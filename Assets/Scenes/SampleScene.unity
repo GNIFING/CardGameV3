@@ -3820,6 +3820,10 @@ PrefabInstance:
       propertyPath: moveType
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1245712353669842297, guid: 7ffa7518deb860e4f8e1620c62db6eff, type: 3}
+      propertyPath: tileManager
+      value: 
+      objectReference: {fileID: 636937102}
     - target: {fileID: 1855405217901779101, guid: 7ffa7518deb860e4f8e1620c62db6eff, type: 3}
       propertyPath: m_Name
       value: Unit
@@ -5440,7 +5444,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636937101}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83d666eb9ba7378458a6cba59e507f4c, type: 3}
   m_Name: 

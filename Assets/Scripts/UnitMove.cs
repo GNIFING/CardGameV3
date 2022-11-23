@@ -6,6 +6,7 @@ using UnityEngine;
 public class UnitMove : MonoBehaviour
 {
     private List<Tile> tiles = new List<Tile>();
+    [SerializeField] private TileManager tileManager;
     enum MoveType
     {
         straightShort,
@@ -154,6 +155,7 @@ public class UnitMove : MonoBehaviour
             tile.NextMoveHighlight(true);
             tiles.Add(tile);
         }
+        SetHighlightUnit(this.gameObject.transform.parent.gameObject);
     }
 
     public void MoveFinish()
@@ -161,7 +163,6 @@ public class UnitMove : MonoBehaviour
         Debug.Log("Move Finish");
         foreach (var tile in tiles)
         {
-            Debug.Log("Tile move Finish = " + tile);
             tile.NextMoveHighlight(false);
         }
         tiles = new List<Tile>();
@@ -174,6 +175,11 @@ public class UnitMove : MonoBehaviour
             tile.NextMoveHighlight(false);
         }
         tiles = new List<Tile>();
+    }
+
+    public void SetHighlightUnit(GameObject unit)
+    {
+        tileManager.GetComponent<TileManager>().SetActiveUnit(unit);
     }
 
 }

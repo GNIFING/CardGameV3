@@ -17,6 +17,8 @@ public class Tile : MonoBehaviour
     [SerializeField] private int yPos = 0;
     [SerializeField] TileType tileType;
 
+    private TileManager tileManager;
+    private GameObject activeUnit;
     private GameObject unit;
     private Transform unitTransform;
     private UnitMove unitMove;
@@ -37,24 +39,34 @@ public class Tile : MonoBehaviour
 
         if(unitTransform != null)
         {
-            Debug.Log("Found Unit");
             unit = unitTransform.gameObject;
             unitMove = unit.GetComponentInChildren<UnitMove>();
+            //Debug.Log("First -->"+ unit);
+            unitMove.SetHighlightUnit(unit);
+
+            Debug.Log("Found Unit");
+            tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+            activeUnit = tileManager.GetActiveUnit();
+            activeUnit = unitTransform.gameObject;
+            unitMove = activeUnit.GetComponentInChildren<UnitMove>();
             unitMove.UnitMovePosition(xPos, yPos);
 
         }
         else if (_nextMoveHighlight.activeSelf)
         {
-            unit = GameObject.Find("Unit");
-            unit.transform.parent = transform;
-            unit.transform.position = transform.position;
-            unitMove = unit.GetComponentInChildren<UnitMove>();
+            tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+            activeUnit = tileManager.GetActiveUnit();
+            activeUnit.transform.parent = transform;
+            activeUnit.transform.position = transform.position;
+            unitMove = activeUnit.GetComponentInChildren<UnitMove>();
             unitMove.MoveFinish();
         }
         else
         {
-            unit = GameObject.Find("Unit");
-            unitMove = unit.GetComponentInChildren<UnitMove>();
+            tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+            activeUnit = tileManager.GetActiveUnit();
+            
+            unitMove = activeUnit.GetComponentInChildren<UnitMove>();
             unitMove.MoveCancel();
             Debug.Log("Not Found Unit");
         }
