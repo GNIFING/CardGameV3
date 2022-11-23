@@ -53,9 +53,9 @@ public class Tile : MonoBehaviour
         }
         else
         {
-            //unit = GameObject.Find("Unit(Clone)");
-            //unitMove = unit.GetComponentInChildren<UnitMove>();
-            //unitMove.MoveFinish();
+            unit = GameObject.Find("Unit");
+            unitMove = unit.GetComponentInChildren<UnitMove>();
+            unitMove.MoveCancel();
             Debug.Log("Not Found Unit");
         }
     }
