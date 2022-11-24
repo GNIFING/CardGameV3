@@ -7,7 +7,6 @@ public class TileManager : MonoBehaviour
     private List<GameObject> tiles = new List<GameObject>();
 
     private GameObject activeUnit;
-
     private void Start()
     {
         AddTilesToList();

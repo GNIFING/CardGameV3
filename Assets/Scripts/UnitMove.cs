@@ -7,6 +7,15 @@ public class UnitMove : MonoBehaviour
 {
     private List<Tile> tiles = new List<Tile>();
     [SerializeField] private TileManager tileManager;
+    private UnitCard unitCard;
+
+    private void Start()
+    {
+        unitCard = gameObject.transform.parent.gameObject.GetComponent<UnitCard>();
+        tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+    }
+
+
     enum MoveType
     {
         straightShort,
@@ -20,6 +29,14 @@ public class UnitMove : MonoBehaviour
 
     [SerializeField] private MoveType moveType; 
     public void UnitMovePosition(int x, int y)
+    {
+        if (PlayerTurnController.GetPlayerTurn() == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
+        {
+            MoveByType(x, y);
+        }
+    }
+
+    private void MoveByType(int x, int y)
     {
         switch (moveType)
         {
@@ -50,7 +67,26 @@ public class UnitMove : MonoBehaviour
         }
     }
 
-    
+    public void UnitMoveFromP1Hand()
+    {
+        GenerateHighlightMove(1,0);
+        GenerateHighlightMove(1,1);
+        GenerateHighlightMove(1,2);
+        GenerateHighlightMove(1,3);
+        GenerateHighlightMove(1,4);
+        GenerateHighlightMove(1,5);
+    }
+
+    public void UnitMoveFromP2Hand()
+    {
+        GenerateHighlightMove(5, 0);
+        GenerateHighlightMove(5, 1);
+        GenerateHighlightMove(5, 2);
+        GenerateHighlightMove(5, 3);
+        GenerateHighlightMove(5, 4);
+        GenerateHighlightMove(5, 5);
+    }
+
 
     private void MoveRound(int x, int y)
     {
@@ -166,6 +202,15 @@ public class UnitMove : MonoBehaviour
             tile.NextMoveHighlight(false);
         }
         tiles = new List<Tile>();
+        unitCard.ReduceCardCredit();
+        //if(PlayerTurnController.GetPlayerTurn() == 1)
+        //{
+        //    PlayerTurnController.SetPlayerTurn(2);
+        //}
+        //else
+        //{
+        //    PlayerTurnController.SetPlayerTurn(1);
+        //}
     }
 
     public void MoveCancel()

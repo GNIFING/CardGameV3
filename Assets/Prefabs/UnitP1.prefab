@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 775454547341489259}
   - component: {fileID: 383456213799541410}
+  - component: {fileID: 2626588665324117051}
   m_Layer: 0
-  m_Name: Unit
-  m_TagString: Untagged
+  m_Name: UnitP1
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,6 +86,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2626588665324117051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855405217901779101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871b03c01873955428d9005cb150e9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNo: 1
+  maxCardCredit: 3
 --- !u!1 &2754858467181715821
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,3 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbde50774c5f2843b3886125539e3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileManager: {fileID: 0}
+  moveType: 3
