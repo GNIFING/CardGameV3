@@ -6,12 +6,13 @@ public class TileManager : MonoBehaviour
 {
     private List<GameObject> tiles = new List<GameObject>();
 
+    private GameObject activeUnit;
     private void Start()
     {
         AddTilesToList();
         foreach (var tile in tiles)
         {
-            Debug.Log(tile.name);
+            //Debug.Log(tile.name);
         }
     }
 
@@ -28,4 +29,14 @@ public class TileManager : MonoBehaviour
         return tiles;
     }
 
+    public void SetActiveUnit(GameObject unit)
+    {
+        activeUnit = unit;
+        Debug.Log(activeUnit);
+    }
+
+    public GameObject GetActiveUnit()
+    {
+        return activeUnit;
+    }
 }
