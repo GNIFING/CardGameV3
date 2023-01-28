@@ -23,6 +23,7 @@ public class Tile : MonoBehaviour
     private Transform unitTransform;
     private UnitMove unitMove;
 
+    //Highlight tile in white color when mouse is hover// 
     void OnMouseEnter()
     {
         _highlight.SetActive(true);
@@ -31,7 +32,7 @@ public class Tile : MonoBehaviour
     {
         _highlight.SetActive(false);    
     }
-
+    //-------------------------------------------------//
     void OnMouseDown()
     {
         switch (tileType)
@@ -51,7 +52,7 @@ public class Tile : MonoBehaviour
     }
     private void Player1TileMove()
     {
-        foreach (Transform tr in transform)
+        foreach (Transform tr in this.transform)
         {
             if (tr.CompareTag("Unit"))
             {
@@ -116,7 +117,7 @@ public class Tile : MonoBehaviour
             if (tr.CompareTag("Unit"))
             {
                 unitTransform = tr;
-                Debug.Log("Found Unit");
+                Debug.Log("Found Unit " + tr);
                 break;
             }
             else
@@ -126,19 +127,44 @@ public class Tile : MonoBehaviour
 
             }
         }
+        int playerTurn = PlayerTurnController.CurrentTurn;
 
         if (unitTransform != null)
         {
-            unit = unitTransform.gameObject;
-            unitMove = unit.GetComponentInChildren<UnitMove>();
-            unitMove.SetHighlightUnit(unit);
+            UnitCard unitCard = unitTransform.GetComponent<UnitCard>();
+            if(unitCard.GetPlayerNo() == playerTurn)
+            {
+                unit = unitTransform.gameObject;
+                unitMove = unit.GetComponentInChildren<UnitMove>();
+                unitMove.SetHighlightUnit(unit);
 
-            Debug.Log("Found Unit");
-            tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
-            activeUnit = tileManager.GetActiveUnit();
-            activeUnit = unitTransform.gameObject;
-            unitMove = activeUnit.GetComponentInChildren<UnitMove>();
-            unitMove.UnitMovePosition(xPos, yPos);
+                Debug.Log("Found Unit");
+                tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+                activeUnit = tileManager.GetActiveUnit();
+                activeUnit = unitTransform.gameObject;
+                unitMove = activeUnit.GetComponentInChildren<UnitMove>();
+                unitMove.UnitMovePosition(xPos, yPos);
+            }
+            else
+            {
+                tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+                activeUnit = tileManager.GetActiveUnit();
+                Debug.Log("Active Unit = " + activeUnit);
+                Debug.Log("unitTransform = " + unitTransform);
+                UnitCard activeUnitCard = activeUnit.GetComponent<UnitCard>();
+                UnitCard unitTransformUnitCard = unitTransform.GetComponent<UnitCard>();
+
+                unitTransformUnitCard.health = unitTransformUnitCard.health - activeUnitCard.attack;
+                unitTransformUnitCard.healthText.text = unitTransformUnitCard.health.ToString();
+
+                activeUnitCard.health = activeUnitCard.health - unitTransformUnitCard.attack;
+                activeUnitCard.healthText.text = activeUnitCard.health.ToString();
+
+                if (activeUnitCard.health <= 0) Destroy(activeUnit);
+                if (unitTransformUnitCard.health <= 0) Destroy(unitTransform.gameObject);
+
+
+            }
 
         }
         else if (_nextMoveHighlight.activeSelf)

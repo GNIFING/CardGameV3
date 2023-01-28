@@ -30,7 +30,7 @@ public class UnitMove : MonoBehaviour
     [SerializeField] private MoveType moveType; 
     public void UnitMovePosition(int x, int y)
     {
-        if (PlayerTurnController.GetPlayerTurn() == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
+        if (PlayerTurnController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
         {
             MoveByType(x, y);
         }

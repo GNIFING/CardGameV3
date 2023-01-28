@@ -1,20 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UnitCard : MonoBehaviour
 {
     [SerializeField] private int playerNo;
     [SerializeField] private int maxCardCredit = 1;
 
-    private int health;
-    private int attack;
+    public UnitCardStat unitCardStat;
+
+    public TextMeshProUGUI attackText;
+    public TextMeshProUGUI healthText;
+
+    private int _health;
+    private int _attack;
  
     private int cardCredit;
 
+    enum MoveType
+    {
+        straightShort,
+        straightFar,
+        diagonalShort,
+        diagonalFar,
+        round,
+        horizontalShort,
+        horizontalFar
+    }
+
     private void Start()
     {
+        health = unitCardStat.Hp;
+        attack = unitCardStat.AttackDamage;
         cardCredit = maxCardCredit;
+        attackText.text = attack.ToString();
+        healthText.text = health.ToString();
+        
     }
 
     public int GetPlayerNo()
@@ -39,6 +61,9 @@ public class UnitCard : MonoBehaviour
             cardCredit -= 1;
         }
     }
+
+    public int health { get; set; }
+    public int attack { get; set; }
 
     public void RefreshCredit()
     {

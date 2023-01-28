@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
+  m_Name: 2
+  m_EditorClassIdentifier: 
+  _cardIndex: 2
+  _cardName: Secind Card
+  _cardDescription: I am number 2
+  _currentCardClass: 1
+  _currentMoveType: 1
+  _specialSkill:
+  - 1
+  - 3
+  - 4
+  _defaultManaCost: 2
+  _defaultHp: 7
+  _defaultAttackDamage: 7
