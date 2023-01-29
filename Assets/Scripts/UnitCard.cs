@@ -18,17 +18,6 @@ public class UnitCard : MonoBehaviour
  
     private int cardCredit;
 
-    enum MoveType
-    {
-        straightShort,
-        straightFar,
-        diagonalShort,
-        diagonalFar,
-        round,
-        horizontalShort,
-        horizontalFar
-    }
-
     private void Start()
     {
         health = unitCardStat.Hp;
@@ -70,4 +59,8 @@ public class UnitCard : MonoBehaviour
         cardCredit = maxCardCredit;
     }
 
+    public UnitCardStat.MoveType GetUnitMoveType()
+    {
+        return unitCardStat.CurrentMoveType;
+    }
 }

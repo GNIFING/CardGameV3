@@ -8,26 +8,17 @@ public class UnitMove : MonoBehaviour
     private List<Tile> tiles = new List<Tile>();
     [SerializeField] private TileManager tileManager;
     private UnitCard unitCard;
+    private UnitCardStat.MoveType moveType;
 
     private void Start()
     {
-        unitCard = gameObject.transform.parent.gameObject.GetComponent<UnitCard>();
+        unitCard = GetComponent<UnitCard>();
         tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+        moveType = unitCard.unitCardStat.CurrentMoveType;
     }
 
 
-    enum MoveType
-    {
-        straightShort,
-        straightFar,
-        diagonalShort,
-        diagonalFar,
-        round,
-        horizontalShort,
-        horizontalFar
-    }
-
-    [SerializeField] private MoveType moveType; 
+    
     public void UnitMovePosition(int x, int y)
     {
         if (PlayerTurnController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
@@ -40,25 +31,25 @@ public class UnitMove : MonoBehaviour
     {
         switch (moveType)
         {
-            case MoveType.straightShort:
+            case UnitCardStat.MoveType.StraightShort:
                 MoveStraightShort(x, y);
                 break;
-            case MoveType.straightFar:
+            case UnitCardStat.MoveType.StraightFar:
                 MoveStraightFar(x, y);
                 break;
-            case MoveType.diagonalShort:
+            case UnitCardStat.MoveType.DiagonalShort:
                 MoveDiagonalShort(x, y);
                 break;
-            case MoveType.diagonalFar:
+            case UnitCardStat.MoveType.DiagonalFar:
                 MoveDiagonalFar(x, y);
                 break;
-            case MoveType.round:
+            case UnitCardStat.MoveType.Round:
                 MoveRound(x, y);
                 break;
-            case MoveType.horizontalShort:
+            case UnitCardStat.MoveType.HorizontalShort:
                 MoveHorizontalShort(x, y);
                 break;
-            case MoveType.horizontalFar:
+            case UnitCardStat.MoveType.HorizontalFar:
                 MoveHorizontalFar(x, y);
                 break;
             default:
@@ -66,6 +57,13 @@ public class UnitMove : MonoBehaviour
                 break;
         }
     }
+
+    public void MoveToArena()
+    {
+        if (PlayerTurnController.CurrentTurn == 1) UnitMoveFromP1Hand();
+        else UnitMoveFromP2Hand();
+    }
+
 
     public void UnitMoveFromP1Hand()
     {
@@ -203,14 +201,6 @@ public class UnitMove : MonoBehaviour
         }
         tiles = new List<Tile>();
         unitCard.ReduceCardCredit();
-        //if(PlayerTurnController.GetPlayerTurn() == 1)
-        //{
-        //    PlayerTurnController.SetPlayerTurn(2);
-        //}
-        //else
-        //{
-        //    PlayerTurnController.SetPlayerTurn(1);
-        //}
     }
 
     public void MoveCancel()

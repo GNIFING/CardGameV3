@@ -169,7 +169,7 @@ RectTransform:
   - {fileID: 2008351670}
   - {fileID: 699254909}
   m_Father: {fileID: 775454547341489259}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 775454547341489259}
   - component: {fileID: 383456213799541410}
   - component: {fileID: 2626588665324117051}
+  - component: {fileID: 8407495469045230624}
   m_Layer: 0
   m_Name: UnitP1
   m_TagString: Unit
@@ -402,7 +403,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6440739904238805033}
   - {fileID: 1937884894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -473,53 +473,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNo: 1
   maxCardCredit: 1
+  unitCardStat: {fileID: 11400000, guid: 74cdecd1f17d30a458e6e9329af17ee7, type: 2}
   attackText: {fileID: 699254910}
   healthText: {fileID: 2008351671}
-  health: 5
-  attack: 2
---- !u!1 &2754858467181715821
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6440739904238805033}
-  - component: {fileID: 1245712353669842297}
-  m_Layer: 0
-  m_Name: UnitMovePosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6440739904238805033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2754858467181715821}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 775454547341489259}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1245712353669842297
+--- !u!114 &8407495469045230624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2754858467181715821}
+  m_GameObject: {fileID: 1855405217901779101}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bbde50774c5f2843b3886125539e3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileManager: {fileID: 0}
-  moveType: 0

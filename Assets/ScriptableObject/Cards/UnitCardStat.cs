@@ -1,55 +1,54 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "CardStat")]
+[CreateAssetMenu(menuName = "UnitCardStat")]
 public class UnitCardStat : ScriptableObject
 {
     public enum MoveType
     {
-        straightShort,
-        straightFar,
-        diagonalShort,
-        diagonalFar,
-        round,
-        horizontalShort,
-        horizontalFar
+        StraightShort,
+        StraightFar,
+        DiagonalShort,
+        DiagonalFar,
+        Round,
+        HorizontalShort,
+        HorizontalFar
     }
 
     public enum CardClass
     {
-        human,
-        ogre,
-        elf
+        Human,
+        Ogre,
+        Elf
     }
 
-    //------------ Name and Description ------------//
-    [SerializeField] private int _cardIndex;
-    public int CardIndex => _cardIndex;
+    // Name and Description 
+    [SerializeField] private int cardIndex;
+    public int CardIndex => cardIndex;
 
-    [SerializeField] private string _cardName;
-    public string CardName => _cardName;
+    [SerializeField] private string cardName;
+    public string CardName => cardName;
 
-    [SerializeField] private string _cardDescription;
-    public string CardDescription => _cardDescription;
+    [SerializeField] private string cardDescription;
+    public string CardDescription => cardDescription;
 
-    //------------ Card Type ------------// 
-    [SerializeField] private CardClass _currentCardClass;
-    public CardClass CurrentCardClass => _currentCardClass;
+    // Card Type 
+    [SerializeField] private CardClass currentCardClass;
+    public CardClass CurrentCardClass => currentCardClass;
 
-    [SerializeField] private MoveType _currentMoveType;
-    public MoveType CurrentMoveType => _currentMoveType;
+    [SerializeField] private MoveType currentMoveType;
+    public MoveType CurrentMoveType => currentMoveType;
 
-    [SerializeField] private List<string> _specialSkill;
-    public List<string> SpecialSkill => _specialSkill;
+    [SerializeField] private List<string> specialSkill;
+    public List<string> SpecialSkill => specialSkill;
 
-    //------------ Stat ------------// 
-    [SerializeField] private int _defaultManaCost;
-    public int ManaCost => _defaultManaCost;
+    // Stat 
+    [SerializeField] private int defaultManaCost;
+    public int ManaCost => defaultManaCost;
 
-    [SerializeField] private int _defaultHp;
-    public int Hp => _defaultHp;
+    [SerializeField] private int defaultHp;
+    public int Hp => defaultHp;
 
-    [SerializeField] private int _defaultAttackDamage;
-    public int AttackDamage => _defaultAttackDamage;
+    [SerializeField] private int defaultAttackDamage;
+    public int AttackDamage => defaultAttackDamage;
 }
