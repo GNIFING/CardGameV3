@@ -43,25 +43,56 @@ public class Tile : TileManager
     void OnMouseDown()
     {
         unit = GetUnitInTile();
-        if (unit == null) return; //not found unit
-
-        unitCard = unit.GetComponent<UnitCard>();
-        if (!IsCurrentPlayerUnit(unitCard)) return; //have unit but not your turn
-
         activeUnit = GetActiveUnit();
+
+        // Not Found Unit //
+        if (unit == null) return;
+
+        // Found Unit But Enemy Unit //
+        unitCard = unit.GetComponent<UnitCard>();
+        if (!IsCurrentPlayerUnit(unitCard)) return;
+
+        // Found Friendly Unit (already move) //
+
+        // Found Friendly unit (not move) //
         if (activeUnit != null)
         {
             if (!IsCurrentPlayerUnit(activeUnit.GetComponent<UnitCard>())) return;
-            HighlightByType(unitCard ,xPos, yPos);
+            HighlightByType(unitCard, xPos, yPos);
         }
         else
         {
             //active unit = null
-            HighlightByType(unitCard ,xPos, yPos);
+            HighlightByType(unitCard, xPos, yPos);
             Debug.Log("highlighbytype");
-            
-            //unitTransform.gameObject.GetComponent<UnitMove>().MoveToArena();
         }
+        // Found Highlight //
+        if (nextMoveHighlight.activeInHierarchy)
+        {
+            //move active unit to this tile
+        }
+      
+        // Found Highlight and Enemy Unit //
+        if( nextMoveHighlight.activeInHierarchy && !IsCurrentPlayerUnit(unitCard))
+        {
+            //Attack enemy unit here
+        }
+        // Found Highlight and Friendly unit (already move) //
+        if(nextMoveHighlight.activeInHierarchy && IsCurrentPlayerUnit(unitCard))
+        {
+            //Cancel all highlight and return active unit to null
+        }
+
+        // Found Highlight and Friendly unit (not move) //
+
+        // Found Highlight and Tower //
+
+
+
+
+
+
+
     }
 
     public void NextMoveHighlight(bool isActive)
@@ -86,12 +117,6 @@ public class Tile : TileManager
     private bool IsCurrentPlayerUnit(UnitCard unitCard)
     {
         return unitCard.GetPlayerNo() == PlayerTurnController.CurrentTurn;
-    }
-
-    private GameObject GetActiveUnit()
-    {
-        tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
-        return tileManager.GetActiveUnit();
     }
 }
 

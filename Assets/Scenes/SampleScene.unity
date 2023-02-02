@@ -11247,6 +11247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NextMoveHightlight
       objectReference: {fileID: 0}
+    - target: {fileID: 6214061701385352031, guid: 3923f6163ca3d074a8862ccce2b975b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3923f6163ca3d074a8862ccce2b975b5, type: 3}
 --- !u!4 &1649644473 stripped
