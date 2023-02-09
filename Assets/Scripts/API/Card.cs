@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -11,12 +12,16 @@ using System.Text;
 public class Card : MonoBehaviour
 {
     public InputField outputArea;
+    public RawImage cardImage;
 
     public void GetCard() => StartCoroutine(GetCardCoroutine());
 
     IEnumerator GetCardCoroutine()
     {
         outputArea.text = "Loading...";
+        RectTransform startPos = outputArea.GetComponent<RectTransform>();
+        RectTransform imagePos = cardImage.GetComponent<RectTransform>();
+
         string path = "card";
 
         var request = Api.CreateRequest(path, "GET");
@@ -26,15 +31,23 @@ public class Card : MonoBehaviour
         {
             var json = request.downloadHandler.text;
             outputArea.text = json;
-            CardModel[] cards = JsonHelper.FromJson<CardModel>(json);
-            Debug.Log(cards);
-            //foreach (CardModel card in cards)
-            //{
-            //    Debug.Log(card);
-            //}
+            CardModel[] cards = JsonConvert.DeserializeObject<CardModel[]>(json);
+            Debug.Log(outputArea.transform.position);
+            foreach (CardModel card in cards)
+            {
+                InputField newOutputArea = Instantiate(outputArea, outputArea.transform);
+                RectTransform newOutputAreaTransform = newOutputArea.GetComponent<RectTransform>();
+                newOutputAreaTransform.anchoredPosition = new Vector2(200, 0);
+
+                RawImage newRawImage = Instantiate(cardImage, cardImage.transform);
+                RectTransform newRawImageTransform = newRawImage.GetComponent<RectTransform>();
+                newRawImageTransform.anchoredPosition = new Vector2(200, 0);
+
+                newOutputArea.text = card.className + ": " + card.unitName + "\nattack type: " + card.atkType + "\nHp: " + card.hp + "\nAttack: " + card.atk;
+            }
             //outputArea.text = cards[0].unitName + "\n" + cards[1].unitName;
         }
-        else
+        else 
         {
             outputArea.text = request.error;
         }

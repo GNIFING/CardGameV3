@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEditor.PackageManager.Requests;
 using Unity.VisualScripting;
+using Newtonsoft.Json;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using System.Text;
 
@@ -84,7 +85,7 @@ public class Auth : MonoBehaviour
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
             string json = request.downloadHandler.text;
-            UserModel user = JsonUtility.FromJson<UserModel>(json);
+            UserModel user = JsonConvert.DeserializeObject<UserModel>(json);
             outputArea.text = "Hi, " + user.username;
         }
         else
