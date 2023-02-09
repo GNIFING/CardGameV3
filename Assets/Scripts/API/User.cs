@@ -5,23 +5,23 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class User : MonoBehaviour
 {
     public InputField outputArea;
 
-    public void CreatePlayer() => StartCoroutine(CreatePlayerCoroutine());
+    public void CreateUser() => StartCoroutine(CreateUserCoroutine());
 
-    IEnumerator CreatePlayerCoroutine()
+    IEnumerator CreateUserCoroutine()
     {
         outputArea.text = "Loading...";
         string path = "player/create";
 
-        CreatePlayerRequest body = new CreatePlayerRequest()
+        CreateUserRequest body = new CreateUserRequest()
         {
             cards = new List<int> { 1, 3, 5 }
         };
 
-        var request = ApiController.CreateRequest(path, "POST", body);
+        var request = Api.CreateRequest(path, "POST", body);
 
         yield return request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)

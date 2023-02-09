@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LinkController : MonoBehaviour
+public class Link : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {

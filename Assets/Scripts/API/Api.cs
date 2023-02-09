@@ -5,10 +5,10 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ApiController : MonoBehaviour
+public class Api : MonoBehaviour
 {
     public static string accessToken;
-    public static string apiPrefix = "http://localhost:3000/";
+    public static string apiPrefix = "http://18.142.91.114:8080/api/";
 
     public static UnityWebRequest CreateAuthRequest(string path, string method, object body = null)
     {

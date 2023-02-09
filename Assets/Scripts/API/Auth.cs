@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -8,7 +9,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using System.Text;
 
-public class AuthController : MonoBehaviour
+public class Auth : MonoBehaviour
 {
     public InputField outputArea;
     public InputField usernameInput;
@@ -27,14 +28,14 @@ public class AuthController : MonoBehaviour
             password = passwordInput.text,
         };
 
-        var request = ApiController.CreateAuthRequest(path, "POST", body);
+        var request = Api.CreateAuthRequest(path, "POST", body);
 
         yield return request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
             AuthResponse data = JsonUtility.FromJson<AuthResponse>(request.downloadHandler.text);
             outputArea.text = data.accessToken;
-            ApiController.accessToken = data.accessToken;
+            Api.accessToken = data.accessToken;
         }
         else
         {
@@ -55,14 +56,14 @@ public class AuthController : MonoBehaviour
             password = passwordInput.text,
         };
 
-        var request = ApiController.CreateAuthRequest(path, "POST", body);
+        var request = Api.CreateAuthRequest(path, "POST", body);
 
         yield return request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
             AuthResponse data = JsonUtility.FromJson<AuthResponse>(request.downloadHandler.text);
             outputArea.text = data.accessToken;
-            ApiController.accessToken = data.accessToken;
+            Api.accessToken = data.accessToken;
         }
         else
         {
@@ -77,12 +78,14 @@ public class AuthController : MonoBehaviour
         outputArea.text = "Loading...";
         string path = "user";
 
-        var request = ApiController.CreateRequest(path, "GET");
+        var request = Api.CreateRequest(path, "GET");
 
         yield return request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
-            outputArea.text = request.downloadHandler.text;
+            string json = request.downloadHandler.text;
+            UserModel user = JsonUtility.FromJson<UserModel>(json);
+            outputArea.text = "Hi, " + user.username;
         }
         else
         {
