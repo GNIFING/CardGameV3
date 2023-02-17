@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEditor.PackageManager.Requests;
 using Unity.VisualScripting;
-using Newtonsoft.Json;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using System.Text;
 

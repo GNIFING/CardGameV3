@@ -1,6 +1,8 @@
 using System;
+using UnityEngine;
 
-public class CardModel
+[Serializable]
+public class Card
 {
     public int id;
     public string index;
@@ -20,7 +22,15 @@ public class CardModel
     public DateTime updatedAt;
 }
 
-public class DeckModel
+public enum CardClass
 {
-    public CardModel[] cards;
+    Human,
+    Elf,
+    Ogre,
+}
+
+public enum CardAttackType
+{
+    Melee,
+    Range,
 }

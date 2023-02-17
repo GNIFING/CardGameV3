@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using System.Text;
 
-public class Card : MonoBehaviour
+public class CardData : MonoBehaviour
 {
     public InputField outputArea;
     public RawImage cardImage;
@@ -31,9 +31,9 @@ public class Card : MonoBehaviour
         {
             var json = request.downloadHandler.text;
             outputArea.text = json;
-            CardModel[] cards = JsonConvert.DeserializeObject<CardModel[]>(json);
+            Card[] cards = JsonConvert.DeserializeObject<Card[]>(json);
             Debug.Log(outputArea.transform.position);
-            foreach (CardModel card in cards)
+            foreach (Card card in cards)
             {
                 InputField newOutputArea = Instantiate(outputArea, outputArea.transform);
                 RectTransform newOutputAreaTransform = newOutputArea.GetComponent<RectTransform>();
@@ -45,7 +45,6 @@ public class Card : MonoBehaviour
 
                 newOutputArea.text = card.className + ": " + card.unitName + "\nattack type: " + card.atkType + "\nHp: " + card.hp + "\nAttack: " + card.atk;
             }
-            //outputArea.text = cards[0].unitName + "\n" + cards[1].unitName;
         }
         else 
         {
