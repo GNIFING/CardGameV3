@@ -16,8 +16,8 @@ MonoBehaviour:
   cardName: First
   cardDescription: I am the first
   currentCardClass: 0
-  currentMoveType: 4
+  currentMoveType: 0
   specialSkill: []
-  defaultManaCost: 3
-  defaultHp: 4
-  defaultAttackDamage: 5
+  defaultManaCost: 1
+  defaultAttackDamage: 1
+  defaultHp: 2

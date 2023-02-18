@@ -46,9 +46,9 @@ public class UnitCardStat : ScriptableObject
     [SerializeField] private int defaultManaCost;
     public int ManaCost => defaultManaCost;
 
-    [SerializeField] private int defaultHp;
-    public int Hp => defaultHp;
-
     [SerializeField] private int defaultAttackDamage;
     public int AttackDamage => defaultAttackDamage;
+    
+    [SerializeField] private int defaultHp;
+    public int Hp => defaultHp;
 }

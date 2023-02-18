@@ -1,48 +1,139 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] GameObject unitCardPrefab;
-    private GameObject[] units;
-    private List<GameObject> Tiles = new List<GameObject>();
+    private static int player1HP;
+    private static int player2HP;
+    private static int player1Mana;
+    private static int player2Mana;
+    private static int player1MaxMana;
+    private static int player2MaxMana;
+    private static int startingMana = 1;
 
-    private void Start()
+
+    public TextMeshProUGUI player1HPText;
+    public TextMeshProUGUI player2HPText;
+    public TextMeshProUGUI player1ManaText;
+    public TextMeshProUGUI player2ManaText;
+    public TextMeshProUGUI playerWinText;
+
+    // Start is called before the first frame update
+    void Start()
     {
-        AddTilesToList();
+        player1HP = 20;
+        player2HP = 20;
+        player1MaxMana = startingMana;
+        player2MaxMana = startingMana;
+        player1Mana = player1MaxMana;
+        player2Mana = player2MaxMana;
+
+        player1HPText.text = player1HP.ToString();
+        player2HPText.text = player2HP.ToString();
+        player1ManaText.text = player1Mana.ToString();
+        player2ManaText.text = player2Mana.ToString();
     }
 
-    private void AddTilesToList()
+    public int GetPlayerHP(int playerNo)
     {
-        GameObject playerTile = transform.GetChild(0).gameObject;
-        for (int i = 0; i < playerTile.transform.childCount; i++)
+        return playerNo == 1 ? player1HP : player2HP;
+    }
+
+    public void SetPlayerHP(int playerNo, int newPlayerHp)
+    {
+        if (playerNo == 1)
         {
-            Tiles.Add(playerTile.transform.GetChild(i).gameObject);
+            player1HP = newPlayerHp;
+            player1HPText.text = player1HP.ToString();
+            CheckWinCondition(player1HP, 2);
+        }
+        else if (playerNo == 2)
+        {
+            player2HP = newPlayerHp;
+            player2HPText.text = player2HP.ToString();
+            CheckWinCondition(player2HP, 1);
         }
     }
 
-    public void SpawnUnit()
+    public void DecreaseP1HP()
     {
-        foreach (GameObject tile in Tiles)
+        Debug.Log("decrease HP 2!");
+        player1HP -= 2;
+        player1HPText.text = player1HP.ToString();
+        CheckWinCondition(player1HP, 2);
+    }
+
+    public void DecreaseP2HP()
+    {
+        Debug.Log("decrease HP 2!");
+        player2HP -= 2;
+        player2HPText.text = player2HP.ToString();
+        CheckWinCondition(player2HP, 1);
+    }
+
+    private void CheckWinCondition(int Hp, int player)
+    {
+        if(Hp <= 0)
         {
-            bool isFoundUnit = false;
-            foreach(Transform tr in tile.transform)
+            playerWinText.text = "Player " + player + "Win!";
+        }
+    }
+
+    public int GetPlayerMana(int playerNo)
+    {
+        return playerNo == 1 ? player1Mana : player2Mana;
+    }
+
+    public void SetPlayerMana(int PlayerNo, int cardMana)
+    {
+        if (PlayerNo == 1)
+        {
+            player1Mana -= cardMana;
+            player1ManaText.text = player1Mana.ToString();
+
+        }
+        else if (PlayerNo == 2)
+        {
+            player2Mana -= cardMana;
+            player2ManaText.text = player2Mana.ToString();
+        }
+    }
+    public void RefreshPlayerMana(int PlayerNo)
+    {
+        if(PlayerNo == 1)
+        {
+            if (player1MaxMana == 10) player1Mana = 10;
+            else
             {
-                if (tr.CompareTag("Unit"))
-                {
-                    isFoundUnit = true;
-                }
-            }
-            if (!isFoundUnit)
-            {
-                GameObject unitCard = Instantiate(unitCardPrefab, tile.transform.position, Quaternion.identity);
-                unitCard.transform.parent = tile.transform;
-                UnitCard unCard = unitCard.GetComponent<UnitCard>();
-                unCard.health = Random.Range(2, 6);
-                unCard.attack = Random.Range(2, 6);
-                break;
+                player1MaxMana += 1;
+                player1Mana = player1MaxMana;
+                player1ManaText.text = player1Mana.ToString();
             }
         }
+        else if(PlayerNo == 2)
+        {
+            if (player2MaxMana == 10) player2Mana = 10;
+            else
+            {
+                player2MaxMana += 1;
+                player2Mana = player2MaxMana;
+                player2ManaText.text = player2Mana.ToString();
+            }
+        }
+    }
+
+    public bool IsEnoughMana(UnitCard unitCard)
+    {
+        if(unitCard.GetPlayerNo() == 1)
+        {
+            return player1Mana >= unitCard.mana;
+        }
+        else if (unitCard.GetPlayerNo() == 2)
+        {
+            return player2Mana >= unitCard.mana;
+        }
+        return false;
     }
 }

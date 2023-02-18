@@ -21,7 +21,7 @@ public class UnitMove : MonoBehaviour
     
     public void UnitMovePosition(int x, int y)
     {
-        if (PlayerTurnController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
+        if (GameController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
         {
             MoveByType(x, y);
         }
@@ -60,7 +60,7 @@ public class UnitMove : MonoBehaviour
 
     public void MoveToArena()
     {
-        if (PlayerTurnController.CurrentTurn == 1) UnitMoveFromP1Hand();
+        if (GameController.CurrentTurn == 1) UnitMoveFromP1Hand();
         else UnitMoveFromP2Hand();
     }
 
@@ -214,7 +214,7 @@ public class UnitMove : MonoBehaviour
 
     public void SetHighlightUnit(GameObject unit)
     {
-        tileManager.GetComponent<TileManager>().SetActiveUnit(unit);
+        tileManager.GetComponent<TileManager>().SetSelectUnit(unit);
     }
 
 }

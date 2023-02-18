@@ -7,24 +7,31 @@ public class UnitCard : MonoBehaviour
 {
     [SerializeField] private int playerNo;
     [SerializeField] private int maxCardCredit = 1;
+    [SerializeField] private GameObject MoveCredit;
 
     public UnitCardStat unitCardStat;
 
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI healthText;
-
-    private int _health;
-    private int _attack;
+    public TextMeshProUGUI manaText;
  
-    private int cardCredit;
+    public int cardCredit;
+
+    public int health { get; set; }
+    public int attack { get; set; }
+    public int mana { get; set; }
+    public bool isPlayCard;
 
     private void Start()
     {
         health = unitCardStat.Hp;
         attack = unitCardStat.AttackDamage;
+        mana = unitCardStat.ManaCost;
+
         cardCredit = maxCardCredit;
         attackText.text = attack.ToString();
         healthText.text = health.ToString();
+        manaText.text = mana.ToString();
         
     }
 
@@ -45,18 +52,18 @@ public class UnitCard : MonoBehaviour
 
     public void ReduceCardCredit()
     {
-        if(cardCredit >= 0)
+        if(cardCredit > 0)
         {
             cardCredit -= 1;
+            if(cardCredit == 0) MoveCredit.SetActive(false);
         }
-    }
 
-    public int health { get; set; }
-    public int attack { get; set; }
+    }
 
     public void RefreshCredit()
     {
         cardCredit = maxCardCredit;
+        MoveCredit.SetActive(true);
     }
 
     public UnitCardStat.MoveType GetUnitMoveType()

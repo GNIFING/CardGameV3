@@ -7,10 +7,11 @@ public class TileManager : MonoBehaviour
 {
     private List<GameObject> Tiles { get; set; } = new List<GameObject>();
     private List<Tile> NextMoveHighlightTiles = new List<Tile>();
-    public GameObject ActiveUnit { get; private set; }
+    public GameObject SelectUnit;
 
     private void Start()
     {
+        SelectUnit = null;
         AddTilesToList();
     }
 
@@ -24,20 +25,29 @@ public class TileManager : MonoBehaviour
 
     public List<GameObject> GetAllTiles() => Tiles;
 
-    public void SetActiveUnit(GameObject unit)
+    public void SetSelectUnit(GameObject unit)
     {
-        ActiveUnit = unit;
+        SelectUnit = unit;
+    }
+    
+    public void DeSelectUnit()
+    {
+        SelectUnit = null;
     }
 
-    public GameObject GetActiveUnit() => ActiveUnit;
-
+    public GameObject GetSelectUnit()
+    {
+        if (SelectUnit == null) return null;
+        Debug.Log("Get Select Unit :" + SelectUnit);
+        return SelectUnit;
+    }
 
     public void HighlightByType(UnitCard unitCard, int x, int y)
     {
-        if (PlayerTurnController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
+        if (GameController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
         {
             Debug.Log("switch case");
-            SetActiveUnit(unitCard.gameObject);
+            SetSelectUnit(unitCard.gameObject);
             switch (unitCard.GetUnitMoveType())
             {
                 case UnitCardStat.MoveType.StraightShort:
@@ -92,7 +102,7 @@ public class TileManager : MonoBehaviour
 
     private void HighlightRound(int x, int y)
     {
-        Debug.Log("Rounf!");
+        Debug.Log("Round!");
         // give indexMove
         // 7   8   9
         // 4 unit  6
@@ -187,18 +197,21 @@ public class TileManager : MonoBehaviour
 
     private void GenerateHighlightMove(int x, int y)
     {
-        Debug.Log("Ok it is");
         GameObject nextMoveHighlightObj = GameObject.Find($"Tile {x} {y}");
-        Debug.Log(nextMoveHighlightObj.name);
         if (nextMoveHighlightObj != null)
         {
-            Debug.Log("Ok it is true");
-
             Tile tile = nextMoveHighlightObj.GetComponent<Tile>();
             tile.NextMoveHighlight(true);
             NextMoveHighlightTiles.Add(tile);
         }
     }
+    public void CancelHighlightMove()
+    {
+        foreach (Tile tile in NextMoveHighlightTiles){
+            tile.NextMoveHighlight(false);
+        }
+        NextMoveHighlightTiles = new List<Tile>();
+}
 
 
 }
