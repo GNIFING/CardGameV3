@@ -15,6 +15,9 @@ public class Tile : MonoBehaviour
 
     [SerializeField] private GameObject highlight;
     [SerializeField] private GameObject nextMoveHighlight;
+    [SerializeField] private GameObject magicHighlight;
+
+
     [SerializeField] private int xPos = 0;
     [SerializeField] private int yPos = 0;
     [SerializeField] TileType tileType;
@@ -34,6 +37,7 @@ public class Tile : MonoBehaviour
         tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
         highlight = transform.Find("Highlight").gameObject;
         nextMoveHighlight = transform.Find("NextMoveHightlight").gameObject;
+        magicHighlight = transform.Find("MagicHighlight").gameObject;
         playerController = GameObject.Find("PlayerController").gameObject.GetComponent<PlayerController>();
     }
 
@@ -270,7 +274,7 @@ public class Tile : MonoBehaviour
         nextMoveHighlight.SetActive(isSelect);
     }
 
-    private GameObject GetUnitInTile()
+    public GameObject GetUnitInTile()
     {
         foreach (Transform obj in transform)
         {
@@ -290,6 +294,13 @@ public class Tile : MonoBehaviour
     {
         return unitCard.GetPlayerNo() == GameController.CurrentTurn;
     }
+
+    //================ Magic ================//
+    public void SetMagicHighlight(bool isActive)
+    {
+        magicHighlight.SetActive(isActive);
+    }
+
 }
 
 

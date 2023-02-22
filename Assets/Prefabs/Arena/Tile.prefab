@@ -244,7 +244,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -268,11 +268,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53afad229c71bd547bdc46ca9928d427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseColor: {r: 0.43137255, g: 0.7372549, b: 0.3647059, a: 1}
-  _offsetColor: {r: 0.4, g: 0.6901961, b: 0.3372549, a: 1}
-  _renderer: {fileID: 7694626546875340913}
-  _highlight: {fileID: 1657701980525229555}
-  _nextMoveHighlight: {fileID: 277068929394346976}
+  highlight: {fileID: 0}
+  nextMoveHighlight: {fileID: 0}
+  magicHighlight: {fileID: 0}
+  xPos: 0
+  yPos: 0
+  tileType: 0
 --- !u!61 &1833924425619288721
 BoxCollider2D:
   m_ObjectHideFlags: 0

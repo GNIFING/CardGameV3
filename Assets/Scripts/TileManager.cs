@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+
 
 public class TileManager : MonoBehaviour
 {
     private List<GameObject> Tiles { get; set; } = new List<GameObject>();
     private List<Tile> NextMoveHighlightTiles = new List<Tile>();
     public GameObject SelectUnit;
+
+    private List<GameObject> magicHighlightTile = new List<GameObject>();
 
     private void Start()
     {
@@ -24,6 +26,21 @@ public class TileManager : MonoBehaviour
     }
 
     public List<GameObject> GetAllTiles() => Tiles;
+
+    public List<GameObject> HighlightFriendlyUnitTiles(int playerNo)
+    {
+        foreach (GameObject tileObject in Tiles)
+        {
+            Tile tile = tileObject.GetComponent<Tile>();
+            if(tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() == playerNo)
+            {
+                tile.SetMagicHighlight(true);
+                magicHighlightTile.Add(tile.gameObject);
+            }
+        }
+        Debug.Log(magicHighlightTile.Count);
+        return magicHighlightTile;
+    }
 
     public void SetSelectUnit(GameObject unit)
     {
