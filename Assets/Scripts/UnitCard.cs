@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UnitCard : MonoBehaviour
@@ -20,10 +21,17 @@ public class UnitCard : MonoBehaviour
     public int health { get; set; }
     public int attack { get; set; }
     public int mana { get; set; }
+
+    private Image unitImage;
+
+
+
     public bool isPlayCard;
+
 
     private void Start()
     {
+        unitImage = unitCardStat.CardImage;
         health = unitCardStat.Hp;
         attack = unitCardStat.AttackDamage;
         mana = unitCardStat.ManaCost;

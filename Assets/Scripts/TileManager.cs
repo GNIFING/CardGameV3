@@ -42,6 +42,21 @@ public class TileManager : MonoBehaviour
         return magicHighlightTile;
     }
 
+    public List<GameObject> HighlightEnemyUnitTiles(int playerNo)
+    {
+        foreach (GameObject tileObject in Tiles)
+        {
+            Tile tile = tileObject.GetComponent<Tile>();
+            if (tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() != playerNo)
+            {
+                tile.SetMagicHighlight(true);
+                magicHighlightTile.Add(tile.gameObject);
+            }
+        }
+        Debug.Log(magicHighlightTile.Count);
+        return magicHighlightTile;
+    }
+
     public void SetSelectUnit(GameObject unit)
     {
         SelectUnit = unit;

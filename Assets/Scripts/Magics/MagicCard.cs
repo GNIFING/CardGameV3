@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class MagicCard : MonoBehaviour
 {
     // Common properties for all MagicCards
+
     public string cardName;
     public string description;
     public int manaCost;
@@ -16,7 +17,7 @@ public abstract class MagicCard : MonoBehaviour
     protected List<GameObject> highlightTargets;
     protected List<GameObject> selectTargets;
 
-    protected HighlightUnitType highlightUnitType;
+    public HighlightUnitType highlightUnitType;
 
     public enum HighlightUnitType
     {
@@ -42,11 +43,10 @@ public abstract class MagicCard : MonoBehaviour
         switch (highlightType)
         {
             case HighlightUnitType.FriendlyOnly:
-                HighlightFriendlyUnit(playerNo);
-                // highlight friendly units only
+                highlightTargets = tileManager.HighlightFriendlyUnitTiles(playerNo);
                 break;
             case HighlightUnitType.EnemyOnly:
-                // highlight enemy units only
+                highlightTargets = tileManager.HighlightEnemyUnitTiles(playerNo);
                 break;
             case HighlightUnitType.AllTarget:
                 // highlight all units (friendly and enemy)
@@ -68,8 +68,4 @@ public abstract class MagicCard : MonoBehaviour
         }
     }
 
-    private void HighlightFriendlyUnit(int playerNo)
-    {
-        highlightTargets = tileManager.HighlightFriendlyUnitTiles(playerNo);
-    }
 }

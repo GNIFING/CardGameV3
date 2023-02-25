@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "UnitCardStat")]
 public class UnitCardStat : ScriptableObject
@@ -24,31 +25,28 @@ public class UnitCardStat : ScriptableObject
 
     // Name and Description 
     [SerializeField] private int cardIndex;
-    public int CardIndex => cardIndex;
-
     [SerializeField] private string cardName;
-    public string CardName => cardName;
-
+    [SerializeField] private Image cardImage;
     [SerializeField] private string cardDescription;
+    [SerializeField] private CardClass currentCardClass;
+    [SerializeField] private MoveType currentMoveType;
+    [SerializeField] private List<string> specialSkill;
+    [SerializeField] private int defaultManaCost;
+    [SerializeField] private int defaultAttackDamage;
+    [SerializeField] private int defaultHp;
+
+    public int CardIndex => cardIndex;
+    public string CardName => cardName;
+    public Image CardImage => cardImage;
     public string CardDescription => cardDescription;
 
     // Card Type 
-    [SerializeField] private CardClass currentCardClass;
     public CardClass CurrentCardClass => currentCardClass;
-
-    [SerializeField] private MoveType currentMoveType;
     public MoveType CurrentMoveType => currentMoveType;
-
-    [SerializeField] private List<string> specialSkill;
     public List<string> SpecialSkill => specialSkill;
 
     // Stat 
-    [SerializeField] private int defaultManaCost;
     public int ManaCost => defaultManaCost;
-
-    [SerializeField] private int defaultAttackDamage;
     public int AttackDamage => defaultAttackDamage;
-    
-    [SerializeField] private int defaultHp;
     public int Hp => defaultHp;
 }

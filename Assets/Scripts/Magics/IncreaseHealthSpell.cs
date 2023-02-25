@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballSpell : MagicCard
+public class IncreaseHealthSpell : MagicCard
 {
     // Override the Play method to implement the Fireball spell
     private void Start()
