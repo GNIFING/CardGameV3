@@ -9,7 +9,8 @@ public class TileManager : MonoBehaviour
     private List<Tile> NextMoveHighlightTiles = new List<Tile>();
     public GameObject SelectUnit;
 
-    private List<GameObject> magicHighlightTile = new List<GameObject>();
+    private List<GameObject> unitHighlight = new List<GameObject>();
+
 
     private void Start()
     {
@@ -27,6 +28,20 @@ public class TileManager : MonoBehaviour
 
     public List<GameObject> GetAllTiles() => Tiles;
 
+    public List<GameObject> HighlightAllUnitTiles()
+    {
+        foreach(GameObject tileObject in Tiles)
+        {
+            Tile tile = tileObject.GetComponent<Tile>();
+            if(tile.GetUnitInTile() != null)
+            {
+
+                unitHighlight.Add(tile.gameObject);
+            }
+        }
+        Debug.Log(unitHighlight.Count);
+        return unitHighlight;
+    }
     public List<GameObject> HighlightFriendlyUnitTiles(int playerNo)
     {
         foreach (GameObject tileObject in Tiles)
@@ -35,11 +50,11 @@ public class TileManager : MonoBehaviour
             if(tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() == playerNo)
             {
                 tile.SetMagicHighlight(true);
-                magicHighlightTile.Add(tile.gameObject);
+                unitHighlight.Add(tile.gameObject);
             }
         }
-        Debug.Log(magicHighlightTile.Count);
-        return magicHighlightTile;
+        Debug.Log(unitHighlight.Count);
+        return unitHighlight;
     }
 
     public List<GameObject> HighlightEnemyUnitTiles(int playerNo)
@@ -50,11 +65,11 @@ public class TileManager : MonoBehaviour
             if (tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() != playerNo)
             {
                 tile.SetMagicHighlight(true);
-                magicHighlightTile.Add(tile.gameObject);
+                unitHighlight.Add(tile.gameObject);
             }
         }
-        Debug.Log(magicHighlightTile.Count);
-        return magicHighlightTile;
+        Debug.Log(unitHighlight.Count);
+        return unitHighlight;
     }
 
     public void SetSelectUnit(GameObject unit)

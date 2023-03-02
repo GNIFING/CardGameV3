@@ -7,7 +7,7 @@ using TMPro;
 public class UnitCard : MonoBehaviour
 {
     [SerializeField] private int playerNo;
-    [SerializeField] private int maxCardCredit = 1;
+    [SerializeField] protected int maxCardCredit = 1;
     [SerializeField] private GameObject MoveCredit;
 
     public UnitCardStat unitCardStat;
@@ -22,25 +22,20 @@ public class UnitCard : MonoBehaviour
     public int attack { get; set; }
     public int mana { get; set; }
 
-    private Image unitImage;
-
-
+    protected Image unitImage;
 
     public bool isPlayCard;
+    public bool isSkillDone;
 
-
-    private void Start()
+    public virtual void UnitSkill()
     {
-        unitImage = unitCardStat.CardImage;
-        health = unitCardStat.Hp;
-        attack = unitCardStat.AttackDamage;
-        mana = unitCardStat.ManaCost;
+        Debug.Log("Default skill");
+    }
 
-        cardCredit = maxCardCredit;
-        attackText.text = attack.ToString();
-        healthText.text = health.ToString();
-        manaText.text = mana.ToString();
-        
+    public virtual void UnitHighlight()
+    {
+        Debug.Log("No highlight");
+        isSkillDone = true;
     }
 
     public int GetPlayerNo()
