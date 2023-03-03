@@ -447,6 +447,7 @@ MonoBehaviour:
   healthText: {fileID: 2008351671}
   manaText: {fileID: 8027175481294073067}
   cardCredit: 0
+  unitImage: {fileID: 7835656205824284680}
   isPlayCard: 0
   isSkillDone: 0
 --- !u!1 &2574625450841418402

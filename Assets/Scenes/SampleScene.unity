@@ -23324,6 +23324,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Highlight
       objectReference: {fileID: 0}
+    - target: {fileID: 7241568145694976973, guid: 3ccc68503717ded498039a1c2d34c7b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241568145694976974, guid: 3ccc68503717ded498039a1c2d34c7b4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241568145694976974, guid: 3ccc68503717ded498039a1c2d34c7b4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241568145694976974, guid: 3ccc68503717ded498039a1c2d34c7b4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241568145694976974, guid: 3ccc68503717ded498039a1c2d34c7b4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7241568145694976975, guid: 3ccc68503717ded498039a1c2d34c7b4, type: 3}
       propertyPath: m_RootOrder
       value: 0

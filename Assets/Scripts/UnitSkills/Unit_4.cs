@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Unit_3 : UnitCard
+public class Unit_4 : UnitCard
 {
 
 
     // Start is called before the first frame update
     void Start()
     {
-        unitImage = unitCardStat.CardImage;
+        unitImage.sprite = unitCardStat.CardImage;
         health = unitCardStat.Hp;
         attack = unitCardStat.AttackDamage;
         mana = unitCardStat.ManaCost;
@@ -29,7 +28,7 @@ public class Unit_3 : UnitCard
 
     public override void UnitSkill()
     {
-        Debug.Log("Unit 3 Skill !");
+        Debug.Log("Unit 4 Skill !");
         isSkillDone = true;
     }
 }

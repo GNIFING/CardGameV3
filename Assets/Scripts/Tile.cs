@@ -153,10 +153,7 @@ public class Tile : MonoBehaviour
         
     }
 
-    private bool IsHighlightFound(GameObject highlightObject)
-    {
-        return highlightObject.activeInHierarchy;
-    }
+    
 
     private void HandleFoundHighlight(UnitCard unitCard, GameObject selectUnit)
     {
@@ -252,8 +249,12 @@ public class Tile : MonoBehaviour
     }
 
     //-------------------------------------//
+    private bool IsHighlightFound(GameObject highlightObject)
+    {
+        return highlightObject.activeInHierarchy;
+    }
 
-    public int IsTowerTile()
+    private int IsTowerTile()
     {
         if(tileType == TileType.Player1Tower)
         {
@@ -267,7 +268,7 @@ public class Tile : MonoBehaviour
         return 0; 
     }
 
-    public void AttackUnit(UnitCard selectUnitCard, UnitCard unitCard)
+    private void AttackUnit(UnitCard selectUnitCard, UnitCard unitCard)
     {
         unitCard.health -= selectUnitCard.attack;
         unitCard.healthText.text = unitCard.health.ToString();
@@ -280,7 +281,7 @@ public class Tile : MonoBehaviour
     }
 
 
-    public void MoveUnitToThisTile(GameObject selectUnit)
+    private void MoveUnitToThisTile(GameObject selectUnit)
     {
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;

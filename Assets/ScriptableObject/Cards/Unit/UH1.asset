@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
-  m_Name: 2
+  m_Name: UH1
   m_EditorClassIdentifier: 
-  cardIndex: 2
-  cardName: Second
-  cardDescription: I am the second
-  currentCardClass: 1
-  currentMoveType: 2
+  cardIndex: 1
+  cardName: First
+  cardImage: {fileID: 21300000, guid: b5417ee958c911443a49e32b6a6d314b, type: 3}
+  cardDescription: I am the first
+  currentCardClass: 0
+  currentMoveType: 0
   specialSkill: []
-  defaultManaCost: 2
-  defaultAttackDamage: 3
+  defaultManaCost: 1
+  defaultAttackDamage: 1
   defaultHp: 2

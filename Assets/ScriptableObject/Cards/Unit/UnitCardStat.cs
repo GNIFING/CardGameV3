@@ -26,7 +26,7 @@ public class UnitCardStat : ScriptableObject
     // Name and Description 
     [SerializeField] private int cardIndex;
     [SerializeField] private string cardName;
-    [SerializeField] private Image cardImage;
+    [SerializeField] private Sprite cardImage;
     [SerializeField] private string cardDescription;
     [SerializeField] private CardClass currentCardClass;
     [SerializeField] private MoveType currentMoveType;
@@ -37,7 +37,7 @@ public class UnitCardStat : ScriptableObject
 
     public int CardIndex => cardIndex;
     public string CardName => cardName;
-    public Image CardImage => cardImage;
+    public Sprite CardImage => cardImage;
     public string CardDescription => cardDescription;
 
     // Card Type 

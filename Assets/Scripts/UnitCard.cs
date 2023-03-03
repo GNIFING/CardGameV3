@@ -22,7 +22,7 @@ public class UnitCard : MonoBehaviour
     public int attack { get; set; }
     public int mana { get; set; }
 
-    protected Image unitImage;
+    public SpriteRenderer unitImage;
 
     public bool isPlayCard;
     public bool isSkillDone;
