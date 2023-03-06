@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour
 
         highlight = transform.Find("Highlight").gameObject;
         nextMoveHighlight = transform.Find("NextMoveHightlight").gameObject;
-        unitHighlight = transform.Find("MagicHighlight").gameObject;
+        unitHighlight = transform.Find("UnitHighlight").gameObject;
     }
 
     void OnMouseEnter()

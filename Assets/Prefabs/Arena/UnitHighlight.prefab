@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1492014935083448020}
   - component: {fileID: 1492014935083448021}
   m_Layer: 0
-  m_Name: MagicHighlight
+  m_Name: UnitHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
