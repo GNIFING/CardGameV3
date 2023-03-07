@@ -186,7 +186,7 @@ public class UnitMove : MonoBehaviour
         if (highlightObj != null)
         {
             Tile tile = highlightObj.GetComponent<Tile>();
-            tile.NextMoveHighlight(true);
+            tile.SetNextMoveHighlight(true);
             tiles.Add(tile);
         }
         SetHighlightUnit(this.gameObject.transform.parent.gameObject);
@@ -197,7 +197,7 @@ public class UnitMove : MonoBehaviour
         Debug.Log("Move Finish");
         foreach (var tile in tiles)
         {
-            tile.NextMoveHighlight(false);
+            tile.SetNextMoveHighlight(false);
         }
         tiles = new List<Tile>();
         unitCard.ReduceCardCredit();
@@ -207,7 +207,7 @@ public class UnitMove : MonoBehaviour
     {
         foreach (var tile in tiles)
         {
-            tile.NextMoveHighlight(false);
+            tile.SetNextMoveHighlight(false);
         }
         tiles = new List<Tile>();
     }

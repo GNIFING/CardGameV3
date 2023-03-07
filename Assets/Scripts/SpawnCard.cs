@@ -5,8 +5,7 @@ using UnityEngine;
 public class SpawnCard : MonoBehaviour
 {
     [SerializeField] List<GameObject> unitCardPrefabs;
-    private List<GameObject> unitTiles = new List<GameObject>();
-    private List<GameObject> magicTiles = new List<GameObject>();
+    private List<GameObject> cardTiles = new List<GameObject>();
 
     private void Start()
     {
@@ -15,21 +14,15 @@ public class SpawnCard : MonoBehaviour
 
     private void AddTilesToList()
     {
-        GameObject playerUnitTile = transform.GetChild(0).gameObject;
-        GameObject playerMagicTile = transform.GetChild(1).gameObject;
-        for (int i = 0; i < playerUnitTile.transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            unitTiles.Add(playerUnitTile.transform.GetChild(i).gameObject);
-        }
-        for (int i = 0; i < playerMagicTile.transform.childCount; i++)
-        {
-            unitTiles.Add(playerMagicTile.transform.GetChild(i).gameObject);
+            cardTiles.Add(transform.GetChild(i).gameObject);
         }
     }
 
     public void SpawnUnit()
     {
-        foreach (GameObject tile in unitTiles)
+        foreach (GameObject tile in cardTiles)
         {
             bool isFoundUnit = false;
             foreach(Transform tr in tile.transform)
@@ -43,6 +36,7 @@ public class SpawnCard : MonoBehaviour
             {
                 int index = Random.Range(0, unitCardPrefabs.Count);
                 GameObject unitCard = Instantiate(unitCardPrefabs[index], tile.transform.position, Quaternion.identity);
+                Debug.Log(tile.name);
                 unitCard.transform.parent = tile.transform;
                 return;
             }

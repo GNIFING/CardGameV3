@@ -205,6 +205,7 @@ public class Tile : MonoBehaviour
             }
             else
             {
+                //unit play skill here
                 selectUnitCard.isPlayCard = true;
                 playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
                 MoveUnitToThisTile(selectUnit);
@@ -287,9 +288,14 @@ public class Tile : MonoBehaviour
         selectUnit.transform.position = transform.position;
     }
 
-    public void NextMoveHighlight(bool isSelect)
+    public void SetNextMoveHighlight(bool isSelect)
     {
         nextMoveHighlight.SetActive(isSelect);
+    }
+
+    public void SetUnitHighlight(bool isSelect)
+    {
+        unitHighlight.SetActive(isSelect);
     }
 
     public GameObject GetUnitInTile()
@@ -308,6 +314,15 @@ public class Tile : MonoBehaviour
         return null;
     }
 
+    public int GetXPos()
+    {
+        return xPos;
+    }
+
+    public int GetYPos()
+    {
+        return yPos;
+    }
     private bool IsCurrentPlayerUnit(UnitCard unitCard)
     {
         return unitCard.GetPlayerNo() == GameController.CurrentTurn;

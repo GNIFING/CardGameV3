@@ -49,7 +49,7 @@ public abstract class MagicCard : MonoBehaviour
                 highlightTargets = tileManager.HighlightEnemyUnitTiles(playerNo);
                 break;
             case HighlightUnitType.AllTarget:
-                // highlight all units (friendly and enemy)
+                highlightTargets = tileManager.HighlightAllUnitTiles();
                 break;
             case HighlightUnitType.UnitOnly:
                 // highlight all units (friendly and enemy) and non-units

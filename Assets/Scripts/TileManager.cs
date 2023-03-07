@@ -28,6 +28,7 @@ public class TileManager : MonoBehaviour
 
     public List<GameObject> GetAllTiles() => Tiles;
 
+    // Get Unit Highlight in many type  ->  all unit, friendly unit only, enemy unit only, tower only // 
     public List<GameObject> HighlightAllUnitTiles()
     {
         foreach(GameObject tileObject in Tiles)
@@ -37,6 +38,7 @@ public class TileManager : MonoBehaviour
             {
 
                 unitHighlight.Add(tile.gameObject);
+                GenerateUnitHighlight(tile.gameObject);
             }
         }
         Debug.Log(unitHighlight.Count);
@@ -248,14 +250,19 @@ public class TileManager : MonoBehaviour
         if (nextMoveHighlightObj != null)
         {
             Tile tile = nextMoveHighlightObj.GetComponent<Tile>();
-            tile.NextMoveHighlight(true);
+            tile.SetNextMoveHighlight(true);
             NextMoveHighlightTiles.Add(tile);
         }
+    }
+
+    private void GenerateUnitHighlight(GameObject tile)
+    {
+        tile.GetComponent<Tile>().SetUnitHighlight(true);
     }
     public void CancelHighlightMove()
     {
         foreach (Tile tile in NextMoveHighlightTiles){
-            tile.NextMoveHighlight(false);
+            tile.SetNextMoveHighlight(false);
         }
         NextMoveHighlightTiles = new List<Tile>();
 }
