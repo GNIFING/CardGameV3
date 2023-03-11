@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class TileManager : MonoBehaviour
 {
+    public GameObject SelectUnit;
     private List<GameObject> Tiles { get; set; } = new List<GameObject>();
     private List<Tile> NextMoveHighlightTiles = new List<Tile>();
-    public GameObject SelectUnit;
+    private List<Tile> unitHighlightTiles = new List<Tile>();
 
-    private List<GameObject> unitHighlight = new List<GameObject>();
+    public bool isInSkillProcess;
+    public bool hasUnitHighlight;
+
+    private int player1Offset;
+    private int player2Offset;
 
 
     private void Start()
@@ -29,7 +33,7 @@ public class TileManager : MonoBehaviour
     public List<GameObject> GetAllTiles() => Tiles;
 
     // Get Unit Highlight in many type  ->  all unit, friendly unit only, enemy unit only, tower only // 
-    public List<GameObject> HighlightAllUnitTiles()
+    public List<Tile> HighlightAllUnitTiles()
     {
         foreach(GameObject tileObject in Tiles)
         {
@@ -37,43 +41,73 @@ public class TileManager : MonoBehaviour
             if(tile.GetUnitInTile() != null)
             {
 
-                unitHighlight.Add(tile.gameObject);
+                unitHighlightTiles.Add(tile);
                 GenerateUnitHighlight(tile.gameObject);
             }
         }
-        Debug.Log(unitHighlight.Count);
-        return unitHighlight;
+        if(unitHighlightTiles.Count >= 1)
+        {
+            hasUnitHighlight = true;
+        }
+        else
+        {
+            Debug.Log("No unit to highlight --> Skill done");
+            isInSkillProcess = false;
+        }
+        Debug.Log(unitHighlightTiles.Count);
+        return unitHighlightTiles;
     }
-    public List<GameObject> HighlightFriendlyUnitTiles(int playerNo)
+    public List<Tile> HighlightFriendlyUnitTiles(int playerNo)
     {
         foreach (GameObject tileObject in Tiles)
         {
             Tile tile = tileObject.GetComponent<Tile>();
             if(tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() == playerNo)
             {
-                tile.SetMagicHighlight(true);
-                unitHighlight.Add(tile.gameObject);
+                tile.SetUnitHighlight(true);
+                unitHighlightTiles.Add(tile);
             }
         }
-        Debug.Log(unitHighlight.Count);
-        return unitHighlight;
+        if (unitHighlightTiles.Count >= 1)
+        {
+            hasUnitHighlight = true;
+        }
+        else
+        {
+            Debug.Log("No unit to highlight --> Skill done");
+            isInSkillProcess = false;
+        }
+        Debug.Log(unitHighlightTiles.Count);
+        return unitHighlightTiles;
     }
 
-    public List<GameObject> HighlightEnemyUnitTiles(int playerNo)
+    public List<Tile> HighlightEnemyUnitTiles(int playerNo)
     {
         foreach (GameObject tileObject in Tiles)
         {
             Tile tile = tileObject.GetComponent<Tile>();
             if (tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() != playerNo)
             {
-                tile.SetMagicHighlight(true);
-                unitHighlight.Add(tile.gameObject);
+                tile.SetUnitHighlight(true);
+                unitHighlightTiles.Add(tile);
             }
         }
-        Debug.Log(unitHighlight.Count);
-        return unitHighlight;
+        if (unitHighlightTiles.Count >= 1)
+        {
+            hasUnitHighlight = true;
+        }
+        else
+        {
+            Debug.Log("No unit to highlight --> Skill done");
+            isInSkillProcess = false;
+        }
+        return unitHighlightTiles;
     }
 
+    public void NoHighlightUnit()
+    {
+        isInSkillProcess = false;
+    }
     public void SetSelectUnit(GameObject unit)
     {
         SelectUnit = unit;
@@ -87,7 +121,6 @@ public class TileManager : MonoBehaviour
     public GameObject GetSelectUnit()
     {
         if (SelectUnit == null) return null;
-        Debug.Log("Get Select Unit :" + SelectUnit);
         return SelectUnit;
     }
 
@@ -95,7 +128,8 @@ public class TileManager : MonoBehaviour
     {
         if (GameController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
         {
-            Debug.Log("switch case");
+            player1Offset = SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? 1 : 0;
+            player2Offset = SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 2 ? 1 : 0;
             SetSelectUnit(unitCard.gameObject);
             switch (unitCard.GetUnitMoveType())
             {
@@ -128,24 +162,20 @@ public class TileManager : MonoBehaviour
             
     }
 
-    public void UnitMoveFromP1Hand()
+    public void HighlightUnitMoveFromP1Hand()
     {
-        GenerateHighlightMove(1, 0);
-        GenerateHighlightMove(1, 1);
-        GenerateHighlightMove(1, 2);
-        GenerateHighlightMove(1, 3);
-        GenerateHighlightMove(1, 4);
-        GenerateHighlightMove(1, 5);
+        for (int yPos = 0; yPos < 6; yPos++)
+        {
+            GenerateHighlightMove(1, yPos);
+        }
     }
 
-    public void UnitMoveFromP2Hand()
+    public void HighlightUnitMoveFromP2Hand()
     {
-        GenerateHighlightMove(5, 0);
-        GenerateHighlightMove(5, 1);
-        GenerateHighlightMove(5, 2);
-        GenerateHighlightMove(5, 3);
-        GenerateHighlightMove(5, 4);
-        GenerateHighlightMove(5, 5);
+        for (int yPos = 0; yPos < 6; yPos++)
+        {
+            GenerateHighlightMove(5, yPos);
+        }
     }
 
 
@@ -156,15 +186,28 @@ public class TileManager : MonoBehaviour
         // 7   8   9
         // 4 unit  6
         // 1   2   3
+        
+        int[] xOffset = { -1, 0, 1, -1, 1, -1, 0, 1 };
+        int[] yOffset = { -1, -1, -1, 0, 0, 1, 1, 1 };
 
-        if (x != 0 && y != 0) GenerateHighlightMove(x - 1, y - 1); // index 1
-        if (y != 0) GenerateHighlightMove(x, y - 1); // index 2
-        if (x != 6 && y != 0) GenerateHighlightMove(x + 1, y - 1); // index 3
-        if (x != 0) GenerateHighlightMove(x - 1, y); // index 4
-        if (x != 6) GenerateHighlightMove(x + 1, y); // index 6
-        if (x != 0 && y != 5) GenerateHighlightMove(x - 1, y + 1); // index 7
-        if (y != 5) GenerateHighlightMove(x, y + 1); // index 8
-        if (x != 6 && y != 5) GenerateHighlightMove(x + 1, y + 1); // index 9
+        for (int i = 0; i < 8; i++)
+        {
+            int newX = x + xOffset[i];
+            int newY = y + yOffset[i];
+            if (newX >= 0 + player1Offset && newX <= 6 - player2Offset && newY >= 0 && newY <= 5)
+            {
+                GenerateHighlightMove(newX, newY);
+            }
+        }
+
+        //if (x != 0 && y != 0) GenerateHighlightMove(x - 1, y - 1); // index 1
+        //if (y != 0) GenerateHighlightMove(x, y - 1); // index 2
+        //if (x != 6 && y != 0) GenerateHighlightMove(x + 1, y - 1); // index 3
+        //if (x != 0) GenerateHighlightMove(x - 1, y); // index 4
+        //if (x != 6) GenerateHighlightMove(x + 1, y); // index 6
+        //if (x != 0 && y != 5) GenerateHighlightMove(x - 1, y + 1); // index 7
+        //if (y != 5) GenerateHighlightMove(x, y + 1); // index 8
+        //if (x != 6 && y != 5) GenerateHighlightMove(x + 1, y + 1); // index 9
 
     }
 
@@ -179,24 +222,36 @@ public class TileManager : MonoBehaviour
 
         // Can move only 1 5 7 9 17 19 21 25
 
-        if (x > 1 && y > 1) GenerateHighlightMove(x - 2, y - 2); // index 1
-        if (x < 5 && y > 1) GenerateHighlightMove(x + 2, y - 2); // index 5
-        if (x != 0 && y != 0) GenerateHighlightMove(x - 1, y - 1); // index 7
-        if (x != 6 && y != 0) GenerateHighlightMove(x + 1, y - 1); // index 9
-        if (x != 0 && y != 5) GenerateHighlightMove(x - 1, y + 1); // index 17
-        if (x != 6 && y != 5) GenerateHighlightMove(x + 1, y + 1); // index 19
-        if (x > 1 && y < 4) GenerateHighlightMove(x - 2, y + 2); // index 21
-        if (x < 5 && y < 4) GenerateHighlightMove(x + 2, y + 2); // index 25
+        int[] xOffset = { -2, 2, -1, 1, -1, 1, -2, 2 };
+        int[] yOffset = { -2, -2, -1, -1, 1, 1, 2, 2 };
+
+        for (int i = 0; i < 8; i++)
+        {
+            int newX = x + xOffset[i];
+            int newY = y + yOffset[i];
+            if (newX >= 0 + player1Offset && newX <= 6 - player2Offset && newY >= 0 && newY <= 5)
+            {
+                GenerateHighlightMove(newX, newY);
+            }
+        }
     }
 
     private void HighlightDiagonalShort(int x, int y)
     {
         //index same as MoveDiagonalFar
         //Can move only 7 9 17 19
-        if (x != 0 && y != 0) GenerateHighlightMove(x - 1, y - 1); // index 7
-        if (x != 6 && y != 0) GenerateHighlightMove(x + 1, y - 1); // index 9
-        if (x != 0 && y != 5) GenerateHighlightMove(x - 1, y + 1); // index 17
-        if (x != 6 && y != 5) GenerateHighlightMove(x + 1, y + 1); // index 19
+        int[] xOffset = { -1, 1, -1, 1 };
+        int[] yOffset = { -1, -1, 1, 1 };
+
+        for (int i = 0; i < 4; i++)
+        {
+            int newX = x + xOffset[i];
+            int newY = y + yOffset[i];
+            if (newX >= 0 + player1Offset && newX <= 6 - player2Offset && newY >= 0 && newY <= 5)
+            {
+                GenerateHighlightMove(newX, newY);
+            }
+        }
     }
 
     private void HighlightStraightFar(int x, int y)
@@ -209,14 +264,18 @@ public class TileManager : MonoBehaviour
         //  1  2  3  4  5  
 
         //Can move only 3 8 11 12 14 15 18 23
-        if (y > 1) GenerateHighlightMove(x, y - 2); // index 3
-        if (y != 0) GenerateHighlightMove(x, y - 1); // index 8
-        if (x > 1) GenerateHighlightMove(x - 2, y); // index 11
-        if (x != 0) GenerateHighlightMove(x - 1, y); // index 12
-        if (x != 6) GenerateHighlightMove(x + 1, y); // index 14
-        if (x < 5) GenerateHighlightMove(x + 2, y); // index 15
-        if (y != 5) GenerateHighlightMove(x, y + 1); // index 18
-        if (y < 4) GenerateHighlightMove(x, y + 2); // index 23
+        int[] xOffset = { -2, 0, 2, -1, 1, -1, 0, 1 };
+        int[] yOffset = { 0, -1, 0, -2, -2, 2, 1, 2 };
+
+        for (int i = 0; i < 8; i++)
+        {
+            int newX = x + xOffset[i];
+            int newY = y + yOffset[i];
+            if (newX >= 0 + player1Offset && newX <= 6 - player2Offset && newY >= 0 && newY <= 5)
+            {
+                GenerateHighlightMove(newX, newY);
+            }
+        }
 
     }
 
@@ -224,18 +283,38 @@ public class TileManager : MonoBehaviour
     {
         //index same as MoveStraightFar
         //Can move onleey 8 12 14 18
-        if (y != 0) GenerateHighlightMove(x, y - 1); // index 8
-        if (x != 0) GenerateHighlightMove(x - 1, y); // index 12
-        if (x != 6) GenerateHighlightMove(x + 1, y); // index 14
-        if (y != 5) GenerateHighlightMove(x, y + 1); // index 18
+        int[] xOffset = { -1, 0, 1, 0};
+        int[] yOffset = { 0, -1, 0, 1};
+
+        for (int i = 0; i < 4; i++)
+        {
+            int newX = x + xOffset[i];
+            int newY = y + yOffset[i];
+            if (newX >= 0 + player1Offset && newX <= 6 - player2Offset && newY >= 0 && newY <= 5)
+            {
+                GenerateHighlightMove(newX, newY);
+            }
+        }
     }
 
     private void HighlightHorizontalFar(int x, int y)
     {
-        if (x > 1) GenerateHighlightMove(x - 2, y); // index 11
-        if (x != 0) GenerateHighlightMove(x - 1, y); // index 12
-        if (x != 6) GenerateHighlightMove(x + 1, y); // index 14
-        if (x < 5) GenerateHighlightMove(x + 2, y); // index 15
+        int[] xOffset = { -2, -1, 1, 2};
+        int[] yOffset = { 0, 0, 0, 0 };
+
+        for (int i = 0; i < 4; i++)
+        {
+            int newX = x + xOffset[i];
+            int newY = y + yOffset[i];
+            if (newX >= 0 + player1Offset && newX <= 6 - player2Offset && newY >= 0 && newY <= 5)
+            {
+                GenerateHighlightMove(newX, newY);
+            }
+        }
+        //if (x > 1) GenerateHighlightMove(x - 2, y); // index 11
+        //if (x != 0) GenerateHighlightMove(x - 1, y); // index 12
+        //if (x != 6) GenerateHighlightMove(x + 1, y); // index 14
+        //if (x < 5) GenerateHighlightMove(x + 2, y); // index 15
     }
 
     private void HighlightHorizontalShort(int x, int y)
@@ -259,13 +338,23 @@ public class TileManager : MonoBehaviour
     {
         tile.GetComponent<Tile>().SetUnitHighlight(true);
     }
-    public void CancelHighlightMove()
+    public void CancelNextMoveHighlight()
     {
-        foreach (Tile tile in NextMoveHighlightTiles){
+        foreach (Tile tile in NextMoveHighlightTiles)
+        {
             tile.SetNextMoveHighlight(false);
         }
         NextMoveHighlightTiles = new List<Tile>();
-}
+    }
 
-
+    public void CancelUnitMoveHighlight()
+    {
+        foreach (Tile tile in unitHighlightTiles)
+        {
+            tile.SetUnitHighlight(false);
+        }
+        isInSkillProcess = false;
+        unitHighlightTiles = new List<Tile>();
+        hasUnitHighlight = false;
+    }
 }

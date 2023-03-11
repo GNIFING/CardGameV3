@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UH4
   m_EditorClassIdentifier: 
   cardIndex: 4
-  cardName: Fourth
+  cardName: Journal Bearer
   cardImage: {fileID: 21300000, guid: df55c92d64deac6479b3795c586eee40, type: 3}
   cardDescription: I am the fourth
   currentCardClass: 0

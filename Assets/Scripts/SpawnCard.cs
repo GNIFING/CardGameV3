@@ -36,7 +36,6 @@ public class SpawnCard : MonoBehaviour
             {
                 int index = Random.Range(0, unitCardPrefabs.Count);
                 GameObject unitCard = Instantiate(unitCardPrefabs[index], tile.transform.position, Quaternion.identity);
-                Debug.Log(tile.name);
                 unitCard.transform.parent = tile.transform;
                 return;
             }

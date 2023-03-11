@@ -14,7 +14,7 @@ public abstract class MagicCard : MonoBehaviour
 
     public TileManager tileManager;
 
-    protected List<GameObject> highlightTargets;
+    protected List<Tile> highlightTargets;
     protected List<GameObject> selectTargets;
 
     public HighlightUnitType highlightUnitType;

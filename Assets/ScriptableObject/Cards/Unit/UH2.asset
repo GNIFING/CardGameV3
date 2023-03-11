@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UH2
   m_EditorClassIdentifier: 
   cardIndex: 2
-  cardName: Second
+  cardName: Bard of the Road
   cardImage: {fileID: 21300000, guid: 12caf471d1a385a4cb2d7dc2bfa1ba3c, type: 3}
   cardDescription: I am the second
   currentCardClass: 0

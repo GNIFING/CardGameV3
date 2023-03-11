@@ -4,36 +4,26 @@ using UnityEngine;
 
 public class Unit_1 : UnitCard
 {
+    public GameObject bulletPrefab;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        unitImage.sprite = unitCardStat.CardImage;
-        health = unitCardStat.Hp;
-        attack = unitCardStat.AttackDamage;
-        mana = unitCardStat.ManaCost;
-
-        cardCredit = maxCardCredit;
-        attackText.text = attack.ToString();
-        healthText.text = health.ToString();
-        manaText.text = mana.ToString();
+        InitializeCardStats();
+        UpdateCardUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UnitSkill(GameObject unitInSelectTile, int tileXPos, int tileYPos)
     {
-        
-    }
-
-    public override void UnitSkill()
-    {
-        Debug.Log("Unit 1 Skill !");
+        Quaternion rotation = CalculateRotation(unitInSelectTile);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+        bullet.GetComponent<BulletScript>().SetTarget(unitInSelectTile.transform.parent.gameObject);
+        DealDamageToUnit(unitInSelectTile, 1);
         isSkillDone = true;
     }
 
     public override void UnitHighlight()
     {
-        Debug.Log("Highlight from unit 1");
+        tileManager.HighlightEnemyUnitTiles(playerNo);
+        //isSkillDone = true;
     }
 }

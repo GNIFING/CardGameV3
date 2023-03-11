@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UH3
   m_EditorClassIdentifier: 
   cardIndex: 3
-  cardName: Third
+  cardName: Shield Smith
   cardImage: {fileID: 21300000, guid: aef520811b351604394c1bfac94067d0, type: 3}
   cardDescription: I am the third
   currentCardClass: 0

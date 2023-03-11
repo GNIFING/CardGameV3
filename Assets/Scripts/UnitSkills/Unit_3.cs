@@ -2,34 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Unit_3 : UnitCard
 {
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        unitImage.sprite = unitCardStat.CardImage;
-        health = unitCardStat.Hp;
-        attack = unitCardStat.AttackDamage;
-        mana = unitCardStat.ManaCost;
-
-        cardCredit = maxCardCredit;
-        attackText.text = attack.ToString();
-        healthText.text = health.ToString();
-        manaText.text = mana.ToString();
+        InitializeCardStats();
+        UpdateCardUI();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public override void UnitSkill()
+    public override void UnitSkill(GameObject unitInSelectTile, int tileXPos, int tileYPos)
     {
         Debug.Log("Unit 3 Skill !");
         isSkillDone = true;
+    }
+    public override void UnitHighlight()
+    {
+        tileManager.NoHighlightUnit();
+        Debug.Log("Highlight from unit 3");
     }
 }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class UnitCard : MonoBehaviour
 {
-    [SerializeField] private int playerNo;
+    [SerializeField] protected int playerNo;
     [SerializeField] protected int maxCardCredit = 1;
     [SerializeField] private GameObject MoveCredit;
 
@@ -27,7 +27,11 @@ public class UnitCard : MonoBehaviour
     public bool isPlayCard;
     public bool isSkillDone;
 
-    public virtual void UnitSkill()
+    protected TileManager tileManager;
+    public GameObject backCard;
+    protected GameController gameController;
+
+    public virtual void UnitSkill(GameObject unitInSelectTile, int tileXPos, int tileYPos )
     {
         Debug.Log("Default skill");
     }
@@ -73,4 +77,60 @@ public class UnitCard : MonoBehaviour
     {
         return unitCardStat.CurrentMoveType;
     }
+
+    protected Quaternion CalculateRotation(GameObject unitInSelectTile)
+    {
+        Vector2 direction = unitInSelectTile.transform.parent.transform.position - transform.position;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        return Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    protected void InitializeCardStats()
+    {
+        gameController = FindObjectOfType<GameController>();
+        gameController.OnChangeCardBack += ChangeBackCard;
+
+        tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+        unitImage.sprite = unitCardStat.CardImage;
+        health = unitCardStat.Hp;
+        attack = unitCardStat.AttackDamage;
+        mana = unitCardStat.ManaCost;
+        cardCredit = maxCardCredit;
+    }
+    protected void UpdateCardUI()
+    {
+        attackText.text = attack.ToString();
+        healthText.text = health.ToString();
+        manaText.text = mana.ToString();
+    }
+    protected void DealDamageToUnit(GameObject unitInSelectTile, int damage)
+    {
+        UnitCard unitInSelectTileCard = unitInSelectTile.GetComponent<UnitCard>();
+        unitInSelectTileCard.health -= damage;
+        unitInSelectTileCard.healthText.text = unitInSelectTileCard.health.ToString();
+        if (unitInSelectTileCard.health <= 0) Destroy(unitInSelectTile);
+    }
+
+    protected void ChangeBackCard(int playerTurn)
+    {
+        if(backCard != null)
+        {
+            if (playerNo == 1)
+            {
+                backCard.SetActive(playerTurn == 2);
+            }
+            if (playerNo == 2)
+            {
+                backCard.SetActive(playerTurn == 1);
+            }
+        }
+        
+    }
+
+    public void RemoveBackCard()
+    {
+        Destroy(backCard);
+    }
+
 }

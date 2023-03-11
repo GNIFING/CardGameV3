@@ -34,7 +34,6 @@ public class Tile : MonoBehaviour
     private TileManager tileManager;
     private PlayerController playerController;
 
-    //Highlight tile in white color when mouse is hover// 
     private void Start()
     {
         tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
@@ -45,6 +44,7 @@ public class Tile : MonoBehaviour
         unitHighlight = transform.Find("UnitHighlight").gameObject;
     }
 
+    //-------------- Hover Highlight Mouse --------------//
     void OnMouseEnter()
     {
         highlight.SetActive(true);
@@ -54,76 +54,213 @@ public class Tile : MonoBehaviour
        highlight.SetActive(false);    
     }
 
-    //-------------------------------------------------//
+    //-------------- Click On Tile --------------//
+
     void OnMouseDown()
     {
         unit = GetUnitInTile();
         selectUnit = tileManager.GetSelectUnit();
 
-        HandleUnitCard(unit, selectUnit);
-             
+        HandleClickOnTile(unit, selectUnit);    
     }
 
-    private void HandleUnitCard(GameObject unit, GameObject selectUnit)
+    private void HandleClickOnTile(GameObject unit, GameObject selectUnit)
     {
-        if (selectUnit != null)
-        {
-            selectUnitCard = selectUnit.GetComponent<UnitCard>();
-        }
+        //-------------- Retrieve the UnitCard component --------------//
+
+        if (selectUnit != null) selectUnitCard = selectUnit.GetComponent<UnitCard>();
+
+        //-------------- Click on a tile that has the unitHighlight --------------//
 
         if (IsHighlightFound(unitHighlight))
         {
-            HandleUnitSkill();
-        }
-
-        if (IsHighlightFound(nextMoveHighlight) && selectUnitCard.GetCardCredit() >= 0)
-        {
-            HandleFoundHighlight(unitCard, selectUnit);
+            HandleFoundUnitHighlight(unit, selectUnit);
             return;
         }
 
-        if (unit == null || !IsCurrentPlayerUnit(unitCard))
+        if (tileManager.isInSkillProcess)
+        {
+            return;
+        }
+
+        //-------------- Click on a tile that has the nextMoveHighlight --------------//
+
+        if (IsHighlightFound(nextMoveHighlight))
+        {
+            HandleFoundNextMoveHighlight(unitCard, selectUnit);
+            return;
+        }
+
+        //-------------- Click on an empty tile or an enemy unit --------------//
+
+        if (unit == null || !IsUnitFriendly(unitCard))
         {
             tileManager.DeSelectUnit();
-            tileManager.CancelHighlightMove();
+            tileManager.CancelNextMoveHighlight();
             return;
         }
+
+        //-------------- Click on the same selected unit --------------//
 
         if (unit == selectUnit)
         {
-            Debug.Log("Same Selected");
             return;
         }
 
+        //-------------- Click on Unit to Set SelectUnit --------------//
+
         else if (unit != null && selectUnit == null)
         {
+            Debug.Log("1");
             tileManager.SetSelectUnit(unit);
             HighlightNextMoveUnit(unitCard, xPos, yPos);
         }
+
+        //-------------- Click on a unit that has already moved --------------//
 
         else if (IsFriendlyUnitAlreadyMoved(selectUnit, unitCard))
         {
             tileManager.DeSelectUnit();
-            tileManager.CancelHighlightMove();
+            tileManager.CancelNextMoveHighlight();
             return;
         }
 
-        else//friendly unit -> change select unit to this unit, cancel all nextmove highlight and highlight new next move
+        //-------------- Click on a friendly unit to set it as the new SelectUnit --------------//
+
+        else
         {
-            tileManager.CancelHighlightMove();
+            tileManager.DeSelectUnit();
+            tileManager.CancelNextMoveHighlight();
             tileManager.SetSelectUnit(unit);
             HighlightNextMoveUnit(unitCard, xPos, yPos);
         }
     }
 
-    private void HandleUnitSkill()
+    private void HandleFoundUnitHighlight(GameObject unit, GameObject selectUnit)
     {
+        Debug.Log("3");
+        selectUnitCard = selectUnit.GetComponent<UnitCard>();
+        selectUnitCard.UnitSkill(unit, xPos, yPos);
+        tileManager.CancelUnitMoveHighlight();
+        if (selectUnitCard.isSkillDone == true)
+        {
+            tileManager.DeSelectUnit();
+        }
+    }
 
+    private void HandleFoundNextMoveHighlight(UnitCard unitCard, GameObject selectUnit)
+    {
+        //-------------- Click on Player 1 Tower Tile --------------//
+
+        if (tileType == TileType.Player1Tower)
+        {
+            if (selectUnitCard.GetPlayerNo() == 2)
+            {
+                playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.attack);
+                tileManager.CancelNextMoveHighlight();
+                tileManager.DeSelectUnit();
+                selectUnitCard.ReduceCardCredit();
+            }
+            else
+            {
+                tileManager.CancelNextMoveHighlight();
+                tileManager.DeSelectUnit();
+            }
+        }
+
+        //-------------- Click on Player 2 Tower Tile --------------//
+
+        else if (tileType == TileType.Player2Tower)
+        {
+            if (selectUnitCard.GetPlayerNo() == 1)
+            {
+                playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.attack);
+                tileManager.CancelNextMoveHighlight();
+                tileManager.DeSelectUnit();
+                selectUnitCard.ReduceCardCredit();
+            }
+            else
+            {
+                tileManager.CancelNextMoveHighlight();
+                tileManager.DeSelectUnit();
+            }
+        }
+
+        //-------------- Click on an empty tile to move the selected unit to that tile --------------//
+
+        else if (selectUnit != null && unit == null)
+        {
+            if (selectUnitCard.isPlayCard)
+            {
+                MoveUnitToThisTile(selectUnit);
+                tileManager.CancelNextMoveHighlight();
+                tileManager.DeSelectUnit();
+                selectUnitCard.ReduceCardCredit();
+            }
+
+            //-------------- This unit has not been played yet --------------//
+
+            else
+            {
+                Debug.Log("2");
+                //unit play skill here
+                selectUnitCard.isPlayCard = true;
+                selectUnitCard.RemoveBackCard();
+                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
+                MoveUnitToThisTile(selectUnit);
+
+                tileManager.CancelNextMoveHighlight();
+                selectUnitCard.ReduceCardCredit();
+                tileManager.isInSkillProcess = true;
+                selectUnitCard.UnitHighlight();
+
+            }
+        }
+
+        //-------------- Click on enemy unit to attack --------------//
+
+        else if (!IsUnitFriendly(unitCard))
+        {
+            Debug.Log("Attack Enemy");
+            if(selectUnitCard.isPlayCard == false)
+            {
+                selectUnitCard.isPlayCard = true;
+                selectUnitCard.RemoveBackCard();
+                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
+                // Move unit to towe tile //
+                MoveUnitToSpecificTile(selectUnit, selectUnitCard.GetPlayerNo(), xPos, yPos);
+            }
+            AttackUnit(selectUnitCard, unitCard);
+            selectUnitCard.ReduceCardCredit();
+            tileManager.CancelNextMoveHighlight();
+            tileManager.DeSelectUnit();
+            // Attack enemy unit here
+        }
+
+        //-------------- Click on the friendly unit that has already moved --------------//
+
+        else if (IsFriendlyUnitAlreadyMoved(selectUnit, unitCard))
+        {
+            // move Select unit to this tile
+            Debug.Log("Click on the friendly unit that has already moved");
+            tileManager.CancelNextMoveHighlight();
+            tileManager.DeSelectUnit();
+        }
+
+        //-------------- Click on the friendly unit that has not moved, and select it as selectUnit --------------//
+
+        else
+        {
+            Debug.Log("Click on the friendly unit that has not moved, and select it as selectUnit");
+            tileManager.CancelNextMoveHighlight();
+            tileManager.SetSelectUnit(unit);
+            HighlightNextMoveUnit(unitCard, xPos, yPos);
+        }
     }
 
     private bool IsFriendlyUnitAlreadyMoved(GameObject selectUnit, UnitCard unitCard)
     {
-        return selectUnit != null && !IsCurrentPlayerUnit(selectUnit.GetComponent<UnitCard>());
+        return unitCard.GetCardCredit() <= 0;
     }
 
     private void HighlightNextMoveUnit(UnitCard unitCard, int xPos, int yPos)
@@ -140,12 +277,10 @@ public class Tile : MonoBehaviour
                 tileManager.HighlightByType(unitCard, xPos, yPos);
                 break;
             case TileType.Player1Tile:
-                if (playerController.IsEnoughMana(unitCard)) tileManager.UnitMoveFromP1Hand();
-                else Debug.Log("Not enough mana!");
+                if (playerController.IsEnoughMana(unitCard)) tileManager.HighlightUnitMoveFromP1Hand();
                 break;
             case TileType.Player2Tile:
-                if (playerController.IsEnoughMana(unitCard)) tileManager.UnitMoveFromP2Hand();
-                else Debug.Log("Not enough mana!");
+                if (playerController.IsEnoughMana(unitCard)) tileManager.HighlightUnitMoveFromP2Hand();
                 break;
             default:
                 break;
@@ -153,120 +288,9 @@ public class Tile : MonoBehaviour
         
     }
 
-    
-
-    private void HandleFoundHighlight(UnitCard unitCard, GameObject selectUnit)
-    {
-        if (IsTowerTile() == 1) //tower of P1
-        {
-            Debug.Log("Hit Tower");
-            if(selectUnitCard.GetPlayerNo() == 2)
-            {
-                playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.attack);
-                tileManager.CancelHighlightMove();
-                tileManager.DeSelectUnit();
-                selectUnitCard.ReduceCardCredit();
-            }
-            else
-            {
-                tileManager.CancelHighlightMove();
-                tileManager.DeSelectUnit();
-            }
-            //Attack Tower Player
-        }
-
-        else if(IsTowerTile() == 2)
-        {
-            Debug.Log("Hit Tower");
-            if (selectUnitCard.GetPlayerNo() == 1)
-            {
-                playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.attack);
-                tileManager.CancelHighlightMove();
-                tileManager.DeSelectUnit();
-                selectUnitCard.ReduceCardCredit();
-            }
-            else
-            {
-                tileManager.CancelHighlightMove();
-                tileManager.DeSelectUnit();
-            }
-            //Attack Tower Player
-        }
-
-        else if(selectUnit != null && unit == null)
-        {
-            if (selectUnitCard.isPlayCard)
-            {
-                //Move select unit to this tile
-                MoveUnitToThisTile(selectUnit);
-                tileManager.CancelHighlightMove();
-                tileManager.DeSelectUnit();
-                selectUnitCard.ReduceCardCredit();
-            }
-            else
-            {
-                //unit play skill here
-                selectUnitCard.isPlayCard = true;
-                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
-                MoveUnitToThisTile(selectUnit);
-                tileManager.CancelHighlightMove();
-                selectUnitCard.ReduceCardCredit();
-                selectUnitCard.UnitHighlight();
-
-                if(selectUnitCard.isSkillDone == true)
-                {
-                    tileManager.DeSelectUnit();
-                    Debug.Log("deSelect Unit");
-                }
-
-            }
-        }
-        else if (!IsCurrentPlayerUnit(unitCard))
-        {
-            Debug.Log("Attack Enemy");
-            AttackUnit(selectUnitCard, unitCard);
-            tileManager.CancelHighlightMove();
-            tileManager.DeSelectUnit();
-            // Attack enemy unit here
-        }
-
-        else if(IsFriendlyUnitAlreadyMoved(selectUnit, unitCard))
-        {
-            // move Select unit to this tile
-            tileManager.CancelHighlightMove();
-            tileManager.DeSelectUnit();
-        }
-
-        else
-        {
-            Debug.Log("Last case");
-
-            // Cancel all highlight and return Select unit to null
-            tileManager.CancelHighlightMove();
-            tileManager.SetSelectUnit(unit);
-            HighlightNextMoveUnit(unitCard, xPos, yPos);
-        }
-
-    }
-
-    //-------------------------------------//
     private bool IsHighlightFound(GameObject highlightObject)
     {
         return highlightObject.activeInHierarchy;
-    }
-
-    private int IsTowerTile()
-    {
-        if(tileType == TileType.Player1Tower)
-        {
-            return 1;
-        }
-
-        if (tileType == TileType.Player2Tower)
-        {
-            return 2;
-        }
-        return 0; 
     }
 
     private void AttackUnit(UnitCard selectUnitCard, UnitCard unitCard)
@@ -288,6 +312,21 @@ public class Tile : MonoBehaviour
         selectUnit.transform.position = transform.position;
     }
 
+    public void MoveUnitToSpecificTile(GameObject unit, int playerNo, int PosX, int PosY)
+    {
+        GameObject specificTile;
+        if (playerNo == 1)
+        {
+            specificTile = GameObject.Find($"Tile {PosX - 1} {PosY}");
+        }
+        else
+        {
+            specificTile = GameObject.Find($"Tile {PosX + 1} {PosY}");
+        }
+        unit.transform.SetParent(specificTile.transform);
+        unit.transform.position = specificTile.transform.position;
+    }
+
     public void SetNextMoveHighlight(bool isSelect)
     {
         nextMoveHighlight.SetActive(isSelect);
@@ -304,36 +343,18 @@ public class Tile : MonoBehaviour
         {
             if (obj.CompareTag("Unit"))
             {
-                Debug.Log("Found Unit name :" + obj.name);
                 unitCard = obj.GetComponent<UnitCard>();
                 return obj.gameObject;
             }
         }
-        Debug.Log("Not Found Unit");
         unitCard = null;
         return null;
     }
 
-    public int GetXPos()
-    {
-        return xPos;
-    }
-
-    public int GetYPos()
-    {
-        return yPos;
-    }
-    private bool IsCurrentPlayerUnit(UnitCard unitCard)
+    private bool IsUnitFriendly(UnitCard unitCard)
     {
         return unitCard.GetPlayerNo() == GameController.CurrentTurn;
-    }
-
-    //================ Magic ================//
-    public void SetMagicHighlight(bool isActive)
-    {
-        unitHighlight.SetActive(isActive);
-    }
-
+    }   
 }
 
 
