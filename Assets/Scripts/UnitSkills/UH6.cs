@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit_3 : UnitCard
+public class UH6 : UnitCard
 {
     void Start()
     {
@@ -10,14 +10,15 @@ public class Unit_3 : UnitCard
         UpdateCardUI();
     }
 
-    public override void UnitSkill(GameObject unitInSelectTile, int tileXPos, int tileYPos)
+    public override void UnitSkill()
     {
-        Debug.Log("Unit 3 Skill !");
+        Debug.Log("Unit 6 Skill !");
         isSkillDone = true;
     }
     public override void UnitHighlight()
     {
+        isSkillDone = true;
         tileManager.NoHighlightUnit();
-        Debug.Log("Highlight from unit 3");
+        Debug.Log("Highlight from unit 6");
     }
 }

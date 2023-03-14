@@ -116,6 +116,7 @@ public class TileManager : MonoBehaviour
     public void DeSelectUnit()
     {
         SelectUnit = null;
+        CancelNextMoveHighlight();
     }
 
     public GameObject GetSelectUnit()
@@ -128,6 +129,7 @@ public class TileManager : MonoBehaviour
     {
         if (GameController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
         {
+            Debug.Log("333");
             player1Offset = SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? 1 : 0;
             player2Offset = SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 2 ? 1 : 0;
             SetSelectUnit(unitCard.gameObject);
@@ -164,6 +166,7 @@ public class TileManager : MonoBehaviour
 
     public void HighlightUnitMoveFromP1Hand()
     {
+        Debug.Log("p1");
         for (int yPos = 0; yPos < 6; yPos++)
         {
             GenerateHighlightMove(1, yPos);
@@ -295,6 +298,17 @@ public class TileManager : MonoBehaviour
                 GenerateHighlightMove(newX, newY);
             }
         }
+        if(IsUnitRange())
+        {
+            if(SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 && x <= 4 && HasUnitOrTowerInTile(x + 2, y))
+            {
+                GenerateHighlightMove(x + 2, y);
+            }
+            if(SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 2 && x >= 2 && HasUnitOrTowerInTile(x - 2, y))
+            {
+                GenerateHighlightMove(x - 2, y);
+            }
+        }
     }
 
     private void HighlightHorizontalFar(int x, int y)
@@ -319,8 +333,20 @@ public class TileManager : MonoBehaviour
 
     private void HighlightHorizontalShort(int x, int y)
     {
-        if (x != 0) GenerateHighlightMove(x - 1, y); // index 12
-        if (x != 6) GenerateHighlightMove(x + 1, y); // index 14
+        int[] xOffset = { -1, 1 };
+        int[] yOffset = { 0, 0 };
+
+        for (int i = 0; i < 2; i++)
+        {
+            int newX = x + xOffset[i];
+            int newY = y + yOffset[i];
+            if (newX >= 0 + player1Offset && newX <= 6 - player2Offset && newY >= 0 && newY <= 5)
+            {
+                GenerateHighlightMove(newX, newY);
+            }
+        }
+        //if (x != 0) GenerateHighlightMove(x - 1, y); // index 12
+        //if (x != 6) GenerateHighlightMove(x + 1, y); // index 14
     }
 
     private void GenerateHighlightMove(int x, int y)
@@ -356,5 +382,28 @@ public class TileManager : MonoBehaviour
         isInSkillProcess = false;
         unitHighlightTiles = new List<Tile>();
         hasUnitHighlight = false;
+    }
+
+    private bool IsUnitRange()
+    {
+        return SelectUnit.GetComponent<UnitCard>().GetUnitAttackType() == UnitCardStat.AttackType.Range;
+    }
+
+    private bool HasUnitOrTowerInTile(int x, int y)
+    {
+        GameObject SelectTile = GameObject.Find($"Tile {x} {y}");
+        foreach (Transform obj in SelectTile.transform)
+        {
+            if (obj.CompareTag("Unit"))
+            {
+                return true;
+            }
+        }
+        if(SelectTile.GetComponent<Tile>().tileType == Tile.TileType.Player1Tower || SelectTile.GetComponent<Tile>().tileType == Tile.TileType.Player2Tower)
+        {
+            Debug.Log("here");
+            return true;
+        }
+        return false;
     }
 }

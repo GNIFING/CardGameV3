@@ -17,8 +17,9 @@ MonoBehaviour:
   cardImage: {fileID: 0}
   cardDescription: 
   currentCardClass: 0
-  currentMoveType: 0
+  currentMoveType: 5
+  currentAttackType: 0
   specialSkill: []
-  defaultManaCost: 0
-  defaultAttackDamage: 0
-  defaultHp: 0
+  defaultManaCost: 4
+  defaultAttackDamage: 4
+  defaultHp: 4

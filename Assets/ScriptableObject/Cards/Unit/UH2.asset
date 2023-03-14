@@ -18,7 +18,8 @@ MonoBehaviour:
   cardDescription: I am the second
   currentCardClass: 0
   currentMoveType: 2
+  currentAttackType: 0
   specialSkill: []
-  defaultManaCost: 2
-  defaultAttackDamage: 3
+  defaultManaCost: 1
+  defaultAttackDamage: 1
   defaultHp: 2

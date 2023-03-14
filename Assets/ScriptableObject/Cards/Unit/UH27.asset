@@ -15,10 +15,11 @@ MonoBehaviour:
   cardIndex: 27
   cardName: 
   cardImage: {fileID: 0}
-  cardDescription: 
+  cardDescription: Stone Catapult
   currentCardClass: 0
-  currentMoveType: 0
+  currentMoveType: 5
+  currentAttackType: 1
   specialSkill: []
-  defaultManaCost: 0
+  defaultManaCost: 6
   defaultAttackDamage: 0
-  defaultHp: 0
+  defaultHp: 4

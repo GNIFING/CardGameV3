@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 3
   cardName: Shield Smith
-  cardImage: {fileID: 21300000, guid: aef520811b351604394c1bfac94067d0, type: 3}
+  cardImage: {fileID: 21300000, guid: 76ee95b9963591b4e8b6fe19d479e8ca, type: 3}
   cardDescription: I am the third
   currentCardClass: 0
   currentMoveType: 4
+  currentAttackType: 0
   specialSkill: []
-  defaultManaCost: 4
-  defaultAttackDamage: 4
-  defaultHp: 5
+  defaultManaCost: 1
+  defaultAttackDamage: 1
+  defaultHp: 1

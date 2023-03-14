@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnCard : MonoBehaviour
 {
+    public int playerNo;
     [SerializeField] List<GameObject> unitCardPrefabs;
     private List<GameObject> cardTiles = new List<GameObject>();
 
@@ -37,6 +38,7 @@ public class SpawnCard : MonoBehaviour
                 int index = Random.Range(0, unitCardPrefabs.Count);
                 GameObject unitCard = Instantiate(unitCardPrefabs[index], tile.transform.position, Quaternion.identity);
                 unitCard.transform.parent = tile.transform;
+                unitCard.GetComponent<UnitCard>().SetPlayerNo(playerNo);
                 return;
             }
         }

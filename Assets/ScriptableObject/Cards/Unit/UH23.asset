@@ -15,10 +15,11 @@ MonoBehaviour:
   cardIndex: 23
   cardName: 
   cardImage: {fileID: 0}
-  cardDescription: 
+  cardDescription: Majestic Opera Singer
   currentCardClass: 0
-  currentMoveType: 0
+  currentMoveType: 5
+  currentAttackType: 0
   specialSkill: []
-  defaultManaCost: 0
-  defaultAttackDamage: 0
-  defaultHp: 0
+  defaultManaCost: 5
+  defaultAttackDamage: 4
+  defaultHp: 2

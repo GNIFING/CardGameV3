@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit_1 : UnitCard
+public class UH1 : UnitCard
 {
     public GameObject bulletPrefab;
 
@@ -12,8 +12,9 @@ public class Unit_1 : UnitCard
         UpdateCardUI();
     }
 
-    public override void UnitSkill(GameObject unitInSelectTile, int tileXPos, int tileYPos)
+    public override void UnitSkill()
     {
+        GameObject unitInSelectTile = skillTargetUnit;
         Quaternion rotation = CalculateRotation(unitInSelectTile);
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
         bullet.GetComponent<BulletScript>().SetTarget(unitInSelectTile.transform.parent.gameObject);

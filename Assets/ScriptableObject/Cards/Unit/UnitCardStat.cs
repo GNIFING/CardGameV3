@@ -23,6 +23,12 @@ public class UnitCardStat : ScriptableObject
         Elf
     }
 
+    public enum AttackType
+    {
+        Melee,
+        Range
+    }
+
     // Name and Description 
     [SerializeField] private int cardIndex;
     [SerializeField] private string cardName;
@@ -30,6 +36,7 @@ public class UnitCardStat : ScriptableObject
     [SerializeField] private string cardDescription;
     [SerializeField] private CardClass currentCardClass;
     [SerializeField] private MoveType currentMoveType;
+    [SerializeField] private AttackType currentAttackType;
     [SerializeField] private List<string> specialSkill;
     [SerializeField] private int defaultManaCost;
     [SerializeField] private int defaultAttackDamage;
@@ -43,6 +50,7 @@ public class UnitCardStat : ScriptableObject
     // Card Type 
     public CardClass CurrentCardClass => currentCardClass;
     public MoveType CurrentMoveType => currentMoveType;
+    public AttackType CurrentAttackType => currentAttackType;
     public List<string> SpecialSkill => specialSkill;
 
     // Stat 
