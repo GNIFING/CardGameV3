@@ -99,6 +99,7 @@ public class UnitCard : MonoBehaviour
 
     public void ReduceCardCredit()
     {
+        Debug.Log("Reduce");
         if(cardCredit > 0)
         {
             cardCredit -= 1;
@@ -153,11 +154,12 @@ public class UnitCard : MonoBehaviour
     {
         UnitCard unitInSelectTileCard = unitInSelectTile.GetComponent<UnitCard>();
         unitInSelectTileCard.TakeDamage(this, damage);
-        
+        unitInSelectTileCard.UpdateUICard();
     }
     public virtual void TakeDamage(UnitCard attackUnitCard, int damage)
     {
         health -= damage;
+        UpdateUICard();
         if (health <= 0) Destroy(this.gameObject, 0.5f);
     }
 

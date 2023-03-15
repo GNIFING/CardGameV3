@@ -197,7 +197,7 @@ public class Tile : MonoBehaviour
                 Debug.Log("2");
                 //unit play skill here
                 selectUnitCard.isPlayCard = true;
-                selectUnitCard.RemoveBackCard();
+                selectUnitCard.RemoveBackCard   ();
                 playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
                 MoveUnitToThisTile(selectUnit);
 
@@ -317,6 +317,15 @@ public class Tile : MonoBehaviour
         unitHighlight.SetActive(isSelect);
     }
 
+    public int GetXPos()
+    {
+        return xPos;
+    }
+
+    public int GetYPos()
+    {
+        return yPos;
+    }
     
 }
 

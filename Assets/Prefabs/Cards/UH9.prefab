@@ -610,6 +610,7 @@ MonoBehaviour:
   isPlayCard: 0
   isSkillDone: 0
   backCard: {fileID: 512343716104679398}
+  UH9_1_Prefab: {fileID: 1855405217901779101, guid: 6a574fceba485aa44a54114829100c84, type: 3}
 --- !u!1 &2574625450841418402
 GameObject:
   m_ObjectHideFlags: 0

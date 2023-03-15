@@ -39,6 +39,7 @@ public class SpawnCard : MonoBehaviour
                 GameObject unitCard = Instantiate(unitCardPrefabs[index], tile.transform.position, Quaternion.identity);
                 unitCard.transform.parent = tile.transform;
                 unitCard.GetComponent<UnitCard>().SetPlayerNo(playerNo);
+                unitCard.GetComponent<UnitCard>().RefreshCredit();
                 return;
             }
         }
