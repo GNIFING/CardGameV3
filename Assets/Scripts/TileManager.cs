@@ -57,6 +57,20 @@ public class TileManager : MonoBehaviour
         Debug.Log(unitHighlightTiles.Count);
         return unitHighlightTiles;
     }
+
+    public List<UnitCard> SelectFriendlyUnits(int playerNo)
+    {
+        List<UnitCard> unitCards = new List<UnitCard>();
+        foreach (GameObject tileObject in Tiles)
+        {
+            Tile tile = tileObject.GetComponent<Tile>();
+            if (tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() == playerNo)
+            {
+                unitCards.Add(tile.GetUnitInTile().GetComponent<UnitCard>());
+            }
+        }
+        return unitCards;
+    }
     public List<Tile> HighlightFriendlyUnitTiles(int playerNo)
     {
         foreach (GameObject tileObject in Tiles)
@@ -108,6 +122,42 @@ public class TileManager : MonoBehaviour
     {
         isInSkillProcess = false;
     }
+
+    public List<Tile> GetRoundTilesOfThisTile(Tile centerTile)
+    {
+        List<Tile> tiles = new List<Tile>();
+        if(centerTile.GetYPos() != 0 && centerTile.GetYPos() != 5)
+        {
+            int[] xOffset = { -1, 0, 1, -1, 1, -1, 0, 1 };
+            int[] yOffset = { -1, -1, -1, 0, 0, 1, 1, 1 };
+            for (int i = 0; i < 8; i++)
+            {
+                Tile tile = GameObject.Find($"Tile {centerTile.GetXPos() + xOffset[i]} {centerTile.GetYPos() + yOffset[i]}").GetComponent<Tile>();
+                tiles.Add(tile);
+            }
+        }
+        else if(centerTile.GetYPos() == 5)
+        {
+            int[] xOffset = { -1, 0, 1, -1, 1};
+            int[] yOffset = { -1, -1, -1, 0, 0};
+            for (int i = 0; i < 5; i++)
+            {
+                Tile tile = GameObject.Find($"Tile {centerTile.GetXPos() + xOffset[i]} {centerTile.GetYPos() + yOffset[i]}").GetComponent<Tile>();
+                tiles.Add(tile);
+            }
+        }
+        else
+        {
+            int[] xOffset = { -1, 1, -1, 0, 1 };
+            int[] yOffset = { 0, 0, 1, 1, 1 };
+            for (int i = 0; i < 5; i++)
+            {
+                Tile tile = GameObject.Find($"Tile {centerTile.GetXPos() + xOffset[i]} {centerTile.GetYPos() + yOffset[i]}").GetComponent<Tile>();
+                tiles.Add(tile);
+            }
+        }
+        return tiles;
+    }
     public void SetSelectUnit(GameObject unit)
     {
         SelectUnit = unit;
@@ -129,7 +179,6 @@ public class TileManager : MonoBehaviour
     {
         if (GameController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
         {
-            Debug.Log("333");
             player1Offset = SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? 1 : 0;
             player2Offset = SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 2 ? 1 : 0;
             SetSelectUnit(unitCard.gameObject);
@@ -347,6 +396,18 @@ public class TileManager : MonoBehaviour
         }
         //if (x != 0) GenerateHighlightMove(x - 1, y); // index 12
         //if (x != 6) GenerateHighlightMove(x + 1, y); // index 14
+
+        if (IsUnitRange())
+        {
+            if (SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 && x <= 4 && HasUnitOrTowerInTile(x + 2, y))
+            {
+                GenerateHighlightMove(x + 2, y);
+            }
+            if (SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 2 && x >= 2 && HasUnitOrTowerInTile(x - 2, y))
+            {
+                GenerateHighlightMove(x - 2, y);
+            }
+        }
     }
 
     private void GenerateHighlightMove(int x, int y)

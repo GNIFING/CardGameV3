@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 8
   cardName: Caregiver
   cardImage: {fileID: 21300000, guid: 715902fd03fd2f24d9656a2ad2dd5213, type: 3}
-  cardDescription: 
+  cardDescription: I am the eighth
   currentCardClass: 0
   currentMoveType: 5
   currentAttackType: 0

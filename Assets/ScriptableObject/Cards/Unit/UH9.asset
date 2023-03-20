@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 9
   cardName: Backline Brigade
   cardImage: {fileID: 21300000, guid: 18ce1e81ef6a5b14fb100113477b0793, type: 3}
-  cardDescription: 
+  cardDescription: I am the ninth
   currentCardClass: 0
   currentMoveType: 5
   currentAttackType: 0

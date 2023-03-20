@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UH12 : MonoBehaviour
+public class UH12 : UnitCard
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        InitializeCardStats();
+        UpdateCardUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UnitSkill()
     {
-        
+        Debug.Log("Unit 12 Skill !");
+        isSkillDone = true;
+    }
+    public override void UnitHighlight()
+    {
+        isSkillDone = true;
+        tileManager.NoHighlightUnit();
+        Debug.Log("Highlight from unit 12");
     }
 }

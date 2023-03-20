@@ -13,16 +13,49 @@ public class GameController : MonoBehaviour
     private GameObject player1Arrow;
     [SerializeField]
     private GameObject player2Arrow;
+    private List<UnitCard> unitCards;
+
+    private int firstHandCards = 3;
 
     public delegate void ChangeCardBackDelegate(int playerNo);
     public event ChangeCardBackDelegate OnChangeCardBack;
     public static int CurrentTurn => playerturn;
+
+    private void Start()
+    {
+        for (int i = 0; i < firstHandCards; i++)
+        {
+            spawnP1Card.InitialSpawn(true);
+            spawnP2Card.InitialSpawn(false);
+        }
+        playerController.RefreshPlayerMana(1);
+    }
+
+    public void UseUnitsEndturnSkill(int playerNo)
+    {
+        unitCards = tileManager.SelectFriendlyUnits(playerNo);
+        foreach (UnitCard unitCard in unitCards)
+        {
+            unitCard.EndTurnSkill();
+        }
+    }
+
+    public void UseUnitsStartturnSkill(int playerNo)
+    {
+        unitCards = tileManager.SelectFriendlyUnits(playerNo);
+        foreach (UnitCard unitCard in unitCards)
+        {
+            unitCard.StartTurnSkill();
+        }
+    }
 
     public void ChangeTurn()
     {
         tileManager.DeSelectUnit();
         tileManager.CancelNextMoveHighlight();
         tileManager.CancelUnitMoveHighlight();
+
+        UseUnitsEndturnSkill(playerturn);
         
         playerturn = playerturn == 1 ? 2 : 1;
         if(playerturn == 1)
@@ -36,6 +69,7 @@ public class GameController : MonoBehaviour
             spawnP1Card.SpawnUnit();
             playerController.RefreshPlayerMana(1);
             RefreshPlayerCredit(1);
+            UseUnitsStartturnSkill(1);
         }
         else if(playerturn == 2)
         {
@@ -48,6 +82,7 @@ public class GameController : MonoBehaviour
             spawnP2Card.SpawnUnit();
             playerController.RefreshPlayerMana(2);
             RefreshPlayerCredit(2);
+            UseUnitsStartturnSkill(2);
         }
         //RefreshPlayerCredit(playerturn == 1 ? 2 : 1);
     }

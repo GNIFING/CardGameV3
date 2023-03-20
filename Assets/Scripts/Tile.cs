@@ -28,6 +28,11 @@ public class Tile : MonoBehaviour
     private TileManager tileManager;
     private PlayerController playerController;
 
+    private Transform descriptionBox;
+    private float hoverTime;
+    private float showUnitDescriptionTime = 0.5f;
+    private bool isCheckPosition;
+
     public TileType tileType;
 
     private void Start()
@@ -37,6 +42,7 @@ public class Tile : MonoBehaviour
 
     private void InitializeTile()
     {
+        hoverTime = 0f;
         tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
         playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
@@ -52,7 +58,36 @@ public class Tile : MonoBehaviour
     }
     void OnMouseExit()
     {
-        hoverHighlight.SetActive(false);    
+        if(descriptionBox != null)
+        {
+            descriptionBox.gameObject.SetActive(false);
+        }
+        hoverHighlight.SetActive(false);
+        hoverTime = 0f;
+    }
+
+    private void Update()
+    {
+        if(hoverHighlight.activeInHierarchy == true)
+        {
+            hoverTime += Time.deltaTime;
+        }
+        if(hoverTime >= showUnitDescriptionTime)
+        {
+            unit = GetUnitInTile();
+            if(unit != null && unit.GetComponent<UnitCard>().GetPlayerNo() == GameController.CurrentTurn)
+            {
+                Transform canvas = unit.transform.Find("Canvas");
+                descriptionBox = canvas.Find("DescriptionBox");
+                descriptionBox.gameObject.SetActive(true);
+                if(tileType == TileType.Player2Tile && !isCheckPosition)
+                {
+                    descriptionBox.position -= new Vector3(3,0,0);
+                    isCheckPosition = true;
+                }
+
+            }
+        }
     }
 
     //-------------- Click On Tile --------------//

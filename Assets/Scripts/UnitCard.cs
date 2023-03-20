@@ -19,6 +19,7 @@ public class UnitCard : MonoBehaviour
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI manaText;
+    public TextMeshProUGUI descriptionText;
  
     public int cardCredit;
 
@@ -26,6 +27,8 @@ public class UnitCard : MonoBehaviour
     public int health { get; set; }
     public int attack { get; set; }
     public int mana { get; set; }
+
+    public string description { get; set; }
 
     public SpriteRenderer unitImage;
 
@@ -142,6 +145,7 @@ public class UnitCard : MonoBehaviour
         health = unitCardStat.Hp;
         attack = unitCardStat.AttackDamage;
         mana = unitCardStat.ManaCost;
+        description = unitCardStat.CardDescription;
         cardCredit = maxCardCredit;
     }
     protected void UpdateCardUI()
@@ -149,6 +153,7 @@ public class UnitCard : MonoBehaviour
         attackText.text = attack.ToString();
         healthText.text = health.ToString();
         manaText.text = mana.ToString();
+        descriptionText.text = description;
     }
     protected void DealDamageToUnit(GameObject unitInSelectTile, int damage)
     {
@@ -177,10 +182,10 @@ public class UnitCard : MonoBehaviour
         }
     }
 
-    public void MeleeAttack(UnitCard unitAttacked)
+    public virtual void MeleeAttack(UnitCard unitAttacked)
     {
-        unitAttacked.TakeDamage(this, attack);
         TakeDamage(unitAttacked, unitAttacked.attack);
+        unitAttacked.TakeDamage(this, attack);
 
         if (unitAttacked.health <= 0) Destroy(unitAttacked.gameObject, 0.5f);
         if (health <= 0) Destroy(gameObject, 0.5f);
@@ -198,6 +203,16 @@ public class UnitCard : MonoBehaviour
         unitAttacked.UpdateUICard();
     }
 
+    public virtual void EndTurnSkill()
+    {
+        Debug.Log("use end turn skill!");
+    }
+
+    public virtual void StartTurnSkill()
+    {
+        Debug.Log("use start turn skill!");
+    }
+
     protected void ChangeBackCard(int playerTurn)
     {
         if(backCard != null)
@@ -211,7 +226,18 @@ public class UnitCard : MonoBehaviour
                 backCard.SetActive(playerTurn == 1);
             }
         }
-        
+    }
+
+    public void SetBackCard(bool isShowCard)
+    {
+        if (isShowCard)
+        {
+            backCard.SetActive(false);
+        }
+        else
+        {
+            backCard.SetActive(true);
+        }
     }
 
     public void UpdateUICard()

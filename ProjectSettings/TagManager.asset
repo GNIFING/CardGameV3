@@ -48,3 +48,6 @@ TagManager:
   - name: Number
     uniqueID: 13677931
     locked: 0
+  - name: Description
+    uniqueID: 3973974719
+    locked: 0

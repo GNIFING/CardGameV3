@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 33
   cardName: 
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
   cardDescription: Chapel of Light
   currentCardClass: 0
   currentMoveType: 5
@@ -22,4 +22,4 @@ MonoBehaviour:
   specialSkill: []
   defaultManaCost: 8
   defaultAttackDamage: 0
-  defaultHp: 8
+  defaultHp: 4

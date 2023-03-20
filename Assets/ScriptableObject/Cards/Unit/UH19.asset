@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: UH19
   m_EditorClassIdentifier: 
   cardIndex: 19
-  cardName: Mirror Images
-  cardImage: {fileID: 0}
+  cardName: Twin Tea
+  cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
   cardDescription: 
   currentCardClass: 0
-  currentMoveType: 5
+  currentMoveType: 2
   currentAttackType: 0
   specialSkill: []
   defaultManaCost: 4
   defaultAttackDamage: 3
-  defaultHp: 6
+  defaultHp: 3

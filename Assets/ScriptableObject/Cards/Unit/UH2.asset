@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 2
   cardName: Bard of the Road
   cardImage: {fileID: 21300000, guid: 12caf471d1a385a4cb2d7dc2bfa1ba3c, type: 3}
-  cardDescription: I am the second
+  cardDescription: give 1 more attack damage to friendly unit
   currentCardClass: 0
   currentMoveType: 2
   currentAttackType: 0
