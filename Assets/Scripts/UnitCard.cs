@@ -12,6 +12,8 @@ public class UnitCard : MonoBehaviour
     [SerializeField] private GameObject moveCredit1;
     [SerializeField] private GameObject moveCredit2;
     [SerializeField] private GameObject edgeImage;
+    [SerializeField] private GameObject rangeIcon;
+    [SerializeField] private GameObject meleeIcon;
 
 
     public UnitCardStat unitCardStat;
@@ -147,6 +149,17 @@ public class UnitCard : MonoBehaviour
         mana = unitCardStat.ManaCost;
         description = unitCardStat.CardDescription;
         cardCredit = maxCardCredit;
+
+        if(unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
+        {
+            meleeIcon.SetActive(true);
+            rangeIcon.SetActive(false);
+        }
+        else
+        {
+            meleeIcon.SetActive(false);
+            rangeIcon.SetActive(true);
+        }
     }
     protected void UpdateCardUI()
     {
