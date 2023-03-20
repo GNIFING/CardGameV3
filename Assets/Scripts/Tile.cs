@@ -4,165 +4,364 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    enum TileType
+    public enum TileType
     {
         ArenaTile,
         Player1Tile,
-        Player2Tile
+        Player2Tile,
+        Player1Tower,
+        Player2Tower
     }
 
-    [SerializeField] private GameObject _highlight;
-    [SerializeField] private GameObject _nextMoveHighlight;
+    [SerializeField] private GameObject hoverHighlight;
+    [SerializeField] private GameObject nextMoveHighlight;
+    [SerializeField] private GameObject unitHighlight;
     [SerializeField] private int xPos = 0;
     [SerializeField] private int yPos = 0;
-    [SerializeField] TileType tileType;
+ 
+    private GameObject unit;
+    private UnitCard unitCard;
+
+    private GameObject selectUnit;
+    private UnitCard selectUnitCard;
 
     private TileManager tileManager;
-    private GameObject activeUnit;
-    private GameObject unit;
-    private Transform unitTransform;
-    private UnitMove unitMove;
+    private PlayerController playerController;
 
+    private Transform descriptionBox;
+    private float hoverTime;
+    private float showUnitDescriptionTime = 0.5f;
+    private bool isCheckPosition;
+
+    public TileType tileType;
+
+    private void Start()
+    {
+        InitializeTile();
+    }
+
+    private void InitializeTile()
+    {
+        hoverTime = 0f;
+        tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
+        playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+
+        hoverHighlight = transform.Find("Highlight").gameObject;
+        nextMoveHighlight = transform.Find("NextMoveHightlight").gameObject;
+        unitHighlight = transform.Find("UnitHighlight").gameObject;
+    }
+
+    //-------------- Hover Highlight Mouse --------------//
     void OnMouseEnter()
     {
-        _highlight.SetActive(true);
+        hoverHighlight.SetActive(true);
     }
     void OnMouseExit()
     {
-        _highlight.SetActive(false);    
+        if(descriptionBox != null)
+        {
+            descriptionBox.gameObject.SetActive(false);
+        }
+        hoverHighlight.SetActive(false);
+        hoverTime = 0f;
     }
 
+    private void Update()
+    {
+        if(hoverHighlight.activeInHierarchy == true)
+        {
+            hoverTime += Time.deltaTime;
+        }
+        if(hoverTime >= showUnitDescriptionTime)
+        {
+            unit = GetUnitInTile();
+            if(unit != null && unit.GetComponent<UnitCard>().GetPlayerNo() == GameController.CurrentTurn)
+            {
+                Transform canvas = unit.transform.Find("Canvas");
+                descriptionBox = canvas.Find("DescriptionBox");
+                descriptionBox.gameObject.SetActive(true);
+                if(tileType == TileType.Player2Tile && !isCheckPosition)
+                {
+                    descriptionBox.position -= new Vector3(3,0,0);
+                    isCheckPosition = true;
+                }
+
+            }
+        }
+    }
+
+    //-------------- Click On Tile --------------//
     void OnMouseDown()
+    {
+        unit = GetUnitInTile();
+        selectUnit = tileManager.GetSelectUnit();
+        HandleClickOnTile(unit, selectUnit);    
+    }
+
+    private void HandleClickOnTile(GameObject unit, GameObject selectUnit)
+    {
+        //-------------- Retrieve the UnitCard component --------------//
+
+        if (selectUnit != null) selectUnitCard = selectUnit.GetComponent<UnitCard>();
+
+        //-------------- Click on a tile that has the unitHighlight --------------//
+
+        if (unitHighlight.activeInHierarchy)
+        {
+            HandleFoundUnitHighlight(unit, selectUnit);
+            return;
+        }
+
+        if (tileManager.isInSkillProcess)
+        {
+            return;
+        }
+
+        //-------------- Click on a tile that has the nextMoveHighlight --------------//
+
+        if (nextMoveHighlight.activeInHierarchy)
+        {
+            HandleFoundNextMoveHighlight(unitCard, selectUnit);
+            return;
+        }
+
+        //-------------- Click on an empty tile or an enemy unit --------------//
+
+        if (unit == null || unitCard.GetPlayerNo() != GameController.CurrentTurn)
+        {
+            tileManager.DeSelectUnit();
+            return;
+        }
+
+        //-------------- Click on the same selected unit --------------//
+
+        if (unit == selectUnit)
+        {
+            return;
+        }
+
+        //-------------- Click on Unit to Set SelectUnit --------------//
+
+        else if (unit != null && selectUnit == null)
+        {
+            Debug.Log("1");
+            tileManager.SetSelectUnit(unit);
+            HighlightNextMoveUnit(unitCard, xPos, yPos);
+        }
+
+        //-------------- Click on a unit that has already moved --------------//
+
+        else if (unitCard.GetCardCredit() <= 0)
+        {
+            tileManager.DeSelectUnit();
+            return;
+        }
+
+        //-------------- Click on a friendly unit to set it as the new SelectUnit --------------//
+
+        else
+        {
+            tileManager.DeSelectUnit();
+            tileManager.SetSelectUnit(unit);
+            HighlightNextMoveUnit(unitCard, xPos, yPos);
+        }
+    }
+
+    private void HandleFoundUnitHighlight(GameObject unit, GameObject selectUnit)
+    {
+        Debug.Log("3");
+        selectUnitCard = selectUnit.GetComponent<UnitCard>();
+        selectUnitCard.SetSkillTarget(unit);
+        selectUnitCard.UnitSkill();
+        tileManager.CancelUnitMoveHighlight();
+        if (selectUnitCard.isSkillDone == true)
+        {
+            tileManager.DeSelectUnit();
+        }
+    }
+
+    private void HandleFoundNextMoveHighlight(UnitCard unitCard, GameObject selectUnit)
+    {
+        //-------------- Click on Player 1 Tower Tile --------------//
+
+        if (tileType == TileType.Player1Tower)
+        {
+            if (selectUnitCard.GetPlayerNo() == 2)
+            {
+                playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.attack);
+                tileManager.DeSelectUnit();
+                selectUnitCard.ReduceCardCredit();
+            }
+            else
+            {
+                tileManager.DeSelectUnit();
+            }
+        }
+
+        //-------------- Click on Player 2 Tower Tile --------------//
+
+        else if (tileType == TileType.Player2Tower)
+        {
+            if (selectUnitCard.GetPlayerNo() == 1)
+            {
+                playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.attack);
+                tileManager.DeSelectUnit();
+                selectUnitCard.ReduceCardCredit();
+            }
+            else
+            {
+                tileManager.DeSelectUnit();
+            }
+        }
+
+        //-------------- Click on an empty tile to move the selected unit to that tile --------------//
+
+        else if (selectUnit != null && unit == null)
+        {
+            if (selectUnitCard.isPlayCard)
+            {
+                MoveUnitToThisTile(selectUnit);
+                tileManager.DeSelectUnit();
+                selectUnitCard.ReduceCardCredit();
+            }
+
+            //-------------- This unit has not been played yet --------------//
+
+            else
+            {
+                Debug.Log("2");
+                //unit play skill here
+                selectUnitCard.isPlayCard = true;
+                selectUnitCard.RemoveBackCard   ();
+                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
+                MoveUnitToThisTile(selectUnit);
+
+                tileManager.CancelNextMoveHighlight();
+                selectUnitCard.ReduceCardCredit();
+                tileManager.isInSkillProcess = true;
+                selectUnitCard.UnitHighlight();
+
+            }
+        }
+
+        //-------------- Click on enemy unit to attack --------------//
+
+        else if (unitCard.GetPlayerNo() != GameController.CurrentTurn)
+        {
+            Debug.Log("Attack Enemy");
+            if(selectUnitCard.isPlayCard == false)
+            {
+                selectUnitCard.isPlayCard = true;
+                selectUnitCard.RemoveBackCard();
+                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
+                // Move unit to tower tile //
+                MoveUnitToTowerTile(selectUnit, selectUnitCard.GetPlayerNo(), xPos, yPos);
+            }
+
+            selectUnitCard.AttackUnit(unitCard);
+            selectUnitCard.ReduceCardCredit();
+
+            tileManager.DeSelectUnit();
+
+        }
+
+        //-------------- Click on the friendly unit that has already moved --------------//
+
+        else if (unitCard.GetCardCredit() <= 0)
+        {
+            // move Select unit to this tile
+            tileManager.DeSelectUnit();
+        }
+
+        //-------------- Click on the friendly unit that has not moved, and select it as selectUnit --------------//
+
+        else
+        {
+            tileManager.DeSelectUnit();
+            tileManager.SetSelectUnit(unit);
+            HighlightNextMoveUnit(unitCard, xPos, yPos);
+        }
+    }
+
+    private void HighlightNextMoveUnit(UnitCard unitCard, int xPos, int yPos)
     {
         switch (tileType)
         {
+            case TileType.Player1Tower:
+                tileManager.HighlightByType(unitCard, xPos, yPos);
+                break;
+            case TileType.Player2Tower:
+                tileManager.HighlightByType(unitCard, xPos, yPos);
+                break;
             case TileType.ArenaTile:
-                ArenaTileMove();
+                tileManager.HighlightByType(unitCard, xPos, yPos);
                 break;
             case TileType.Player1Tile:
-                Player1TileMove();
+                if (playerController.IsEnoughMana(unitCard)) tileManager.HighlightUnitMoveFromP1Hand();
                 break;
             case TileType.Player2Tile:
-                Player2TileMove();
+                if (playerController.IsEnoughMana(unitCard)) tileManager.HighlightUnitMoveFromP2Hand();
                 break;
             default:
                 break;
         }
     }
-    private void Player1TileMove()
-    {
-        foreach (Transform tr in transform)
-        {
-            if (tr.CompareTag("Unit"))
-            {
-                unitTransform = tr;
-                Debug.Log("Found Unit");
-                break;
-            }
-            else
-            {
-                unitTransform = null;
-                Debug.Log("Not Found Unit");
 
+    public GameObject GetUnitInTile()
+    {
+        foreach (Transform obj in transform)
+        {
+            if (obj.CompareTag("Unit"))
+            {
+                unitCard = obj.GetComponent<UnitCard>();
+                return obj.gameObject;
             }
         }
-
-        unit = unitTransform.gameObject;
-        unitMove = unit.GetComponentInChildren<UnitMove>();
-        unitMove.SetHighlightUnit(unit);
-
-        Debug.Log("Found Unit");
-        tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
-        activeUnit = tileManager.GetActiveUnit();
-        activeUnit = unitTransform.gameObject;
-        unitMove = activeUnit.GetComponentInChildren<UnitMove>();
-        unitMove.UnitMoveFromP1Hand();
+        unitCard = null;
+        return null;
     }
 
-    private void Player2TileMove()
+    private void MoveUnitToThisTile(GameObject selectUnit)
     {
-        foreach (Transform tr in transform)
-        {
-            if (tr.CompareTag("Unit"))
-            {
-                unitTransform = tr;
-                Debug.Log("Found Unit");
-                break;
-            }
-            else
-            {
-                unitTransform = null;
-                Debug.Log("Not Found Unit");
-
-            }
-        }
-
-        unit = unitTransform.gameObject;
-        unitMove = unit.GetComponentInChildren<UnitMove>();
-        unitMove.SetHighlightUnit(unit);
-
-        Debug.Log("Found Unit");
-        tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
-        activeUnit = tileManager.GetActiveUnit();
-        activeUnit = unitTransform.gameObject;
-        unitMove = activeUnit.GetComponentInChildren<UnitMove>();
-        unitMove.UnitMoveFromP2Hand();
+        selectUnit.transform.SetParent(transform);
+        selectUnit.transform.position = transform.position;
     }
 
-    private void ArenaTileMove()
+    public void MoveUnitToTowerTile(GameObject unit, int playerNo, int PosX, int PosY)
     {
-        foreach (Transform tr in transform)
+        GameObject towerTile;
+        if (playerNo == 1)
         {
-            if (tr.CompareTag("Unit"))
-            {
-                unitTransform = tr;
-                Debug.Log("Found Unit");
-                break;
-            }
-            else
-            {
-                unitTransform = null;
-                Debug.Log("Not Found Unit");
-
-            }
-        }
-
-        if (unitTransform != null)
-        {
-            unit = unitTransform.gameObject;
-            unitMove = unit.GetComponentInChildren<UnitMove>();
-            unitMove.SetHighlightUnit(unit);
-
-            Debug.Log("Found Unit");
-            tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
-            activeUnit = tileManager.GetActiveUnit();
-            activeUnit = unitTransform.gameObject;
-            unitMove = activeUnit.GetComponentInChildren<UnitMove>();
-            unitMove.UnitMovePosition(xPos, yPos);
-
-        }
-        else if (_nextMoveHighlight.activeSelf)
-        {
-            tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
-            activeUnit = tileManager.GetActiveUnit();
-            activeUnit.transform.parent = transform;
-            activeUnit.transform.position = transform.position;
-            unitMove = activeUnit.GetComponentInChildren<UnitMove>();
-            unitMove.MoveFinish();
+            towerTile = GameObject.Find($"Tile {PosX - 1} {PosY}");
         }
         else
         {
-            tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
-            activeUnit = tileManager.GetActiveUnit();
-
-            unitMove = activeUnit.GetComponentInChildren<UnitMove>();
-            unitMove.MoveCancel();
-            Debug.Log("Not Found Unit");
+            towerTile = GameObject.Find($"Tile {PosX + 1} {PosY}");
         }
+        unit.transform.SetParent(towerTile.transform);
+        unit.transform.position = towerTile.transform.position;
     }
 
-    public void NextMoveHighlight(bool isActive)
+    public void SetNextMoveHighlight(bool isSelect)
     {
-        _nextMoveHighlight.SetActive(isActive);
+        nextMoveHighlight.SetActive(isSelect);
     }
+
+    public void SetUnitHighlight(bool isSelect)
+    {
+        unitHighlight.SetActive(isSelect);
+    }
+
+    public int GetXPos()
+    {
+        return xPos;
+    }
+
+    public int GetYPos()
+    {
+        return yPos;
+    }
+    
 }
+
+

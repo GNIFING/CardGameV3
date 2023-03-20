@@ -42,3 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BoxBar
+    uniqueID: 3889066341
+    locked: 0
+  - name: Number
+    uniqueID: 13677931
+    locked: 0
+  - name: Description
+    uniqueID: 3973974719
+    locked: 0
