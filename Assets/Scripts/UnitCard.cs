@@ -18,6 +18,7 @@ public class UnitCard : MonoBehaviour
 
     public UnitCardStat unitCardStat;
 
+    public TextMeshProUGUI nameText;
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI manaText;
@@ -25,9 +26,8 @@ public class UnitCard : MonoBehaviour
  
     public int cardCredit;
 
-
-    public int health { get; set; }
-    public int attack { get; set; }
+    protected int health;
+    protected int attack;
     public int mana { get; set; }
 
     public string description { get; set; }
@@ -144,6 +144,7 @@ public class UnitCard : MonoBehaviour
 
         tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
         unitImage.sprite = unitCardStat.CardImage;
+        nameText.text = unitCardStat.CardName;
         health = unitCardStat.Hp;
         attack = unitCardStat.AttackDamage;
         mana = unitCardStat.ManaCost;
@@ -161,26 +162,71 @@ public class UnitCard : MonoBehaviour
             rangeIcon.SetActive(true);
         }
     }
-    protected void UpdateCardUI()
+
+    //-------------------- Increase-Decrease Stat --------------------//
+    public virtual void TakeDamage(UnitCard attackUnitCard, int damage)
+    {
+        DecreaseHealth(damage);
+        UpdateCardUI();
+        if (health <= 0) Destroy(this.gameObject, 0.5f);
+    }
+
+    public void IncreaseHealth(int plusHealth)
+    {
+        health += plusHealth;
+        UpdateCardUI();
+    }
+
+    public void DecreaseHealth(int minusHealth)
+    {
+        health -= minusHealth;
+        UpdateCardUI();
+        if (health <= 0) Destroy(this.gameObject, 0.5f);
+    }
+
+    public void SetHealth(int newHealth)
+    {
+        health = newHealth;
+        UpdateCardUI();
+    }
+    public void IncreaseAttackDamage(int plusAttack)
+    {
+        attack += plusAttack;
+        UpdateCardUI();
+    }
+
+    public void DecreaseAttackDamage(int minusAttack)
+    {
+        attack -= minusAttack;
+        UpdateCardUI();
+    }
+
+    public void SetAttackDamage(int newAttackDamage)
+    {
+        attack = newAttackDamage;
+        UpdateCardUI();
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public int GetAttackDamage()
+    {
+        return attack;
+    }
+
+    public void UpdateCardUI()
     {
         attackText.text = attack.ToString();
         healthText.text = health.ToString();
         manaText.text = mana.ToString();
         descriptionText.text = description;
     }
-    protected void DealDamageToUnit(GameObject unitInSelectTile, int damage)
-    {
-        UnitCard unitInSelectTileCard = unitInSelectTile.GetComponent<UnitCard>();
-        unitInSelectTileCard.TakeDamage(this, damage);
-        unitInSelectTileCard.UpdateUICard();
-    }
-    public virtual void TakeDamage(UnitCard attackUnitCard, int damage)
-    {
-        health -= damage;
-        UpdateUICard();
-        if (health <= 0) Destroy(this.gameObject, 0.5f);
-    }
 
+
+    //-------------------- Attack Unit --------------------//
     public void AttackUnit(UnitCard unitAttacked)
     {
         if(unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
@@ -199,23 +245,14 @@ public class UnitCard : MonoBehaviour
     {
         TakeDamage(unitAttacked, unitAttacked.attack);
         unitAttacked.TakeDamage(this, attack);
-
-        if (unitAttacked.health <= 0) Destroy(unitAttacked.gameObject, 0.5f);
-        if (health <= 0) Destroy(gameObject, 0.5f);
-        
-        UpdateUICard();
-        unitAttacked.UpdateUICard();
     }
 
     public void RangeAttack(UnitCard unitAttacked)
     {
         unitAttacked.TakeDamage(this, attack);
-
-        if (unitAttacked.health <= 0) Destroy(unitAttacked.gameObject, 0.5f);
-        
-        unitAttacked.UpdateUICard();
     }
 
+    //-------------------- End-Start Turn Skill --------------------//
     public virtual void EndTurnSkill()
     {
         Debug.Log("use end turn skill!");
@@ -225,6 +262,8 @@ public class UnitCard : MonoBehaviour
     {
         Debug.Log("use start turn skill!");
     }
+
+    //-------------------- Back Card --------------------//
 
     protected void ChangeBackCard(int playerTurn)
     {
@@ -251,12 +290,6 @@ public class UnitCard : MonoBehaviour
         {
             backCard.SetActive(true);
         }
-    }
-
-    public void UpdateUICard()
-    {
-        attackText.text = attack.ToString();
-        healthText.text = health.ToString();
     }
 
     public void RemoveBackCard()

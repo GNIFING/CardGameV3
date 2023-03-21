@@ -22,19 +22,16 @@ public class UH23 : UnitCard
             {
                 ran2 = Random.Range(0, unitCards.Count);
             } while (ran2 == ran1);
-            unitCards[ran1].health += 2;
-            unitCards[ran2].health += 2;
-            unitCards[ran1].attack += 2;
-            unitCards[ran2].attack += 2;
-            unitCards[ran1].UpdateUICard();
-            unitCards[ran2].UpdateUICard();
+            unitCards[ran1].IncreaseHealth(2);
+            unitCards[ran2].IncreaseHealth(2);
+            unitCards[ran1].IncreaseAttackDamage(2);
+            unitCards[ran2].IncreaseAttackDamage(2);
         }
         
         else if(unitCards.Count == 1)
         {
-            unitCards[0].health += 2;
-            unitCards[0].attack += 2;
-            unitCards[0].UpdateUICard();
+            unitCards[0].IncreaseHealth(2);
+            unitCards[0].IncreaseAttackDamage(2);
         }
         Debug.Log("Unit 23 Skill !");
         isSkillDone = true;

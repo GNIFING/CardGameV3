@@ -29,9 +29,9 @@ public class UH20 : UnitCard
         if (buffTile.GetUnitInTile() != null && buffTile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() == playerNo)
         {
             UnitCard buffUnit = buffTile.GetUnitInTile().GetComponent<UnitCard>();
-            buffUnit.attack += 4;
-            buffUnit.health += 4;
-            buffUnit.UpdateUICard();
+            buffUnit.IncreaseHealth(4);
+            buffUnit.IncreaseAttackDamage(4);
+            buffUnit.UpdateCardUI();
         }
         isSkillDone = true;
     }

@@ -20,7 +20,7 @@ public class UH28 : UnitCard
             if (tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() != playerNo)
             {
                 UnitCard unitCard = tile.GetUnitInTile().GetComponent<UnitCard>();
-                DealDamageToUnit(unitCard.gameObject, damageSkill);
+                unitCard.TakeDamage(this, damageSkill);
             }
         }
         Debug.Log("Unit 28 Skill !");

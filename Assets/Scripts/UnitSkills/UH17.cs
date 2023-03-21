@@ -29,7 +29,7 @@ public class UH17 : UnitCard
         {
             attack += 2;
         }
-        UpdateUICard();
+        UpdateCardUI();
         if (health <= 0) Destroy(this.gameObject, 0.5f);
     }
 }

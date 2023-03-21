@@ -23,13 +23,13 @@ public class UH5 : UnitCard
 
     public override void TakeDamage(UnitCard attackUnitCard, int damage)
     {
-        health -= damage;
-        attackUnitCard.health -= damage;
+        DecreaseHealth(damage);
+        attackUnitCard.DecreaseHealth(damage);
 
-        if (attackUnitCard.health <= 0) Destroy(attackUnitCard.gameObject, 0.5f);
+        if (attackUnitCard.GetHealth() <= 0) Destroy(attackUnitCard.gameObject, 0.5f);
         if (health <= 0) Destroy(this.gameObject, 0.5f);
 
-        UpdateUICard();
-        attackUnitCard.UpdateUICard();
+        UpdateCardUI();
+        attackUnitCard.UpdateCardUI();
     }
 }

@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class UH6 : UnitCard
 {
+    private SpawnCard spawnP1Card;
+    private SpawnCard spawnP2Card;
     void Start()
     {
+        spawnP1Card = GameObject.Find("Player1").GetComponent<SpawnCard>();
+        spawnP2Card = GameObject.Find("Player2").GetComponent<SpawnCard>();
         InitializeCardStats();
         UpdateCardUI();
     }
 
     public override void UnitSkill()
     {
-        Debug.Log("Unit 6 Skill !");
+        if (playerNo == 1)
+        {
+            spawnP1Card.SpawnUnit();
+        }
+        else if (playerNo == 2)
+        {
+            spawnP2Card.SpawnUnit();
+        }
         isSkillDone = true;
     }
     public override void UnitHighlight()
     {
-        isSkillDone = true;
+        UnitSkill();
         tileManager.NoHighlightUnit();
         Debug.Log("Highlight from unit 6");
     }

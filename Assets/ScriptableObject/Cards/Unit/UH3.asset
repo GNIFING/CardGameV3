@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 3
   cardName: Shield Smith
   cardImage: {fileID: 21300000, guid: 76ee95b9963591b4e8b6fe19d479e8ca, type: 3}
-  cardDescription: Summon 0/1 shield in the Left/Right Tile
+  cardDescription: Summon 0/1 Shieldman on the front tile
   currentCardClass: 0
   currentMoveType: 4
   currentAttackType: 0

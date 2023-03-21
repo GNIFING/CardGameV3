@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 20
   cardName: Swordcraft Master
   cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
-  cardDescription: 
+  cardDescription: Give +4/+4 to a friendly unit on the front tile
   currentCardClass: 0
   currentMoveType: 5
   currentAttackType: 0

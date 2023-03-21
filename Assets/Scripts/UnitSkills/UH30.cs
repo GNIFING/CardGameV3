@@ -15,10 +15,10 @@ public class UH30 : UnitCard
         GameObject unitInSelectTile = skillTargetUnit;
         UnitCard unitInSelectTileCard = unitInSelectTile.GetComponent<UnitCard>();
 
-        unitInSelectTileCard.health = 1;
-        unitInSelectTileCard.attack = 1;
+        unitInSelectTileCard.SetHealth(1);
+        unitInSelectTileCard.SetAttackDamage(1);
 
-        unitInSelectTileCard.UpdateUICard();
+        unitInSelectTileCard.UpdateCardUI();
         isSkillDone = true;
     }
 

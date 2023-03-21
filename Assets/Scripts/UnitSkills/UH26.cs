@@ -13,9 +13,7 @@ public class UH26 : UnitCard
     {
         GameObject unitInSelectTile = skillTargetUnit;
         UnitCard unitInSelectTileCard = unitInSelectTile.GetComponent<UnitCard>();
-        unitInSelectTileCard.health += 4;
-        unitInSelectTileCard.healthText.text = unitInSelectTileCard.health.ToString();
-        
+        unitInSelectTileCard.IncreaseHealth(4);
         Debug.Log("Unit 26 Skill !");
         isSkillDone = true;
     }

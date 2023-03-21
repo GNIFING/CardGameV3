@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 1
   cardName: Novice Archer
   cardImage: {fileID: 21300000, guid: b5417ee958c911443a49e32b6a6d314b, type: 3}
-  cardDescription: Deal 1 damage to selected enemy
+  cardDescription: Deal 1 damage to enemy unit
   currentCardClass: 0
   currentMoveType: 0
   currentAttackType: 1
