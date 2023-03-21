@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 32
   cardName: 
   cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
-  cardDescription: Unbeaten Knight
+  cardDescription: Whenever this unit kills an enemy unit, summon a 4/4 soldier
   currentCardClass: 0
   currentMoveType: 5
   currentAttackType: 0

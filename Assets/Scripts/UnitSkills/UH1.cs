@@ -18,7 +18,7 @@ public class UH1 : UnitCard
         Quaternion rotation = CalculateRotation(unitInSelectTile);
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
         bullet.GetComponent<BulletScript>().SetTarget(unitInSelectTile.transform.parent.gameObject);
-        DealDamageToUnit(unitInSelectTile, 1);
+        unitInSelectTile.GetComponent<UnitCard>().TakeDamage(this, 1);
         isSkillDone = true;
     }
 

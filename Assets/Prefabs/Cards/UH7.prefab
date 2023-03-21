@@ -1162,6 +1162,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1937884894}
     m_Modifications:
+    - target: {fileID: 769568792893149992, guid: e571399688e384f45a010cf94db0165b, type: 3}
+      propertyPath: m_text
+      value: "At the end of the turn, deal 1 damage to the nearest enemy unit in
+        this lane. \r\nIf there are no enemy units in the lane, deal 1 damage to
+        the tower"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820830716418265459, guid: e571399688e384f45a010cf94db0165b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820830716418265459, guid: e571399688e384f45a010cf94db0165b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3384343286260039720, guid: e571399688e384f45a010cf94db0165b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1228,11 +1242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3384343286260039720, guid: e571399688e384f45a010cf94db0165b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.5
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 3384343286260039720, guid: e571399688e384f45a010cf94db0165b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 3384343286260039720, guid: e571399688e384f45a010cf94db0165b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1246,9 +1260,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4539342216845940778, guid: e571399688e384f45a010cf94db0165b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.8546
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539342216845940778, guid: e571399688e384f45a010cf94db0165b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.3396
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539342216845940778, guid: e571399688e384f45a010cf94db0165b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000000011176
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539342216845940778, guid: e571399688e384f45a010cf94db0165b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000000014901
+      objectReference: {fileID: 0}
     - target: {fileID: 5981323374259368475, guid: e571399688e384f45a010cf94db0165b, type: 3}
       propertyPath: m_Name
       value: DescriptionBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981323374259368475, guid: e571399688e384f45a010cf94db0165b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e571399688e384f45a010cf94db0165b, type: 3}

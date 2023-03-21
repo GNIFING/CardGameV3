@@ -17,8 +17,7 @@ public class UH15 : UnitCard
             if(tile.GetUnitInTile() != null)
             {
                 UnitCard buffUnit = tile.GetUnitInTile().GetComponent<UnitCard>();
-                buffUnit.attack += 1;
-                buffUnit.attackText.text = buffUnit.attack.ToString();
+                buffUnit.IncreaseAttackDamage(1);
             }
         }
         Debug.Log("Unit 15 Skill !");

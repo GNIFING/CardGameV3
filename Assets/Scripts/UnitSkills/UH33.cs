@@ -31,9 +31,9 @@ public class UH33 : UnitCard
             {
                 if(unitCard != this)
                 {
-                    unitCard.health += 2;
-                    unitCard.attack += 2;
-                    unitCard.UpdateUICard();
+                    unitCard.IncreaseHealth(2);
+                    unitCard.IncreaseAttackDamage(2);
+                    unitCard.UpdateCardUI();
                 }
             }
         }

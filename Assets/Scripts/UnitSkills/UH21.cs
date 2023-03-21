@@ -21,8 +21,8 @@ public class UH21 : UnitCard
         {
             if(friendlyUnit != this)
             {
-                friendlyUnit.health += 1;
-                friendlyUnit.UpdateUICard();
+                friendlyUnit.IncreaseHealth(1);
+                friendlyUnit.UpdateCardUI();
             }
         }
 

@@ -14,9 +14,7 @@ public class UH2 : UnitCard
     {
         GameObject unitInSelectTile = skillTargetUnit;
         UnitCard unitInSelectTileCard = unitInSelectTile.GetComponent<UnitCard>();
-        unitInSelectTileCard.attack += 1;
-        unitInSelectTileCard.attackText.text = unitInSelectTileCard.attack.ToString();
-
+        unitInSelectTileCard.IncreaseAttackDamage(1);
         isSkillDone = true;
     }
     public override void UnitHighlight()

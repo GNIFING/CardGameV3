@@ -33,15 +33,15 @@ public class UH16 : UnitCard
                 if (tile.GetUnitInTile() != null && tile.GetUnitInTile() != this.gameObject)
                 {
                     UnitCard unitCard = tile.GetUnitInTile().GetComponent<UnitCard>();
-                    unitCard.health -= 2;
-                    if (unitCard.health <= 0) Destroy(unitCard.gameObject, 0.5f);
-                    unitCard.UpdateUICard();
+                    unitCard.DecreaseHealth(2);
+                    if (unitCard.GetHealth() <= 0) Destroy(unitCard.gameObject, 0.5f);
+                    unitCard.UpdateCardUI();
                 }
             }
 
             health -= 2;
             if (health <= 0) Destroy(gameObject, 0.5f);
-            UpdateUICard();
+            UpdateCardUI();
         }
     }
 }

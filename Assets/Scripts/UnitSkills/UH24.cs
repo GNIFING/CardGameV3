@@ -24,13 +24,13 @@ public class UH24 : UnitCard
 
     public override void MeleeAttack(UnitCard unitAttacked)
     {
-        TakeDamage(unitAttacked, unitAttacked.attack);
+        TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
         unitAttacked.TakeDamage(this, attack * 2);
 
-        if (unitAttacked.health <= 0) Destroy(unitAttacked.gameObject, 0.5f);
+        if (unitAttacked.GetHealth() <= 0) Destroy(unitAttacked.gameObject, 0.5f);
         if (health <= 0) Destroy(gameObject, 0.5f);
 
-        UpdateUICard();
-        unitAttacked.UpdateUICard();
+        UpdateCardUI();
+        unitAttacked.UpdateCardUI();
     }
 }

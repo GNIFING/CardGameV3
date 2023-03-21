@@ -26,7 +26,7 @@ public class UH25 : UnitCard
 
     public override void MeleeAttack(UnitCard unitAttacked)
     {
-        TakeDamage(unitAttacked, unitAttacked.attack);
+        TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
         unitAttacked.TakeDamage(this, attack);
 
         int xPos = unitAttacked.GetComponentInParent<Tile>().GetXPos();
@@ -50,15 +50,15 @@ public class UH25 : UnitCard
             {
                 pierceUnit = pierceTile.GetUnitInTile().GetComponent<UnitCard>();
                 pierceUnit.TakeDamage(this, attack);
-                if (pierceUnit.health <= 0) Destroy(pierceUnit.gameObject, 0.5f);
-                pierceUnit.UpdateUICard();
+                if (pierceUnit.GetHealth() <= 0) Destroy(pierceUnit.gameObject, 0.5f);
+                pierceUnit.UpdateCardUI();
             }
         }
 
-        if (unitAttacked.health <= 0) Destroy(unitAttacked.gameObject, 0.5f);
+        if (unitAttacked.GetHealth() <= 0) Destroy(unitAttacked.gameObject, 0.5f);
         if (health <= 0) Destroy(gameObject, 0.5f);
 
-        UpdateUICard();
-        unitAttacked.UpdateUICard();
+        UpdateCardUI();
+        unitAttacked.UpdateCardUI();
     }
 }

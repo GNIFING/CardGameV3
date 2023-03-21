@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 33
   cardName: 
   cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
-  cardDescription: Chapel of Light
+  cardDescription: At the end of turn, give all friendly units in the field +2/+2
   currentCardClass: 0
   currentMoveType: 5
   currentAttackType: 0

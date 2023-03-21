@@ -38,10 +38,10 @@ public class UH7 : UnitCard
                 Tile tile = GameObject.Find($"Tile {xPos + i * offset} {yPos}").GetComponent<Tile>();
                 if(tile.GetUnitInTile() != null)
                 {
-                    GameObject selectedUnit = tile.GetUnitInTile();
-                    if(selectedUnit.GetComponent<UnitCard>().GetPlayerNo() != playerNo)
+                    UnitCard selectedUnit = tile.GetUnitInTile().GetComponent<UnitCard>();
+                    if(selectedUnit.GetPlayerNo() != playerNo)
                     {
-                        DealDamageToUnit(selectedUnit, 1);
+                        selectedUnit.TakeDamage(this, 1);
                         hasUnit = true;
                         break;
                     }

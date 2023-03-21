@@ -15,7 +15,8 @@ MonoBehaviour:
   cardIndex: 5
   cardName: Cursed Soul
   cardImage: {fileID: 21300000, guid: 761c033eb8b660e4b9d48f0c9a697f4a, type: 3}
-  cardDescription: When this unit take damage, deal damage back to the attacker
+  cardDescription: When this unit take damages, deal damage back to the attacking
+    unit
   currentCardClass: 0
   currentMoveType: 5
   currentAttackType: 0

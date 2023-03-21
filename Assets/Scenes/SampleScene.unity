@@ -8669,7 +8669,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNo: 1
   unitCardPrefabs:
-  - {fileID: 1855405217901779101, guid: b5ef83c56abb0a84fa1ea834958723a8, type: 3}
   - {fileID: 1855405217901779101, guid: aa69ef715f69f52448935718152b037f, type: 3}
   - {fileID: 1855405217901779101, guid: f8d6082550a87d340bfb5079fd964b7f, type: 3}
   - {fileID: 1855405217901779101, guid: 7ffa7518deb860e4f8e1620c62db6eff, type: 3}
@@ -8694,12 +8693,13 @@ MonoBehaviour:
   - {fileID: 1855405217901779101, guid: 7dce64cd045603e4da5508d1232fc95e, type: 3}
   - {fileID: 1855405217901779101, guid: 8bf9490db2bdd9e43a3e53ab79ed4cc6, type: 3}
   - {fileID: 1855405217901779101, guid: f4744f35dab93be4a842d60d1a070713, type: 3}
-  - {fileID: 1855405217901779101, guid: 7036786d55d13aa468553f690f5a6468, type: 3}
   - {fileID: 1855405217901779101, guid: b349aa396d785564fad772118dba05cd, type: 3}
   - {fileID: 1855405217901779101, guid: d1eb3bd3ad45ac84d99823ce09a517ce, type: 3}
   - {fileID: 1855405217901779101, guid: 7592027b306e3be4ba4e47c96a4e394a, type: 3}
   - {fileID: 1855405217901779101, guid: 473fb344732b06c4a81150c2b0d7ba66, type: 3}
   - {fileID: 1855405217901779101, guid: ddc173799c44a0d44a9013592d8f5b4d, type: 3}
+  - {fileID: 1855405217901779101, guid: b5ef83c56abb0a84fa1ea834958723a8, type: 3}
+  - {fileID: 1855405217901779101, guid: 7036786d55d13aa468553f690f5a6468, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

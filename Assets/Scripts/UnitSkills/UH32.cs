@@ -18,10 +18,10 @@ public class UH32 : UnitCard
 
     public override void MeleeAttack(UnitCard unitAttacked)
     {
-        TakeDamage(unitAttacked, unitAttacked.attack);
+        TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
         unitAttacked.TakeDamage(this, attack);
 
-        if (unitAttacked.health <= 0) 
+        if (unitAttacked.GetHealth() <= 0) 
         {
             summonTile = unitAttacked.GetComponentInParent<Tile>();
             Destroy(unitAttacked.gameObject, 0.5f);
@@ -30,8 +30,8 @@ public class UH32 : UnitCard
         }
         if (health <= 0) Destroy(gameObject, 0.5f);
 
-        UpdateUICard();
-        unitAttacked.UpdateUICard();
+        UpdateCardUI();
+        unitAttacked.UpdateCardUI();
     }
 
     IEnumerator SummonWarrior(float waitTime)

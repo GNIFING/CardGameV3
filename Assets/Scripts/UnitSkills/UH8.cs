@@ -14,9 +14,7 @@ public class UH8 : UnitCard
     {
         GameObject unitInSelectTile = skillTargetUnit;
         UnitCard unitInSelectTileCard = unitInSelectTile.GetComponent<UnitCard>();
-        unitInSelectTileCard.health += 2;
-        unitInSelectTileCard.healthText.text = unitInSelectTileCard.health.ToString();
-
+        unitInSelectTileCard.IncreaseHealth(2);
         isSkillDone = true;
     }
     public override void UnitHighlight()

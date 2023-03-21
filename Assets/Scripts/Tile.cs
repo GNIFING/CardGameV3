@@ -75,17 +75,19 @@ public class Tile : MonoBehaviour
         if(hoverTime >= showUnitDescriptionTime)
         {
             unit = GetUnitInTile();
-            if(unit != null && unit.GetComponent<UnitCard>().GetPlayerNo() == GameController.CurrentTurn)
+            if(unit != null)
             {
-                Transform canvas = unit.transform.Find("Canvas");
-                descriptionBox = canvas.Find("DescriptionBox");
-                descriptionBox.gameObject.SetActive(true);
-                if(tileType == TileType.Player2Tile && !isCheckPosition)
+                if(unit.GetComponent<UnitCard>().isPlayCard == true || unit.GetComponent<UnitCard>().GetPlayerNo() == GameController.CurrentTurn)
                 {
-                    descriptionBox.position -= new Vector3(3,0,0);
-                    isCheckPosition = true;
+                    Transform canvas = unit.transform.Find("Canvas");
+                    descriptionBox = canvas.Find("DescriptionBox");
+                    descriptionBox.gameObject.SetActive(true);
+                    if(tileType == TileType.Player2Tile && !isCheckPosition)
+                    {
+                        descriptionBox.position -= new Vector3(3.6f,0,0);
+                        isCheckPosition = true;
+                    }
                 }
-
             }
         }
     }
@@ -188,7 +190,7 @@ public class Tile : MonoBehaviour
         {
             if (selectUnitCard.GetPlayerNo() == 2)
             {
-                playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.attack);
+                playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.GetAttackDamage());
                 tileManager.DeSelectUnit();
                 selectUnitCard.ReduceCardCredit();
             }
@@ -204,7 +206,7 @@ public class Tile : MonoBehaviour
         {
             if (selectUnitCard.GetPlayerNo() == 1)
             {
-                playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.attack);
+                playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.GetAttackDamage());
                 tileManager.DeSelectUnit();
                 selectUnitCard.ReduceCardCredit();
             }
@@ -232,7 +234,7 @@ public class Tile : MonoBehaviour
                 Debug.Log("2");
                 //unit play skill here
                 selectUnitCard.isPlayCard = true;
-                selectUnitCard.RemoveBackCard   ();
+                selectUnitCard.RemoveBackCard();
                 playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
                 MoveUnitToThisTile(selectUnit);
 
