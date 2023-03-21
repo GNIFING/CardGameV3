@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UH28
   m_EditorClassIdentifier: 
   cardIndex: 28
-  cardName: 
+  cardName: Kingdom Fortress
   cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
   cardDescription: Deals 4 damage to all enemies in this lane
   currentCardClass: 0

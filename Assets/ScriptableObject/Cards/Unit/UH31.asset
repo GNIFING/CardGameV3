@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UH31
   m_EditorClassIdentifier: 
   cardIndex: 31
-  cardName: 
+  cardName: Warship
   cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
   cardDescription: 
   currentCardClass: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UH30
   m_EditorClassIdentifier: 
   cardIndex: 30
-  cardName: 
+  cardName: Knight of Light
   cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
   cardDescription: Reduces the health and attack of a targeted enemy unit to 1/1
   currentCardClass: 0

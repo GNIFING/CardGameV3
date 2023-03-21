@@ -608,6 +608,7 @@ MonoBehaviour:
   rangeIcon: {fileID: 5394888451996988251}
   meleeIcon: {fileID: 5072125604467745958}
   unitCardStat: {fileID: 11400000, guid: 31231b7e46b086f40a6203a55356a360, type: 2}
+  nameText: {fileID: 8591357782145133261}
   attackText: {fileID: 699254910}
   healthText: {fileID: 2008351671}
   manaText: {fileID: 8027175481294073067}
@@ -1206,6 +1207,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3384343286260039720, guid: e571399688e384f45a010cf94db0165b, type: 3}
   m_PrefabInstance: {fileID: 269598055393267715}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8591357782145133261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8396799200646822606, guid: e571399688e384f45a010cf94db0165b, type: 3}
+  m_PrefabInstance: {fileID: 269598055393267715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1264658961770704763
 PrefabInstance:
   m_ObjectHideFlags: 0

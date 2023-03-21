@@ -18,6 +18,7 @@ public class UnitCard : MonoBehaviour
 
     public UnitCardStat unitCardStat;
 
+    public TextMeshProUGUI nameText;
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI manaText;
@@ -143,6 +144,7 @@ public class UnitCard : MonoBehaviour
 
         tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
         unitImage.sprite = unitCardStat.CardImage;
+        nameText.text = unitCardStat.CardName;
         health = unitCardStat.Hp;
         attack = unitCardStat.AttackDamage;
         mana = unitCardStat.ManaCost;

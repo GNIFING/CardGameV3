@@ -84,7 +84,8 @@ public class Tile : MonoBehaviour
                     descriptionBox.gameObject.SetActive(true);
                     if(tileType == TileType.Player2Tile && !isCheckPosition)
                     {
-                        descriptionBox.position -= new Vector3(3.6f,0,0);
+                        //unit description on right screen show in the left side instead
+                        descriptionBox.position -= new Vector3(4.3f,0,0);
                         isCheckPosition = true;
                     }
                 }
