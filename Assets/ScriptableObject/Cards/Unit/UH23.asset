@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 23
   cardName: Majestic Opera Singer
-  cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
+  cardImage: {fileID: 21300000, guid: e657412715154f0438b7ea5dd7fe340a, type: 3}
   cardDescription: Give two random adjacent units +2/+2
   currentCardClass: 0
   currentMoveType: 5

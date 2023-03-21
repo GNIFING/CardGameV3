@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 24
   cardName: Swift Escapist
-  cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
+  cardImage: {fileID: 21300000, guid: a81c85e0dc5b4aa47a4c99b16b211d63, type: 3}
   cardDescription: Deals double damage when attacking
   currentCardClass: 0
   currentMoveType: 5

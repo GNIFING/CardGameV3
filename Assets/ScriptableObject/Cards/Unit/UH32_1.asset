@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 0
   cardName: Unbeaten Warrior
-  cardImage: {fileID: 21300000, guid: aef520811b351604394c1bfac94067d0, type: 3}
+  cardImage: {fileID: 21300000, guid: fbf2f5a471919cd4e807ecb047e4b042, type: 3}
   cardDescription: 
   currentCardClass: 0
   currentMoveType: 4

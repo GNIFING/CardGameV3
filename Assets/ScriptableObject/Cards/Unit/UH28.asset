@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 28
   cardName: Kingdom Fortress
-  cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
+  cardImage: {fileID: 21300000, guid: 4b9027f57d79d5c4ca176b2c3811a603, type: 3}
   cardDescription: Deals 4 damage to all enemies in this lane
   currentCardClass: 0
   currentMoveType: 5

@@ -22,4 +22,4 @@ MonoBehaviour:
   specialSkill: []
   defaultManaCost: 1
   defaultAttackDamage: 1
-  defaultHp: 4
+  defaultHp: 1
