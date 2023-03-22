@@ -43,7 +43,7 @@ public class CardData : MonoBehaviour
                 RectTransform newRawImageTransform = newRawImage.GetComponent<RectTransform>();
                 newRawImageTransform.anchoredPosition = new Vector2(200, 0);
 
-                newOutputArea.text = card.className + ": " + card.unitName + "\nattack type: " + card.atkType + "\nHp: " + card.hp + "\nAttack: " + card.atk;
+                // newOutputArea.text = card.className + ": " + card.unitName + "\nattack type: " + card.atkType + "\nHp: " + card.hp + "\nAttack: " + card.atk;
             }
         }
         else 

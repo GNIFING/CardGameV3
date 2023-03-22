@@ -52,7 +52,6 @@ public class CardController : MonoBehaviour
             var json = request.downloadHandler.text;
             cards = new List<Card>(JsonConvert.DeserializeObject<Card[]>(json));
             cards.AddRange(JsonConvert.DeserializeObject<Card[]>(json));
-            cards.AddRange(JsonConvert.DeserializeObject<Card[]>(json));
         }
         else 
         {
