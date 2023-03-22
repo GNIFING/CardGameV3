@@ -41,6 +41,8 @@ public class Auth : MonoBehaviour
         {
             outputArea.text = request.error;
         }
+
+        request.Dispose();
     }
 
     public void Register() => StartCoroutine(RegisterCoroutine());
@@ -69,6 +71,8 @@ public class Auth : MonoBehaviour
         {
             outputArea.text = request.error;
         }
+
+        request.Dispose();
     }
 
     public void GetUser() => StartCoroutine(GetUserCoroutine());
@@ -91,5 +95,7 @@ public class Auth : MonoBehaviour
         {
             outputArea.text = request.error;
         }
+
+        request.Dispose();
     }
 }

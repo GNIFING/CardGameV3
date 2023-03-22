@@ -26,6 +26,8 @@ public class CardController : MonoBehaviour
         {
             Debug.Log(request.result);
         }
+
+        request.Dispose();
     }
 
     public IEnumerator AddCard(int deckId, int cardId, Action<string> callback)
@@ -44,6 +46,8 @@ public class CardController : MonoBehaviour
         {
             Debug.Log(request.result);
         }
+
+        request.Dispose();
     }
     public IEnumerator RemoveCard(int deckId, int cardId, Action<string> callback)
     {
@@ -62,5 +66,7 @@ public class CardController : MonoBehaviour
         {
             Debug.Log(request.result);
         }
+
+        request.Dispose();
     }
 }

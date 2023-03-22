@@ -26,6 +26,8 @@ public class DeckController : MonoBehaviour
         {
             Debug.Log(request.result);
         }
+
+        request.Dispose();
     }
     public IEnumerator GetDecks(Action<string> callback)
     {
@@ -43,6 +45,8 @@ public class DeckController : MonoBehaviour
         {
             Debug.Log(request.result);
         }
+
+        request.Dispose();
     }
 
     public IEnumerator AddDeck(string newDeckName, Action<string> callback)
@@ -63,5 +67,7 @@ public class DeckController : MonoBehaviour
         {
             Debug.Log(request.result);
         }
+
+        request.Dispose();
     }
 }
