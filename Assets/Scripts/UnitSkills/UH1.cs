@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class UH1 : UnitCard
 {
-    public GameObject bulletPrefab;
-
     void Start()
     {
         InitializeCardStats();

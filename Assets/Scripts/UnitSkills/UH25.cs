@@ -28,6 +28,7 @@ public class UH25 : UnitCard
     {
         TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
         unitAttacked.TakeDamage(this, attack);
+        MeleeAttackAnimation(unitAttacked);
 
         int xPos = unitAttacked.GetComponentInParent<Tile>().GetXPos();
         int yPos = unitAttacked.GetComponentInParent<Tile>().GetYPos();

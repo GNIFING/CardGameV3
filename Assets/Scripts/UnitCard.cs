@@ -14,7 +14,10 @@ public class UnitCard : MonoBehaviour
     [SerializeField] private GameObject edgeImage;
     [SerializeField] private GameObject rangeIcon;
     [SerializeField] private GameObject meleeIcon;
+    [SerializeField] private GameObject swordAnimationPrefab1;
+    [SerializeField] private GameObject swordAnimationPrefab2;
 
+    [SerializeField] protected GameObject bulletPrefab;
 
     public UnitCardStat unitCardStat;
 
@@ -245,13 +248,53 @@ public class UnitCard : MonoBehaviour
     {
         TakeDamage(unitAttacked, unitAttacked.attack);
         unitAttacked.TakeDamage(this, attack);
+
+        MeleeAttackAnimation(unitAttacked);
+    }
+
+    public void MeleeAttackAnimation(UnitCard unitAttacked)
+    {
+        if(unitAttacked == null)
+        {
+            if(transform.position.x <= 1)
+            {
+                GameObject swordAnimation2 = Instantiate(swordAnimationPrefab2, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                GameObject swordAnimation1 = Instantiate(swordAnimationPrefab2, transform.position, Quaternion.identity);
+            }
+        }
+        else if(transform.position.x <= unitAttacked.transform.position.x)
+        {
+            GameObject swordAnimation1 = Instantiate(swordAnimationPrefab1, transform.position, Quaternion.identity);
+            GameObject swordAnimation2 = Instantiate(swordAnimationPrefab2, unitAttacked.transform.position, Quaternion.identity);
+            Debug.Log("case 1");
+        }
+        else
+        {
+            Debug.Log("case 2");
+
+            GameObject swordAnimation2 = Instantiate(swordAnimationPrefab2, transform.position, Quaternion.identity);
+            GameObject swordAnimation1 = Instantiate(swordAnimationPrefab1, unitAttacked.transform.position, Quaternion.identity);
+        }
+        
     }
 
     public void RangeAttack(UnitCard unitAttacked)
     {
         unitAttacked.TakeDamage(this, attack);
+        RangeAttackAnimation(unitAttacked.gameObject);
     }
 
+
+    public void RangeAttackAnimation(GameObject unitAttacked)
+    {
+        Quaternion rotation = CalculateRotation(unitAttacked);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+        bullet.GetComponent<BulletScript>().SetTarget(unitAttacked.transform.parent.gameObject);
+
+    }
     //-------------------- End-Start Turn Skill --------------------//
     public virtual void EndTurnSkill()
     {

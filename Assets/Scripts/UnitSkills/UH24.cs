@@ -26,6 +26,8 @@ public class UH24 : UnitCard
     {
         TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
         unitAttacked.TakeDamage(this, attack * 2);
+        
+        MeleeAttackAnimation(unitAttacked);
 
         if (unitAttacked.GetHealth() <= 0) Destroy(unitAttacked.gameObject, 0.5f);
         if (health <= 0) Destroy(gameObject, 0.5f);

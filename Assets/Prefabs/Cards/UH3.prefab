@@ -523,6 +523,8 @@ MonoBehaviour:
   edgeImage: {fileID: 5731837908077934484}
   rangeIcon: {fileID: 4264070170065206630}
   meleeIcon: {fileID: 1404312982392575066}
+  swordAnimationPrefab1: {fileID: 3895624369815643161, guid: 867b3d663811b464da53ef36689fba9a, type: 3}
+  swordAnimationPrefab2: {fileID: 5300147887753038749, guid: d091e3d1a0ba49c4f9ecf50b1da0f2b6, type: 3}
   unitCardStat: {fileID: 11400000, guid: 09109522f88e26d409f0f6d86b27d5ee, type: 2}
   nameText: {fileID: 4437378306596009983}
   attackText: {fileID: 699254910}
