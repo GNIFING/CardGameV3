@@ -4,10 +4,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-using UnityEditor.PackageManager.Requests;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
-using System.Text;
+using UnityEngine.SceneManagement;
 
 public class Auth : MonoBehaviour
 {
@@ -36,6 +33,8 @@ public class Auth : MonoBehaviour
             AuthResponse data = JsonUtility.FromJson<AuthResponse>(request.downloadHandler.text);
             outputArea.text = data.accessToken;
             Api.accessToken = data.accessToken;
+
+            SceneManager.LoadScene("LobbyPage");
         }
         else
         {

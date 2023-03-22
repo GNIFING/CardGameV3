@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/RegisterPage.unity
     guid: a016349d74a0844078abecc8de489939
   - enabled: 1
+    path: Assets/Scenes/LobbyPage.unity
+    guid: 263491d65b396244e9f29dec51822d55
+  - enabled: 1
     path: Assets/Scenes/DeckPage.unity
     guid: b998276127c671e48b60c804424b61e6
   - enabled: 1

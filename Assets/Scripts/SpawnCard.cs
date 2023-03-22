@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -17,13 +18,23 @@ public class SpawnCard : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(deckController.GetDeck(14, (responseData) =>
+        string saveFile = Application.persistentDataPath + "/deckId.json";
+        if (File.Exists(saveFile))
         {
-            cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
-            cardIds = cards.Select(s => s.id).ToList();
-            Debug.Log(cardIds.Count);
-            isLoading = true;
-        }));
+            // Read the entire file and save its contents.
+            string fileContents = File.ReadAllText(saveFile);
+
+            // Work with JSON
+            //Debug.Log("content " + fileContents);
+            
+            // ---------- Get cards in deck by deckId ---------- //
+            StartCoroutine(deckController.GetDeck(int.Parse(fileContents), (responseData) =>
+            {
+                cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
+                cardIds = cards.Select(s => s.id).ToList();
+                isLoading = true;
+            }));
+        }
 
         AddTilesToList();
     }
@@ -83,9 +94,7 @@ public class SpawnCard : MonoBehaviour
                 //return;
 
                 int index = Random.Range(0, cards.Count);
-                Debug.Log(index);
-                Debug.Log(cardIds.Count);
-                int targetIndex = cardIds.ElementAt(index);
+                int targetIndex = cardIds.ElementAt(index) - 1;
                 GameObject unitCard = Instantiate(unitCardPrefabs[targetIndex], tile.transform.position, Quaternion.identity);
                 unitCard.transform.parent = tile.transform;
                 unitCard.GetComponent<UnitCard>().SetPlayerNo(playerNo);
