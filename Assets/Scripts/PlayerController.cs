@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
 
     public TextMeshProUGUI player1HPText;
     public TextMeshProUGUI player2HPText;
-    public TextMeshProUGUI player1ManaText;
-    public TextMeshProUGUI player2ManaText;
+    public ShowMana player1ShowMana;
+    public ShowMana player2ShowMana;
     public TextMeshProUGUI playerWinText;
 
     // Start is called before the first frame update
@@ -32,8 +32,6 @@ public class PlayerController : MonoBehaviour
 
         player1HPText.text = player1HP.ToString();
         player2HPText.text = player2HP.ToString();
-        player1ManaText.text = player1Mana.ToString();
-        player2ManaText.text = player2Mana.ToString();
     }
 
     public int GetPlayerHP(int playerNo)
@@ -86,18 +84,23 @@ public class PlayerController : MonoBehaviour
         return playerNo == 1 ? player1Mana : player2Mana;
     }
 
+    public int GetPlayerMaxMana(int playerNo)
+    {
+        return playerNo == 1 ? player1MaxMana : player2MaxMana;
+
+    }
+
     public void SetPlayerMana(int PlayerNo, int cardMana)
     {
         if (PlayerNo == 1)
         {
             player1Mana -= cardMana;
-            player1ManaText.text = player1Mana.ToString();
-
+            player1ShowMana.SetManaColor(player1Mana, player1MaxMana);
         }
         else if (PlayerNo == 2)
         {
             player2Mana -= cardMana;
-            player2ManaText.text = player2Mana.ToString();
+            player2ShowMana.SetManaColor(player2Mana, player2MaxMana);
         }
     }
     public void RefreshPlayerMana(int PlayerNo)
@@ -109,7 +112,7 @@ public class PlayerController : MonoBehaviour
             {
                 player1MaxMana += 1;
                 player1Mana = player1MaxMana;
-                player1ManaText.text = player1Mana.ToString();
+                player1ShowMana.SetManaColor(player1Mana, player1MaxMana);
             }
         }
         else if(PlayerNo == 2)
@@ -119,7 +122,7 @@ public class PlayerController : MonoBehaviour
             {
                 player2MaxMana += 1;
                 player2Mana = player2MaxMana;
-                player2ManaText.text = player2Mana.ToString();
+                player2ShowMana.SetManaColor(player2Mana, player2MaxMana);
             }
         }
     }
