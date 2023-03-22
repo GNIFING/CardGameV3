@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 113
   cardName: Healer Witch
   cardImage: {fileID: 21300000, guid: 4a547fb7906fc0b40ab194b5c47f1409, type: 3}
-  cardDescription: 
+  cardDescription: Give a friendly unit +3 health
   currentCardClass: 2
   currentMoveType: 0
   currentAttackType: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   cardIndex: 115
   cardName: The Lucky Archer
   cardImage: {fileID: 21300000, guid: 1519be2a35333c0469d0bde7e10968df, type: 3}
-  cardDescription: 
+  cardDescription: Whenever attack enemy unit, if it survived, draw a card
   currentCardClass: 2
   currentMoveType: 0
   currentAttackType: 1

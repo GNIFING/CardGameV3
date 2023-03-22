@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UH27
   m_EditorClassIdentifier: 
   cardIndex: 27
-  cardName: Stone Catapult
+  cardName: Barrack Castle
   cardImage: {fileID: 21300000, guid: 9b1002f8f495d2a47afa323c3d32da1b, type: 3}
   cardDescription: At the start of turn, deal 3 damage to enemy tower
   currentCardClass: 0
