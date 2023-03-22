@@ -134,7 +134,15 @@ public class UnitCard : MonoBehaviour
 
     protected Quaternion CalculateRotation(GameObject unitInSelectTile)
     {
-        Vector2 direction = unitInSelectTile.transform.parent.transform.position - transform.position;
+        Vector2 direction;
+        if (unitInSelectTile.CompareTag("Unit"))
+        {
+            direction = unitInSelectTile.transform.parent.transform.position - transform.position;
+        }
+        else
+        {
+            direction = unitInSelectTile.transform.transform.position - transform.position;
+        }
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         return Quaternion.AngleAxis(angle, Vector3.forward);
@@ -292,7 +300,15 @@ public class UnitCard : MonoBehaviour
     {
         Quaternion rotation = CalculateRotation(unitAttacked);
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
-        bullet.GetComponent<BulletScript>().SetTarget(unitAttacked.transform.parent.gameObject);
+
+        if (unitAttacked.CompareTag("Unit"))
+        {
+            bullet.GetComponent<BulletScript>().SetTarget(unitAttacked.transform.parent.gameObject);
+        }
+        else
+        {
+            bullet.GetComponent<BulletScript>().SetTarget(unitAttacked.transform.gameObject);
+        }
 
     }
     //-------------------- End-Start Turn Skill --------------------//

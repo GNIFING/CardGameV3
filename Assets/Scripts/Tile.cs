@@ -18,7 +18,8 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject unitHighlight;
     [SerializeField] private int xPos = 0;
     [SerializeField] private int yPos = 0;
- 
+    [SerializeField] private GameObject buff;
+
     private GameObject unit;
     private UnitCard unitCard;
 
@@ -32,6 +33,7 @@ public class Tile : MonoBehaviour
     private float hoverTime;
     private float showUnitDescriptionTime = 0.5f;
     private bool isCheckPosition;
+
 
     public TileType tileType;
 
@@ -198,6 +200,7 @@ public class Tile : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Tile name = " + this.gameObject.name);
                     selectUnitCard.RangeAttackAnimation(this.gameObject);
                 }
                 tileManager.DeSelectUnit();
@@ -222,6 +225,7 @@ public class Tile : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Tile name = " + this.gameObject.name);
                     selectUnitCard.RangeAttackAnimation(this.gameObject);
                 }
                 tileManager.DeSelectUnit();
@@ -344,6 +348,12 @@ public class Tile : MonoBehaviour
     {
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;
+        if(buff != null)
+        {
+            selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+            selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+            Destroy(buff, 0.3f);
+        }
     }
 
     public void MoveUnitToTowerTile(GameObject unit, int playerNo, int PosX, int PosY)
