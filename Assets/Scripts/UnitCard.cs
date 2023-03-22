@@ -289,7 +289,7 @@ public class UnitCard : MonoBehaviour
         
     }
 
-    public void RangeAttack(UnitCard unitAttacked)
+    public virtual void RangeAttack(UnitCard unitAttacked)
     {
         unitAttacked.TakeDamage(this, attack);
         RangeAttackAnimation(unitAttacked.gameObject);
