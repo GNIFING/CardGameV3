@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CardUIManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class CardUIManager : MonoBehaviour
     public TMP_InputField searchInput;
     public TMP_Dropdown deckDropdown;
     public TMP_InputField newDeckNameInput;
+    public DeckController deckController;
+    public CardController cardController;
 
     protected List<Card> cards = new();
     protected List<Deck> decks = new();
@@ -28,177 +31,52 @@ public class CardUIManager : MonoBehaviour
     private string searchName;
 
     private IEnumerator Start() {
-        yield return StartCoroutine(GetDecks());
-        yield return StartCoroutine(GetCards());
-        
-    }
-
-    private IEnumerator GetCards()
-    {
-        string path = "card";
-
-        var request = Api.CreateRequest(path, "GET");
-
-        yield return request.SendWebRequest();
-        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
+        yield return StartCoroutine(deckController.GetDecks((responseData) =>
         {
-            var json = request.downloadHandler.text;
-            userCards = new List<UserCard>(JsonConvert.DeserializeObject<UserCard[]>(json));
+            List<Deck> decks = new(JsonConvert.DeserializeObject<Deck[]>(responseData));
 
-            cards.AddRange(userCards.Select(s => s.card));
-        }
-        else 
-        {
-            Debug.Log(request.result);
-        }
-        
-        UpdatePage();
-    }
-
-    private IEnumerator GetDeck(int deckId)
-    {
-        string path = "deck/deckId/cards/" + deckId;
-
-        var request = Api.CreateRequest(path, "GET");
-
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
-        {
-            var json = request.downloadHandler.text;
-            this.cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(json)));
-        }
-        else
-        {
-            Debug.Log(request.result);
-        }
-
-        this.UpdatePage();
-        this.AssignDeckId(deckId);
-    }
-
-    protected IEnumerator GetDecks()
-    {
-        string path = "deck";
-
-        var request = Api.CreateRequest(path, "GET");
-
-        yield return request.SendWebRequest();
-        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
-        {
-            var json = request.downloadHandler.text;
-            List<Deck> decks = new (JsonConvert.DeserializeObject<Deck[]>(json));
-
-            this.deckItems = new()
+            deckItems = new()
             {
                 // ---------- Add placeholder at the start ---------- //        
                 new DeckItem() { id = 0, name = "Choose" }
             };
 
-            this.deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.id, name = s.name }).ToList());
+            deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.id, name = s.name }).ToList());
 
             // -------- Add deckItems to dropdown ---------- //
-            deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(this.deckItems.Select(s => s.name.ToString()).ToList());
-        }
-        else
+            deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
+        }));
+
+        yield return StartCoroutine(cardController.GetCards((responseData) =>
         {
-            Debug.Log(request.result);
-        }
+            userCards = new List<UserCard>(JsonConvert.DeserializeObject<UserCard[]>(responseData));
+
+            // ---------- Clear card panel data ---------- //
+            cards.Clear();
+
+            cards.AddRange(userCards.Select(s => s.card));
+
+            UpdatePage();
+        }));
     }
 
-    public IEnumerator AddCard(int deckId, int cardId)
+    public IEnumerable<int> GetCardIdsFromDeckId(int deckId)
     {
-        string path = "deck/add/cardId/";
-
-        var request = Api.CreateRequest(path, "PATCH", new UpdateDeckCardRequest() { id = deckId, cardId = cardId });
-
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
+        StartCoroutine(deckController.GetDeck(deckId, (responseData) =>
         {
-            //var json = request.downloadHandler.text;
-            //Card[] response = JsonConvert.DeserializeObject<Card[]>(json);
+            cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
 
-            // ---------- Clear card panel ---------- //
-            //this.cards.Clear();
+            UpdatePage();
+            AssignDeckId(deckId);
+        }));
 
-            // ---------- Add new cards ---------- //
-            //this.cards.AddRange(response.Select(s => s));
-        }
-        else
-        {
-            Debug.Log(request.result);
-        }
-
-        this.UpdatePage();
-    }
-
-    private IEnumerator AddDeck(string newDeckName)
-    {
-        string path = "deck/create/";
-        int[] initialCardIds = new int[] { 1, 2, 3 };
-
-        var request = Api.CreateRequest(path, "POST", new CreateDeckRequest() { name = newDeckName, cards = initialCardIds });
-
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
-        {
-            var json = request.downloadHandler.text;
-            CreateDeckResponse response = JsonConvert.DeserializeObject<CreateDeckResponse>(json);
-
-            // ---------- Clear and add new cards from the new deck to cardPanel ---------- //
-            this.cards.Clear();
-            this.cards.AddRange(response.cards.Select(s => s));
-
-            // ---------- Add new deck to decks ---------- //
-            this.deckItems.Add(new DeckItem() { id = response.id, name = response.name });
-
-            // -------- Clear and add deckItems to dropdown ---------- //
-            deckDropdown.GetComponent<TMP_Dropdown>().ClearOptions();
-            deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(this.deckItems.Select(s => s.name.ToString()).ToList());
-            deckDropdown.value = deckDropdown.options.Count - 1;
-        }
-        else
-        {
-            Debug.Log(request.result);
-        }
-
-        this.UpdatePage();
-    }
-
-    public IEnumerator RemoveCard(int deckId, int cardId)
-    {
-        string path = "deck/remove/cardId/";
-
-        var request = Api.CreateRequest(path, "PATCH", new UpdateDeckCardRequest() { id = deckId, cardId = cardId });
-
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
-        {
-            var json = request.downloadHandler.text;
-            Card[] response = JsonConvert.DeserializeObject<Card[]>(json);
-
-            // ---------- Clear card panel ---------- //
-            this.cards.Clear();
-
-            // ---------- Add new cards ---------- //
-            this.cards.AddRange(response.Select(s => s));
-        }
-        else
-        {
-            Debug.Log(request.result);
-        }
-
-        this.UpdatePage();
-        this.AssignDeckId(deckId);
+        return cards.Select(s => s.id);
     }
 
     public void OnDropdownChange()
     {
         // ---------- Clear card panel data ---------- //
-        this.cards.Clear();
+        cards.Clear();
 
         // ---------- Get deck id from dropdown options from value index from deckItems ---------- //
         int deckId = deckItems.First(f => f.name == deckDropdown.options[deckDropdown.value].text).id;
@@ -206,20 +84,51 @@ public class CardUIManager : MonoBehaviour
         // ---------- If value equals "Select deck", do nothing ---------- //
         if (deckId == 0)
         {
-            StartCoroutine(GetCards());
+            StartCoroutine(cardController.GetCards((responseData) =>
+            {
+                userCards = new List<UserCard>(JsonConvert.DeserializeObject<UserCard[]>(responseData));
+
+                cards.AddRange(userCards.Select(s => s.card));
+
+                UpdatePage();
+            }));
         }
 
         // ---------- If not, get deck by id from dropdown value ---------- //
         else
         {
-            StartCoroutine(GetDeck(deckId));
+            StartCoroutine(deckController.GetDeck(deckId, (responseData) =>
+            {
+                cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
+
+                UpdatePage();
+                AssignDeckId(deckId);
+            }));
         }
     }
 
     public void OnClickCreateDeck()
     {
         string necDeckName = newDeckNameInput.text;
-        StartCoroutine(AddDeck(necDeckName));
+
+        StartCoroutine(deckController.AddDeck(necDeckName, (responseData) =>
+        {
+            CreateDeckResponse response = JsonConvert.DeserializeObject<CreateDeckResponse>(responseData);
+
+            // ---------- Clear and add new cards from the new deck to cardPanel ---------- //
+            cards.Clear();
+            cards.AddRange(response.cards.Select(s => s));
+
+            // ---------- Add new deck to decks ---------- //
+            deckItems.Add(new DeckItem() { id = response.id, name = response.name });
+
+            // -------- Clear and add deckItems to dropdown ---------- //
+            deckDropdown.GetComponent<TMP_Dropdown>().ClearOptions();
+            deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
+            deckDropdown.value = deckDropdown.options.Count - 1;
+
+            UpdatePage();
+        }));
     }
 
     private void AssignCard(Card card)
@@ -243,7 +152,7 @@ public class CardUIManager : MonoBehaviour
         {
             cardUI.removeCardButton.gameObject.SetActive(false);
             cardUI.deckDropdown.gameObject.SetActive(true);
-            cardUI.deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(this.deckItems.Select(s => s.name.ToString()).ToList());
+            cardUI.deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
         }
         else
         {
@@ -254,7 +163,7 @@ public class CardUIManager : MonoBehaviour
         newCardBody.transform.SetParent(cardPanel.transform, false);
     }
 
-    protected void AssignDeckId(int deckId)
+    public void AssignDeckId(int deckId)
     {
         foreach (Transform child in cardPanel.transform)
         {
@@ -269,9 +178,12 @@ public class CardUIManager : MonoBehaviour
         yield return request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
-            Texture2D webTexture = ((DownloadHandlerTexture)request.downloadHandler).texture as Texture2D;
-            Sprite webSprite = SpriteFromTexture2D(webTexture);
-            cardUI.cardImage.GetComponent<Image>().sprite = webSprite;
+            if (cardUI != null && !cardUI.gameObject.IsDestroyed())
+            {
+                Texture2D webTexture = ((DownloadHandlerTexture)request.downloadHandler).texture as Texture2D;
+                Sprite webSprite = SpriteFromTexture2D(webTexture);
+                cardUI.cardImage.GetComponent<Image>().sprite = webSprite;
+            }
         }
         else
         {
@@ -369,7 +281,7 @@ public class CardUIManager : MonoBehaviour
         RenderCards(classCards);
     }
 
-    protected void UpdatePage()
+    public void UpdatePage()
     {
         RenderCards(cards, false);
 
@@ -379,6 +291,11 @@ public class CardUIManager : MonoBehaviour
 
     public List<DeckItem> GetDeckItems()
     {
-        return this.deckItems;
+        return deckItems;
+    }
+
+    public List<Card> GetCards()
+    {
+        return cards;
     }
 }

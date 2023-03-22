@@ -1,15 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class SpawnCard : MonoBehaviour
 {
     public int playerNo;
     [SerializeField] List<GameObject> unitCardPrefabs;
+    public DeckController deckController;
+
     private List<GameObject> cardTiles = new List<GameObject>();
+    private List<Card> cards = new();
+    private List<int> cardIds = new();
 
     private void Start()
     {
+        StartCoroutine(deckController.GetDeck(11, (responseData) =>
+        {
+            cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
+            cardIds = cards.Select(s => s.id).ToList();
+        }));
+
         AddTilesToList();
     }
 
@@ -23,6 +35,7 @@ public class SpawnCard : MonoBehaviour
 
     public void SpawnUnit()
     {
+        Debug.Log(cardIds.Count);
         foreach (GameObject tile in cardTiles)
         {
             bool isFoundUnit = false;

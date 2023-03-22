@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Newtonsoft.Json;
 
 public class CardUI : MonoBehaviour
 {
@@ -27,7 +28,19 @@ public class CardUI : MonoBehaviour
 
     public void OnClickRemoveCardFromDeck()
     {
-        StartCoroutine(cardUIManager.RemoveCard(this.deckId, this.id));
+        StartCoroutine(cardUIManager.cardController.RemoveCard(this.deckId, this.id, (responseData) =>
+        {
+            Card[] response = JsonConvert.DeserializeObject<Card[]>(responseData);
+
+            // ---------- Clear card panel ---------- //
+            cardUIManager.GetCards().Clear();
+
+            // ---------- Add new cards ---------- //
+            cardUIManager.GetCards().AddRange(response.Select(s => s));
+
+            cardUIManager.UpdatePage();
+            cardUIManager.AssignDeckId(deckId);
+        }));
     }
 
     public void OnClickAssignToDeck()
@@ -40,6 +53,9 @@ public class CardUI : MonoBehaviour
             )
             .id;
 
-        StartCoroutine(cardUIManager.AddCard(deckId, this.id));
+        StartCoroutine(cardUIManager.cardController.AddCard(deckId, this.id, (responseData) =>
+        {
+            cardUIManager.UpdatePage();
+        }));
     }
 }
