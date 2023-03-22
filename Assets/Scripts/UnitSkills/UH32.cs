@@ -20,6 +20,7 @@ public class UH32 : UnitCard
     {
         TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
         unitAttacked.TakeDamage(this, attack);
+        MeleeAttackAnimation(unitAttacked);
 
         if (unitAttacked.GetHealth() <= 0) 
         {

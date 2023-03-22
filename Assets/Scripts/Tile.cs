@@ -192,6 +192,14 @@ public class Tile : MonoBehaviour
             if (selectUnitCard.GetPlayerNo() == 2)
             {
                 playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.GetAttackDamage());
+                if(selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
+                {
+                    selectUnitCard.MeleeAttackAnimation(null);
+                }
+                else
+                {
+                    selectUnitCard.RangeAttackAnimation(this.gameObject);
+                }
                 tileManager.DeSelectUnit();
                 selectUnitCard.ReduceCardCredit();
             }
@@ -208,6 +216,14 @@ public class Tile : MonoBehaviour
             if (selectUnitCard.GetPlayerNo() == 1)
             {
                 playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.GetAttackDamage());
+                if (selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
+                {
+                    selectUnitCard.MeleeAttackAnimation(null);
+                }
+                else
+                {
+                    selectUnitCard.RangeAttackAnimation(this.gameObject);
+                }
                 tileManager.DeSelectUnit();
                 selectUnitCard.ReduceCardCredit();
             }

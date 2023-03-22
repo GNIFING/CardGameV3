@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UH14
   m_EditorClassIdentifier: 
   cardIndex: 14
-  cardName: Deadly Marksman
-  cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
+  cardName: Deadly Assassin
+  cardImage: {fileID: 21300000, guid: 7341b2410d475ea4d8bb7fdecf6067fc, type: 3}
   cardDescription: 
   currentCardClass: 0
   currentMoveType: 5
