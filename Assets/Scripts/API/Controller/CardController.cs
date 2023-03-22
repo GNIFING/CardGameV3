@@ -7,8 +7,9 @@ using Newtonsoft.Json;
 using TMPro;
 using System;
 using System.Linq;
+using Assets.Scripts.API.Controller;
 
-public class CardController : MonoBehaviour
+public class CardController : ApiController
 {
     public IEnumerator GetCards(Action<string> callback)
     {
@@ -24,7 +25,7 @@ public class CardController : MonoBehaviour
         }
         else
         {
-            Debug.Log(request.result);
+            CheckRequestStatus(request);
         }
 
         request.Dispose();
@@ -44,7 +45,7 @@ public class CardController : MonoBehaviour
         }
         else
         {
-            Debug.Log(request.result);
+            CheckRequestStatus(request);
         }
 
         request.Dispose();
@@ -64,7 +65,7 @@ public class CardController : MonoBehaviour
         }
         else
         {
-            Debug.Log(request.result);
+            CheckRequestStatus(request);
         }
 
         request.Dispose();

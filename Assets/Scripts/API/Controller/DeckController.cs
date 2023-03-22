@@ -1,13 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Linq;
-using TMPro;
-using UnityEngine;
 using UnityEngine.Networking;
+using Assets.Scripts.API.Controller;
 
-public class DeckController : MonoBehaviour
+public class DeckController : ApiController
 {
     public IEnumerator GetDeck(int deckId, Action<string> callback)
     {
@@ -24,7 +20,7 @@ public class DeckController : MonoBehaviour
         }
         else
         {
-            Debug.Log(request.result);
+            CheckRequestStatus(request);
         }
 
         request.Dispose();
@@ -43,7 +39,7 @@ public class DeckController : MonoBehaviour
         }
         else
         {
-            Debug.Log(request.result);
+            CheckRequestStatus(request);
         }
 
         request.Dispose();
@@ -65,7 +61,7 @@ public class DeckController : MonoBehaviour
         }
         else
         {
-            Debug.Log(request.result);
+            CheckRequestStatus(request);
         }
 
         request.Dispose();

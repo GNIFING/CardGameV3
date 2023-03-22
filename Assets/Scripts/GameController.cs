@@ -23,12 +23,18 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < firstHandCards; i++)
+        float timeout = 10f;
+        do
         {
-            spawnP1Card.InitialSpawn(true);
-            spawnP2Card.InitialSpawn(false);
+            for (int i = 0; i < firstHandCards; i++)
+            {
+                spawnP1Card.InitialSpawn(true);
+                spawnP2Card.InitialSpawn(false);
+            }
+            playerController.RefreshPlayerMana(1);
+            break;
         }
-        playerController.RefreshPlayerMana(1);
+        while (!spawnP1Card.isLoading || !spawnP2Card.isLoading);
     }
 
     public void UseUnitsEndturnSkill(int playerNo)
