@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour
     private List<UnitCard> unitCards;
 
     private int firstHandCards = 3;
+    private float time = 0f;
+    private float timeout = 10f;
+    private bool alreadyLoad;
 
     public delegate void ChangeCardBackDelegate(int playerNo);
     public event ChangeCardBackDelegate OnChangeCardBack;
@@ -23,8 +26,21 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        float timeout = 10f;
-        do
+
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
+        if(time >= timeout)
+        {
+            //throw load error go back scene
+        }
+        else if(!spawnP1Card.isLoading || !spawnP2Card.isLoading)
+        {
+            return;
+        }
+        else if(alreadyLoad == false)
         {
             for (int i = 0; i < firstHandCards; i++)
             {
@@ -32,9 +48,8 @@ public class GameController : MonoBehaviour
                 spawnP2Card.InitialSpawn(false);
             }
             playerController.RefreshPlayerMana(1);
-            break;
+            alreadyLoad = true;
         }
-        while (!spawnP1Card.isLoading || !spawnP2Card.isLoading);
     }
 
     public void UseUnitsEndturnSkill(int playerNo)

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private static int player2Mana;
     private static int player1MaxMana;
     private static int player2MaxMana;
-    private static int startingMana = 1;
+    private static int startingMana = 0;
 
 
     public TextMeshProUGUI player1HPText;
