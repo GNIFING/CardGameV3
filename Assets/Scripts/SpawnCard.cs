@@ -17,10 +17,11 @@ public class SpawnCard : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(deckController.GetDeck(12, (responseData) =>
+        StartCoroutine(deckController.GetDeck(14, (responseData) =>
         {
             cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
             cardIds = cards.Select(s => s.id).ToList();
+            Debug.Log(cardIds.Count);
             isLoading = true;
         }));
 
