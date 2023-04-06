@@ -1,7 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using EasyUI.Toast;
 using Newtonsoft.Json;
+using SocketIOClient;
+using SocketIOClient.Newtonsoft.Json;
 using TMPro;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
@@ -23,6 +28,7 @@ public class LobbyUIManager : MonoBehaviour
         {
             UserModel user = JsonConvert.DeserializeObject<UserModel>(responseData);
             greetingUser.text = "Hi, " + user.username;
+            //Toast.Show("Welcome Back!", 3f, ToastColor.Black, ToastPosition.TopRight);
         }));
 
         StartCoroutine(deckController.GetDecks((responseData) =>

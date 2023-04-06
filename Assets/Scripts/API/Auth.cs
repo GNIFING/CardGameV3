@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using EasyUI.Toast;
 
 public class Auth : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Auth : MonoBehaviour
         }
         else
         {
+            Toast.Show(request.error, 3f, ToastColor.Black, ToastPosition.TopRight);
             outputArea.text = request.error;
         }
 
