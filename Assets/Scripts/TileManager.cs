@@ -33,6 +33,35 @@ public class TileManager : MonoBehaviour
     public List<GameObject> GetAllTiles() => Tiles;
 
     // Get Unit Highlight in many type  ->  all unit, friendly unit only, enemy unit only, tower only // 
+
+    public List<GameObject> GetAllUnits()
+    {
+        List<GameObject> allUnits = new List<GameObject>();
+        foreach (GameObject tileObject in Tiles)
+        {
+            Tile tile = tileObject.GetComponent<Tile>();
+            if (tile.GetUnitInTile() != null)
+            {
+                allUnits.Add(tile.GetUnitInTile());
+            }
+        }
+        return allUnits;
+    }
+
+    public List<GameObject> GetAllTileWithUnit()
+    {
+        List<GameObject> allUnits = new List<GameObject>();
+        foreach (GameObject tileObject in Tiles)
+        {
+            Tile tile = tileObject.GetComponent<Tile>();
+            if (tile.GetUnitInTile() != null)
+            {
+                allUnits.Add(tile.gameObject);
+            }
+        }
+        return allUnits;
+    }
+
     public List<Tile> HighlightAllUnitTiles()
     {
         foreach(GameObject tileObject in Tiles)
