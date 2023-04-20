@@ -25,7 +25,7 @@ public class UE1 : UnitCard
                 UnitCard selectedUnit = tile.GetUnitInTile().GetComponent<UnitCard>();
                 if (selectedUnit.GetPlayerNo() != playerNo)
                 {
-                    selectedUnit.TakeDamage(this, 1);
+                    selectedUnit.TakeDamage(this, 2);
                     break;
                 }
             }

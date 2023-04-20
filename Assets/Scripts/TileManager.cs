@@ -100,6 +100,19 @@ public class TileManager : MonoBehaviour
         }
         return unitCards;
     }
+    public List<UnitCard> SelectEnemyUnits(int playerNo)
+    {
+        List<UnitCard> unitCards = new List<UnitCard>();
+        foreach (GameObject tileObject in Tiles)
+        {
+            Tile tile = tileObject.GetComponent<Tile>();
+            if (tile.GetUnitInTile() != null && tile.GetUnitInTile().GetComponent<UnitCard>().GetPlayerNo() != playerNo)
+            {
+                unitCards.Add(tile.GetUnitInTile().GetComponent<UnitCard>());
+            }
+        }
+        return unitCards;
+    }
     public List<Tile> HighlightFriendlyUnitTiles(int playerNo)
     {
         foreach (GameObject tileObject in Tiles)

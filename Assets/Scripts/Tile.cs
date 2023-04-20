@@ -344,7 +344,7 @@ public class Tile : MonoBehaviour
         return null;
     }
 
-    private void MoveUnitToThisTile(GameObject selectUnit)
+    public void MoveUnitToThisTile(GameObject selectUnit)
     {
         //------------ SEND API HERE ---------------//
         
