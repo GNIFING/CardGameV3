@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: UO14
   m_EditorClassIdentifier: 
   cardIndex: 214
-  cardName: The Realm Conqourer
+  cardName: The Realm Conqueror
   cardImage: {fileID: 0}
-  cardDescription: Deals 1 damage to all enemies in this lane
+  cardDescription: 
   currentCardClass: 1
   currentMoveType: 4
   currentAttackType: 0
