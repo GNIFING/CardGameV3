@@ -358,8 +358,8 @@ public class TileManager : MonoBehaviour
         //  1  2  3  4  5  
 
         //Can move only 3 8 11 12 14 15 18 23
-        int[] xOffset = { -2, 0, 2, -1, 1, -1, 0, 1 };
-        int[] yOffset = { 0, -1, 0, -2, -2, 2, 1, 2 };
+        int[] xOffset = { -2, -1, 1, 2, 0, 0, 0, 0 };
+        int[] yOffset = { 0, 0, 0, 0, -2, -1, 1, 2 };
 
         for (int i = 0; i < 8; i++)
         {

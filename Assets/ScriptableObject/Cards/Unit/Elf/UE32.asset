@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 101
   cardName: Nature Assassin
-  cardImage: {fileID: 21300000, guid: c861557733cf11b4499d5e3ec907ed83, type: 3}
+  cardImage: {fileID: 21300000, guid: 7aba826915dd1f34bbeffaeb4782fdbb, type: 3}
   cardDescription: Shoot large arrow, Kill all enemies in this lane
   currentCardClass: 2
   currentMoveType: 4

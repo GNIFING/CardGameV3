@@ -61,7 +61,7 @@ public class SpawnCard : MonoBehaviour
             }
             if (!isFoundUnit)
             {
-                int index = Random.Range(unitCardPrefabs.Count - 7, unitCardPrefabs.Count);
+                int index = Random.Range(0, unitCardPrefabs.Count);
                 GameObject unitCard = Instantiate(unitCardPrefabs[index], tile.transform.position, Quaternion.identity);
                 unitCard.transform.parent = tile.transform;
                 unitCard.GetComponent<UnitCard>().SetPlayerNo(playerNo);

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 104
   cardName: Last Will
-  cardImage: {fileID: 21300000, guid: c861557733cf11b4499d5e3ec907ed83, type: 3}
+  cardImage: {fileID: 21300000, guid: 94fd14b0466cf9141916a5848f6ee9d3, type: 3}
   cardDescription: If attacked unit dies, it also dies
   currentCardClass: 2
   currentMoveType: 0

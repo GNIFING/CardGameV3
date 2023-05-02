@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 227
   cardName: Ancient Dragon
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: 6aca135c5ec21b240843bbabab02ad78, type: 3}
   cardDescription: Reduce enemy's damage by 2 for all units. Increase allies' damage
     by 2 for all units
   currentCardClass: 1

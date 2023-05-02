@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 212
   cardName: Long Spear Goliath
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: a45b38941f11236449a28c9fcebb5f64, type: 3}
   cardDescription: Deals 1 damage to all enemies in this lane
   currentCardClass: 1
   currentMoveType: 0

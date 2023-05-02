@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 99
   cardName: Summon Backline
-  cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
+  cardImage: {fileID: 21300000, guid: b46000d622271d748a25a47ec8609a6a, type: 3}
   cardDescription: UH9_1
   currentCardClass: 0
   currentMoveType: 0

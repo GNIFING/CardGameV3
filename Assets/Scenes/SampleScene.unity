@@ -3029,12 +3029,17 @@ MonoBehaviour:
   - {fileID: 1855405217901779101, guid: 7592027b306e3be4ba4e47c96a4e394a, type: 3}
   - {fileID: 1855405217901779101, guid: b5ef83c56abb0a84fa1ea834958723a8, type: 3}
   - {fileID: 1855405217901779101, guid: 0b75495b2b20b6349aadcf139ec125a6, type: 3}
+  - {fileID: 1855405217901779101, guid: 57bb0739e282b624389381237c11b2c9, type: 3}
   - {fileID: 1855405217901779101, guid: 7255f57cb152dd44aad03539cdf9b6e0, type: 3}
+  - {fileID: 1855405217901779101, guid: 7e46eb2d2719bb241bd6b8d7804324e6, type: 3}
   - {fileID: 1855405217901779101, guid: c3e46fb79ab2c20428d75c6e6251641d, type: 3}
   - {fileID: 1855405217901779101, guid: 23f1ca88589a2994a839cdea52f8b30d, type: 3}
   - {fileID: 1855405217901779101, guid: 8352ce3f00521aa48a2de8548a1fcb3c, type: 3}
   - {fileID: 1855405217901779101, guid: ebbe84d5751304e468f2f724d70c7c2a, type: 3}
   - {fileID: 1855405217901779101, guid: 1cf222a08c888b5428f04cc957a015d0, type: 3}
+  - {fileID: 1855405217901779101, guid: fcb0b30f0f460ab4a8499aaaf82123d4, type: 3}
+  - {fileID: 1855405217901779101, guid: 84ec8cc93cf508940b5a58329ee68f95, type: 3}
+  - {fileID: 1855405217901779101, guid: 5bd07e3181a64f2478a2c037209d70e7, type: 3}
   deckController: {fileID: 719817399}
   isLoading: 0
 --- !u!4 &143956406
@@ -5133,7 +5138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &290312488
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9486,6 +9491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNo: 1
   unitCardPrefabs:
+  - {fileID: 1855405217901779101, guid: 57bb0739e282b624389381237c11b2c9, type: 3}
   - {fileID: 1855405217901779101, guid: b5ef83c56abb0a84fa1ea834958723a8, type: 3}
   - {fileID: 1855405217901779101, guid: aa69ef715f69f52448935718152b037f, type: 3}
   - {fileID: 1855405217901779101, guid: f8d6082550a87d340bfb5079fd964b7f, type: 3}
@@ -9526,7 +9532,6 @@ MonoBehaviour:
   - {fileID: 1855405217901779101, guid: 8352ce3f00521aa48a2de8548a1fcb3c, type: 3}
   - {fileID: 1855405217901779101, guid: ebbe84d5751304e468f2f724d70c7c2a, type: 3}
   - {fileID: 1855405217901779101, guid: 1cf222a08c888b5428f04cc957a015d0, type: 3}
-  - {fileID: 1855405217901779101, guid: 57bb0739e282b624389381237c11b2c9, type: 3}
   - {fileID: 1855405217901779101, guid: 7e46eb2d2719bb241bd6b8d7804324e6, type: 3}
   - {fileID: 1855405217901779101, guid: fcb0b30f0f460ab4a8499aaaf82123d4, type: 3}
   - {fileID: 1855405217901779101, guid: 84ec8cc93cf508940b5a58329ee68f95, type: 3}
@@ -9537,6 +9542,11 @@ MonoBehaviour:
   - {fileID: 1855405217901779101, guid: dbff167165d99c64db1810d7349eb07b, type: 3}
   - {fileID: 1855405217901779101, guid: f8510e54efc4bc6479d7b0b033f123a2, type: 3}
   - {fileID: 1855405217901779101, guid: 766c725fe8ccdd8419859f782634b8eb, type: 3}
+  - {fileID: 1855405217901779101, guid: 01e08c6571a9d954d8fb45c3729f6920, type: 3}
+  - {fileID: 1855405217901779101, guid: b9751bb5cb3377a4e8fe1636db5f1d37, type: 3}
+  - {fileID: 1855405217901779101, guid: 38489fa0929f05541bfd6a23fcc9f786, type: 3}
+  - {fileID: 1855405217901779101, guid: fc27953304352e24bb7b06145e007a2d, type: 3}
+  - {fileID: 1855405217901779101, guid: 51faec8e69fdb984fa0d46e112efc32c, type: 3}
   deckController: {fileID: 719817399}
   isLoading: 0
 --- !u!1 &519420028
@@ -13245,7 +13255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &760151008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14355,7 +14365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -446.1}
+  m_AnchoredPosition: {x: 0, y: -462.5}
   m_SizeDelta: {x: 125.8144, y: 72.4273}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845276310
@@ -14427,7 +14437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.7932563, b: 0.18396229, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17920,8 +17930,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b12ac91ac2b1f2b429cb101a73465f0a, type: 2}
+  m_sharedMaterial: {fileID: -2159047538728306869, guid: b12ac91ac2b1f2b429cb101a73465f0a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17945,8 +17955,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -21632,8 +21642,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Player 2 \n\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b12ac91ac2b1f2b429cb101a73465f0a, type: 2}
+  m_sharedMaterial: {fileID: -2159047538728306869, guid: b12ac91ac2b1f2b429cb101a73465f0a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22558,10 +22568,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Player 1 \n\n"
+  m_text: 'Player 1
+
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b12ac91ac2b1f2b429cb101a73465f0a, type: 2}
+  m_sharedMaterial: {fileID: -2159047538728306869, guid: b12ac91ac2b1f2b429cb101a73465f0a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -32126,7 +32139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1937503550
 RectTransform:
   m_ObjectHideFlags: 0

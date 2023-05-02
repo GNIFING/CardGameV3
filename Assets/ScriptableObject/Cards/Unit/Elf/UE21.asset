@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 101
   cardName: Swapper Elf
-  cardImage: {fileID: 21300000, guid: c861557733cf11b4499d5e3ec907ed83, type: 3}
+  cardImage: {fileID: 21300000, guid: 922e4bf131ec389438486357107dc8b9, type: 3}
   cardDescription: Swap attack damage with selected Enemy
   currentCardClass: 2
   currentMoveType: 0

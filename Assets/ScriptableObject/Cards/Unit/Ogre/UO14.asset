@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 214
   cardName: The Realm Conqueror
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: 7b0076f7882d9094ba9a93070ecb6018, type: 3}
   cardDescription: 
   currentCardClass: 1
   currentMoveType: 4

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 101
   cardName: Supply Suppoter
-  cardImage: {fileID: 21300000, guid: c861557733cf11b4499d5e3ec907ed83, type: 3}
+  cardImage: {fileID: 21300000, guid: 269b32295a99cdd459df81c733930c35, type: 3}
   cardDescription: Draw cards with the same of friendly units on arena
   currentCardClass: 2
   currentMoveType: 0

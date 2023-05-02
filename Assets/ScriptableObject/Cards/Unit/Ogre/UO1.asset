@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 201
   cardName: Raging Golem
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: e6d56bcf1e3fdbc489403d9b480eec1d, type: 3}
   cardDescription: Deal 3 damage to enemy unit
   currentCardClass: 1
   currentMoveType: 0

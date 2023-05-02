@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 220
   cardName: 'Warlord Ogre '
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: b5786de16570c444ebd192adafdec59b, type: 3}
   cardDescription: Deal 4 damage to enemy unit, if it dies jump to their position
   currentCardClass: 1
   currentMoveType: 0

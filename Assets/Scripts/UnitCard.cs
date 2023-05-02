@@ -43,6 +43,7 @@ public class UnitCard : MonoBehaviour
     protected GameObject skillTargetUnit;
     protected TileManager tileManager;
     public GameObject backCard;
+    public ChooseMoveType chooseMoveType;
     protected GameController gameController;
 
     public virtual void UnitSkill()
@@ -161,8 +162,9 @@ public class UnitCard : MonoBehaviour
         mana = unitCardStat.ManaCost;
         description = unitCardStat.CardDescription;
         cardCredit = maxCardCredit;
+        chooseMoveType.SetMoveTypeImage();
 
-        if(unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
+        if (unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
         {
             meleeIcon.SetActive(true);
             rangeIcon.SetActive(false);
@@ -209,6 +211,10 @@ public class UnitCard : MonoBehaviour
     public void DecreaseAttackDamage(int minusAttack)
     {
         attack -= minusAttack;
+        if(attack <= 0)
+        {
+            attack = 0;
+        }
         UpdateCardUI();
     }
 
