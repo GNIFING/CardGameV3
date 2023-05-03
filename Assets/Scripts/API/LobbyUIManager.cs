@@ -55,9 +55,9 @@ public class LobbyUIManager : MonoBehaviour
 
             //StartCoroutine(cardController.GetCards((responseData) =>
             //{
-            //    userCards = new List<UserCard>(JsonConvert.DeserializeObject<UserCard[]>(responseData));
+            //    UnitCards = new List<UnitCard>(JsonConvert.DeserializeObject<UnitCard[]>(responseData));
 
-            //    cards.AddRange(userCards.Select(s => s.card));
+            //    cards.AddRange(UnitCards.Select(s => s.card));
 
             //    UpdatePage();
             //}));

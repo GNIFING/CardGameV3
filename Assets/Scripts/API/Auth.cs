@@ -8,15 +8,20 @@ using UnityEngine.SceneManagement;
 
 public class Auth : MonoBehaviour
 {
-    public InputField outputArea;
+    //public InputField outputArea;
     public InputField usernameInput;
     public InputField passwordInput;
+
+    private void Start()
+    {
+        passwordInput.contentType = InputField.ContentType.Password;
+    }
 
     public void Login() => StartCoroutine(LoginCoroutine());
 
     IEnumerator LoginCoroutine()
     {
-        outputArea.text = "Loading...";
+        //outputArea.text = "Loading...";
         string path = "auth/login";
 
         AuthRequest body = new AuthRequest()
@@ -31,14 +36,14 @@ public class Auth : MonoBehaviour
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
             AuthResponse data = JsonUtility.FromJson<AuthResponse>(request.downloadHandler.text);
-            outputArea.text = data.accessToken;
+            //outputArea.text = data.accessToken;
             Api.accessToken = data.accessToken;
 
             SceneManager.LoadScene("LobbyPage");
         }
         else
         {
-            outputArea.text = request.error;
+            //outputArea.text = request.error;
         }
 
         request.Dispose();
@@ -48,7 +53,7 @@ public class Auth : MonoBehaviour
 
     IEnumerator RegisterCoroutine()
     {
-        outputArea.text = "Loading...";
+        //outputArea.text = "Loading...";
         string path = "auth/register";
 
         AuthRequest body = new AuthRequest()
@@ -63,12 +68,12 @@ public class Auth : MonoBehaviour
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
             AuthResponse data = JsonUtility.FromJson<AuthResponse>(request.downloadHandler.text);
-            outputArea.text = data.accessToken;
+            //outputArea.text = data.accessToken;
             Api.accessToken = data.accessToken;
         }
         else
         {
-            outputArea.text = request.error;
+            //outputArea.text = request.error;
         }
 
         request.Dispose();
@@ -78,7 +83,7 @@ public class Auth : MonoBehaviour
 
     IEnumerator GetUserCoroutine()
     {
-        outputArea.text = "Loading...";
+        //outputArea.text = "Loading...";
         string path = "user";
 
         var request = Api.CreateRequest(path, "GET");
@@ -88,11 +93,11 @@ public class Auth : MonoBehaviour
         {
             string json = request.downloadHandler.text;
             UserModel user = JsonConvert.DeserializeObject<UserModel>(json);
-            outputArea.text = "Hi, " + user.username;
+            //outputArea.text = "Hi, " + user.username;
         }
         else
         {
-            outputArea.text = request.error;
+            //outputArea.text = request.error;
         }
 
         request.Dispose();

@@ -24,7 +24,7 @@ public class CardUIManager : MonoBehaviour
     protected List<Deck> decks = new();
     protected List<DeckItem> deckItems = new();
 
-    private List<UserCard> userCards = new();
+    private List<Card> Cards = new();
     private int PAGE_COUNT;
     private int page = 0;
     private readonly int MAX_CARD_PER_PAGE = 8;
@@ -49,12 +49,12 @@ public class CardUIManager : MonoBehaviour
 
         yield return StartCoroutine(cardController.GetCards((responseData) =>
         {
-            userCards = new List<UserCard>(JsonConvert.DeserializeObject<UserCard[]>(responseData));
+            Cards = new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData));
 
             // ---------- Clear card panel data ---------- //
             cards.Clear();
 
-            cards.AddRange(userCards.Select(s => s.card));
+            cards.AddRange(Cards.Select(s => s));
 
             UpdatePage();
         }));
@@ -86,9 +86,9 @@ public class CardUIManager : MonoBehaviour
         {
             StartCoroutine(cardController.GetCards((responseData) =>
             {
-                userCards = new List<UserCard>(JsonConvert.DeserializeObject<UserCard[]>(responseData));
+                Cards = new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData));
 
-                cards.AddRange(userCards.Select(s => s.card));
+                cards.AddRange(Cards.Select(s => s));
 
                 UpdatePage();
             }));
