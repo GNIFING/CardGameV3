@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 
 public class CardUIManager : MonoBehaviour
 {
-    public GameObject cardBody; 
+    public GameObject cardBody;
 
     public RectTransform cardPanel;
     public TextMeshProUGUI pageText;
@@ -35,13 +35,13 @@ public class CardUIManager : MonoBehaviour
         {
             List<Deck> decks = new(JsonConvert.DeserializeObject<Deck[]>(responseData));
 
-            deckItems = new()
-            {
-                // ---------- Add placeholder at the start ---------- //        
-                new DeckItem() { id = 0, name = "Choose" }
-            };
+            //deckItems = new()
+            //{
+            //    // ---------- Add placeholder at the start ---------- //        
+            //    new DeckItem() { id = 0, name = "Choose" }
+            //};
 
-            deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.id, name = s.name }).ToList());
+            deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.Id, name = s.Name }).ToList());
 
             // -------- Add deckItems to dropdown ---------- //
             deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());

@@ -4,14 +4,9 @@ using UnityEngine;
 [Serializable]
 public class Deck
 {
-    public int id;
-    public string name;
-    public int userId;
-    public int[] cards;
-    public int[] cardsOrigin;
-    public bool isActive;
-    public DateTime createAt;
-    public DateTime updatedAt;
+    public int Id;
+    public string Name;
+    public UserCard[] UserCards;
 }
 
 public class DeckItem

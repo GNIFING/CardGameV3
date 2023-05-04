@@ -35,7 +35,7 @@ public class LobbyUIManager : MonoBehaviour
                 new DeckItem() { id = 0, name = "Choose" }
             };
 
-            deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.id, name = s.name }).ToList());
+            deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.Id, name = s.Name }).ToList());
 
             // -------- Add deckItems to dropdown ---------- //
             deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
