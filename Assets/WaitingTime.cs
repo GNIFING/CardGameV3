@@ -18,7 +18,9 @@ public class WaitingTime : MonoBehaviour
     void Start()
     {
         time = 0;
-        StartCoroutine(FindMatch(3));
+        int deckId = PlayerPrefs.GetInt("DeckId");
+        Debug.Log(deckId);
+        //StartCoroutine(FindMatch(3));
     }
 
     // Update is called once per frame

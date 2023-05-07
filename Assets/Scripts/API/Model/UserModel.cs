@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 
-public class CreateUserRequest
+public class User
 {
-    public List<int> cards;
-}
-
-[Serializable]
-public class UserModel
-{
-    public int id;
-    public string username;
-    public string role;
-    public int rank;
-    public bool isActive;
+    public int Id;
+    public string Username;
+    public string Role;
+    public int Rank;
+    public string Address;
+    public bool IsActive;
     public DateTime createdAt;
     public DateTime updatedAt;
 }

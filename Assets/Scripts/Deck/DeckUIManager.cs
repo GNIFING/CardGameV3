@@ -14,9 +14,9 @@ public class DeckUIManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return StartCoroutine(deckController.GetDecks((responseData) =>
+        yield return StartCoroutine(deckController.GetDecks((decks) =>
         {
-            decks = new(JsonConvert.DeserializeObject<Deck[]>(responseData));
+            this.decks = decks;
             
             UpdatePage();
         }));

@@ -31,9 +31,9 @@ public class CardUIManager : MonoBehaviour
     private string searchName;
 
     private IEnumerator Start() {
-        yield return StartCoroutine(deckController.GetDecks((responseData) =>
+        yield return StartCoroutine(deckController.GetDecks((decks) =>
         {
-            List<Deck> decks = new(JsonConvert.DeserializeObject<Deck[]>(responseData));
+            this.decks = decks;
 
             //deckItems = new()
             //{

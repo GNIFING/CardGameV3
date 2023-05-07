@@ -5,7 +5,7 @@ using Assets.Scripts.API.Controller;
 
 public class RoomController : ApiController
 {
-    private readonly string controller = "/room";
+    private readonly string controller = "room";
     public IEnumerator MatchMaking(int playerId, Action<string> callback)
     {
         string path = "/matchmaking";

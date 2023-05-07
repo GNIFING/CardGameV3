@@ -1,12 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using TMPro;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class LobbyUIManager : MonoBehaviour
 {
@@ -16,27 +12,22 @@ public class LobbyUIManager : MonoBehaviour
     public TMP_Dropdown deckDropdown;
 
     private List<DeckItem> deckItems;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(userController.GetUser((responseData) =>
+        StartCoroutine(userController.GetUser((user) =>
         {
-            UserModel user = JsonConvert.DeserializeObject<UserModel>(responseData);
-            greetingUser.text = "Hi, " + user.username;
+            greetingUser.text = "Hi, " + user.Username;
         }));
 
-        StartCoroutine(deckController.GetDecks((responseData) =>
+        StartCoroutine(deckController.GetDecks((decks) =>
         {
-            List<Deck> decks = new(JsonConvert.DeserializeObject<Deck[]>(responseData));
-
-            deckItems = new()
-            {
-                // ---------- Add placeholder at the start ---------- //        
-                new DeckItem() { id = 0, name = "Choose" }
-            };
+            List<DeckItem> deckItems = new();
 
             deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.Id, name = s.Name }).ToList());
 
+            this.deckItems = deckItems;
             // -------- Add deckItems to dropdown ---------- //
             deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
         }));
@@ -47,30 +38,10 @@ public class LobbyUIManager : MonoBehaviour
         // ---------- Get deck id from dropdown options from value index from deckItems ---------- //
         int deckId = deckItems.First(f => f.name == deckDropdown.options[deckDropdown.value].text).id;
 
-        // ---------- If value equals "Select deck", do nothing ---------- //
-        if (deckId == 0)
-        {
-            // Do nothing //
-
-
-            //StartCoroutine(cardController.GetCards((responseData) =>
-            //{
-            //    UnitCards = new List<UnitCard>(JsonConvert.DeserializeObject<UnitCard[]>(responseData));
-
-            //    cards.AddRange(UnitCards.Select(s => s.card));
-
-            //    UpdatePage();
-            //}));
-        }
-
-        // ---------- If not, get deck by id from dropdown value ---------- //
-        else
-        {
-            SaveIntoJson(deckId.ToString());
-        }
+        PlayerPrefs.SetInt("DeckId", deckId);
     }
-    public void SaveIntoJson(string data)
-    {
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/deckId.json", data);
-    }
+    //public void SaveIntoJson(string data)
+    //{
+    //    System.IO.File.WriteAllText(Application.persistentDataPath + "/deckId.json", data);
+    //}
 }
