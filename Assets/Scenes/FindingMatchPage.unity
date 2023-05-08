@@ -209,7 +209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1055754439}
         m_TargetAssemblyTypeName: WaitingTime, Assembly-CSharp
-        m_MethodName: CancelFindingMatch
+        m_MethodName: CancelMatchMaking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -569,7 +569,7 @@ MonoBehaviour:
   timeText: {fileID: 1895647176}
   findingMatchText: {fileID: 899142596}
   cancelButton: {fileID: 201270802}
-  roomController: {fileID: 0}
+  roomController: {fileID: 2131512718}
 --- !u!4 &1055754440
 Transform:
   m_ObjectHideFlags: 0

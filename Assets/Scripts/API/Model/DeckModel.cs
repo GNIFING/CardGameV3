@@ -1,9 +1,9 @@
 public class Deck
 {
-    public int Id;
-    public string Name;
-    public UserCard[] UserCards;
-    public CardClass ClassName;
+    public int id;
+    public string name;
+    public UserCard[] userCards;
+    public CardClass className;
 }
 
 public class DeckItem

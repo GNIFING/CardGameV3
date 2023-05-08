@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyUIManager : MonoBehaviour
 {
     public TMP_Text greetingUser;
     public UserController userController;
     public DeckController deckController;
+    public MultiPlayerController multiPlayerController;
     public TMP_Dropdown deckDropdown;
 
     private List<DeckItem> deckItems;
@@ -25,9 +26,13 @@ public class LobbyUIManager : MonoBehaviour
         {
             List<DeckItem> deckItems = new();
 
-            deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.Id, name = s.Name }).ToList());
+            deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.id, name = s.name }).ToList());
 
             this.deckItems = deckItems;
+
+            Debug.Log(decks.FirstOrDefault().id);
+            PlayerPrefs.SetInt("DeckId", decks.FirstOrDefault().id);
+
             // -------- Add deckItems to dropdown ---------- //
             deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
         }));
@@ -39,6 +44,18 @@ public class LobbyUIManager : MonoBehaviour
         int deckId = deckItems.First(f => f.name == deckDropdown.options[deckDropdown.value].text).id;
 
         PlayerPrefs.SetInt("DeckId", deckId);
+    }
+
+    public void FindMatch()
+    {
+        int deckId = PlayerPrefs.GetInt("DeckId");
+
+        StartCoroutine(multiPlayerController.CreatePlayer(deckId, (newPlayer) =>
+        {
+            Debug.Log(newPlayer.id);
+            PlayerPrefs.SetInt("PlayerId", newPlayer.id);
+            SceneManager.LoadScene("FindingMatchPage");
+        }));
     }
     //public void SaveIntoJson(string data)
     //{
