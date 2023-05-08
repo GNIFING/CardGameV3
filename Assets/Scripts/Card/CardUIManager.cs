@@ -10,171 +10,124 @@ using Unity.VisualScripting;
 
 public class CardUIManager : MonoBehaviour
 {
-    public GameObject cardBody;
-
-    public RectTransform cardPanel;
-    public TextMeshProUGUI pageText;
-    public TMP_InputField searchInput;
-    public TMP_Dropdown deckDropdown;
-    public TMP_InputField newDeckNameInput;
-    public DeckController deckController;
     public CardController cardController;
+    public DeckController deckController;
 
-    protected List<Card> cards = new();
-    protected List<Deck> decks = new();
-    protected List<DeckItem> deckItems = new();
+    private Deck deck;
+    private List<UserCard> userCards;
 
-    private List<Card> Cards = new();
-    private int PAGE_COUNT;
-    private int page = 0;
-    private readonly int MAX_CARD_PER_PAGE = 8;
-    private string searchName;
+    public GameObject userCardBody;
+    public GameObject deckCardBody;
+    public RectTransform cardPanel;
+    public Button deckCardsButton;
+    public Button myCardsButton;
+    public TMP_Text deckName;
+    private string? classType;
+    private int? costType;
+
+    private string activeTab = "deckCards";
 
     private IEnumerator Start() {
-        yield return StartCoroutine(deckController.GetDecks((decks) =>
+        classType = null;
+        costType = null;
+
+        int deckId = PlayerPrefs.GetInt("DeckId");
+
+        yield return StartCoroutine(deckController.GetDeck(deckId, (deck) =>
         {
-            this.decks = decks;
+            this.deck = deck;
 
-            //deckItems = new()
-            //{
-            //    // ---------- Add placeholder at the start ---------- //        
-            //    new DeckItem() { id = 0, name = "Choose" }
-            //};
+            // Set deck name in navbar
+            deckName.text = $"Deck {deck.Id}: {deck.Name}";
 
-            deckItems.AddRange(decks.Select(s => new DeckItem() { id = s.Id, name = s.Name }).ToList());
-
-            // -------- Add deckItems to dropdown ---------- //
-            deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
+            deckCardsButton.Select();
         }));
 
-        yield return StartCoroutine(cardController.GetCards((responseData) =>
+        yield return StartCoroutine(cardController.GetCards((userCards) =>
         {
-            Cards = new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData));
+            Debug.Log(deck.ClassName.ToString());
+            this.userCards = userCards
+                .Where(w =>
+                    !deck.UserCards.Select(s => s.id).Contains(w.id) &&
+                    w.card.className == deck.ClassName.ToString() &&
+                    w.activeFlag == ActiveFlag.R
+                )
+                .Select(s => s)
+                .ToList();
 
-            // ---------- Clear card panel data ---------- //
-            cards.Clear();
-
-            cards.AddRange(Cards.Select(s => s));
-
-            UpdatePage();
         }));
-    }
-
-    public IEnumerable<int> GetCardIdsFromDeckId(int deckId)
-    {
-        StartCoroutine(deckController.GetDeck(deckId, (responseData) =>
-        {
-            cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
-
-            UpdatePage();
-            AssignDeckId(deckId);
-        }));
-
-        return cards.Select(s => s.id);
-    }
-
-    public void OnDropdownChange()
-    {
-        // ---------- Clear card panel data ---------- //
-        cards.Clear();
-
-        // ---------- Get deck id from dropdown options from value index from deckItems ---------- //
-        int deckId = deckItems.First(f => f.name == deckDropdown.options[deckDropdown.value].text).id;
-
-        // ---------- If value equals "Select deck", do nothing ---------- //
-        if (deckId == 0)
-        {
-            StartCoroutine(cardController.GetCards((responseData) =>
-            {
-                Cards = new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData));
-
-                cards.AddRange(Cards.Select(s => s));
-
-                UpdatePage();
-            }));
-        }
-
-        // ---------- If not, get deck by id from dropdown value ---------- //
-        else
-        {
-            StartCoroutine(deckController.GetDeck(deckId, (responseData) =>
-            {
-                cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
-
-                UpdatePage();
-                AssignDeckId(deckId);
-            }));
-        }
-    }
-
-    public void OnClickCreateDeck()
-    {
-        string necDeckName = newDeckNameInput.text;
-
-        StartCoroutine(deckController.AddDeck(necDeckName, (responseData) =>
-        {
-            CreateDeckResponse response = JsonConvert.DeserializeObject<CreateDeckResponse>(responseData);
-
-            // ---------- Clear and add new cards from the new deck to cardPanel ---------- //
-            cards.Clear();
-            cards.AddRange(response.cards.Select(s => s));
-
-            // ---------- Add new deck to decks ---------- //
-            deckItems.Add(new DeckItem() { id = response.id, name = response.name });
-
-            // -------- Clear and add deckItems to dropdown ---------- //
-            deckDropdown.GetComponent<TMP_Dropdown>().ClearOptions();
-            deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
-            deckDropdown.value = deckDropdown.options.Count - 1;
-
-            UpdatePage();
-        }));
-    }
-
-    private void AssignCard(Card card)
-    {
-        GameObject newCardBody = Instantiate(cardBody);
-        CardUI cardUI = newCardBody.GetComponent<CardUI>();
-
-        cardUI.id = card.id;
-        cardUI.unitName.text = card.name;
-        cardUI.unitDescription.text = card.description;
-
-        StartCoroutine(DownloadImage(card.imageUri, cardUI));
         
-        cardUI.cost.text = card.cost.ToString();
-        cardUI.atk.text = card.atk.ToString();
-        cardUI.hp.text = card.hp.ToString();
-
-        cardUI.cardUIManager = this;
-
-        if (deckDropdown.value == 0)
+        UpdatePage();
+    }
+    public void UpdatePage()
+    {
+        if (activeTab == "deckCards")
         {
-            cardUI.removeCardButton.gameObject.SetActive(false);
-            cardUI.deckDropdown.gameObject.SetActive(true);
-            cardUI.deckDropdown.GetComponent<TMP_Dropdown>().AddOptions(deckItems.Select(s => s.name.ToString()).ToList());
+            RenderUserCards(deck.UserCards.ToList(), false);
+        }
+        else if (activeTab == "myCards")
+        {
+            RenderUserCards(userCards);
         }
         else
         {
-            cardUI.removeCardButton.gameObject.SetActive(true);
-            cardUI.deckDropdown.gameObject.SetActive(false);
+            return;
         }
-
-        newCardBody.transform.SetParent(cardPanel.transform, false);
     }
 
-    public void AssignDeckId(int deckId)
+    private void RenderUserCards(List<UserCard> userCards, bool resetPage = true)
     {
-        foreach (Transform child in cardPanel.transform)
+        ResetCardPanelChildren();
+
+        if (resetPage)
         {
-            CardUI childCardUI = child.gameObject.GetComponent<CardUI>();
-            childCardUI.deckId = deckId;
+            //ResetPage(cards.Count);
+        }
+
+        //Debug.Log(userCards
+            //.Where(w => classType == null || w.card.className == classType)
+            //.Where(w => costType == null || w.card.cost == costType)
+            //.Select(s => s).Count());
+        //Debug.Log(costType);
+
+        foreach (UserCard userCard in userCards
+            //.Where(w => classType == null || w.card.className == classType)
+            .Where(w => costType == null || w.card.cost.ToString() == costType.ToString())
+            .Select(s => s)
+        )
+        {
+            Debug.Log(userCard.card.cost);
+            RenderUserCard(userCard);
         }
     }
-    
+    private void ResetCardPanelChildren()
+    {
+        while (cardPanel.transform.childCount > 0)
+        {
+            DestroyImmediate(cardPanel.transform.GetChild(0).gameObject);
+        }
+    }
+
+    private void RenderUserCard(UserCard userCard)
+    {
+        GameObject newUseruserCardBody = Instantiate(activeTab == "deckCards" ? deckCardBody : userCardBody);
+        //CardUI cardUI = newUseruserCardBody.transform.GetChild(0).GetComponent<CardUI>();
+        CardUI cardUI = newUseruserCardBody.GetComponentInChildren<CardUI>();
+
+        cardUI.Id = userCard.id;
+        cardUI.Name.text = userCard.card.name.ToString();
+        cardUI.ClassName.text = userCard.card.className.ToString();
+        cardUI.Cost.text = userCard.card.cost.ToString();
+        cardUI.Hp.text = userCard.card.hp.ToString();
+        cardUI.Atk.text = userCard.card.atk.ToString();
+
+        StartCoroutine(DownloadImage(userCard.card.imageUri, cardUI));
+
+        newUseruserCardBody.transform.SetParent(cardPanel.transform, false);
+    }
     IEnumerator DownloadImage(string MediaUrl, CardUI cardUI)
     {
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(Api.s3Prefix + MediaUrl + ".png");
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
@@ -190,112 +143,101 @@ public class CardUIManager : MonoBehaviour
             Debug.Log(request.result);
         }
     }
-	
-	Sprite SpriteFromTexture2D(Texture2D texture) {
-		return Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-	}
 
-    public void NextPage()
+    Sprite SpriteFromTexture2D(Texture2D texture)
     {
-        page = (page + 1) % PAGE_COUNT;
+        return Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+    }
+
+    public void ToggleTab(string targetTab)
+    {
+        // If currently on this active tab, do nothing
+        if (targetTab == activeTab) return;
+
+        activeTab = targetTab;
+
         UpdatePage();
     }
 
-    public void PreviousPage()
+    public void FilterClassType(string targetClassType)
     {
-        page = (int)(((page - 1) + Mathf.CeilToInt(cards.Count / (float)MAX_CARD_PER_PAGE))) % (Mathf.CeilToInt(cards.Count / (float)MAX_CARD_PER_PAGE));
-        UpdatePage();
-    }
+        // Reset underline
+        GameObject humanClassTypeText = GameObject.Find($"Class Human");
+        GameObject elfClassTypeText = GameObject.Find($"Class Elf");
+        GameObject ogreClassTypeText = GameObject.Find($"Class Ogre");
+        humanClassTypeText.GetComponent<TMP_Text>().text = $"Human";
+        elfClassTypeText.GetComponent<TMP_Text>().text = $"Elf";
+        ogreClassTypeText.GetComponent<TMP_Text>().text = $"Ogre";
 
-    private void ResetCardPanelChildren()
-    {
-        while (cardPanel.transform.childCount > 0) 
+        if (classType == targetClassType)
         {
-            DestroyImmediate(cardPanel.transform.GetChild(0).gameObject);
-        }
-    }
-
-    private void RenderCards(List<Card> cards, bool resetPage = true)
-    {
-        ResetCardPanelChildren();
-
-        if (resetPage)
-        {
-            ResetPage(cards.Count);
-        }
-
-        foreach (Card card in cards
-            .Skip(MAX_CARD_PER_PAGE * page)
-            .Take(MAX_CARD_PER_PAGE)
-        )
-        {
-            AssignCard(card);
-        }
-    }
-
-    private void ResetPage(int countCards)
-    {
-        page = 0;
-        PAGE_COUNT = Mathf.Max(Mathf.CeilToInt(countCards / (float)MAX_CARD_PER_PAGE), 1);
-        pageText.text = (page + 1).ToString() + "/" + PAGE_COUNT.ToString();
-    }
-
-    public void SearchByInput()
-    {
-        searchName = searchInput.text;
-
-        if (searchName == "")
-        {
-            UpdatePage();
+            classType = null;
         }
         else
         {
-            List<Card> searchCards = cards
-                .Where(w => w.name
-                    .ToUpper()
-                    .Contains(searchName
-                        .ToUpper()
-                    )
-                )
-                .ToList();
-            
-            RenderCards(searchCards);
+            classType = targetClassType;
+            GameObject classTypeText = GameObject.Find($"Class {targetClassType}");
+            classTypeText.GetComponent<TMP_Text>().text = $"<u>{targetClassType}</u>";
         }
+
+        UpdatePage();
+    }
+    public void FilterCostType(int targetCostType)
+    {
+        // Reset underline
+        GameObject Cost1TypeText = GameObject.Find($"Cost 1");
+        GameObject Cost2TypeText = GameObject.Find($"Cost 2");
+        GameObject Cost3TypeText = GameObject.Find($"Cost 3");
+        GameObject Cost4TypeText = GameObject.Find($"Cost 4");
+        GameObject Cost5TypeText = GameObject.Find($"Cost 5");
+        GameObject Cost6TypeText = GameObject.Find($"Cost 6");
+        GameObject Cost7TypeText = GameObject.Find($"Cost 7");
+        GameObject Cost8TypeText = GameObject.Find($"Cost 8");
+        Cost1TypeText.GetComponent<TMP_Text>().text = $"1";
+        Cost2TypeText.GetComponent<TMP_Text>().text = $"2";
+        Cost3TypeText.GetComponent<TMP_Text>().text = $"3";
+        Cost4TypeText.GetComponent<TMP_Text>().text = $"4";
+        Cost5TypeText.GetComponent<TMP_Text>().text = $"5";
+        Cost6TypeText.GetComponent<TMP_Text>().text = $"6";
+        Cost7TypeText.GetComponent<TMP_Text>().text = $"7";
+        Cost8TypeText.GetComponent<TMP_Text>().text = $"8";
+
+        if (costType == targetCostType)
+        {
+            costType = null;
+        }
+        else
+        {
+            costType = targetCostType;
+            GameObject costTypeText = GameObject.Find($"Cost {targetCostType}");
+            costTypeText.GetComponent<TMP_Text>().text = $"<u>{targetCostType}</u>";
+        }
+
+        UpdatePage();
     }
 
-    public void SearchByMana(int _mana)
+    public void AddCard(int deckId, int cardId)
     {
-        List<Card> manaCards = cards
-            .Where(w => w.cost == _mana)
-            .ToList();
+        StartCoroutine(deckController.AddCard(deckId, cardId, (deck) =>
+        {
+            userCards.Remove(userCards.Single(x => x.id == cardId));
+            this.deck = deck;
 
-        RenderCards(manaCards);
+            UpdatePage();
+        }));
     }
 
-    public void SearchByClass(string _class)
+    public void RemoveCard(int deckId, int cardId)
     {
-        List<Card> classCards = cards
-            .Where(w => w.className == _class)
-            .ToList();
+        StartCoroutine(deckController.RemoveCard(deckId, cardId, (deck) =>
+        {
+            userCards.Add(this.deck.UserCards.Single(x => x.id == cardId));
+            this.deck = deck;
 
-        RenderCards(classCards);
-    }
+            Debug.Log(userCards.Count());
+            Debug.Log(deck.UserCards.Count());
 
-    public void UpdatePage()
-    {
-        RenderCards(cards, false);
-
-        PAGE_COUNT = Mathf.Max(Mathf.CeilToInt(cards.Count / (float)MAX_CARD_PER_PAGE), 1);
-        pageText.text = (page + 1).ToString() + "/" + (PAGE_COUNT).ToString();
-    }
-
-    public List<DeckItem> GetDeckItems()
-    {
-        return deckItems;
-    }
-
-    public List<Card> GetCards()
-    {
-        return cards;
+            UpdatePage();
+        }));
     }
 }

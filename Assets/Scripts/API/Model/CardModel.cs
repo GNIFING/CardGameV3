@@ -8,6 +8,7 @@ public class UserCard
     public int atk;
     public int hp;
     public int maxHp;
+    public ActiveFlag activeFlag;
     public Card card;
 }
 
@@ -28,6 +29,13 @@ public class Card
     public CardType cardType;
 }
 
+public enum ActiveFlag
+{
+    M,
+    R,
+    S,
+}
+
 public enum CardClass
 {
     Human,
@@ -45,6 +53,7 @@ public enum CardObtainType
 {
     Market,
     Initial,
+    Summon,
 }
 
 public enum CardType

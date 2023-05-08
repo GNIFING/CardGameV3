@@ -8,54 +8,74 @@ using Newtonsoft.Json;
 
 public class CardUI : MonoBehaviour
 {
-    public TextMeshProUGUI unitName;
-    public TextMeshProUGUI unitDescription;
+    public TextMeshProUGUI Name;
+    //public TextMeshProUGUI Description;
 
     public Image cardImage;
     public Image cardBgImage;
 
-    public int id;
-    public int deckId = -1;
-    public TextMeshProUGUI className;
+    public int Id;
+    //public int deckId = -1;
+    public TextMeshProUGUI ClassName;
 
-    public TextMeshProUGUI cost;
-    public TextMeshProUGUI atk;
-    public TextMeshProUGUI hp;
+    public TextMeshProUGUI Cost;
+    public TextMeshProUGUI Atk;
+    public TextMeshProUGUI Hp;
 
     public CardUIManager cardUIManager;
-    public TMP_Dropdown deckDropdown;
-    public Button removeCardButton;
 
-    public void OnClickRemoveCardFromDeck()
+    private void Start()
     {
-        StartCoroutine(cardUIManager.cardController.RemoveCard(this.deckId, this.id, (responseData) =>
-        {
-            Card[] response = JsonConvert.DeserializeObject<Card[]>(responseData);
+        cardUIManager = FindObjectOfType<CardUIManager>();
+    }
+    public void AddCard()
+    {
+        int deckId = PlayerPrefs.GetInt("DeckId");
 
-            // ---------- Clear card panel ---------- //
-            cardUIManager.GetCards().Clear();
-
-            // ---------- Add new cards ---------- //
-            cardUIManager.GetCards().AddRange(response.Select(s => s));
-
-            cardUIManager.UpdatePage();
-            cardUIManager.AssignDeckId(deckId);
-        }));
+        cardUIManager.AddCard(deckId, Id);
     }
 
-    public void OnClickAssignToDeck()
+    public void RemoveCard()
     {
-        // ---------- Get deck id from dropdown options from value index from deckItems ---------- //
-        int deckId = cardUIManager
-            .GetDeckItems()
-            .First(f =>
-                f.name == deckDropdown.options[deckDropdown.value].text
-            )
-            .id;
+        int deckId = PlayerPrefs.GetInt("DeckId");
 
-        StartCoroutine(cardUIManager.cardController.AddCard(deckId, this.id, (responseData) =>
-        {
-            cardUIManager.UpdatePage();
-        }));
+        cardUIManager.RemoveCard(deckId, Id);
     }
+
+    //public CardUIManager cardUIManager;
+    //public TMP_Dropdown deckDropdown;
+    //public Button removeCardButton;
+
+    //public void OnClickRemoveCardFromDeck()
+    //{
+    //    StartCoroutine(cardUIManager.cardController.RemoveCard(this.deckId, this.id, (responseData) =>
+    //    {
+    //        Card[] response = JsonConvert.DeserializeObject<Card[]>(responseData);
+
+    //        // ---------- Clear card panel ---------- //
+    //        cardUIManager.GetCards().Clear();
+
+    //        // ---------- Add new cards ---------- //
+    //        cardUIManager.GetCards().AddRange(response.Select(s => s));
+
+    //        cardUIManager.UpdatePage();
+    //        cardUIManager.AssignDeckId(deckId);
+    //    }));
+    //}
+
+    //public void OnClickAssignToDeck()
+    //{
+    //    // ---------- Get deck id from dropdown options from value index from deckItems ---------- //
+    //    int deckId = cardUIManager
+    //        .GetDeckItems()
+    //        .First(f =>
+    //            f.name == deckDropdown.options[deckDropdown.value].text
+    //        )
+    //        .id;
+
+    //    StartCoroutine(cardUIManager.cardController.AddCard(deckId, this.id, (responseData) =>
+    //    {
+    //        cardUIManager.UpdatePage();
+    //    }));
+    //}
 }

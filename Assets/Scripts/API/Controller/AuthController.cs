@@ -76,8 +76,6 @@ public class AuthController : MonoBehaviour
         request.Dispose();
     }
 
-    //public void GetUser() => StartCoroutine(GetUserCoroutine());
-
     //IEnumerator GetUserCoroutine()
     //{
     //    //outputArea.text = "Loading...";

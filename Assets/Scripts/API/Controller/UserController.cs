@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using Assets.Scripts.API.Controller;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 public class UserController : ApiController
 {
@@ -28,5 +29,12 @@ public class UserController : ApiController
         }
 
         request.Dispose();
+    }
+
+    public void Logout()
+    {
+        Api.accessToken = null;
+
+        SceneManager.LoadScene("LoginPage");
     }
 }
