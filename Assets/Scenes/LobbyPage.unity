@@ -1886,10 +1886,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 835948058}
-        m_TargetAssemblyTypeName: Link, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 1167481023}
+        m_TargetAssemblyTypeName: LobbyUIManager, Assembly-CSharp
+        m_MethodName: FindMatch
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2252,6 +2252,7 @@ MonoBehaviour:
   greetingUser: {fileID: 604769770}
   userController: {fileID: 1970441200}
   deckController: {fileID: 1970441202}
+  multiPlayerController: {fileID: 1970441203}
   deckDropdown: {fileID: 1244122916}
 --- !u!4 &1167481024
 Transform:
@@ -3739,6 +3740,7 @@ GameObject:
   - component: {fileID: 1970441201}
   - component: {fileID: 1970441200}
   - component: {fileID: 1970441202}
+  - component: {fileID: 1970441203}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -3783,6 +3785,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59e5535b37b2e44439b888b35e753671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1970441203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970441199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdf9c641c4fedb468b6cd963c7e10a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1991314452

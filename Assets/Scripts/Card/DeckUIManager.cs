@@ -59,8 +59,8 @@ public class CardUIManager2 : MonoBehaviour
         GameObject newCardBody = Instantiate(cardBody);
         DeckUI deckUI = newCardBody.GetComponent<DeckUI>();
 
-        deckUI.Name.text = deck.Name;
-        deckUI.Id.text = $"Deck {deck.Id}: ({deck.UserCards.Count()} cards)";
+        deckUI.Name.text = deck.name;
+        deckUI.Id.text = $"Deck {deck.id}: ({deck.userCards.Count()} cards)";
 
         newCardBody.transform.SetParent(cardPanel.transform, false);
     }

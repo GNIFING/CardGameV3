@@ -38,18 +38,17 @@ public class CardUIManager : MonoBehaviour
             this.deck = deck;
 
             // Set deck name in navbar
-            deckName.text = $"Deck {deck.Id}: {deck.Name}";
+            deckName.text = $"Deck {deck.id}: {deck.name}";
 
             deckCardsButton.Select();
         }));
 
         yield return StartCoroutine(cardController.GetCards((userCards) =>
         {
-            Debug.Log(deck.ClassName.ToString());
             this.userCards = userCards
                 .Where(w =>
-                    !deck.UserCards.Select(s => s.id).Contains(w.id) &&
-                    w.card.className == deck.ClassName.ToString() &&
+                    !deck.userCards.Select(s => s.id).Contains(w.id) &&
+                    w.card.className == deck.className.ToString() &&
                     w.activeFlag == ActiveFlag.R
                 )
                 .Select(s => s)
@@ -63,7 +62,7 @@ public class CardUIManager : MonoBehaviour
     {
         if (activeTab == "deckCards")
         {
-            RenderUserCards(deck.UserCards.ToList(), false);
+            RenderUserCards(deck.userCards.ToList(), false);
         }
         else if (activeTab == "myCards")
         {
@@ -84,19 +83,12 @@ public class CardUIManager : MonoBehaviour
             //ResetPage(cards.Count);
         }
 
-        //Debug.Log(userCards
-            //.Where(w => classType == null || w.card.className == classType)
-            //.Where(w => costType == null || w.card.cost == costType)
-            //.Select(s => s).Count());
-        //Debug.Log(costType);
-
         foreach (UserCard userCard in userCards
             //.Where(w => classType == null || w.card.className == classType)
             .Where(w => costType == null || w.card.cost.ToString() == costType.ToString())
             .Select(s => s)
         )
         {
-            Debug.Log(userCard.card.cost);
             RenderUserCard(userCard);
         }
     }
@@ -231,11 +223,11 @@ public class CardUIManager : MonoBehaviour
     {
         StartCoroutine(deckController.RemoveCard(deckId, cardId, (deck) =>
         {
-            userCards.Add(this.deck.UserCards.Single(x => x.id == cardId));
+            userCards.Add(this.deck.userCards.Single(x => x.id == cardId));
             this.deck = deck;
 
             Debug.Log(userCards.Count());
-            Debug.Log(deck.UserCards.Count());
+            Debug.Log(deck.userCards.Count());
 
             UpdatePage();
         }));
