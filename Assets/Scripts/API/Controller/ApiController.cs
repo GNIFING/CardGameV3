@@ -11,7 +11,7 @@ namespace Assets.Scripts.API.Controller
             Debug.Log(request.error);
 
             // ---------- If unauthorized, load scene login ---------- //
-            if (request.responseCode == 401)
+            if (request.responseCode != 200)
             {
                 SceneManager.LoadScene("LoginPage");
             }

@@ -28,9 +28,8 @@ public class SpawnCard : MonoBehaviour
             //Debug.Log("content " + fileContents);
             
             // ---------- Get cards in deck by deckId ---------- //
-            StartCoroutine(deckController.GetDeck(int.Parse(fileContents), (responseData) =>
+            StartCoroutine(deckController.GetDeck(int.Parse(fileContents), (deck) =>
             {
-                cards.AddRange(new List<Card>(JsonConvert.DeserializeObject<Card[]>(responseData)));
                 cardIds = cards.Select(s => s.id).ToList();
                 isLoading = true;
             }));

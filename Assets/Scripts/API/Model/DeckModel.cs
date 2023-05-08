@@ -1,17 +1,9 @@
-using System;
-using UnityEngine;
-
-[Serializable]
 public class Deck
 {
-    public int id;
-    public string name;
-    public int userId;
-    public int[] cards;
-    public int[] cardsOrigin;
-    public bool isActive;
-    public DateTime createAt;
-    public DateTime updatedAt;
+    public int Id;
+    public string Name;
+    public UserCard[] UserCards;
+    public CardClass ClassName;
 }
 
 public class DeckItem
@@ -23,6 +15,7 @@ public class DeckItem
 public class CreateDeckRequest
 {
     public string name;
+    public string className;
     public int[] cards;
 }
 public class CreateDeckResponse

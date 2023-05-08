@@ -11,9 +11,9 @@ using Assets.Scripts.API.Controller;
 
 public class CardController : ApiController
 {
-    public IEnumerator GetCards(Action<string> callback)
+    public IEnumerator GetCards(Action<List<UserCard>> callback)
     {
-        string path = "card";
+        string path = "/card";
 
         var request = Api.CreateRequest(path, "GET");
 
@@ -21,7 +21,9 @@ public class CardController : ApiController
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
             var json = request.downloadHandler.text;
-            callback(json);
+            List<UserCard> userCards = new(JsonConvert.DeserializeObject<UserCard[]>(json));
+
+            callback(userCards);
         }
         else
         {
