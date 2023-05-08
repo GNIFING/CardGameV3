@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 public class Api : MonoBehaviour
 {
 
-    public static string accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImlhdCI6MTY4MzU2MTM2MSwiZXhwIjoxNjgzNTY0OTYxfQ.fNQWijeGtdicwU0qGZaHKOGo1CMj1yzdPhIHlQmKgNs";
+    public static string accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTY4MzU2NDQ0NSwiZXhwIjoxNjgzNTY4MDQ1fQ.sN8Y4xgCza5R9pRcn7wCGPn4u3d1RLHMwamsg47aQ1I";
     public static string apiPrefix = "http://18.140.116.224:8080/api";
     //public static string s3Prefix = "https://thanat-sun-storage.s3.ap-southeast-1.amazonaws.com/capstone/images/";
 

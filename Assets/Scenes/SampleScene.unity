@@ -187,6 +187,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1049583
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -321,6 +322,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &2658723
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -850,6 +852,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &39045316
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1267,6 +1270,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &53653435
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1401,6 +1405,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &55868393
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1992,6 +1997,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 3
+  multiPlayerController: {fileID: 0}
 --- !u!212 &95686495
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2649,6 +2655,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &131040863
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3040,7 +3047,7 @@ MonoBehaviour:
   - {fileID: 1855405217901779101, guid: fcb0b30f0f460ab4a8499aaaf82123d4, type: 3}
   - {fileID: 1855405217901779101, guid: 84ec8cc93cf508940b5a58329ee68f95, type: 3}
   - {fileID: 1855405217901779101, guid: 5bd07e3181a64f2478a2c037209d70e7, type: 3}
-  deckController: {fileID: 719817399}
+  deckController: {fileID: 0}
   isLoading: 0
 --- !u!4 &143956406
 Transform:
@@ -3284,6 +3291,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 3
+  multiPlayerController: {fileID: 0}
 --- !u!212 &159270770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3735,9 +3743,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 3
+  yPos: 9
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &182157011
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4728,6 +4737,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &282774376
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4877,9 +4887,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 3
+  yPos: 9
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &286020836
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5375,6 +5386,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 0}
   tileType: 4
+  multiPlayerController: {fileID: 0}
 --- !u!212 &294402602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5655,6 +5667,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 0}
   tileType: 4
+  multiPlayerController: {fileID: 0}
 --- !u!212 &309042567
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6273,6 +6286,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 4
+  multiPlayerController: {fileID: 0}
 --- !u!212 &344857735
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6615,6 +6629,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &359403186
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6872,6 +6887,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &386996975
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7006,6 +7022,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &388071246
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7220,6 +7237,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &407334586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7435,9 +7453,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 4
+  yPos: 10
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &408598362
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7755,9 +7774,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 5
+  yPos: 11
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &419602565
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8399,6 +8419,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &454239627
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8631,6 +8652,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &460378974
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8765,6 +8787,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &461592030
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9682,7 +9705,7 @@ MonoBehaviour:
   - {fileID: 1855405217901779101, guid: 38489fa0929f05541bfd6a23fcc9f786, type: 3}
   - {fileID: 1855405217901779101, guid: fc27953304352e24bb7b06145e007a2d, type: 3}
   - {fileID: 1855405217901779101, guid: 51faec8e69fdb984fa0d46e112efc32c, type: 3}
-  deckController: {fileID: 719817399}
+  deckController: {fileID: 0}
   isLoading: 0
 --- !u!1 &519420028
 GameObject:
@@ -11109,6 +11132,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &614030503
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11333,6 +11357,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &632281756
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11559,6 +11584,7 @@ MonoBehaviour:
   SelectUnit: {fileID: 0}
   isInSkillProcess: 0
   hasUnitHighlight: 0
+  gameController: {fileID: 1789605238}
 --- !u!4 &636937103
 Transform:
   m_ObjectHideFlags: 0
@@ -11880,9 +11906,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 2
+  yPos: 8
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &655644309
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12517,7 +12544,7 @@ GameObject:
   - component: {fileID: 719817398}
   - component: {fileID: 719817399}
   m_Layer: 0
-  m_Name: Api Controller
+  m_Name: MultiPlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12547,7 +12574,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 719817397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5535b37b2e44439b888b35e753671, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cdf9c641c4fedb468b6cd963c7e10a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &721259392
@@ -12840,6 +12867,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &739026363
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13080,6 +13108,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 0}
   tileType: 3
+  multiPlayerController: {fileID: 0}
 --- !u!212 &745726752
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14679,6 +14708,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &853161852
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14924,6 +14954,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 625399754}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &872980781
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16005,6 +16036,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &929858765
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16467,6 +16499,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 0}
   tileType: 3
+  multiPlayerController: {fileID: 0}
 --- !u!212 &979678887
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16700,9 +16733,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 0
+  yPos: 6
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &985932197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17126,9 +17160,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 5
+  yPos: 11
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &997628738
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18575,6 +18610,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1076009083
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19369,6 +19405,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1124773839
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20952,6 +20989,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 4
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1231134622
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21104,6 +21142,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1235530635
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22125,6 +22164,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1344281307
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22510,6 +22550,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1357977974
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22915,6 +22956,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1373441056
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23399,6 +23441,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1408916855
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23811,9 +23854,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 1
+  yPos: 7
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1421650753
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -26071,6 +26115,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1526360123
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -26373,6 +26418,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1542105088
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -26509,9 +26555,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 0
+  yPos: 6
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1547370724
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -26628,6 +26675,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 3
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1555007797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28051,6 +28099,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1700583399
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28203,6 +28252,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1703468978
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28337,6 +28387,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1705921348
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28698,6 +28749,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 4
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1748719057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28832,6 +28884,7 @@ MonoBehaviour:
   yPos: 5
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1750244686
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29317,6 +29370,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1775130206
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29688,6 +29742,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1814057282
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29884,6 +29939,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1832571353
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -30146,6 +30202,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1839284885
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -31079,6 +31136,7 @@ MonoBehaviour:
   yPos: 2
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1889954538
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -31228,9 +31286,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 1
+  yPos: 7
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1890963168
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -31938,6 +31997,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 3
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1924683599
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -32608,6 +32668,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1943112643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -32892,6 +32953,7 @@ MonoBehaviour:
   yPos: 0
   buff: {fileID: 0}
   tileType: 4
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1965001723
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33229,6 +33291,7 @@ MonoBehaviour:
   yPos: 3
   buff: {fileID: 0}
   tileType: 1
+  multiPlayerController: {fileID: 0}
 --- !u!212 &1984475413
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33445,9 +33508,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 4
+  yPos: 10
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &2000827885
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33564,6 +33628,7 @@ MonoBehaviour:
   yPos: 4
   buff: {fileID: 1267689752}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &2004689533
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34103,9 +34168,10 @@ MonoBehaviour:
   nextMoveHighlight: {fileID: 0}
   unitHighlight: {fileID: 0}
   xPos: 0
-  yPos: 2
+  yPos: 8
   buff: {fileID: 0}
   tileType: 2
+  multiPlayerController: {fileID: 0}
 --- !u!212 &2055188033
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -35025,6 +35091,7 @@ MonoBehaviour:
   yPos: 1
   buff: {fileID: 0}
   tileType: 0
+  multiPlayerController: {fileID: 0}
 --- !u!212 &2119207938
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class TileManager : MonoBehaviour
     private int player1Offset;
     private int player2Offset;
 
+    public GameController gameController;
+
 
     private void Start()
     {
@@ -219,7 +221,7 @@ public class TileManager : MonoBehaviour
 
     public void HighlightByType(UnitCard unitCard, int x, int y)
     {
-        if (GameController.CurrentTurn == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
+        if (gameController.GetPlayerId() == unitCard.GetPlayerNo() && unitCard.GetCardCredit() != 0)
         {
             player1Offset = SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? 1 : 0;
             player2Offset = SelectUnit.GetComponent<UnitCard>().GetPlayerNo() == 2 ? 1 : 0;

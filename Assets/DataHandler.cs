@@ -102,6 +102,9 @@ public class DataHandler : MonoBehaviour
         winner = gameData.winner;
         attackerIndex = gameData.attackerIndex;
         defenderIndex = gameData.defenderIndex;
+
+        gameController.SetPlayerTurn(gameData.playerOne.isTurn ? 1 : 2);
+        
         Debug.Log("Update Initial Data Passed");
 
         UpdatePlayerStat();

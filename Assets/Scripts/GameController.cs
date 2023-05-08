@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private static int playerturn = 1; // P1 = 1, P2 = 2
+    public int playerId;
+    
     public SpawnCard spawnP1Card;
     public SpawnCard spawnP2Card;
     public PlayerController playerController;
@@ -26,7 +28,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-
+        playerId = PlayerPrefs.GetInt("PlayerId");
     }
 
     private void Update()
@@ -108,6 +110,15 @@ public class GameController : MonoBehaviour
         //RefreshPlayerCredit(playerturn == 1 ? 2 : 1);
     }
 
+    public void SetPlayerTurn(int newPlayerTurn)
+    {
+        playerturn = newPlayerTurn;
+    }
+
+    public int GetPlayerId()
+    {
+        return playerId;
+    }
     private void RefreshPlayerCredit(int playerNo)
     {
         GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");

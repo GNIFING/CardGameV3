@@ -26,16 +26,19 @@ public class Tile : MonoBehaviour
     private GameObject selectUnit;
     private UnitCard selectUnitCard;
 
+    private GameController gameController;
     private TileManager tileManager;
     private PlayerController playerController;
+    private DataHandler dataHandler;
 
     private Transform descriptionBox;
     private float hoverTime;
     private float showUnitDescriptionTime = 0.5f;
     private bool isCheckPosition;
 
-
     public TileType tileType;
+
+    public MultiPlayerController multiPlayerController;
 
     private void Start()
     {
@@ -45,6 +48,9 @@ public class Tile : MonoBehaviour
     private void InitializeTile()
     {
         hoverTime = 0f;
+        gameController = FindObjectOfType<GameController>();
+        multiPlayerController = FindObjectOfType<MultiPlayerController>();
+        dataHandler = FindObjectOfType<DataHandler>();
         tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
         playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
 
@@ -79,7 +85,16 @@ public class Tile : MonoBehaviour
             unit = GetUnitInTile();
             if(unit != null)
             {
-                if(unit.GetComponent<UnitCard>().isPlayCard == true || unit.GetComponent<UnitCard>().GetPlayerNo() == GameController.CurrentTurn)
+                //if(unit.GetComponent<UnitCard>().isPlayCard == true || unit.GetComponent<UnitCard>().GetPlayerNo() == GameController.CurrentTurn)
+                int player = 1;
+                
+                bool isEnemyHandTile = false;
+                if(player == 1)
+                {
+                    isEnemyHandTile = tileType == TileType.Player2Tile ? true : false;
+                }
+
+                if(!isEnemyHandTile)
                 {
                     Transform canvas = unit.transform.Find("Canvas");
                     descriptionBox = canvas.Find("DescriptionBox");
@@ -132,7 +147,7 @@ public class Tile : MonoBehaviour
 
         //-------------- Click on an empty tile or an enemy unit --------------//
 
-        if (unit == null || unitCard.GetPlayerNo() != GameController.CurrentTurn)
+        if (unit == null || unitCard.GetPlayerNo() != gameController.GetPlayerId())
         {
             tileManager.DeSelectUnit();
             return;
@@ -269,7 +284,7 @@ public class Tile : MonoBehaviour
 
         //-------------- Click on enemy unit to attack --------------//
 
-        else if (unitCard.GetPlayerNo() != GameController.CurrentTurn)
+        else if (unitCard.GetPlayerNo() != gameController.GetPlayerId())
         {
             Debug.Log("Attack Enemy");
             if(selectUnitCard.isPlayCard == false)
@@ -348,7 +363,11 @@ public class Tile : MonoBehaviour
     public void MoveUnitToThisTile(GameObject selectUnit)
     {
         //------------ SEND API HERE ---------------//
-        
+        int arenaId = PlayerPrefs.GetInt("ArenaId");
+        arenaId = 13;
+        int beforeTileIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
+        int afterTileIndex = ConvertTilePosToIndex(xPos, yPos);
+        StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => { }));
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;
@@ -371,6 +390,15 @@ public class Tile : MonoBehaviour
         {
             towerTile = GameObject.Find($"Tile {PosX + 1} {PosY}");
         }
+        
+        //------------ SEND API HERE ---------------//
+        int arenaId = PlayerPrefs.GetInt("ArenaId");
+        int cardId = playerNo == 1? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
+        arenaId = 13;
+        int tileIndex = ConvertTilePosToIndex(towerTile.GetComponent<Tile>().GetXPos(), towerTile.GetComponent<Tile>().GetYPos());
+        StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) => { }));
+        //------------------------------------------//
+
         unit.transform.SetParent(towerTile.transform);
         unit.transform.position = towerTile.transform.position;
     }
@@ -393,6 +421,11 @@ public class Tile : MonoBehaviour
     public int GetYPos()
     {
         return yPos;
+    }
+
+    public int ConvertTilePosToIndex(int xPos, int yPos)
+    {
+        return xPos * 6 + yPos;
     }
     
 }
