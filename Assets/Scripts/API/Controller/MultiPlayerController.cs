@@ -58,7 +58,7 @@ public class MultiPlayerController : ApiController
         request.Dispose();
     }
 
-    public IEnumerator LaydownCard(int arenaId, int cardId, int index, Action<CardPlacement> callback)
+    public IEnumerator LaydownCard(int arenaId, int cardId, int index, Action<Arena> callback)
     {
         string path = "/create";
 
@@ -74,7 +74,7 @@ public class MultiPlayerController : ApiController
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
             var json = request.downloadHandler.text;
-            CardPlacement cardPlacement = JsonConvert.DeserializeObject<CardPlacement>(json);
+            Arena cardPlacement = JsonConvert.DeserializeObject<Arena>(json);
 
             callback(cardPlacement);
         }
@@ -227,7 +227,7 @@ public class MultiPlayerController : ApiController
         request.Dispose();
     }
     
-    public IEnumerator MoveCard(int arenaId, int beforeIndex, int afterIndex, Action<CardPlacement> callback)
+    public IEnumerator MoveCard(int arenaId, int beforeIndex, int afterIndex, Action<Arena> callback)
     {
         string path = "/move";
 
@@ -243,7 +243,7 @@ public class MultiPlayerController : ApiController
         if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
         {
             var json = request.downloadHandler.text;
-            CardPlacement response = JsonConvert.DeserializeObject<CardPlacement>(json);
+            Arena response = JsonConvert.DeserializeObject<Arena>(json);
 
             callback(response);
         }
