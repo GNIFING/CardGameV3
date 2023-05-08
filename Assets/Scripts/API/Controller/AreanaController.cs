@@ -1,14 +1,21 @@
 using Assets.Scripts.API.Controller;
+using Newtonsoft.Json;
 using SocketIOClient;
 using SocketIOClient.Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.Playables;
 
 public class AreanaController : ApiController
 {
     public TextMeshProUGUI outputArea;
+    public DataHandler dataHandler;
+
+    private readonly string controller = "/arena";
 
     void Start()
     {
@@ -49,15 +56,19 @@ public class AreanaController : ApiController
         Debug.Log("Connecting...");
         socket.Connect();
 
-        socket.OnUnityThread("2", OnMessage);
+        socket.OnUnityThread("12", OnMessage);
+
+        StartCoroutine(this.GetArena(12));
     }
 
     void OnMessage(SocketIOResponse response)
     {
+        Debug.Log("response = " + response);
         try
         {
             GameData gameData = response.GetValue<GameData>();
-            outputArea.text = $"Me: {gameData.player1.id}, Opponent: {gameData.player2.id}";
+            outputArea.text = $"Player 1 : {gameData.playerOne.id}, Player 2 : {gameData.playerTwo.id}";
+            dataHandler.UpdateData(gameData);
             //outputArea.text = $"Me: {arenaData.Me.Cards}";
         }
         catch (Exception e)
@@ -65,4 +76,31 @@ public class AreanaController : ApiController
             Debug.LogError(e);
         }
     }
+
+
+    public IEnumerator GetArena(int arenaId)
+    {
+        yield return new WaitForSeconds(2);
+        string path = "/arenaId/" + arenaId;
+
+        var request = Api.CreateRequest(controller + path, "GET");
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
+        {
+            var json = request.downloadHandler.text;
+            //DrawCardResponse response = JsonConvert.DeserializeObject<DrawCardResponse>(json);
+
+            //callback(response);
+        }
+        else
+        {
+            CheckRequestStatus(request);
+        }
+
+        request.Dispose();
+    }
+
+
 }

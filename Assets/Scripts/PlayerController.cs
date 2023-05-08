@@ -95,16 +95,28 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void SetPlayerMana(int PlayerNo, int cardMana)
+    public void SetPlayerMaxMana(int playerNo, int newMaxMana)
     {
-        if (PlayerNo == 1)
+        if(playerNo == 1)
         {
-            player1Mana -= cardMana;
+            player1MaxMana = newMaxMana;
+        }
+        else if(playerNo == 2)
+        {
+            player2MaxMana = newMaxMana;
+        }
+    }
+
+    public void SetPlayerMana(int playerNo, int newMana)
+    {
+        if (playerNo == 1)
+        {
+            player1Mana = newMana;
             player1ShowMana.SetManaColor(player1Mana, player1MaxMana);
         }
-        else if (PlayerNo == 2)
+        else if (playerNo == 2)
         {
-            player2Mana -= cardMana;
+            player2Mana = newMana;
             player2ShowMana.SetManaColor(player2Mana, player2MaxMana);
         }
     }

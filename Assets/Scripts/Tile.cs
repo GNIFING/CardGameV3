@@ -256,7 +256,7 @@ public class Tile : MonoBehaviour
                 //unit play skill here
                 selectUnitCard.isPlayCard = true;
                 selectUnitCard.RemoveBackCard();
-                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
+                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), playerController.GetPlayerMana(selectUnitCard.GetPlayerNo()) - selectUnitCard.mana);
                 MoveUnitToThisTile(selectUnit);
 
                 tileManager.CancelNextMoveHighlight();
@@ -276,7 +276,8 @@ public class Tile : MonoBehaviour
             {
                 selectUnitCard.isPlayCard = true;
                 selectUnitCard.RemoveBackCard();
-                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
+                //playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
+                playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), playerController.GetPlayerMana(selectUnitCard.GetPlayerNo()) - selectUnitCard.mana);
                 // Move unit to tower tile //
                 MoveUnitToTowerTile(selectUnit, selectUnitCard.GetPlayerNo(), xPos, yPos);
             }

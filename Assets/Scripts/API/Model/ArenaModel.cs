@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class GameData
 {
-    public Player player1;
-    public Player player2;
+    public Player playerOne;
+    public Player playerTwo;
     public Arena arena;
-    public UserCard[] cardsOnBoard;
+    public UserCard[] cardOnBoard;
     public bool gameOver;
     public int? winner;
     public int? attackerIndex;
@@ -17,8 +17,9 @@ public class Player
 {
     public int id;
     public int deckId;
-    public UserCard[] cards;
+    public UserCard?[] cards;
     public int hp;
+    public int maxMana;
     public int mana;
     public bool isTurn;
 }

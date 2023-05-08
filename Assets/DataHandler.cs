@@ -9,8 +9,9 @@ public class DataHandler : MonoBehaviour
     
     public int player1Id;
     public int player1DeckId;
-    public List<UserCard> player1HandCards;
+    public List<UserCard?> player1HandCards;
     public int player1Hp;
+    public int player1MaxMana;
     public int player1Mana;
     public bool isPlayer1Turn;
 
@@ -18,8 +19,9 @@ public class DataHandler : MonoBehaviour
 
     public int player2Id;
     public int player2DeckId;
-    public List<UserCard> player2HandCards;
+    public List<UserCard?> player2HandCards;
     public int player2Hp;
+    public int player2MaxMana;
     public int player2Mana;
     public bool isPlayer2Turn;
 
@@ -29,7 +31,7 @@ public class DataHandler : MonoBehaviour
 
     //-------------- CardsOnBoard --------------//
 
-    public List<UserCard> cardsOnBoard;
+    public List<UserCard?> cardsOnBoard;
 
     //-------------- Game Condition --------------//
 
@@ -76,23 +78,25 @@ public class DataHandler : MonoBehaviour
 
     public void UpdateData(GameData gameData)
     {
-        player1Id = gameData.player1.id;
-        player1DeckId = gameData.player1.deckId;
-        player1HandCards = gameData.player1.cards.ToList();
-        player1Hp = gameData.player1.hp;
-        player1Mana = gameData.player1.mana;
-        isPlayer1Turn = gameData.player1.isTurn;
+        player1Id = gameData.playerOne.id;
+        player1DeckId = gameData.playerOne.deckId;
+        player1HandCards = gameData.playerOne.cards.ToList();
+        player1Hp = gameData.playerOne.hp;
+        player1MaxMana = gameData.playerOne.maxMana;
+        player1Mana = gameData.playerOne.mana;
+        isPlayer1Turn = gameData.playerOne.isTurn;
 
-        player2Id = gameData.player2.id;
-        player2DeckId = gameData.player2.deckId;
-        player2HandCards = gameData.player2.cards.ToList();
-        player2Hp = gameData.player2.hp;
-        player2Mana = gameData.player2.mana;
-        isPlayer2Turn = gameData.player2.isTurn;
+        player2Id = gameData.playerTwo.id;
+        player2DeckId = gameData.playerTwo.deckId;
+        player2HandCards = gameData.playerTwo.cards.ToList();
+        player2Hp = gameData.playerTwo.hp;
+        player2MaxMana = gameData.playerTwo.maxMana;
+        player2Mana = gameData.playerTwo.mana;
+        isPlayer2Turn = gameData.playerTwo.isTurn;
 
         arena = gameData.arena;
 
-        cardsOnBoard = gameData.cardsOnBoard.ToList();
+        cardsOnBoard = gameData.cardOnBoard.ToList();
         
         gameOver = gameData.gameOver;
         winner = gameData.winner;
@@ -123,9 +127,12 @@ public class DataHandler : MonoBehaviour
         //Hp
         playerController.SetPlayerHP(1, player1Hp);
         playerController.SetPlayerHP(2, player2Hp);
+        //MaxMana
+        playerController.SetPlayerMaxMana(1, player1MaxMana);
+        playerController.SetPlayerMaxMana(2, player2MaxMana);
         //Mana
         playerController.SetPlayerMana(1, player1Mana);
-        playerController.SetPlayerMana(2, player1Mana);
+        playerController.SetPlayerMana(2, player2Mana);
     }
 
     public void UpdatePlayerHands()
@@ -188,7 +195,7 @@ public class DataHandler : MonoBehaviour
                 }
                 else if (player2Tile[handIndex].GetUnitInTile() == null)
                 {
-                    GameObject newUnitCardObj = Instantiate(cardPrefabs[player1HandCards[handIndex].card.id], player2Tile[handIndex].transform.position, Quaternion.identity);
+                    GameObject newUnitCardObj = Instantiate(cardPrefabs[player2HandCards[handIndex].card.id], player2Tile[handIndex].transform.position, Quaternion.identity);
                     newUnitCardObj.transform.parent = player2Tile[handIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
                     newUnitCard.SetPlayerNo(2);
@@ -228,7 +235,7 @@ public class DataHandler : MonoBehaviour
                     {
                         // Destroy the existing unit and spawn a new one.
                         Destroy(unitCard.gameObject);
-                        GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.id], tiles[arenaIndex].transform.position, Quaternion.identity);
+                        GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
                         newUnitCardObj.transform.parent = tiles[arenaIndex].transform;
                         UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
                         newUnitCard.SetPlayerNo(userCard.player);
@@ -250,7 +257,7 @@ public class DataHandler : MonoBehaviour
                 {
                     // If there is no unit in this tile, spawn a new one.
                     UserCard userCard = cardsOnBoard.Where(u => u.id == arena.arenaArray[arenaIndex]).Select(u => u).FirstOrDefault();
-                    GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.id], tiles[arenaIndex].transform.position, Quaternion.identity);
+                    GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
                     newUnitCardObj.transform.parent = tiles[arenaIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
                     newUnitCard.SetPlayerNo(userCard.player);

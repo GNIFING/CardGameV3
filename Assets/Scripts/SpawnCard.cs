@@ -28,11 +28,11 @@ public class SpawnCard : MonoBehaviour
             //Debug.Log("content " + fileContents);
             
             // ---------- Get cards in deck by deckId ---------- //
-            StartCoroutine(deckController.GetDeck(int.Parse(fileContents), (deck) =>
-            {
-                cardIds = cards.Select(s => s.id).ToList();
-                isLoading = true;
-            }));
+            //StartCoroutine(deckController.GetDeck(int.Parse(fileContents), (deck) =>
+            //{
+            //    cardIds = cards.Select(s => s.id).ToList();
+            //    isLoading = true;
+            //}));
         }
 
         AddTilesToList();

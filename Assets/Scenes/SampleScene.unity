@@ -30262,6 +30262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outputArea: {fileID: 468944112}
+  dataHandler: {fileID: 1843965771}
 --- !u!114 &1843965771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30278,12 +30279,14 @@ MonoBehaviour:
   player1DeckId: 0
   player1HandCards: []
   player1Hp: 0
+  player1MaxMana: 0
   player1Mana: 0
   isPlayer1Turn: 0
   player2Id: 0
   player2DeckId: 0
   player2HandCards: []
   player2Hp: 0
+  player2MaxMana: 0
   player2Mana: 0
   isPlayer2Turn: 0
   cardsOnBoard: []
