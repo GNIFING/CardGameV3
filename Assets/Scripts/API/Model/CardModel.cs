@@ -10,7 +10,7 @@ public class UserCard
     public int hp;
     public int maxHp;
     public bool isReady;
-    public ActiveFlag activeFlag;
+    public ActiveFlag? activeFlag;
     public Card card;
 }
 

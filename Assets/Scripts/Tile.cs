@@ -118,7 +118,10 @@ public class Tile : MonoBehaviour
             unit = GetUnitInTile();
             selectUnit = tileManager.GetSelectUnit();
             HandleClickOnTile(unit, selectUnit);
+            Debug.Log("Can Play");
         }
+            Debug.Log(gameController.GetPlayerId());
+            Debug.Log(GameController.CurrentTurn);
     }
         
 
@@ -390,7 +393,7 @@ public class Tile : MonoBehaviour
     {
         //------------ SEND API HERE ---------------//
         int arenaId = PlayerPrefs.GetInt("ArenaId");
-        arenaId = 13;
+        arenaId = 22;
         int beforeTileIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
         int afterTileIndex = ConvertTilePosToIndex(xPos, yPos);
         StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => 
@@ -412,8 +415,23 @@ public class Tile : MonoBehaviour
     {
         //------------ SEND API HERE ---------------//
         int arenaId = PlayerPrefs.GetInt("ArenaId");
-        int cardId = selectUnitCard.GetPlayerNo() == 1 ? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
-        arenaId = 13;
+        int cardId;
+        if(selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1)
+        {
+            Debug.Log("dataHandler = " + dataHandler);
+            Debug.Log("dataHandler.player1HandCards = " + dataHandler.player1HandCards);
+
+            Tile selectUnitTile = selectUnit.GetComponentInParent<Tile>();
+            cardId = dataHandler.player1HandCards[ConvertTilePosToIndex(selectUnitTile.GetXPos(), selectUnitTile.GetYPos())].id;
+            Debug.Log("cardId = " + cardId);
+        }
+        else
+        {
+            cardId = dataHandler.player2HandCards[yPos].id;
+        }
+
+        //int cardId = selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
+        arenaId = 22;
         int tileIndex = ConvertTilePosToIndex(xPos, yPos);
         StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
         {
@@ -444,8 +462,10 @@ public class Tile : MonoBehaviour
         
         //------------ SEND API HERE ---------------//
         int arenaId = PlayerPrefs.GetInt("ArenaId");
-        int cardId = playerNo == 1? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
-        arenaId = 13;
+        Tile unitHandTile = unit.GetComponentInParent<Tile>();
+        int handTileIndex = ConvertTilePosToIndex(unitHandTile.GetXPos(), unitHandTile.GetYPos());
+        int cardId = playerNo == 1? dataHandler.player1HandCards[handTileIndex].id : dataHandler.player2HandCards[handTileIndex].id;
+        arenaId = 22;
         int tileIndex = ConvertTilePosToIndex(towerTile.GetComponent<Tile>().GetXPos(), towerTile.GetComponent<Tile>().GetYPos());
         StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
         {

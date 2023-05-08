@@ -60,7 +60,7 @@ public class MultiPlayerController : ApiController
 
     public IEnumerator LaydownCard(int arenaId, int cardId, int index, Action<Arena> callback)
     {
-        string path = "/create";
+        string path = "/laydown";
 
         var request = Api.CreateRequest(controller + path, "POST", new LaydownCardRequest()
         {

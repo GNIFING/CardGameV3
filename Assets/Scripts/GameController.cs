@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GameController : MonoBehaviour
 {
-    private static int playerturn = 1; // P1 = 1, P2 = 2
-    public int playerId;
-    
+    private static int playerturn = 1;
+    public int playerId; // P1 = 1, P2 = 2
+
     public SpawnCard spawnP1Card;
     public SpawnCard spawnP2Card;
     public PlayerController playerController;
@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         playerId = PlayerPrefs.GetInt("PlayerId");
+        playerId = 1;
     }
 
     private void Update()

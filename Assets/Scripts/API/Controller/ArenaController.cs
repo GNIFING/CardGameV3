@@ -58,6 +58,7 @@ public class ArenaController : ApiController
 
 
         int arenaId = PlayerPrefs.GetInt("ArenaId");
+        arenaId = 22;
         socket.OnUnityThread(arenaId.ToString(), OnMessage);
 
         StartCoroutine(this.GetArena(arenaId));
