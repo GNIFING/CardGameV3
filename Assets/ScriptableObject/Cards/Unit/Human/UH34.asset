@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
-  m_Name: UH32_1
+  m_Name: UH34
   m_EditorClassIdentifier: 
-  cardIndex: 0
-  cardName: Unbeaten Warrior
-  cardImage: {fileID: 21300000, guid: fbf2f5a471919cd4e807ecb047e4b042, type: 3}
+  id: 34
+  cardIndex: UH34
+  cardName: Shield helper
+  cardImage: {fileID: 21300000, guid: 6b66be722c1b3914195460cc129d8ee9, type: 3}
   cardDescription: 
   currentCardClass: 0
-  currentMoveType: 4
+  currentMoveType: 0
   currentAttackType: 0
   specialSkill: []
-  defaultManaCost: 4
-  defaultAttackDamage: 4
-  defaultHp: 4
+  defaultManaCost: 1
+  defaultAttackDamage: 0
+  defaultHp: 1

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH13
   m_EditorClassIdentifier: 
-  cardIndex: 13
+  id: 13
+  cardIndex: UH13
   cardName: Master Engineer
   cardImage: {fileID: 21300000, guid: 5f88465686f3fca4584a25680cd39bae, type: 3}
   cardDescription: Heal +3 player tower

@@ -4,10 +4,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-using UnityEditor.PackageManager.Requests;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
-using System.Text;
+
 
 public class CardData : MonoBehaviour
 {

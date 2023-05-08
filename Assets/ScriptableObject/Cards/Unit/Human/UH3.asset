@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH3
   m_EditorClassIdentifier: 
-  cardIndex: 3
+  id: 3
+  cardIndex: UH3
   cardName: Shield Smith
   cardImage: {fileID: 21300000, guid: 76ee95b9963591b4e8b6fe19d479e8ca, type: 3}
   cardDescription: Summon 0/1 Shieldman on the front tile

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UO18
   m_EditorClassIdentifier: 
-  cardIndex: 218
+  id: 88
+  cardIndex: UO18
   cardName: Kinetic Slime
   cardImage: {fileID: 21300000, guid: 3b4e1bbcd9461c143bf6b265a9c67cad, type: 3}
   cardDescription: When this unit take damages, increase attack damage equal to damage

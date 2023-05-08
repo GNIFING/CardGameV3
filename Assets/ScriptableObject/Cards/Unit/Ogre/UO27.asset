@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UO27
   m_EditorClassIdentifier: 
-  cardIndex: 227
+  id: 97
+  cardIndex: UO27
   cardName: Ancient Dragon
   cardImage: {fileID: 21300000, guid: 6aca135c5ec21b240843bbabab02ad78, type: 3}
   cardDescription: Reduce enemy's damage by 2 for all units. Increase allies' damage

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH25
   m_EditorClassIdentifier: 
-  cardIndex: 25
+  id: 25
+  cardIndex: UH25
   cardName: Nameless Knight
   cardImage: {fileID: 21300000, guid: 3602935d87da88f48ba519bd780c0449, type: 3}
   cardDescription: Deals piercing damage to units behind the target

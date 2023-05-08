@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE13
   m_EditorClassIdentifier: 
-  cardIndex: 113
+  id: 50
+  cardIndex: UE13
   cardName: Healer Witch
   cardImage: {fileID: 21300000, guid: 4a547fb7906fc0b40ab194b5c47f1409, type: 3}
   cardDescription: Give a friendly unit +3 health

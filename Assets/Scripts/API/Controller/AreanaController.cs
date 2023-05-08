@@ -56,8 +56,9 @@ public class AreanaController : ApiController
     {
         try
         {
-            ArenaData arenaData = response.GetValue<ArenaData>();
-            outputArea.text = $"Me: {arenaData.Me.Id}, Opponent: {arenaData.Opponent.Id}";
+            GameData gameData = response.GetValue<GameData>();
+            outputArea.text = $"Me: {gameData.player1.id}, Opponent: {gameData.player2.id}";
+            //outputArea.text = $"Me: {arenaData.Me.Cards}";
         }
         catch (Exception e)
         {

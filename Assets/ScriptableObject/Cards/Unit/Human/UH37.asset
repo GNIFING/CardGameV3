@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
-  m_Name: UH9_1
+  m_Name: UH37
   m_EditorClassIdentifier: 
-  cardIndex: 99
-  cardName: Summon Backline
-  cardImage: {fileID: 21300000, guid: b46000d622271d748a25a47ec8609a6a, type: 3}
-  cardDescription: UH9_1
+  id: 37
+  cardIndex: UH37
+  cardName: Unbeaten Warrior
+  cardImage: {fileID: 21300000, guid: fbf2f5a471919cd4e807ecb047e4b042, type: 3}
+  cardDescription: 
   currentCardClass: 0
-  currentMoveType: 0
+  currentMoveType: 4
   currentAttackType: 0
   specialSkill: []
-  defaultManaCost: 1
-  defaultAttackDamage: 1
-  defaultHp: 1
+  defaultManaCost: 4
+  defaultAttackDamage: 4
+  defaultHp: 4

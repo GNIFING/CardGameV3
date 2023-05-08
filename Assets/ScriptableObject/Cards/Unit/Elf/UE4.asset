@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE4
   m_EditorClassIdentifier: 
-  cardIndex: 104
+  id: 41
+  cardIndex: UE4
   cardName: Last Will
   cardImage: {fileID: 21300000, guid: 94fd14b0466cf9141916a5848f6ee9d3, type: 3}
   cardDescription: If attacked unit dies, it also dies

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH24
   m_EditorClassIdentifier: 
-  cardIndex: 24
+  id: 24
+  cardIndex: UH24
   cardName: Swift Escapist
   cardImage: {fileID: 21300000, guid: a81c85e0dc5b4aa47a4c99b16b211d63, type: 3}
   cardDescription: Deals double damage when attacking

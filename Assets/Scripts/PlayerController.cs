@@ -71,12 +71,17 @@ public class PlayerController : MonoBehaviour
         CheckWinCondition(player2HP, 1);
     }
 
-    private void CheckWinCondition(int Hp, int player)
+    private void CheckWinCondition(int Hp, int playerNo)
     {
         if(Hp <= 0)
         {
-            playerWinText.text = "Player " + player + "Win!";
+            PlayerWin(playerNo);
         }
+    }
+
+    public void PlayerWin(int? playerNo)
+    {
+        playerWinText.text = "Player " + playerNo + " Win!";
     }
 
     public int GetPlayerMana(int playerNo)

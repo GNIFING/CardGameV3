@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH21
   m_EditorClassIdentifier: 
-  cardIndex: 21
+  id: 21
+  cardIndex: UH21
   cardName: Wine Merchant
   cardImage: {fileID: 21300000, guid: 66193ee30236bec48a6d5758fb93ef0c, type: 3}
   cardDescription: Add +1 Health to all friendly units. Draw 1 card

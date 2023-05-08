@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE7
   m_EditorClassIdentifier: 
-  cardIndex: 107
+  id: 44
+  cardIndex: UE7
   cardName: Ninja Warrior
   cardImage: {fileID: 21300000, guid: 6eba3c817f822a64483bb50655fd3eb4, type: 3}
   cardDescription: 

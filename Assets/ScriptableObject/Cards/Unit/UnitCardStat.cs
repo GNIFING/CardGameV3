@@ -30,7 +30,8 @@ public class UnitCardStat : ScriptableObject
     }
 
     // Name and Description 
-    [SerializeField] private int cardIndex;
+    [SerializeField] private int id;
+    [SerializeField] private string cardIndex;
     [SerializeField] private string cardName;
     [SerializeField] private Sprite cardImage;
     [SerializeField] private string cardDescription;
@@ -42,7 +43,8 @@ public class UnitCardStat : ScriptableObject
     [SerializeField] private int defaultAttackDamage;
     [SerializeField] private int defaultHp;
 
-    public int CardIndex => cardIndex;
+    public int Id => id;
+    public string CardIndex => cardIndex;
     public string CardName => cardName;
     public Sprite CardImage => cardImage;
     public string CardDescription => cardDescription;

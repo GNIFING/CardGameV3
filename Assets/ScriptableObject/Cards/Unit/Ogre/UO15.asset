@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UO15
   m_EditorClassIdentifier: 
-  cardIndex: 215
+  id: 85
+  cardIndex: UO15
   cardName: Armored Mutant Ogre
   cardImage: {fileID: 21300000, guid: 906ca064be9776a4096b070f8da37570, type: 3}
   cardDescription: 

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH12
   m_EditorClassIdentifier: 
-  cardIndex: 12
+  id: 12
+  cardIndex: UH12
   cardName: Champion Jouster
   cardImage: {fileID: 21300000, guid: 738274d535ed0444cbcf1c25d2b884b1, type: 3}
   cardDescription: 

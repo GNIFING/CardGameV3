@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UO30
   m_EditorClassIdentifier: 
-  cardIndex: 230
+  id: 100
+  cardIndex: UO30
   cardName: The Earth Shaker
   cardImage: {fileID: 21300000, guid: 6aae325b6596f9a4cb506d4a99018a71, type: 3}
   cardDescription: Deal 5 damage to all units

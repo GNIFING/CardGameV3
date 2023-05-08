@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UO20
   m_EditorClassIdentifier: 
-  cardIndex: 220
+  id: 90
+  cardIndex: UO20
   cardName: 'Warlord Ogre '
   cardImage: {fileID: 21300000, guid: b5786de16570c444ebd192adafdec59b, type: 3}
   cardDescription: Deal 4 damage to enemy unit, if it dies jump to their position

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE32
   m_EditorClassIdentifier: 
-  cardIndex: 101
+  id: 69
+  cardIndex: UE32
   cardName: Nature Assassin
   cardImage: {fileID: 21300000, guid: 7aba826915dd1f34bbeffaeb4782fdbb, type: 3}
   cardDescription: Shoot large arrow, Kill all enemies in this lane

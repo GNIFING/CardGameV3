@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH17
   m_EditorClassIdentifier: 
-  cardIndex: 17
+  id: 17
+  cardIndex: UH17
   cardName: Defensive Line
   cardImage: {fileID: 21300000, guid: da60ca2220b18cb4aa2aac5fa6361ecc, type: 3}
   cardDescription: When this unit take damages, gain +2 Attack

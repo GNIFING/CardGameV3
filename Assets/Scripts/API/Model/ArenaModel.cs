@@ -1,23 +1,30 @@
 using System;
 using UnityEngine;
 
-public class ArenaData
+public class GameData
 {
-    public Player Me;
-    public Player Opponent;
-    public CardPlacement Arena;
-    public UserCard[] CardOnBoard;
+    public Player player1;
+    public Player player2;
+    public Arena arena;
+    public UserCard[] cardsOnBoard;
+    public bool gameOver;
+    public int? winner;
+    public int? attackerIndex;
+    public int? defenderIndex;
 }
 
 public class Player
 {
-    public int Id;
-    public int DeckId;
-    public UserCard[] Cards;
+    public int id;
+    public int deckId;
+    public UserCard[] cards;
+    public int hp;
+    public int mana;
+    public bool isTurn;
 }
 
-public class CardPlacement
+public class Arena
 {
-    public int Id;
-    public int?[] ArenaArray;
+    public int id;
+    public int?[] arenaArray;
 }

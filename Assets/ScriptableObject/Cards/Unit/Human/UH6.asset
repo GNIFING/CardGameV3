@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH6
   m_EditorClassIdentifier: 
-  cardIndex: 6
+  id: 6
+  cardIndex: UH6
   cardName: News Haste
   cardImage: {fileID: 21300000, guid: 6731c6a061eb5fe4bb78851e0ee00cb6, type: 3}
   cardDescription: Draw 1 card

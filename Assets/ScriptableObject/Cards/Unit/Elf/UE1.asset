@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE1
   m_EditorClassIdentifier: 
-  cardIndex: 101
+  id: 38
+  cardIndex: UE1
   cardName: Knives Thief
   cardImage: {fileID: 21300000, guid: c861557733cf11b4499d5e3ec907ed83, type: 3}
   cardDescription: Deal 1 damage to the nearest enemy unit in this lane

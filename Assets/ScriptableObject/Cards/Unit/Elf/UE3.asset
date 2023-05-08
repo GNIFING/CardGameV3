@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE3
   m_EditorClassIdentifier: 
-  cardIndex: 103
+  id: 40
+  cardIndex: UE3
   cardName: The Gossiper
   cardImage: {fileID: 21300000, guid: d85e060bf03fae54a8a3b4fb4c557998, type: 3}
   cardDescription: 

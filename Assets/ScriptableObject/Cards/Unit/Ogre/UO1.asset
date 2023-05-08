@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UO1
   m_EditorClassIdentifier: 
-  cardIndex: 201
+  id: 71
+  cardIndex: UO1
   cardName: Raging Golem
   cardImage: {fileID: 21300000, guid: e6d56bcf1e3fdbc489403d9b480eec1d, type: 3}
   cardDescription: Deal 3 damage to enemy unit

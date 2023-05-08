@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE9
   m_EditorClassIdentifier: 
-  cardIndex: 109
+  id: 46
+  cardIndex: UE9
   cardName: The Wanderred Veteran
   cardImage: {fileID: 21300000, guid: c788414190c231345a1ba7237148812c, type: 3}
   cardDescription: 

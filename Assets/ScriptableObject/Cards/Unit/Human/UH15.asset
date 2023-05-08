@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH15
   m_EditorClassIdentifier: 
-  cardIndex: 15
+  id: 15
+  cardIndex: UH15
   cardName: Wok Wizard
   cardImage: {fileID: 21300000, guid: bdd975842b09d474a897647e0c967d89, type: 3}
   cardDescription: Grant all units around this unit +1 Attack

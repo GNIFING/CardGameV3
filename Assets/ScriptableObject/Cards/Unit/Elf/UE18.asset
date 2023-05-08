@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE18
   m_EditorClassIdentifier: 
-  cardIndex: 118
+  id: 55
+  cardIndex: UE18
   cardName: Retired Assassin
   cardImage: {fileID: 21300000, guid: af046f2899a692a4e83856bd0be838f5, type: 3}
   cardDescription: When attack the enemy, if the unit attack damage lower than 3,

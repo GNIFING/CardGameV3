@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH10
   m_EditorClassIdentifier: 
-  cardIndex: 10
+  id: 10
+  cardIndex: UH10
   cardName: Drunken Soldier
   cardImage: {fileID: 21300000, guid: 3ed7d83b1c9e62147a7bfee2b526d43a, type: 3}
   cardDescription: 

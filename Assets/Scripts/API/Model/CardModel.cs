@@ -5,9 +5,11 @@ public class UserCard
 {
     public int id;
     public int cardId;
+    public int player = 0;
     public int atk;
     public int hp;
     public int maxHp;
+    public bool isReady = true;
     public Card card;
 }
 

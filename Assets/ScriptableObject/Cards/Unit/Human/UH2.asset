@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH2
   m_EditorClassIdentifier: 
-  cardIndex: 2
+  id: 2
+  cardIndex: UH2
   cardName: Bard of the Road
   cardImage: {fileID: 21300000, guid: 12caf471d1a385a4cb2d7dc2bfa1ba3c, type: 3}
   cardDescription: Give a friendly unit +1 attack

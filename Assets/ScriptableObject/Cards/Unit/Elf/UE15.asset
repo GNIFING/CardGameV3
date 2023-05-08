@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE15
   m_EditorClassIdentifier: 
-  cardIndex: 115
+  id: 52
+  cardIndex: UE15
   cardName: The Lucky Archer
   cardImage: {fileID: 21300000, guid: 1519be2a35333c0469d0bde7e10968df, type: 3}
   cardDescription: Whenever attack enemy unit, if it survived, draw a card

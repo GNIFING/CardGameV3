@@ -32,6 +32,8 @@ public class UnitCard : MonoBehaviour
     protected int health;
     protected int attack;
     public int mana { get; set; }
+    protected int id;
+    protected string cardIndex;
 
     public string description { get; set; }
 
@@ -160,6 +162,8 @@ public class UnitCard : MonoBehaviour
         health = unitCardStat.Hp;
         attack = unitCardStat.AttackDamage;
         mana = unitCardStat.ManaCost;
+        id = unitCardStat.Id;
+        cardIndex = unitCardStat.CardIndex;
         description = unitCardStat.CardDescription;
         cardCredit = maxCardCredit;
         chooseMoveType.SetMoveTypeImage();
@@ -176,6 +180,18 @@ public class UnitCard : MonoBehaviour
         }
     }
 
+    //------------------------- Card Index ---------------------------//
+
+    public int GetId()
+    {
+        return id;
+    }
+
+    public string GetCardIndex()
+    {
+        return cardIndex;
+    }
+    
     //-------------------- Increase-Decrease Stat --------------------//
     public virtual void TakeDamage(UnitCard attackUnitCard, int damage)
     {

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH30
   m_EditorClassIdentifier: 
-  cardIndex: 30
+  id: 30
+  cardIndex: UH30
   cardName: Knight of Light
   cardImage: {fileID: 21300000, guid: df55c92d64deac6479b3795c586eee40, type: 3}
   cardDescription: Reduces the health and attack of a targeted enemy unit to 1/1

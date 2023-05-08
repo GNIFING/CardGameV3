@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH11
   m_EditorClassIdentifier: 
-  cardIndex: 11
+  id: 11
+  cardIndex: UH11
   cardName: Sharpshooter
   cardImage: {fileID: 21300000, guid: d9dd9cd383c8adb4196fa2afb2384df1, type: 3}
   cardDescription: 'At the start of turn, gain +1 Attack '

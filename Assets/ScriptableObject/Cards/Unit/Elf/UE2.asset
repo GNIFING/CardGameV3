@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE2
   m_EditorClassIdentifier: 
-  cardIndex: 102
+  id: 39
+  cardIndex: UE2
   cardName: Apprentice Archer
   cardImage: {fileID: 21300000, guid: a9ae0262cbc8ac842a62cfee32c96bef, type: 3}
   cardDescription: When attacking, deal 1 damage to enemy tower

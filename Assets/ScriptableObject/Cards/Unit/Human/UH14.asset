@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH14
   m_EditorClassIdentifier: 
-  cardIndex: 14
+  id: 14
+  cardIndex: UH14
   cardName: Deadly Assassin
   cardImage: {fileID: 21300000, guid: 7341b2410d475ea4d8bb7fdecf6067fc, type: 3}
   cardDescription: 

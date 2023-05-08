@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UE21
   m_EditorClassIdentifier: 
-  cardIndex: 101
+  id: 58
+  cardIndex: UE21
   cardName: Swapper Elf
   cardImage: {fileID: 21300000, guid: 922e4bf131ec389438486357107dc8b9, type: 3}
   cardDescription: Swap attack damage with selected Enemy

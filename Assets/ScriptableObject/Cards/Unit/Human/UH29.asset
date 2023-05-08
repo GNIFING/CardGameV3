@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH29
   m_EditorClassIdentifier: 
-  cardIndex: 29
+  id: 29
+  cardIndex: UH29
   cardName: Mad potion maker
   cardImage: {fileID: 21300000, guid: 8095d52f7d93363448880df0bac9d625, type: 3}
   cardDescription: At the start of each turn, gain +2/+2

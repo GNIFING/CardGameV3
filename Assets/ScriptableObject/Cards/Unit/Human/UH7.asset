@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH7
   m_EditorClassIdentifier: 
-  cardIndex: 7
+  id: 7
+  cardIndex: UH7
   cardName: Front Fortress
   cardImage: {fileID: 21300000, guid: f1fa25f4162003343bbb57935b1013a6, type: 3}
   cardDescription: '"At the end of the turn, deal 1 damage to the nearest enemy unit

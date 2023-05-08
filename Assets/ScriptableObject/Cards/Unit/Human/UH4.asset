@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH4
   m_EditorClassIdentifier: 
-  cardIndex: 4
+  id: 4
+  cardIndex: UH4
   cardName: Journal Bearer
   cardImage: {fileID: 21300000, guid: 593ad004caac7ea47bef237053f6df05, type: 3}
   cardDescription: Draw 1 card

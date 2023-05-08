@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UH20
   m_EditorClassIdentifier: 
-  cardIndex: 20
+  id: 20
+  cardIndex: UH20
   cardName: Swordcraft Master
   cardImage: {fileID: 21300000, guid: c6ea92436f059744aa4cd39e2306be04, type: 3}
   cardDescription: Give +4/+4 to a friendly unit on the front tile
