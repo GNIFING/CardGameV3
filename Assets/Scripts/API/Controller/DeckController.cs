@@ -32,6 +32,7 @@ public class DeckController : ApiController
 
         request.Dispose();
     }
+
     public IEnumerator GetDecks(Action<List<Deck>> callback)
     {
         string path = "/";

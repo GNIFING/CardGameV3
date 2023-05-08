@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class AreanaController : ApiController
+public class ArenaController : ApiController
 {
     public TextMeshProUGUI outputArea;
 
