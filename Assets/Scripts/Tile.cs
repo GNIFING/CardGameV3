@@ -113,10 +113,14 @@ public class Tile : MonoBehaviour
     //-------------- Click On Tile --------------//
     void OnMouseDown()
     {
-        unit = GetUnitInTile();
-        selectUnit = tileManager.GetSelectUnit();
-        HandleClickOnTile(unit, selectUnit);    
+        if(gameController.GetPlayerId() == GameController.CurrentTurn)
+        {
+            unit = GetUnitInTile();
+            selectUnit = tileManager.GetSelectUnit();
+            HandleClickOnTile(unit, selectUnit);
+        }
     }
+        
 
     private void HandleClickOnTile(GameObject unit, GameObject selectUnit)
     {
@@ -208,16 +212,26 @@ public class Tile : MonoBehaviour
         {
             if (selectUnitCard.GetPlayerNo() == 2)
             {
+                //hit tower 1 tile
                 playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.GetAttackDamage());
-                if(selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
+
+                //----------------- SEND API HERE -------------------//
+
+
+
+
+                //----------------- Attack Animation -------------------//
+                if (selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
                 {
                     selectUnitCard.MeleeAttackAnimation(null);
                 }
                 else
                 {
-                    Debug.Log("Tile name = " + this.gameObject.name);
                     selectUnitCard.RangeAttackAnimation(this.gameObject);
                 }
+                //------------------------------------------------------//
+
+
                 tileManager.DeSelectUnit();
                 selectUnitCard.ReduceCardCredit();
             }
@@ -233,7 +247,15 @@ public class Tile : MonoBehaviour
         {
             if (selectUnitCard.GetPlayerNo() == 1)
             {
+                //hit tower 2 tile
                 playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.GetAttackDamage());
+
+                //----------------- SEND API HERE -------------------//
+
+
+
+
+                //----------------- Attack Animation -------------------//
                 if (selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
                 {
                     selectUnitCard.MeleeAttackAnimation(null);
@@ -243,6 +265,8 @@ public class Tile : MonoBehaviour
                     Debug.Log("Tile name = " + this.gameObject.name);
                     selectUnitCard.RangeAttackAnimation(this.gameObject);
                 }
+                //------------------------------------------------------//
+
                 tileManager.DeSelectUnit();
                 selectUnitCard.ReduceCardCredit();
             }
@@ -272,13 +296,15 @@ public class Tile : MonoBehaviour
                 selectUnitCard.isPlayCard = true;
                 selectUnitCard.RemoveBackCard();
                 playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), playerController.GetPlayerMana(selectUnitCard.GetPlayerNo()) - selectUnitCard.mana);
-                MoveUnitToThisTile(selectUnit);
+                //send API in this method
+                MoveUnitFromHandToArenaTile(selectUnit);
 
                 tileManager.CancelNextMoveHighlight();
                 selectUnitCard.ReduceCardCredit();
                 tileManager.isInSkillProcess = true;
+                //unit use skill
                 selectUnitCard.UnitHighlight();
-
+                
             }
         }
 
@@ -367,11 +393,36 @@ public class Tile : MonoBehaviour
         arenaId = 13;
         int beforeTileIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
         int afterTileIndex = ConvertTilePosToIndex(xPos, yPos);
-        StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => { }));
+        StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => 
+        { 
+            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, afterTileIndex, (response) => { }));
+        }));
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;
         if(buff != null)
+        {
+            selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+            selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+            Destroy(buff, 0.3f);
+        }
+    }
+
+    public void MoveUnitFromHandToArenaTile(GameObject selectUnit)
+    {
+        //------------ SEND API HERE ---------------//
+        int arenaId = PlayerPrefs.GetInt("ArenaId");
+        int cardId = selectUnitCard.GetPlayerNo() == 1 ? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
+        arenaId = 13;
+        int tileIndex = ConvertTilePosToIndex(xPos, yPos);
+        StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
+        {
+            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { }));
+        }));
+        //------------------------------------------//
+        selectUnit.transform.SetParent(transform);
+        selectUnit.transform.position = transform.position;
+        if (buff != null)
         {
             selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
             selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
@@ -396,7 +447,10 @@ public class Tile : MonoBehaviour
         int cardId = playerNo == 1? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
         arenaId = 13;
         int tileIndex = ConvertTilePosToIndex(towerTile.GetComponent<Tile>().GetXPos(), towerTile.GetComponent<Tile>().GetYPos());
-        StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) => { }));
+        StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
+        {
+            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { }));
+        }));
         //------------------------------------------//
 
         unit.transform.SetParent(towerTile.transform);
