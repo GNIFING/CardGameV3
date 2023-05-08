@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Playables;
 
-public class AreanaController : ApiController
+public class ArenaController : ApiController
 {
     public TextMeshProUGUI outputArea;
     public DataHandler dataHandler;
