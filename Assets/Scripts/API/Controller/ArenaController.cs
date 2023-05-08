@@ -56,9 +56,11 @@ public class ArenaController : ApiController
         Debug.Log("Connecting...");
         socket.Connect();
 
-        socket.OnUnityThread("13", OnMessage);
 
-        StartCoroutine(this.GetArena(13));
+        int arenaId = PlayerPrefs.GetInt("ArenaId");
+        socket.OnUnityThread(arenaId.ToString(), OnMessage);
+
+        StartCoroutine(this.GetArena(arenaId));
     }
 
     void OnMessage(SocketIOResponse response)

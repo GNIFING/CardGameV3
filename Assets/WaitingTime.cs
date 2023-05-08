@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 public class WaitingTime : MonoBehaviour
 {
@@ -26,13 +27,13 @@ public class WaitingTime : MonoBehaviour
         // Create initial MatchMaking
         yield return StartCoroutine(roomController.MatchMaking(this.playerId, (response) =>
         {
-            Debug.Log(response);
+            Debug.Log(JsonConvert.SerializeObject(response));
 
             // Store roomId
             this.roomId = response.roomId;
 
             // if match other player
-            if (response.playerTwoId != null && response.arenaId != null)
+            if (response.playerTwoId != null)
             {
                 PlayerPrefs.SetInt("ArenaId", (int)response.arenaId);
 
@@ -42,7 +43,8 @@ public class WaitingTime : MonoBehaviour
             else
             {
                 // Return to lobby if something wrong
-                SceneManager.LoadScene("LobbyPage");
+                //SceneManager.LoadScene("LobbyPage");
+                Debug.Log(JsonConvert.SerializeObject(response));
             }
         }));
 
@@ -81,7 +83,9 @@ public class WaitingTime : MonoBehaviour
                 else
                 {
                     // Return to lobby if something wrong
-                    SceneManager.LoadScene("LobbyPage");
+                    //SceneManager.LoadScene("LobbyPage");
+
+                    Debug.Log(JsonConvert.SerializeObject(response));
                 }
             }));
         }
