@@ -419,16 +419,14 @@ public class Tile : MonoBehaviour
         int cardId;
         if(selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1)
         {
-            Debug.Log("dataHandler = " + dataHandler);
-            Debug.Log("dataHandler.player1HandCards = " + dataHandler.player1HandCards);
-
             Tile selectUnitTile = selectUnit.GetComponentInParent<Tile>();
             cardId = dataHandler.player1HandCards[ConvertTilePosToIndex(selectUnitTile.GetXPos(), selectUnitTile.GetYPos())].id;
             Debug.Log("cardId = " + cardId);
         }
         else
         {
-            cardId = dataHandler.player2HandCards[yPos].id;
+            Tile selectUnitTile = selectUnit.GetComponentInParent<Tile>();
+            cardId = dataHandler.player2HandCards[ConvertTilePosToIndex(selectUnitTile.GetXPos(), selectUnitTile.GetYPos())].id;
         }
 
         //int cardId = selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
