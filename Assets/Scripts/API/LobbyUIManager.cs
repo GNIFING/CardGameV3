@@ -21,12 +21,18 @@ public class LobbyUIManager : MonoBehaviour
     {
         yield return StartCoroutine(userController.IsInGame((response) =>
         {
-            if (response.playerId != null && response.arenaId != null)
+            if (response.isInGame)
             {
                 PlayerPrefs.SetInt("ArenaId", (int)response.arenaId);
                 PlayerPrefs.SetInt("PlayerId", (int)response.playerId);
 
                 SceneManager.LoadScene("SampleScene");
+            }
+            else if (response.isInRoom)
+            {
+                PlayerPrefs.SetInt("PlayerId", (int)response.playerId);
+
+                SceneManager.LoadScene("FindingMatchPage");
             }
         }));
 
@@ -43,7 +49,7 @@ public class LobbyUIManager : MonoBehaviour
 
             this.deckItems = deckItems;
 
-            Debug.Log(decks.FirstOrDefault().id);
+            //Debug.Log(decks.FirstOrDefault().id);
             PlayerPrefs.SetInt("DeckId", decks.FirstOrDefault().id);
 
             // -------- Add deckItems to dropdown ---------- //
@@ -65,7 +71,6 @@ public class LobbyUIManager : MonoBehaviour
 
         StartCoroutine(multiPlayerController.CreatePlayer(deckId, (newPlayer) =>
         {
-            Debug.Log(newPlayer.id);
             PlayerPrefs.SetInt("PlayerId", newPlayer.id);
             SceneManager.LoadScene("FindingMatchPage");
         }));

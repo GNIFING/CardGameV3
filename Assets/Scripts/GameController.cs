@@ -35,8 +35,8 @@ public class GameController : MonoBehaviour
     {
         playerId = PlayerPrefs.GetInt("PlayerId");
         arenaId = PlayerPrefs.GetInt("ArenaId");
-        playerId = 1;
-        arenaId = 2;
+        //playerId = 1;
+        //arenaId = 2;
 
     }
 
@@ -92,20 +92,12 @@ public class GameController : MonoBehaviour
 
         //----------- SEND API -----------//
 
-        int playerIndex;
-        if(playerId == 1)
-        {
-            playerIndex = dataHandler.player1Id;
-        }
-        else
-        {
-            playerIndex = dataHandler.player2Id;
-        }
-        StartCoroutine(multiPlayerController.EndTurn(arenaId, playerIndex, (response) => { }));
+        StartCoroutine(multiPlayerController.EndTurn(arenaId, playerId, (response) => { }));
 
 
         //----------- SEND API -----------//
 
+        UpdateIsPlay();
         playerturn = playerturn == 1 ? 2 : 1;
         if(playerturn == 1)
         {
@@ -143,7 +135,7 @@ public class GameController : MonoBehaviour
 
     public int GetPlayerId()
     {
-        return playerId;
+        return playerId == dataHandler.player1Id? 1 : 2;
     }
     private void RefreshPlayerCredit(int playerNo)
     {
@@ -156,5 +148,21 @@ public class GameController : MonoBehaviour
                 unitCard.RefreshCredit();
             }
         }
+    }
+
+    public void UpdateIsPlay()
+    {
+        List<GameObject> unitObjs = tileManager.GetAllUnits();
+        foreach (GameObject unitObj in unitObjs)
+        {
+            unitObj.GetComponent<UnitCard>().isPlayCard = true;
+        }
+    }
+    public void Surrender()
+    {
+        Debug.Log("Surrender");
+        StartCoroutine(multiPlayerController.Surrender(arenaId, playerId, (response) => { }));
+
+
     }
 }

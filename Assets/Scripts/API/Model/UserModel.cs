@@ -15,6 +15,8 @@ public class User
 public class IsInGameResponse
 {
     public bool isInGame;
+    public bool isInRoom;
     public int? playerId;
     public int? arenaId;
+    public string? roomId;
 }
