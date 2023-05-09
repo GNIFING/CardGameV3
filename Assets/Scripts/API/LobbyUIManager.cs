@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -9,14 +10,26 @@ public class LobbyUIManager : MonoBehaviour
     public TMP_Text greetingUser;
     public UserController userController;
     public DeckController deckController;
+
     public MultiPlayerController multiPlayerController;
     public TMP_Dropdown deckDropdown;
 
     private List<DeckItem> deckItems;
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        yield return StartCoroutine(userController.IsInGame((response) =>
+        {
+            if (response.playerId != null && response.arenaId != null)
+            {
+                PlayerPrefs.SetInt("ArenaId", (int)response.arenaId);
+                PlayerPrefs.SetInt("PlayerId", (int)response.playerId);
+
+                SceneManager.LoadScene("SampleScene");
+            }
+        }));
+
         StartCoroutine(userController.GetUser((user) =>
         {
             greetingUser.text = "Hi, " + user.Username;

@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class UserController : ApiController
 {
     private readonly string controller = "/user";
+
     public IEnumerator GetUser(Action<User> callback)
     {
         string path = "/";
@@ -22,6 +23,28 @@ public class UserController : ApiController
             User user = JsonConvert.DeserializeObject<User>(json);
 
             callback(user);
+        }
+        else
+        {
+            CheckRequestStatus(request);
+        }
+
+        request.Dispose();
+    }
+
+    public IEnumerator IsInGame(Action<IsInGameResponse> callback)
+    {
+        string path = "/isInGame";
+
+        var request = Api.CreateRequest(controller + path, "GET");
+
+        yield return request.SendWebRequest();
+        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
+        {
+            var json = request.downloadHandler.text;
+            IsInGameResponse response = JsonConvert.DeserializeObject<IsInGameResponse>(json);
+
+            callback(response);
         }
         else
         {

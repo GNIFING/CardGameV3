@@ -12,3 +12,9 @@ public class User
     public DateTime updatedAt;
 }
 
+public class IsInGameResponse
+{
+    public bool isInGame;
+    public int? playerId;
+    public int? arenaId;
+}
