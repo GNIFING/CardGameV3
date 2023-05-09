@@ -269,7 +269,9 @@ public class UnitCard : MonoBehaviour
         multiPlayerController = FindObjectOfType<MultiPlayerController>();
         Tile tileOnThisUnit = GetComponentInParent<Tile>();
         int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
-        StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, plusAttack, (response) => { }));
+        Debug.Log("tileIndex = " + tileIndex);
+        Debug.Log("plusAttack = " + plusAttack);
+        StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, plusAttack, (response) => { Debug.Log(response.atk); }));
         //----------- SEND API ------------//
     }
 
@@ -287,7 +289,7 @@ public class UnitCard : MonoBehaviour
         int arenaId = gameController.arenaId;
         multiPlayerController = FindObjectOfType<MultiPlayerController>();
         Tile tileOnThisUnit = GetComponentInParent<Tile>();
-        int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());s
+        int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
         StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, -minusAttack, (response) => { }));
         //----------- SEND API ------------//
     }

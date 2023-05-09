@@ -197,8 +197,8 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetBackCard(true);
                     if (newUnitCard.GetComponentInParent<Tile>().tileType != Tile.TileType.Player1Tile)
                     {
-                        newUnitCard.SetAttackDamage(player1HandCards[handIndex].card.atk);
-                        newUnitCard.SetHealth(player1HandCards[handIndex].card.hp);
+                        newUnitCard.SetAttackDamage(player1HandCards[handIndex].atk);
+                        newUnitCard.SetHealth(player1HandCards[handIndex].hp);
                     }
                 }
             }
@@ -240,8 +240,8 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetBackCard(true);
                     if (newUnitCard.GetComponentInParent<Tile>().tileType != Tile.TileType.Player2Tile)
                     {
-                        newUnitCard.SetAttackDamage(player2HandCards[handIndex].card.atk);
-                        newUnitCard.SetHealth(player2HandCards[handIndex].card.hp);
+                        newUnitCard.SetAttackDamage(player2HandCards[handIndex].atk);
+                        newUnitCard.SetHealth(player2HandCards[handIndex].hp);
                     }
                 }
             }
