@@ -104,6 +104,7 @@ public class DataHandler : MonoBehaviour
         defenderIndex = gameData.defenderIndex;
 
         gameController.SetPlayerTurn(gameData.playerOne.isTurn ? 1 : 2);
+        gameController.endTurnButton.SetActive(gameData.playerOne.isTurn);
         
         Debug.Log("Update Initial Data Passed");
 
@@ -166,6 +167,7 @@ public class DataHandler : MonoBehaviour
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[player1HandCards[handIndex].card.id], player1Tile[handIndex].transform.position, Quaternion.identity);
                     newUnitCardObj.transform.parent = player1Tile[handIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
+                    newUnitCard.SetUserCardId(player1HandCards[handIndex].id);
                     newUnitCard.SetPlayerNo(1);
                     newUnitCard.RefreshCredit();
                     newUnitCard.SetBackCard(true);
@@ -184,6 +186,8 @@ public class DataHandler : MonoBehaviour
                 {
                     GameObject unitCard = player2Tile[handIndex].GetUnitInTile();
                     Destroy(unitCard);
+                    Debug.Log("Destrot case -1");
+
                 }
             }
             else if (player2HandCards[handIndex] != null)
@@ -194,6 +198,8 @@ public class DataHandler : MonoBehaviour
                     if (unitCard.GetId() != player2HandCards[handIndex].card.id)
                     {
                         Destroy(unitCard.gameObject);
+                        Debug.Log("Destrot case 0");
+
                     }
                 }
                 else if (player2Tile[handIndex].GetUnitInTile() == null)
@@ -201,6 +207,7 @@ public class DataHandler : MonoBehaviour
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[player2HandCards[handIndex].card.id], player2Tile[handIndex].transform.position, Quaternion.identity);
                     newUnitCardObj.transform.parent = player2Tile[handIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
+                    newUnitCard.SetUserCardId(player2HandCards[handIndex].id);
                     newUnitCard.SetPlayerNo(2);
                     newUnitCard.RefreshCredit();
                     newUnitCard.SetBackCard(true);
@@ -223,6 +230,7 @@ public class DataHandler : MonoBehaviour
                 if (tiles[arenaIndex].GetUnitInTile() != null)
                 {
                     Destroy(tiles[arenaIndex].GetUnitInTile());
+                    Debug.Log("Destrot case 1");
                 }
                 // If there is no unit and no card, do nothing.
             }
@@ -234,13 +242,18 @@ public class DataHandler : MonoBehaviour
                     UnitCard unitCard = tiles[arenaIndex].GetUnitInTile().GetComponent<UnitCard>();
                     UserCard userCard = cardsOnBoard.Where(u => u.id == arena.arenaArray[arenaIndex]).Select(u => u).FirstOrDefault();
 
-                    if (unitCard.GetId() != userCard.id)
+                    if (unitCard.GetUserCardId() != userCard.id)
                     {
+                        Debug.Log("unitCard.GetId() = " + unitCard.GetId());
+                        Debug.Log("userCard.id = " + userCard.id);
                         // Destroy the existing unit and spawn a new one.
                         Destroy(unitCard.gameObject);
+
                         GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
                         newUnitCardObj.transform.parent = tiles[arenaIndex].transform;
                         UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
+                        newUnitCard.isPlayCard = true;
+                        newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                         newUnitCard.SetPlayerNo(userCard.player);
                         newUnitCard.SetBackCard(true);
                         newUnitCard.SetAttackDamage(userCard.atk);
@@ -263,6 +276,7 @@ public class DataHandler : MonoBehaviour
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
                     newUnitCardObj.transform.parent = tiles[arenaIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
+                    newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                     newUnitCard.SetPlayerNo(userCard.player);
                     newUnitCard.SetBackCard(true);
                     newUnitCard.SetAttackDamage(userCard.atk);

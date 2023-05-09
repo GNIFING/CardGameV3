@@ -259,7 +259,7 @@ public class MultiPlayerController : ApiController
     {
         string path = "/turn";
 
-        var request = Api.CreateRequest(controller + path, "POST", new ArenaPlayerRequest()
+        var request = Api.CreateRequest(controller + path, "PATCH", new ArenaPlayerRequest()
         {
             arenaId = arenaId,
             playerId = playerId,

@@ -283,7 +283,8 @@ public class Tile : MonoBehaviour
 
         else if (selectUnit != null && unit == null)
         {
-            if (selectUnitCard.isPlayCard)
+            //|| selectUnitCard.GetComponentInParent<Tile>().tileType != TileType.Player1Tile || selectUnitCard.GetComponentInParent<Tile>().tileType != TileType.Player2Tile
+            if (selectUnitCard.isPlayCard )
             {
                 MoveUnitToThisTile(selectUnit);
                 tileManager.DeSelectUnit();
@@ -393,7 +394,7 @@ public class Tile : MonoBehaviour
     {
         //------------ SEND API HERE ---------------//
         int arenaId = PlayerPrefs.GetInt("ArenaId");
-        arenaId = 22;
+        arenaId = 23;
         int beforeTileIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
         int afterTileIndex = ConvertTilePosToIndex(xPos, yPos);
         StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => 
@@ -403,6 +404,7 @@ public class Tile : MonoBehaviour
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;
+        selectUnit.GetComponent<UnitCard>().ReduceCardCredit();
         if(buff != null)
         {
             selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
@@ -431,7 +433,7 @@ public class Tile : MonoBehaviour
         }
 
         //int cardId = selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
-        arenaId = 22;
+        arenaId = 23;
         int tileIndex = ConvertTilePosToIndex(xPos, yPos);
         StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
         {
@@ -440,6 +442,8 @@ public class Tile : MonoBehaviour
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;
+        selectUnit.GetComponent<UnitCard>().ReduceCardCredit();
+
         if (buff != null)
         {
             selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
@@ -465,7 +469,7 @@ public class Tile : MonoBehaviour
         Tile unitHandTile = unit.GetComponentInParent<Tile>();
         int handTileIndex = ConvertTilePosToIndex(unitHandTile.GetXPos(), unitHandTile.GetYPos());
         int cardId = playerNo == 1? dataHandler.player1HandCards[handTileIndex].id : dataHandler.player2HandCards[handTileIndex].id;
-        arenaId = 22;
+        arenaId = 23;
         int tileIndex = ConvertTilePosToIndex(towerTile.GetComponent<Tile>().GetXPos(), towerTile.GetComponent<Tile>().GetYPos());
         StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
         {
@@ -475,6 +479,8 @@ public class Tile : MonoBehaviour
 
         unit.transform.SetParent(towerTile.transform);
         unit.transform.position = towerTile.transform.position;
+        selectUnit.GetComponent<UnitCard>().ReduceCardCredit();
+
     }
 
     public void SetNextMoveHighlight(bool isSelect)

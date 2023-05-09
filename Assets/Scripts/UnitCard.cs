@@ -32,6 +32,7 @@ public class UnitCard : MonoBehaviour
     protected int health;
     protected int attack;
     public int mana { get; set; }
+    public int userCardId;
     protected int id;
     protected string cardIndex;
 
@@ -181,6 +182,15 @@ public class UnitCard : MonoBehaviour
     }
 
     //------------------------- Card Index ---------------------------//
+    public int GetUserCardId()
+    {
+        return userCardId;
+    }
+
+    public void SetUserCardId(int newUserCardId)
+    {
+        userCardId = newUserCardId;
+    }
 
     public int GetId()
     {

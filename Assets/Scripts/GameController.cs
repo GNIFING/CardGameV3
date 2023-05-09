@@ -22,8 +22,12 @@ public class GameController : MonoBehaviour
     private float timeout = 10f;
     private bool alreadyLoad;
 
+    public DataHandler dataHandler;
+    public MultiPlayerController multiPlayerController;
     public delegate void ChangeCardBackDelegate(int playerNo);
     public event ChangeCardBackDelegate OnChangeCardBack;
+
+    public GameObject endTurnButton;
     public static int CurrentTurn => playerturn;
 
     private void Start()
@@ -79,8 +83,27 @@ public class GameController : MonoBehaviour
         tileManager.CancelNextMoveHighlight();
         tileManager.CancelUnitMoveHighlight();
 
-        UseUnitsEndturnSkill(playerturn);
-        
+
+        UseUnitsEndturnSkill(playerId);
+
+        //----------- SEND API -----------//
+
+        int arenaId = PlayerPrefs.GetInt("ArenaId");
+        arenaId = 23;
+        int playerIndex;
+        if(playerId == 1)
+        {
+            playerIndex = dataHandler.player1Id;
+        }
+        else
+        {
+            playerIndex = dataHandler.player2Id;
+        }
+        StartCoroutine(multiPlayerController.EndTurn(arenaId, playerIndex, (response) => { }));
+
+
+        //----------- SEND API -----------//
+
         playerturn = playerturn == 1 ? 2 : 1;
         if(playerturn == 1)
         {
@@ -90,10 +113,10 @@ public class GameController : MonoBehaviour
             }
             player1Arrow.SetActive(true);
             player2Arrow.SetActive(false);
-            spawnP1Card.SpawnUnit();
+            //spawnP1Card.SpawnUnit(); // SEND DRAW CARD API
             playerController.RefreshPlayerMana(1);
             RefreshPlayerCredit(1);
-            UseUnitsStartturnSkill(1);
+            UseUnitsStartturnSkill(1); 
         }
         else if(playerturn == 2)
         {
@@ -103,7 +126,7 @@ public class GameController : MonoBehaviour
             }
             player1Arrow.SetActive(false);
             player2Arrow.SetActive(true);
-            spawnP2Card.SpawnUnit();
+            //spawnP2Card.SpawnUnit();
             playerController.RefreshPlayerMana(2);
             RefreshPlayerCredit(2);
             UseUnitsStartturnSkill(2);
