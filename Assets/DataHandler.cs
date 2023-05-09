@@ -104,7 +104,7 @@ public class DataHandler : MonoBehaviour
         defenderIndex = gameData.defenderIndex;
 
         gameController.SetPlayerTurn(gameData.playerOne.isTurn ? 1 : 2);
-        gameController.endTurnButton.SetActive(gameData.playerOne.isTurn);
+        gameController.endTurnButton.SetActive(gameController.playerId == player1Id ? isPlayer1Turn : isPlayer2Turn);
         
         Debug.Log("Update Initial Data Passed");
 

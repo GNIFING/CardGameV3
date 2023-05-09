@@ -92,20 +92,12 @@ public class GameController : MonoBehaviour
 
         //----------- SEND API -----------//
 
-        int playerIndex;
-        if(playerId == 1)
-        {
-            playerIndex = dataHandler.player1Id;
-        }
-        else
-        {
-            playerIndex = dataHandler.player2Id;
-        }
-        StartCoroutine(multiPlayerController.EndTurn(arenaId, playerIndex, (response) => { }));
+        StartCoroutine(multiPlayerController.EndTurn(arenaId, playerId, (response) => { }));
 
 
         //----------- SEND API -----------//
 
+        UpdateIsPlay();
         playerturn = playerturn == 1 ? 2 : 1;
         if(playerturn == 1)
         {
@@ -158,6 +150,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void UpdateIsPlay()
+    {
+        List<GameObject> unitObjs = tileManager.GetAllUnits();
+        foreach (GameObject unitObj in unitObjs)
+        {
+            unitObj.GetComponent<UnitCard>().isPlayCard = true;
+        }
+    }
     public void Surrender()
     {
         Debug.Log("Surrender");
