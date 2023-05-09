@@ -324,7 +324,6 @@ public class Tile : MonoBehaviour
 
         else if (unitCard.GetPlayerNo() != gameController.GetPlayerId())
         {
-            Debug.Log("Attack Enemy");
             if(selectUnitCard.isPlayCard == false)
             {
                 selectUnitCard.isPlayCard = true;
@@ -332,8 +331,10 @@ public class Tile : MonoBehaviour
                 playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), playerController.GetPlayerMana(selectUnitCard.GetPlayerNo()) - selectUnitCard.mana);
                 // Move unit to tower tile //
                 MoveUnitToTowerTile(selectUnit, selectUnitCard.GetPlayerNo(), xPos, yPos);
+                Debug.Log("Move Unit Passed");
             }
 
+            Debug.Log("Attack Enemy");
             selectUnitCard.AttackUnit(unitCard);
             selectUnitCard.ReduceCardCredit();
 
