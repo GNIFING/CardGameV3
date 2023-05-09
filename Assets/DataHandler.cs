@@ -198,10 +198,14 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetBackCard(true);
                     if (newUnitCard.GetComponentInParent<Tile>().tileType != Tile.TileType.Player1Tile)
                     {
-                        newUnitCard.SetAttackDamage(player1HandCards[handIndex].atk);
-                        newUnitCard.SetHealth(player1HandCards[handIndex].hp);
-                        newUnitCard.UpdateCardUI();
-
+                        if(newUnitCard.GetAttackDamage() != player1HandCards[handIndex].atk)
+                        {
+                            newUnitCard.SetAttackDamage(player1HandCards[handIndex].atk);
+                        }
+                        if(newUnitCard.GetHealth() != player1HandCards[handIndex].hp)
+                        {
+                            newUnitCard.SetHealth(player1HandCards[handIndex].hp);
+                        }
                     }
                 }
             }
@@ -243,10 +247,14 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetBackCard(true);
                     if (newUnitCard.GetComponentInParent<Tile>().tileType != Tile.TileType.Player2Tile)
                     {
-                        newUnitCard.SetAttackDamage(player2HandCards[handIndex].atk);
-                        newUnitCard.SetHealth(player2HandCards[handIndex].hp);
-                        newUnitCard.UpdateCardUI();
-
+                        if (newUnitCard.GetAttackDamage() != player2HandCards[handIndex].atk)
+                        {
+                            newUnitCard.SetAttackDamage(player2HandCards[handIndex].atk);
+                        }
+                        if (newUnitCard.GetHealth() != player2HandCards[handIndex].hp)
+                        {
+                            newUnitCard.SetHealth(player2HandCards[handIndex].hp);
+                        }
                     }
                 }
             }
@@ -292,21 +300,29 @@ public class DataHandler : MonoBehaviour
                         newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                         newUnitCard.SetPlayerNo(userCard.player);
                         newUnitCard.SetBackCard(false);
-                        newUnitCard.SetAttackDamage(userCard.atk);
-                        newUnitCard.SetHealth(userCard.hp);
-                        newUnitCard.UpdateCardUI();
-
+                        
+                        if (newUnitCard.GetAttackDamage() != userCard.atk)
+                        {
+                            newUnitCard.SetAttackDamage(userCard.atk);
+                        }
+                        if (newUnitCard.GetHealth() != userCard.hp)
+                        {
+                            newUnitCard.SetHealth(userCard.hp);
+                        }
                         // Set the new unit's credit based on whether it's ready or not.
                         newUnitCard.SetCardCredit(userCard.isReady ? 1 : 0);
                     }
                     else if(unitCard.GetUserCardId() == userCard.id) ///////////////////////////////////////////////////////
                     {
                         // Update the existing unit's attack and health.
-                        //Debug.Log("userCard.atk = " + userCard.atk);
-
-                        unitCard.SetAttackDamage(userCard.atk);
-                        unitCard.SetHealth(userCard.hp);
-                        
+                        if (unitCard.GetAttackDamage() != userCard.atk)
+                        {
+                            unitCard.SetAttackDamage(userCard.atk);
+                        }
+                        if (unitCard.GetHealth() != userCard.hp)
+                        {
+                            unitCard.SetHealth(userCard.hp);
+                        }
                     }
                 }
                 else if (tiles[arenaIndex].GetUnitInTile() == null)
@@ -320,10 +336,15 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                     newUnitCard.SetPlayerNo(userCard.player);
                     newUnitCard.SetBackCard(true);
-                    newUnitCard.SetAttackDamage(userCard.atk);
-                    newUnitCard.SetHealth(userCard.hp);
-                    newUnitCard.UpdateCardUI();
-
+                    
+                    if (newUnitCard.GetAttackDamage() != userCard.atk)
+                    {
+                        newUnitCard.SetAttackDamage(userCard.atk);
+                    }
+                    if (newUnitCard.GetHealth() != userCard.hp)
+                    {
+                        newUnitCard.SetHealth(userCard.hp);
+                    }
                     // Set the new unit's credit based on whether it's ready or not.
                     newUnitCard.SetCardCredit(userCard.isReady ? 1 : 0);
                 }
