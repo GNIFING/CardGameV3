@@ -35,7 +35,6 @@ public class UH9 : UnitCard
                 UH9_1Card.SetPlayerNo(playerNo);
                 UH9_1Card.isPlayCard = true;
                 UH9_1Card.isSkillDone = true;
-                UH9_1Card.RemoveBackCard();
             }
         }
         isSkillDone = true;

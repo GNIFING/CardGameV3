@@ -39,7 +39,6 @@ public class UH3 : UnitCard
                 UH3_1Card.SetPlayerNo(playerNo);
                 UH3_1Card.isPlayCard = true;
                 UH3_1Card.isSkillDone = true;
-                UH3_1Card.RemoveBackCard();
             }
         isSkillDone = true;
     }

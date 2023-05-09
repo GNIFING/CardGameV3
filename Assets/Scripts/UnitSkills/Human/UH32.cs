@@ -44,7 +44,6 @@ public class UH32 : UnitCard
         UH32_1Card.SetPlayerNo(playerNo);
         UH32_1Card.isPlayCard = true;
         UH32_1Card.isSkillDone = true;
-        UH32_1Card.RemoveBackCard();
     }
 
     public override void UnitHighlight()

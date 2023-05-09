@@ -118,10 +118,7 @@ public class Tile : MonoBehaviour
             unit = GetUnitInTile();
             selectUnit = tileManager.GetSelectUnit();
             HandleClickOnTile(unit, selectUnit);
-            Debug.Log("Can Play");
         }
-        Debug.Log(gameController.GetPlayerId());
-        Debug.Log(GameController.CurrentTurn);
     }
         
 
@@ -171,7 +168,6 @@ public class Tile : MonoBehaviour
 
         else if (unit != null && selectUnit == null)
         {
-            Debug.Log("1");
             tileManager.SetSelectUnit(unit);
             HighlightNextMoveUnit(unitCard, xPos, yPos);
         }
@@ -311,7 +307,6 @@ public class Tile : MonoBehaviour
                 Debug.Log("2");
                 //unit play skill here
                 selectUnitCard.isPlayCard = true;
-                selectUnitCard.RemoveBackCard();
                 playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), playerController.GetPlayerMana(selectUnitCard.GetPlayerNo()) - selectUnitCard.mana);
                 //send API in this method
                 MoveUnitFromHandToArenaTile(selectUnit);
@@ -333,7 +328,6 @@ public class Tile : MonoBehaviour
             if(selectUnitCard.isPlayCard == false)
             {
                 selectUnitCard.isPlayCard = true;
-                selectUnitCard.RemoveBackCard();
                 //playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), selectUnitCard.mana);
                 playerController.SetPlayerMana(selectUnitCard.GetPlayerNo(), playerController.GetPlayerMana(selectUnitCard.GetPlayerNo()) - selectUnitCard.mana);
                 // Move unit to tower tile //

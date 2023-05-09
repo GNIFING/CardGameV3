@@ -156,8 +156,6 @@ public class UnitCard : MonoBehaviour
     protected void InitializeCardStats()
     {
         gameController = FindObjectOfType<GameController>();
-        gameController.OnChangeCardBack += ChangeBackCard;
-
         tileManager = GameObject.Find("Tiles").GetComponent<TileManager>();
         unitImage.sprite = unitCardStat.CardImage;
         nameText.text = unitCardStat.CardName;
@@ -232,7 +230,8 @@ public class UnitCard : MonoBehaviour
 
     public void DecreaseHealth(int minusHealth, bool callApi = true)
     {
-
+        health -= minusHealth;
+        UpdateCardUI();
         //----------- SEND API ------------//
         gameController = FindObjectOfType<GameController>();
 
@@ -247,8 +246,7 @@ public class UnitCard : MonoBehaviour
             StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, -minusHealth, 0, (response) => { }));
         }
         //----------- SEND API ------------//
-        health -= minusHealth;
-        UpdateCardUI();
+        
         if (health <= 0) Destroy(this.gameObject, 0.5f);
 
     }
@@ -270,6 +268,7 @@ public class UnitCard : MonoBehaviour
         //----------- SEND API ------------//
         health = newHealth;
         UpdateCardUI();
+        if (health <= 0) Destroy(this.gameObject, 0.5f);
     }
     public void IncreaseAttackDamage(int plusAttack, bool callApi = true)
     {
@@ -453,35 +452,9 @@ public class UnitCard : MonoBehaviour
 
     //-------------------- Back Card --------------------//
 
-    protected void ChangeBackCard(int playerTurn)
+    public void SetBackCard(bool isActive)
     {
-        if(backCard != null)
-        {
-            if (playerNo == 1)
-            {
-                backCard.SetActive(playerTurn == 2);
-            }
-            if (playerNo == 2)
-            {
-                backCard.SetActive(playerTurn == 1);
-            }
-        }
+        backCard.SetActive(isActive);
     }
 
-    public void SetBackCard(bool isShowCard)
-    {
-        if (isShowCard)
-        {
-            backCard.SetActive(false);
-        }
-        else
-        {
-            backCard.SetActive(true);
-        }
-    }
-
-    public void RemoveBackCard()
-    {
-        Destroy(backCard);
-    }
 }

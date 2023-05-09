@@ -25,9 +25,6 @@ public class GameController : MonoBehaviour
 
     public DataHandler dataHandler;
     public MultiPlayerController multiPlayerController;
-    public delegate void ChangeCardBackDelegate(int playerNo);
-    public event ChangeCardBackDelegate OnChangeCardBack;
-
     public GameObject endTurnButton;
     public static int CurrentTurn => playerturn;
 
@@ -101,10 +98,6 @@ public class GameController : MonoBehaviour
         playerturn = playerturn == 1 ? 2 : 1;
         if(playerturn == 1)
         {
-            if(OnChangeCardBack != null)
-            {
-                OnChangeCardBack(1);
-            }
             player1Arrow.SetActive(true);
             player2Arrow.SetActive(false);
             //spawnP1Card.SpawnUnit(); // SEND DRAW CARD API
@@ -114,10 +107,6 @@ public class GameController : MonoBehaviour
         }
         else if(playerturn == 2)
         {
-            if (OnChangeCardBack != null)
-            {
-                OnChangeCardBack(2);
-            }
             player1Arrow.SetActive(false);
             player2Arrow.SetActive(true);
             //spawnP2Card.SpawnUnit();

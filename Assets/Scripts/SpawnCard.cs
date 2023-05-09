@@ -98,7 +98,6 @@ public class SpawnCard : MonoBehaviour
                 unitCard.transform.parent = tile.transform;
                 unitCard.GetComponent<UnitCard>().SetPlayerNo(playerNo);
                 unitCard.GetComponent<UnitCard>().RefreshCredit();
-                unitCard.GetComponent<UnitCard>().SetBackCard(isShowCard);
                 return;
             }
         }

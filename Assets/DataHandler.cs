@@ -195,7 +195,7 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetUserCardId(player1HandCards[handIndex].id);
                     newUnitCard.SetPlayerNo(1);
                     newUnitCard.RefreshCredit();
-                    newUnitCard.SetBackCard(true);
+                    newUnitCard.SetBackCard(gameController.GetPlayerId() == 2);
                     if (newUnitCard.GetComponentInParent<Tile>().tileType != Tile.TileType.Player1Tile)
                     {
                         if(newUnitCard.GetAttackDamage() != player1HandCards[handIndex].atk)
@@ -244,7 +244,7 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetUserCardId(player2HandCards[handIndex].id);
                     newUnitCard.SetPlayerNo(2);
                     newUnitCard.RefreshCredit();
-                    newUnitCard.SetBackCard(true);
+                    newUnitCard.SetBackCard(gameController.GetPlayerId() == 1);
                     if (newUnitCard.GetComponentInParent<Tile>().tileType != Tile.TileType.Player2Tile)
                     {
                         if (newUnitCard.GetAttackDamage() != player2HandCards[handIndex].atk)
@@ -335,7 +335,7 @@ public class DataHandler : MonoBehaviour
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
                     newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                     newUnitCard.SetPlayerNo(userCard.player);
-                    newUnitCard.SetBackCard(true);
+                    newUnitCard.SetBackCard(false);
                     
                     if (newUnitCard.GetAttackDamage() != userCard.atk)
                     {
