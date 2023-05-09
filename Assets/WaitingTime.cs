@@ -27,8 +27,6 @@ public class WaitingTime : MonoBehaviour
         // Create initial MatchMaking
         yield return StartCoroutine(roomController.MatchMaking(this.playerId, (response) =>
         {
-            Debug.Log(JsonConvert.SerializeObject(response));
-
             // Store roomId
             this.roomId = response.roomId;
 

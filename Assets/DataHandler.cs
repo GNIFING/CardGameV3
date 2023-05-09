@@ -71,7 +71,7 @@ public class DataHandler : MonoBehaviour
         {
             player2Tile.Add(child.gameObject.GetComponent<Tile>());
         }
-        Debug.Log("Link objects Passed");
+        //Debug.Log("Link objects Passed");
 
         //Draw 3 initial card here
     }
@@ -99,7 +99,7 @@ public class DataHandler : MonoBehaviour
         cardsOnBoard = gameData.cardOnBoard.ToList();
         
         gameOver = gameData.gameOver;
-        Debug.Log("gameOver = " + gameOver);
+        //Debug.Log("gameOver = " + gameOver);
         winner = gameData.winner;
         attackerIndex = gameData.attackerIndex;
         defenderIndex = gameData.defenderIndex;
@@ -107,17 +107,17 @@ public class DataHandler : MonoBehaviour
         gameController.SetPlayerTurn(gameData.playerOne.isTurn ? 1 : 2);
         gameController.endTurnButton.SetActive(gameController.playerId == player1Id ? isPlayer1Turn : isPlayer2Turn);
         
-        Debug.Log("Update Initial Data Passed");
+        //Debug.Log("Update Initial Data Passed");
 
         CheckAttackAnimation(attackerIndex);
         UpdatePlayerStat();
-        Debug.Log("Update Player Stat Passed");
+        //Debug.Log("Update Player Stat Passed");
         UpdatePlayerHands();
-        Debug.Log("Update Player Hand Passed");
+        //Debug.Log("Update Player Hand Passed");
         UpdateArenaCardsPosition();
-        Debug.Log("Update Arena Card Passed");
+        //Debug.Log("Update Arena Card Passed");
         CheckWinCondition();
-        Debug.Log("Update Player Stat Passed");
+        //Debug.Log("Update Player Stat Passed");
     }
 
     public void CheckAttackAnimation(int? attackerIndex)
@@ -292,7 +292,6 @@ public class DataHandler : MonoBehaviour
                         newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                         newUnitCard.SetPlayerNo(userCard.player);
                         newUnitCard.SetBackCard(false);
-                        Debug.Log("userCard.atk = " + userCard.atk);
                         newUnitCard.SetAttackDamage(userCard.atk);
                         newUnitCard.SetHealth(userCard.hp);
                         newUnitCard.UpdateCardUI();
@@ -303,7 +302,7 @@ public class DataHandler : MonoBehaviour
                     else if(unitCard.GetUserCardId() == userCard.id) ///////////////////////////////////////////////////////
                     {
                         // Update the existing unit's attack and health.
-                        Debug.Log("userCard.atk = " + userCard.atk);
+                        //Debug.Log("userCard.atk = " + userCard.atk);
 
                         unitCard.SetAttackDamage(userCard.atk);
                         unitCard.SetHealth(userCard.hp);

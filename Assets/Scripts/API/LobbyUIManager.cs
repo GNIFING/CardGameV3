@@ -49,7 +49,7 @@ public class LobbyUIManager : MonoBehaviour
 
             this.deckItems = deckItems;
 
-            Debug.Log(decks.FirstOrDefault().id);
+            //Debug.Log(decks.FirstOrDefault().id);
             PlayerPrefs.SetInt("DeckId", decks.FirstOrDefault().id);
 
             // -------- Add deckItems to dropdown ---------- //
@@ -71,7 +71,6 @@ public class LobbyUIManager : MonoBehaviour
 
         StartCoroutine(multiPlayerController.CreatePlayer(deckId, (newPlayer) =>
         {
-            Debug.Log(newPlayer.id);
             PlayerPrefs.SetInt("PlayerId", newPlayer.id);
             SceneManager.LoadScene("FindingMatchPage");
         }));

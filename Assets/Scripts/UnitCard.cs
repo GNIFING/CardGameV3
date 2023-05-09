@@ -307,7 +307,7 @@ public class UnitCard : MonoBehaviour
         //----------- SEND API ------------//
         gameController = FindObjectOfType<GameController>();
 
-        Debug.Log("gameController = " + gameController);
+        //Debug.Log("gameController = " + gameController);
         int arenaId = gameController.arenaId;
         multiPlayerController = FindObjectOfType<MultiPlayerController>();
         Tile tileOnThisUnit = GetComponentInParent<Tile>();
@@ -331,7 +331,7 @@ public class UnitCard : MonoBehaviour
 
     public void UpdateCardUI()
     {
-        Debug.Log("attack damage " + id +" = " + attack);
+        //Debug.Log("attack damage " + id +" = " + attack);
         attackText.text = attack.ToString();
         healthText.text = health.ToString();
         manaText.text = mana.ToString();
