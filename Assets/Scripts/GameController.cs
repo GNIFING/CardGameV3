@@ -35,8 +35,8 @@ public class GameController : MonoBehaviour
     {
         playerId = PlayerPrefs.GetInt("PlayerId");
         arenaId = PlayerPrefs.GetInt("ArenaId");
-        playerId = 1;
-        arenaId = 2;
+        //playerId = 1;
+        //arenaId = 2;
 
     }
 
