@@ -213,9 +213,6 @@ public class UnitCard : MonoBehaviour
 
     public void IncreaseHealth(int plusHealth)
     {
-        health += plusHealth;
-        UpdateCardUI();
-
         //----------- SEND API ------------//
         gameController = FindObjectOfType<GameController>();
 
@@ -225,13 +222,12 @@ public class UnitCard : MonoBehaviour
         int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
         StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, plusHealth, 0, (response) => { }));
         //----------- SEND API ------------//
+        health += plusHealth;
+        UpdateCardUI();
     }
 
     public void DecreaseHealth(int minusHealth)
     {
-        health -= minusHealth;
-        UpdateCardUI();
-        if (health <= 0) Destroy(this.gameObject, 0.5f);
 
         //----------- SEND API ------------//
         gameController = FindObjectOfType<GameController>();
@@ -242,12 +238,14 @@ public class UnitCard : MonoBehaviour
         int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
         StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, -minusHealth, 0, (response) => { }));
         //----------- SEND API ------------//
+        health -= minusHealth;
+        UpdateCardUI();
+        if (health <= 0) Destroy(this.gameObject, 0.5f);
+
     }
 
     public void SetHealth(int newHealth)
     {
-        health = newHealth;
-        UpdateCardUI();
         //----------- SEND API ------------//
         gameController = FindObjectOfType<GameController>();
 
@@ -257,11 +255,11 @@ public class UnitCard : MonoBehaviour
         int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
         StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, newHealth - health, 0, (response) => { }));
         //----------- SEND API ------------//
+        health = newHealth;
+        UpdateCardUI();
     }
     public void IncreaseAttackDamage(int plusAttack)
     {
-        attack += plusAttack;
-        UpdateCardUI();
         //----------- SEND API ------------//
         gameController = FindObjectOfType<GameController>();
 
@@ -273,11 +271,13 @@ public class UnitCard : MonoBehaviour
         Debug.Log("plusAttack = " + plusAttack);
         StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, plusAttack, (response) => { Debug.Log(response.atk); }));
         //----------- SEND API ------------//
+        attack += plusAttack;
+        UpdateCardUI();
     }
 
     public void DecreaseAttackDamage(int minusAttack)
     {
-        attack -= minusAttack;
+        
         if(attack <= 0)
         {
             attack = 0;
@@ -292,12 +292,12 @@ public class UnitCard : MonoBehaviour
         int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
         StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, -minusAttack, (response) => { }));
         //----------- SEND API ------------//
+        attack -= minusAttack;
+        UpdateCardUI();
     }
 
     public void SetAttackDamage(int newAttackDamage)
     {
-        attack = newAttackDamage;
-        UpdateCardUI();
         //----------- SEND API ------------//
         gameController = FindObjectOfType<GameController>();
 
@@ -308,6 +308,8 @@ public class UnitCard : MonoBehaviour
         int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
         StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, newAttackDamage - attack, (response) => { }));
         //----------- SEND API ------------//
+        attack = newAttackDamage;
+        UpdateCardUI();
     }
 
     public int GetHealth()
@@ -322,6 +324,7 @@ public class UnitCard : MonoBehaviour
 
     public void UpdateCardUI()
     {
+        Debug.Log("attack damage " + id +" = " + attack);
         attackText.text = attack.ToString();
         healthText.text = health.ToString();
         manaText.text = mana.ToString();

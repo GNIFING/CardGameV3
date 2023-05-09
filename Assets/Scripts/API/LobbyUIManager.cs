@@ -32,7 +32,7 @@ public class LobbyUIManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("PlayerId", (int)response.playerId);
 
-                SceneManager.LoadScene("FindingMatch");
+                SceneManager.LoadScene("FindingMatchPage");
             }
         }));
 

@@ -99,6 +99,7 @@ public class DataHandler : MonoBehaviour
         cardsOnBoard = gameData.cardOnBoard.ToList();
         
         gameOver = gameData.gameOver;
+        Debug.Log("gameOver = " + gameOver);
         winner = gameData.winner;
         attackerIndex = gameData.attackerIndex;
         defenderIndex = gameData.defenderIndex;
@@ -199,6 +200,8 @@ public class DataHandler : MonoBehaviour
                     {
                         newUnitCard.SetAttackDamage(player1HandCards[handIndex].atk);
                         newUnitCard.SetHealth(player1HandCards[handIndex].hp);
+                        newUnitCard.UpdateCardUI();
+
                     }
                 }
             }
@@ -242,6 +245,8 @@ public class DataHandler : MonoBehaviour
                     {
                         newUnitCard.SetAttackDamage(player2HandCards[handIndex].atk);
                         newUnitCard.SetHealth(player2HandCards[handIndex].hp);
+                        newUnitCard.UpdateCardUI();
+
                     }
                 }
             }
@@ -260,9 +265,10 @@ public class DataHandler : MonoBehaviour
                 if (tiles[arenaIndex].GetUnitInTile() != null)
                 {
                     Destroy(tiles[arenaIndex].GetUnitInTile());
-                    Debug.Log("Destrot case 1");
+                    Debug.Log("case 1");
                 }
                 // If there is no unit and no card, do nothing.
+                Debug.Log("case 2");
             }
             else
             {
@@ -270,37 +276,43 @@ public class DataHandler : MonoBehaviour
                 {
                     // If there is already a unit in this tile, check if it needs to be replaced.
                     UnitCard unitCard = tiles[arenaIndex].GetUnitInTile().GetComponent<UnitCard>();
-                    UserCard userCard = cardsOnBoard.Where(u => u.id == arena.arenaArray[arenaIndex]).Select(u => u).FirstOrDefault();
+                    UserCard userCard = cardsOnBoard.SingleOrDefault(x => x.id == arena.arenaArray[arenaIndex]);
 
                     if (unitCard.GetUserCardId() != userCard.id)
                     {
-                        Debug.Log("unitCard.GetId() = " + unitCard.GetId());
-                        Debug.Log("userCard.id = " + userCard.id);
+                        Debug.Log("case 3");
                         // Destroy the existing unit and spawn a new one.
                         Destroy(unitCard.gameObject);
 
                         GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
                         newUnitCardObj.transform.parent = tiles[arenaIndex].transform;
                         UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
+
                         newUnitCard.isPlayCard = true;
                         newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                         newUnitCard.SetPlayerNo(userCard.player);
-                        newUnitCard.SetBackCard(true);
+                        newUnitCard.SetBackCard(false);
+                        Debug.Log("userCard.atk = " + userCard.atk);
                         newUnitCard.SetAttackDamage(userCard.atk);
                         newUnitCard.SetHealth(userCard.hp);
+                        newUnitCard.UpdateCardUI();
 
                         // Set the new unit's credit based on whether it's ready or not.
                         newUnitCard.SetCardCredit(userCard.isReady ? 1 : 0);
                     }
-                    else if(unitCard.GetId() == userCard.id)
+                    else if(unitCard.GetUserCardId() == userCard.id) ///////////////////////////////////////////////////////
                     {
                         // Update the existing unit's attack and health.
+                        Debug.Log("userCard.atk = " + userCard.atk);
+
                         unitCard.SetAttackDamage(userCard.atk);
                         unitCard.SetHealth(userCard.hp);
+                        
                     }
                 }
                 else if (tiles[arenaIndex].GetUnitInTile() == null)
                 {
+                    Debug.Log("Case 10");
                     // If there is no unit in this tile, spawn a new one.
                     UserCard userCard = cardsOnBoard.Where(u => u.id == arena.arenaArray[arenaIndex]).Select(u => u).FirstOrDefault();
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
@@ -311,6 +323,7 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetBackCard(true);
                     newUnitCard.SetAttackDamage(userCard.atk);
                     newUnitCard.SetHealth(userCard.hp);
+                    newUnitCard.UpdateCardUI();
 
                     // Set the new unit's credit based on whether it's ready or not.
                     newUnitCard.SetCardCredit(userCard.isReady ? 1 : 0);
