@@ -200,11 +200,11 @@ public class DataHandler : MonoBehaviour
                     {
                         if(newUnitCard.GetAttackDamage() != player1HandCards[handIndex].atk)
                         {
-                            newUnitCard.SetAttackDamage(player1HandCards[handIndex].atk);
+                            newUnitCard.SetAttackDamage(player1HandCards[handIndex].atk, false);
                         }
                         if(newUnitCard.GetHealth() != player1HandCards[handIndex].hp)
                         {
-                            newUnitCard.SetHealth(player1HandCards[handIndex].hp);
+                            newUnitCard.SetHealth(player1HandCards[handIndex].hp, false);
                         }
                     }
                 }
@@ -249,11 +249,11 @@ public class DataHandler : MonoBehaviour
                     {
                         if (newUnitCard.GetAttackDamage() != player2HandCards[handIndex].atk)
                         {
-                            newUnitCard.SetAttackDamage(player2HandCards[handIndex].atk);
+                            newUnitCard.SetAttackDamage(player2HandCards[handIndex].atk, false);
                         }
                         if (newUnitCard.GetHealth() != player2HandCards[handIndex].hp)
                         {
-                            newUnitCard.SetHealth(player2HandCards[handIndex].hp);
+                            newUnitCard.SetHealth(player2HandCards[handIndex].hp, false);
                         }
                     }
                 }
@@ -303,11 +303,11 @@ public class DataHandler : MonoBehaviour
                         
                         if (newUnitCard.GetAttackDamage() != userCard.atk)
                         {
-                            newUnitCard.SetAttackDamage(userCard.atk);
+                            newUnitCard.SetAttackDamage(userCard.atk, false);
                         }
                         if (newUnitCard.GetHealth() != userCard.hp)
                         {
-                            newUnitCard.SetHealth(userCard.hp);
+                            newUnitCard.SetHealth(userCard.hp, false);
                         }
                         // Set the new unit's credit based on whether it's ready or not.
                         newUnitCard.SetCardCredit(userCard.isReady ? 1 : 0);
@@ -317,11 +317,11 @@ public class DataHandler : MonoBehaviour
                         // Update the existing unit's attack and health.
                         if (unitCard.GetAttackDamage() != userCard.atk)
                         {
-                            unitCard.SetAttackDamage(userCard.atk);
+                            unitCard.SetAttackDamage(userCard.atk, false);
                         }
                         if (unitCard.GetHealth() != userCard.hp)
                         {
-                            unitCard.SetHealth(userCard.hp);
+                            unitCard.SetHealth(userCard.hp, false);
                         }
                     }
                 }
@@ -339,11 +339,11 @@ public class DataHandler : MonoBehaviour
                     
                     if (newUnitCard.GetAttackDamage() != userCard.atk)
                     {
-                        newUnitCard.SetAttackDamage(userCard.atk);
+                        newUnitCard.SetAttackDamage(userCard.atk, false);
                     }
                     if (newUnitCard.GetHealth() != userCard.hp)
                     {
-                        newUnitCard.SetHealth(userCard.hp);
+                        newUnitCard.SetHealth(userCard.hp, false);
                     }
                     // Set the new unit's credit based on whether it's ready or not.
                     newUnitCard.SetCardCredit(userCard.isReady ? 1 : 0);
