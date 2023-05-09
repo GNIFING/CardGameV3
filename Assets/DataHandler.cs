@@ -108,6 +108,7 @@ public class DataHandler : MonoBehaviour
         
         Debug.Log("Update Initial Data Passed");
 
+        CheckAttackAnimation(attackerIndex);
         UpdatePlayerStat();
         Debug.Log("Update Player Stat Passed");
         UpdatePlayerHands();
@@ -118,6 +119,29 @@ public class DataHandler : MonoBehaviour
         Debug.Log("Update Player Stat Passed");
     }
 
+    public void CheckAttackAnimation(int? attackerIndex)
+    {
+        if(attackerIndex == null)
+        {
+            //do nothing
+        }
+        else
+        {
+            UnitCard attakerUnit = tiles[(int)attackerIndex].GetUnitInTile().GetComponent<UnitCard>();
+            UnitCard defenderUnit = tiles[(int)defenderIndex].GetUnitInTile().GetComponent<UnitCard>();
+
+            if(attakerUnit.unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
+            {
+                attakerUnit.MeleeAttackAnimation(defenderUnit);
+            }
+            else
+            {
+                attakerUnit.RangeAttackAnimation(defenderUnit.gameObject);
+            }
+
+            //run animation
+        }
+    }
     public void CheckWinCondition()
     {
         if(gameOver == true)
@@ -171,8 +195,11 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetPlayerNo(1);
                     newUnitCard.RefreshCredit();
                     newUnitCard.SetBackCard(true);
-                    newUnitCard.SetAttackDamage(player1HandCards[handIndex].card.atk);
-                    newUnitCard.SetHealth(player1HandCards[handIndex].card.hp);
+                    if (newUnitCard.GetComponentInParent<Tile>().tileType != Tile.TileType.Player1Tile)
+                    {
+                        newUnitCard.SetAttackDamage(player1HandCards[handIndex].card.atk);
+                        newUnitCard.SetHealth(player1HandCards[handIndex].card.hp);
+                    }
                 }
             }
         }
@@ -211,8 +238,11 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetPlayerNo(2);
                     newUnitCard.RefreshCredit();
                     newUnitCard.SetBackCard(true);
-                    newUnitCard.SetAttackDamage(player2HandCards[handIndex].card.atk);
-                    newUnitCard.SetHealth(player2HandCards[handIndex].card.hp);
+                    if (newUnitCard.GetComponentInParent<Tile>().tileType != Tile.TileType.Player2Tile)
+                    {
+                        newUnitCard.SetAttackDamage(player2HandCards[handIndex].card.atk);
+                        newUnitCard.SetHealth(player2HandCards[handIndex].card.hp);
+                    }
                 }
             }
         }

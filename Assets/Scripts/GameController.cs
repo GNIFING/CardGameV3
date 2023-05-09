@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public SpawnCard spawnP2Card;
     public PlayerController playerController;
     public TileManager tileManager;
+    public int arenaId;
 
     [SerializeField]
     private GameObject player1Arrow;
@@ -33,7 +34,10 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         playerId = PlayerPrefs.GetInt("PlayerId");
+        arenaId = PlayerPrefs.GetInt("ArenaId");
         playerId = 1;
+        arenaId = 2;
+
     }
 
     private void Update()
@@ -88,8 +92,6 @@ public class GameController : MonoBehaviour
 
         //----------- SEND API -----------//
 
-        int arenaId = PlayerPrefs.GetInt("ArenaId");
-        arenaId = 23;
         int playerIndex;
         if(playerId == 1)
         {
@@ -115,7 +117,7 @@ public class GameController : MonoBehaviour
             player2Arrow.SetActive(false);
             //spawnP1Card.SpawnUnit(); // SEND DRAW CARD API
             playerController.RefreshPlayerMana(1);
-            RefreshPlayerCredit(1);
+            RefreshPlayerCredit(2);
             UseUnitsStartturnSkill(1); 
         }
         else if(playerturn == 2)
@@ -128,7 +130,7 @@ public class GameController : MonoBehaviour
             player2Arrow.SetActive(true);
             //spawnP2Card.SpawnUnit();
             playerController.RefreshPlayerMana(2);
-            RefreshPlayerCredit(2);
+            RefreshPlayerCredit(1);
             UseUnitsStartturnSkill(2);
         }
         //RefreshPlayerCredit(playerturn == 1 ? 2 : 1);

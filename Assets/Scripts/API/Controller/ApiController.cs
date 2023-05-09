@@ -13,7 +13,7 @@ namespace Assets.Scripts.API.Controller
             // ---------- If unauthorized, load scene login ---------- //
             if (request.responseCode != 200)
             {
-                SceneManager.LoadScene("LoginPage");
+                //SceneManager.LoadScene("LoginPage");
             }
         }
     }

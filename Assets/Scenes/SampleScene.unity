@@ -7565,6 +7565,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 143956405}
     - target: {fileID: 22422081159505342, guid: da8c121d5eebdea47a7f327cb3e9c28f, type: 3}
+      propertyPath: dataHandler
+      value: 
+      objectReference: {fileID: 1843965771}
+    - target: {fileID: 22422081159505342, guid: da8c121d5eebdea47a7f327cb3e9c28f, type: 3}
       propertyPath: spawnP1Card
       value: 
       objectReference: {fileID: 513062228}
@@ -7585,6 +7589,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1264270920}
     - target: {fileID: 22422081159505342, guid: da8c121d5eebdea47a7f327cb3e9c28f, type: 3}
+      propertyPath: endTurnButton
+      value: 
+      objectReference: {fileID: 845276308}
+    - target: {fileID: 22422081159505342, guid: da8c121d5eebdea47a7f327cb3e9c28f, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 778456478}
@@ -7592,6 +7600,10 @@ PrefabInstance:
       propertyPath: playerHpController
       value: 
       objectReference: {fileID: 778456478}
+    - target: {fileID: 22422081159505342, guid: da8c121d5eebdea47a7f327cb3e9c28f, type: 3}
+      propertyPath: multiPlayerController
+      value: 
+      objectReference: {fileID: 719817399}
     - target: {fileID: 22422081159505343, guid: da8c121d5eebdea47a7f327cb3e9c28f, type: 3}
       propertyPath: m_RootOrder
       value: 6

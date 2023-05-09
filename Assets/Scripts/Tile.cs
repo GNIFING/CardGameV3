@@ -219,9 +219,8 @@ public class Tile : MonoBehaviour
                 playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.GetAttackDamage());
 
                 //----------------- SEND API HERE -------------------//
-
-
-
+                
+                
 
                 //----------------- Attack Animation -------------------//
                 if (selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
@@ -394,7 +393,7 @@ public class Tile : MonoBehaviour
     {
         //------------ SEND API HERE ---------------//
         int arenaId = PlayerPrefs.GetInt("ArenaId");
-        arenaId = 23;
+        arenaId = gameController.arenaId;
         int beforeTileIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
         int afterTileIndex = ConvertTilePosToIndex(xPos, yPos);
         StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => 
@@ -433,7 +432,7 @@ public class Tile : MonoBehaviour
         }
 
         //int cardId = selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
-        arenaId = 23;
+        arenaId = gameController.arenaId;
         int tileIndex = ConvertTilePosToIndex(xPos, yPos);
         StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
         {
@@ -469,7 +468,7 @@ public class Tile : MonoBehaviour
         Tile unitHandTile = unit.GetComponentInParent<Tile>();
         int handTileIndex = ConvertTilePosToIndex(unitHandTile.GetXPos(), unitHandTile.GetYPos());
         int cardId = playerNo == 1? dataHandler.player1HandCards[handTileIndex].id : dataHandler.player2HandCards[handTileIndex].id;
-        arenaId = 23;
+        arenaId = gameController.arenaId;
         int tileIndex = ConvertTilePosToIndex(towerTile.GetComponent<Tile>().GetXPos(), towerTile.GetComponent<Tile>().GetYPos());
         StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
         {
