@@ -143,7 +143,7 @@ public class GameController : MonoBehaviour
 
     public int GetPlayerId()
     {
-        return playerId;
+        return playerId == dataHandler.player1Id? 1 : 2;
     }
     private void RefreshPlayerCredit(int playerNo)
     {
@@ -156,5 +156,13 @@ public class GameController : MonoBehaviour
                 unitCard.RefreshCredit();
             }
         }
+    }
+
+    public void Surrender()
+    {
+        Debug.Log("Surrender");
+        StartCoroutine(multiPlayerController.Surrender(arenaId, playerId, (response) => { }));
+
+
     }
 }

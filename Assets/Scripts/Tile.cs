@@ -120,8 +120,8 @@ public class Tile : MonoBehaviour
             HandleClickOnTile(unit, selectUnit);
             Debug.Log("Can Play");
         }
-            Debug.Log(gameController.GetPlayerId());
-            Debug.Log(GameController.CurrentTurn);
+        Debug.Log(gameController.GetPlayerId());
+        Debug.Log(GameController.CurrentTurn);
     }
         
 
