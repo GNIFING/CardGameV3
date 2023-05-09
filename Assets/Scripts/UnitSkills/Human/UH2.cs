@@ -12,6 +12,7 @@ public class UH2 : UnitCard
 
     public override void UnitSkill()
     {
+        Debug.Log("UH2 SKILL");
         GameObject unitInSelectTile = skillTargetUnit;
         UnitCard unitInSelectTileCard = unitInSelectTile.GetComponent<UnitCard>();
         unitInSelectTileCard.IncreaseAttackDamage(1);
