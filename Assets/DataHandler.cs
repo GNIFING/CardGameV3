@@ -128,17 +128,42 @@ public class DataHandler : MonoBehaviour
         }
         else
         {
-            UnitCard attakerUnit = tiles[(int)attackerIndex].GetUnitInTile().GetComponent<UnitCard>();
-            UnitCard defenderUnit = tiles[(int)defenderIndex].GetUnitInTile().GetComponent<UnitCard>();
-
-            if(attakerUnit.unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
+            UnitCard attackerUnit = tiles[(int)attackerIndex].GetUnitInTile().GetComponent<UnitCard>();
+            UnitCard defenderUnit = null;
+            if (defenderIndex != null)
             {
-                attakerUnit.MeleeAttackAnimation(defenderUnit);
+                defenderUnit = tiles[(int)defenderIndex].GetUnitInTile().GetComponent<UnitCard>();
+                if(attackerUnit.unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
+                {
+                    attackerUnit.MeleeAttackAnimation(defenderUnit);
+                }
+                else
+                {
+                    attackerUnit.RangeAttackAnimation(defenderUnit.gameObject);
+                }
             }
             else
             {
-                attakerUnit.RangeAttackAnimation(defenderUnit.gameObject);
+                if (attackerUnit.unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
+                {
+                    attackerUnit.MeleeAttackAnimation(defenderUnit);
+                }
+                else
+                {
+                    int yPos = attackerUnit.GetComponentInChildren<Tile>().GetYPos();
+                    GameObject targetTileObj;
+                    if (attackerUnit.GetPlayerNo() == 1)
+                    {
+                        targetTileObj = GameObject.Find($"Tile {6} {yPos}");
+                    }
+                    else
+                    {
+                        targetTileObj = GameObject.Find($"Tile {0} {yPos}");
+                    }
+                    attackerUnit.RangeAttackAnimation(targetTileObj);
+                }
             }
+
 
             //run animation
         }
@@ -174,7 +199,7 @@ public class DataHandler : MonoBehaviour
                 if (player1Tile[handIndex].GetUnitInTile() != null)
                 {
                     GameObject unitCard = player1Tile[handIndex].GetUnitInTile();
-                    Destroy(unitCard);
+                    Destroy(unitCard, 0.5f);
                 }
             }
             else if (player1HandCards[handIndex] != null)
@@ -184,7 +209,7 @@ public class DataHandler : MonoBehaviour
                     UnitCard unitCard = player1Tile[handIndex].GetUnitInTile().GetComponent<UnitCard>();
                     if(unitCard.GetUserCardId() != player1HandCards[handIndex].id)
                     {
-                        Destroy(unitCard.gameObject);
+                        Destroy(unitCard.gameObject, 0.5f);
                     }
                 }
                 else if(player1Tile[handIndex].GetUnitInTile() == null)
@@ -219,7 +244,7 @@ public class DataHandler : MonoBehaviour
                 if (player2Tile[handIndex].GetUnitInTile() != null)
                 {
                     GameObject unitCard = player2Tile[handIndex].GetUnitInTile();
-                    Destroy(unitCard);
+                    Destroy(unitCard, 0.5f);
                     Debug.Log("Destroy case -1");
 
                 }
@@ -231,7 +256,7 @@ public class DataHandler : MonoBehaviour
                     UnitCard unitCard = player2Tile[handIndex].GetUnitInTile().GetComponent<UnitCard>();
                     if (unitCard.GetUserCardId() != player2HandCards[handIndex].id)
                     {
-                        Destroy(unitCard.gameObject);
+                        Destroy(unitCard.gameObject, 0.5f);
                         Debug.Log("Destroy case 0");
 
                     }
@@ -272,7 +297,7 @@ public class DataHandler : MonoBehaviour
                 // If there is no unit in this tile, remove any existing unit.
                 if (tiles[arenaIndex].GetUnitInTile() != null)
                 {
-                    Destroy(tiles[arenaIndex].GetUnitInTile());
+                    Destroy(tiles[arenaIndex].GetUnitInTile(), 0.5f);
                     Debug.Log("case 1");
                 }
                 // If there is no unit and no card, do nothing.
@@ -290,7 +315,7 @@ public class DataHandler : MonoBehaviour
                     {
                         Debug.Log("case 3");
                         // Destroy the existing unit and spawn a new one.
-                        Destroy(unitCard.gameObject);
+                        Destroy(unitCard.gameObject, 0.5f);
 
                         GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
                         newUnitCardObj.transform.parent = tiles[arenaIndex].transform;

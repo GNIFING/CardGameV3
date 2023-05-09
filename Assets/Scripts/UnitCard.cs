@@ -241,7 +241,7 @@ public class UnitCard : MonoBehaviour
 
         if (callApi == true)
         {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, -minusHealth, 0, (response) => { }));
+            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, -minusHealth, 0, (response) => { Debug.Log("Update Card Done"); }));
         }
         Debug.Log("decrease health - " + minusHealth + "Passed");
         //----------- SEND API ------------//
@@ -365,7 +365,7 @@ public class UnitCard : MonoBehaviour
         Tile defenderTile = unitAttacked.GetComponentInParent<Tile>();
         int defenderIndex = defenderTile.ConvertTilePosToIndex(defenderTile.GetXPos(), defenderTile.GetYPos());
         multiPlayerController = FindObjectOfType<MultiPlayerController>();
-        StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => { }));
+        StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => { Debug.Log("Attack Card Done"); }));
         //----------- SEND API ------------//
         if (unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
         {

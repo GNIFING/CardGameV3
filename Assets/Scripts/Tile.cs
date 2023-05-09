@@ -333,11 +333,12 @@ public class Tile : MonoBehaviour
                 MoveUnitToTowerTile(selectUnit, selectUnitCard.GetPlayerNo(), xPos, yPos);
                 Debug.Log("Move Unit Passed");
             }
-
-            Debug.Log("Attack Enemy");
-            selectUnitCard.AttackUnit(unitCard);
+            else
+            {
+                selectUnitCard.AttackUnit(unitCard);
+                Debug.Log("Attack Enemy");
+            }
             selectUnitCard.ReduceCardCredit();
-
             tileManager.DeSelectUnit();
 
         }
@@ -479,7 +480,8 @@ public class Tile : MonoBehaviour
         int tileIndex = ConvertTilePosToIndex(towerTile.GetComponent<Tile>().GetXPos(), towerTile.GetComponent<Tile>().GetYPos());
         StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
         {
-            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { }));
+            Debug.Log("Lay Down Done");
+            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { Debug.Log("Mark Use Done"); }));
         }));
         //------------------------------------------//
 
