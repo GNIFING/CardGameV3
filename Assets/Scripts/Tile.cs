@@ -216,11 +216,19 @@ public class Tile : MonoBehaviour
             if (selectUnitCard.GetPlayerNo() == 2)
             {
                 //hit tower 1 tile
-                playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.GetAttackDamage());
+                //playerController.SetPlayerHP(1, playerController.GetPlayerHP(1) - selectUnitCard.GetAttackDamage());
 
                 //----------------- SEND API HERE -------------------//
-                
-                
+
+                int arenaId = PlayerPrefs.GetInt("ArenaId");
+                arenaId = gameController.arenaId;
+                int attackerIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
+                int defenderId = dataHandler.player1Id;
+                StartCoroutine(multiPlayerController.AttackTower(arenaId, defenderId, attackerIndex, (response) =>
+                {
+                    StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
+                }));
+
 
                 //----------------- Attack Animation -------------------//
                 if (selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
@@ -250,12 +258,18 @@ public class Tile : MonoBehaviour
             if (selectUnitCard.GetPlayerNo() == 1)
             {
                 //hit tower 2 tile
-                playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.GetAttackDamage());
+                //playerController.SetPlayerHP(2, playerController.GetPlayerHP(2) - selectUnitCard.GetAttackDamage());
 
                 //----------------- SEND API HERE -------------------//
 
-
-
+                int arenaId = PlayerPrefs.GetInt("ArenaId");
+                arenaId = gameController.arenaId;
+                int attackerIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
+                int defenderId = dataHandler.player2Id;
+                StartCoroutine(multiPlayerController.AttackTower(arenaId, defenderId, attackerIndex, (response) =>
+                {
+                    StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
+                }));
 
                 //----------------- Attack Animation -------------------//
                 if (selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
