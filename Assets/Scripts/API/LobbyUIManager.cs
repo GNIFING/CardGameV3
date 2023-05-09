@@ -21,12 +21,18 @@ public class LobbyUIManager : MonoBehaviour
     {
         yield return StartCoroutine(userController.IsInGame((response) =>
         {
-            if (response.playerId != null && response.arenaId != null)
+            if (response.isInGame)
             {
                 PlayerPrefs.SetInt("ArenaId", (int)response.arenaId);
                 PlayerPrefs.SetInt("PlayerId", (int)response.playerId);
 
                 SceneManager.LoadScene("SampleScene");
+            }
+            else if (response.isInRoom)
+            {
+                PlayerPrefs.SetInt("PlayerId", (int)response.playerId);
+
+                SceneManager.LoadScene("FindingMatch");
             }
         }));
 
