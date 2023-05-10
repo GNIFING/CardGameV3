@@ -185,7 +185,11 @@ public class DataHandler : MonoBehaviour
             yield return new WaitForSeconds(5);
 
             // Set result
-            if (winner == 1 && gameController.playerId == this.player1Id)
+            if (winner == 1 && (gameController.playerId == this.player1Id))
+            {
+                PlayerPrefs.SetString("Result", "Victory");
+            }
+            else if (winner == 2 && (gameController.playerId == this.player2Id))
             {
                 PlayerPrefs.SetString("Result", "Victory");
             }

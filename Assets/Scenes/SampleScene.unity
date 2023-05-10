@@ -31994,8 +31994,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1855405217901779101, guid: 51faec8e69fdb984fa0d46e112efc32c, type: 3}
   - {fileID: 0}
-  player1CardNo: {fileID: 0}
-  player2CardNo: {fileID: 0}
+  player1CardNo: {fileID: 1908505390}
+  player2CardNo: {fileID: 1348980269}
 --- !u!1001 &1847528928
 PrefabInstance:
   m_ObjectHideFlags: 0
