@@ -9,6 +9,7 @@ public class DataHandler : MonoBehaviour
     //-------------- Player 1 --------------//
     
     public int player1Id;
+    public int player1CardLeft;
     public int player1DeckId;
     public List<UserCard?> player1HandCards;
     public int player1Hp;
@@ -19,6 +20,7 @@ public class DataHandler : MonoBehaviour
     //-------------- Player 2 --------------//
 
     public int player2Id;
+    public int player2CardLeft;
     public int player2DeckId;
     public List<UserCard?> player2HandCards;
     public int player2Hp;
@@ -29,6 +31,8 @@ public class DataHandler : MonoBehaviour
     //-------------- Arena --------------//
 
     public Arena arena;
+    public bool buff1Active;
+    public bool buff2Active;
 
     //-------------- CardsOnBoard --------------//
 
@@ -55,6 +59,9 @@ public class DataHandler : MonoBehaviour
     public SpawnCard player2Spawn;
     public List<Tile> player1Tile;
     public List<Tile> player2Tile;
+
+    public Tile buffTile1;
+    public Tile buffTile2;
 
     public List<GameObject> cardPrefabs;
 
@@ -83,6 +90,7 @@ public class DataHandler : MonoBehaviour
     public void UpdateData(GameData gameData)
     {
         player1Id = gameData.playerOne.id;
+        player1CardLeft = gameData.playerOne.cardLeft;
         player1DeckId = gameData.playerOne.deckId;
         player1HandCards = gameData.playerOne.cards.ToList();
         player1Hp = gameData.playerOne.hp;
@@ -91,6 +99,7 @@ public class DataHandler : MonoBehaviour
         isPlayer1Turn = gameData.playerOne.isTurn;
 
         player2Id = gameData.playerTwo.id;
+        player2CardLeft = gameData.playerTwo.cardLeft;
         player2DeckId = gameData.playerTwo.deckId;
         player2HandCards = gameData.playerTwo.cards.ToList();
         player2Hp = gameData.playerTwo.hp;
@@ -110,6 +119,18 @@ public class DataHandler : MonoBehaviour
 
         gameController.SetPlayerTurn(gameData.playerOne.isTurn ? 1 : 2);
         gameController.endTurnButton.SetActive(gameController.playerId == player1Id ? isPlayer1Turn : isPlayer2Turn);
+
+        buff1Active = gameData.arena.buffOneActive;
+        buff2Active = gameData.arena.buffTwoActive;
+
+        if (!buff1Active)
+        {
+            Destroy(buffTile1.buff);
+        }
+        if (!buff2Active)
+        {
+            Destroy(buffTile2.buff);
+        }
         
         //Debug.Log("Update Initial Data Passed");
 
@@ -123,8 +144,8 @@ public class DataHandler : MonoBehaviour
         StartCoroutine(CheckWinCondition());
         //Debug.Log("Update Player Stat Passed");
 
-        player1CardNo.text = player1HandCards.Count.ToString();
-        player2CardNo.text = player2HandCards.Count.ToString();
+        player1CardNo.text = player1CardLeft.ToString();
+        player2CardNo.text = player2CardLeft.ToString();
     }
 
     public void CheckAttackAnimation(int? attackerIndex)

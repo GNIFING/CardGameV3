@@ -16,6 +16,7 @@ public class GameData
 public class Player
 {
     public int id;
+    public int cardLeft;
     public int deckId;
     public UserCard?[] cards;
     public int hp;

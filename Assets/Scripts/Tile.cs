@@ -18,7 +18,9 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject unitHighlight;
     [SerializeField] private int xPos = 0;
     [SerializeField] private int yPos = 0;
-    [SerializeField] private GameObject buff;
+    public GameObject buff;
+    [SerializeField] private int buffIndex;
+
 
     private GameObject unit;
     private UnitCard unitCard;
@@ -409,12 +411,23 @@ public class Tile : MonoBehaviour
         StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => 
         { 
             StartCoroutine(multiPlayerController.MarkUseCard(arenaId, afterTileIndex, (response) => { }));
-            if (buff != null)
+            if (buff != null && buffIndex == 1)
             {
                 selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
                 selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+
+                StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { }));
                 Destroy(buff, 0.3f);
             }
+            if (buff != null && buffIndex == 2)
+            {
+                selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+                selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+
+                StartCoroutine(multiPlayerController.UpdateBuff(arenaId, dataHandler.arena.buffOneActive, false, (response) => { }));
+                Destroy(buff, 0.3f);
+            }
+
         }));
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
