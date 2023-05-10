@@ -96,10 +96,12 @@ public class GameController : MonoBehaviour
 
         UpdateIsPlay();
         playerturn = playerturn == 1 ? 2 : 1;
-        if(playerturn == 1)
+
+        player1Arrow.SetActive(playerturn == 1);
+        player2Arrow.SetActive(playerturn == 2);
+
+        if (playerturn == 1)
         {
-            player1Arrow.SetActive(true);
-            player2Arrow.SetActive(false);
             //spawnP1Card.SpawnUnit(); // SEND DRAW CARD API
             playerController.RefreshPlayerMana(1);
             RefreshPlayerCredit(2);
@@ -107,8 +109,6 @@ public class GameController : MonoBehaviour
         }
         else if(playerturn == 2)
         {
-            player1Arrow.SetActive(false);
-            player2Arrow.SetActive(true);
             //spawnP2Card.SpawnUnit();
             playerController.RefreshPlayerMana(2);
             RefreshPlayerCredit(1);

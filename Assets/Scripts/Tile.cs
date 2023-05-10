@@ -409,17 +409,18 @@ public class Tile : MonoBehaviour
         StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => 
         { 
             StartCoroutine(multiPlayerController.MarkUseCard(arenaId, afterTileIndex, (response) => { }));
+            if (buff != null)
+            {
+                selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+                selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+                Destroy(buff, 0.3f);
+            }
         }));
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;
         selectUnit.GetComponent<UnitCard>().ReduceCardCredit();
-        if(buff != null)
-        {
-            selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-            selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
-            Destroy(buff, 0.3f);
-        }
+        
     }
 
     public void MoveUnitFromHandToArenaTile(GameObject selectUnit)

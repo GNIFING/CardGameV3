@@ -22,9 +22,11 @@ public class UO32 : UnitCard
         Debug.Log("Highlight from Ogre 32");
     }
 
-    public override void MeleeAttack(UnitCard unitAttacked)
+    public override IEnumerator MeleeAttack(UnitCard unitAttacked)
     {
         TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
+        yield return new WaitForSeconds(0.5f);
+
         unitAttacked.TakeDamage(this, attack);
         MeleeAttackAnimation(unitAttacked);
         

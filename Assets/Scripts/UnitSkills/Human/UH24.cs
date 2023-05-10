@@ -22,11 +22,12 @@ public class UH24 : UnitCard
         Debug.Log("Highlight from unit 24");
     }
 
-    public override void MeleeAttack(UnitCard unitAttacked)
+    public override IEnumerator MeleeAttack(UnitCard unitAttacked)
     {
         TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
+        yield return new WaitForSeconds(0.5f);
         unitAttacked.TakeDamage(this, attack * 2);
-        
+
         MeleeAttackAnimation(unitAttacked);
 
         if (unitAttacked.GetHealth() <= 0) Destroy(unitAttacked.gameObject, 0.5f);

@@ -150,7 +150,7 @@ public class DataHandler : MonoBehaviour
                 }
                 else
                 {
-                    int yPos = attackerUnit.GetComponentInChildren<Tile>().GetYPos();
+                    int yPos = attackerUnit.GetComponentInParent<Tile>().GetYPos();
                     GameObject targetTileObj;
                     if (attackerUnit.GetPlayerNo() == 1)
                     {

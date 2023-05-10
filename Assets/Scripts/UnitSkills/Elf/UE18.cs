@@ -21,10 +21,12 @@ public class UE18 : UnitCard
         Debug.Log("Highlight from Elf 9");
     }
 
-    public override void MeleeAttack(UnitCard unitAttacked)
+    public override IEnumerator MeleeAttack(UnitCard unitAttacked)
     {
         TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
-        if(unitAttacked.GetAttackDamage() < 3)
+        yield return new WaitForSeconds(0.5f);
+
+        if (unitAttacked.GetAttackDamage() < 3)
         {
             Destroy(unitAttacked.gameObject, 0.5f);
         }

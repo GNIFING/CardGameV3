@@ -379,9 +379,10 @@ public class UnitCard : MonoBehaviour
         }
     }
 
-    public virtual void MeleeAttack(UnitCard unitAttacked)
+    public virtual IEnumerator MeleeAttack(UnitCard unitAttacked)
     {
         TakeDamage(unitAttacked, unitAttacked.attack);
+        yield return new WaitForSeconds(0.5f);
         unitAttacked.TakeDamage(this, attack);
 
         //MeleeAttackAnimation(unitAttacked);
