@@ -31961,8 +31961,8 @@ MonoBehaviour:
   player2Spawn: {fileID: 143956405}
   player1Tile: []
   player2Tile: []
-  buffTile1: {fileID: 0}
-  buffTile2: {fileID: 0}
+  buffTile1: {fileID: 872980780}
+  buffTile2: {fileID: 2004689532}
   cardPrefabs:
   - {fileID: 0}
   - {fileID: 1855405217901779101, guid: b5ef83c56abb0a84fa1ea834958723a8, type: 3}
