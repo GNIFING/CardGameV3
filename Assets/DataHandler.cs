@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class DataHandler : MonoBehaviour
 {
     //-------------- Player 1 --------------//
@@ -57,6 +57,9 @@ public class DataHandler : MonoBehaviour
     public List<Tile> player2Tile;
 
     public List<GameObject> cardPrefabs;
+
+    public TextMeshProUGUI player1CardNo;
+    public TextMeshProUGUI player2CardNo;
 
     public void Start()
     {
@@ -119,6 +122,9 @@ public class DataHandler : MonoBehaviour
         //Debug.Log("Update Arena Card Passed");
         StartCoroutine(CheckWinCondition());
         //Debug.Log("Update Player Stat Passed");
+
+        player1CardNo.text = player1HandCards.Count.ToString();
+        player2CardNo.text = player2HandCards.Count.ToString();
     }
 
     public void CheckAttackAnimation(int? attackerIndex)

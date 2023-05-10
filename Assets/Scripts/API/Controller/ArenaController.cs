@@ -70,7 +70,7 @@ public class ArenaController : ApiController
         try
         {
             GameData gameData = response.GetValue<GameData>();
-            outputArea.text = $"Player 1 : {gameData.playerOne.id}, Player 2 : {gameData.playerTwo.id}";
+            outputArea.text = $"Player 1 : {gameData.playerOne.id}, Player 2 : {gameData.playerTwo.id}, Arena id : {gameData.arena.id}";
             dataHandler.UpdateData(gameData);
             //outputArea.text = $"Me: {arenaData.Me.Cards}";
         }
