@@ -186,6 +186,7 @@ MonoBehaviour:
   xPos: 3
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1049583
@@ -321,6 +322,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &2658723
@@ -851,6 +853,7 @@ MonoBehaviour:
   xPos: 1
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &39045316
@@ -1269,6 +1272,7 @@ MonoBehaviour:
   xPos: 5
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &53653435
@@ -1404,6 +1408,7 @@ MonoBehaviour:
   xPos: 5
   yPos: 4
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &55868393
@@ -1996,6 +2001,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 3
   multiPlayerController: {fileID: 0}
 --- !u!212 &95686495
@@ -2654,6 +2660,7 @@ MonoBehaviour:
   xPos: 4
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &131040863
@@ -3290,6 +3297,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 3
   multiPlayerController: {fileID: 0}
 --- !u!212 &159270770
@@ -3745,6 +3753,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 9
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &182157011
@@ -4736,6 +4745,7 @@ MonoBehaviour:
   xPos: 1
   yPos: 4
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &282774376
@@ -4973,6 +4983,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 9
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &286020836
@@ -5469,6 +5480,7 @@ MonoBehaviour:
   xPos: 6
   yPos: 4
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 4
   multiPlayerController: {fileID: 0}
 --- !u!212 &294402602
@@ -5750,6 +5762,7 @@ MonoBehaviour:
   xPos: 6
   yPos: 1
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 4
   multiPlayerController: {fileID: 0}
 --- !u!212 &309042567
@@ -6459,6 +6472,7 @@ MonoBehaviour:
   xPos: 6
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 4
   multiPlayerController: {fileID: 0}
 --- !u!212 &344857735
@@ -6802,6 +6816,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 4
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &359403186
@@ -7060,6 +7075,7 @@ MonoBehaviour:
   xPos: 2
   yPos: 1
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &386996975
@@ -7195,6 +7211,7 @@ MonoBehaviour:
   xPos: 1
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &388071246
@@ -7410,6 +7427,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &407334586
@@ -7629,6 +7647,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 10
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &408598362
@@ -7964,6 +7983,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 11
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &419602565
@@ -8741,6 +8761,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &454239627
@@ -8974,6 +8995,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &460378974
@@ -9109,6 +9131,7 @@ MonoBehaviour:
   xPos: 1
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &461592030
@@ -11454,6 +11477,7 @@ MonoBehaviour:
   xPos: 4
   yPos: 4
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &614030503
@@ -11825,6 +11849,7 @@ MonoBehaviour:
   xPos: 1
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &632281756
@@ -12377,6 +12402,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 8
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &655644309
@@ -13501,6 +13527,7 @@ MonoBehaviour:
   xPos: 4
   yPos: 1
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &739026363
@@ -13742,6 +13769,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 1
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 3
   multiPlayerController: {fileID: 0}
 --- !u!212 &745726752
@@ -15343,6 +15371,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &853161852
@@ -15621,6 +15650,7 @@ MonoBehaviour:
   xPos: 3
   yPos: 1
   buff: {fileID: 625399754}
+  buffIndex: 1
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &872980781
@@ -16704,6 +16734,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 1
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &929858765
@@ -17167,6 +17198,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 4
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 3
   multiPlayerController: {fileID: 0}
 --- !u!212 &979678887
@@ -17404,6 +17436,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 6
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &985932197
@@ -17831,6 +17864,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 11
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &997628738
@@ -18905,8 +18939,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eae84b972b53a6b4180f6c659c9e39fb, type: 2}
+  m_sharedMaterial: {fileID: 3521759246754870942, guid: eae84b972b53a6b4180f6c659c9e39fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18930,8 +18964,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 130
+  m_fontSizeBase: 130
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -19278,6 +19312,7 @@ MonoBehaviour:
   xPos: 5
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1076009083
@@ -20222,6 +20257,7 @@ MonoBehaviour:
   xPos: 2
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1124773839
@@ -22025,6 +22061,7 @@ MonoBehaviour:
   xPos: 6
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 4
   multiPlayerController: {fileID: 0}
 --- !u!212 &1231134622
@@ -22178,6 +22215,7 @@ MonoBehaviour:
   xPos: 4
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1235530635
@@ -23200,6 +23238,7 @@ MonoBehaviour:
   xPos: 2
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1344281307
@@ -23856,6 +23895,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 1
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &1357977974
@@ -24262,6 +24302,7 @@ MonoBehaviour:
   xPos: 2
   yPos: 4
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1373441056
@@ -24747,6 +24788,7 @@ MonoBehaviour:
   xPos: 5
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1408916855
@@ -25163,6 +25205,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 7
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &1421650753
@@ -27524,6 +27567,7 @@ MonoBehaviour:
   xPos: 4
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1526360123
@@ -27827,6 +27871,7 @@ MonoBehaviour:
   xPos: 4
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1542105088
@@ -27967,6 +28012,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 6
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &1547370724
@@ -28084,6 +28130,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 3
   multiPlayerController: {fileID: 0}
 --- !u!212 &1555007797
@@ -29643,6 +29690,7 @@ MonoBehaviour:
   xPos: 3
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1700583399
@@ -29796,6 +29844,7 @@ MonoBehaviour:
   xPos: 5
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1703468978
@@ -29931,6 +29980,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &1705921348
@@ -30293,6 +30343,7 @@ MonoBehaviour:
   xPos: 6
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 4
   multiPlayerController: {fileID: 0}
 --- !u!212 &1748719057
@@ -30428,6 +30479,7 @@ MonoBehaviour:
   xPos: 2
   yPos: 5
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1750244686
@@ -30914,6 +30966,7 @@ MonoBehaviour:
   xPos: 3
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1775130206
@@ -31286,6 +31339,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &1814057282
@@ -31483,6 +31537,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 4
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &1832571353
@@ -31746,6 +31801,7 @@ MonoBehaviour:
   xPos: 3
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1839284885
@@ -31878,6 +31934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1Id: 0
+  player1CardLeft: 0
   player1DeckId: 0
   player1HandCards: []
   player1Hp: 0
@@ -31885,12 +31942,15 @@ MonoBehaviour:
   player1Mana: 0
   isPlayer1Turn: 0
   player2Id: 0
+  player2CardLeft: 0
   player2DeckId: 0
   player2HandCards: []
   player2Hp: 0
   player2MaxMana: 0
   player2Mana: 0
   isPlayer2Turn: 0
+  buff1Active: 0
+  buff2Active: 0
   cardsOnBoard: []
   gameOver: 0
   gameController: {fileID: 1789605238}
@@ -31901,6 +31961,8 @@ MonoBehaviour:
   player2Spawn: {fileID: 143956405}
   player1Tile: []
   player2Tile: []
+  buffTile1: {fileID: 0}
+  buffTile2: {fileID: 0}
   cardPrefabs:
   - {fileID: 0}
   - {fileID: 1855405217901779101, guid: b5ef83c56abb0a84fa1ea834958723a8, type: 3}
@@ -32682,6 +32744,7 @@ MonoBehaviour:
   xPos: 2
   yPos: 2
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1889954538
@@ -32835,6 +32898,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 7
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &1890963168
@@ -33678,6 +33742,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 3
   multiPlayerController: {fileID: 0}
 --- !u!212 &1924683599
@@ -34349,6 +34414,7 @@ MonoBehaviour:
   xPos: 5
   yPos: 1
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &1943112643
@@ -34634,6 +34700,7 @@ MonoBehaviour:
   xPos: 6
   yPos: 0
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 4
   multiPlayerController: {fileID: 0}
 --- !u!212 &1965001723
@@ -34972,6 +35039,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 3
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 1
   multiPlayerController: {fileID: 0}
 --- !u!212 &1984475413
@@ -35192,6 +35260,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 10
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &2000827885
@@ -35309,6 +35378,7 @@ MonoBehaviour:
   xPos: 3
   yPos: 4
   buff: {fileID: 1267689752}
+  buffIndex: 2
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &2004689533
@@ -35852,6 +35922,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 8
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 2
   multiPlayerController: {fileID: 0}
 --- !u!212 &2055188033
@@ -36772,6 +36843,7 @@ MonoBehaviour:
   xPos: 1
   yPos: 1
   buff: {fileID: 0}
+  buffIndex: 0
   tileType: 0
   multiPlayerController: {fileID: 0}
 --- !u!212 &2119207938
