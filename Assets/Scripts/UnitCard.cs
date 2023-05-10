@@ -370,7 +370,7 @@ public class UnitCard : MonoBehaviour
         if (unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
         {
             Debug.Log("Melee Attack");
-            MeleeAttack(unitAttacked);
+            StartCoroutine(MeleeAttack(unitAttacked));
         }
         if(unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Range)
         {
@@ -382,7 +382,7 @@ public class UnitCard : MonoBehaviour
     public virtual IEnumerator MeleeAttack(UnitCard unitAttacked)
     {
         TakeDamage(unitAttacked, unitAttacked.attack);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         unitAttacked.TakeDamage(this, attack);
 
         //MeleeAttackAnimation(unitAttacked);

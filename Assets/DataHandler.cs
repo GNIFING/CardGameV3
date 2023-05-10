@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataHandler : MonoBehaviour
 {
@@ -168,11 +169,27 @@ public class DataHandler : MonoBehaviour
             //run animation
         }
     }
-    public void CheckWinCondition()
+    public IEnumerator CheckWinCondition()
     {
         if(gameOver == true)
         {
             playerController.PlayerWin(winner);
+            
+            // Wait for a bit
+            yield return new WaitForSeconds(5);
+
+            // Set result
+            if (winner == 1 && gameController.playerId == this.player1Id)
+            {
+                PlayerPrefs.SetString("Result", "Victory");
+            }
+            else
+            {
+                PlayerPrefs.SetString("Result", "Defeat");
+            }
+
+            // Load Result Page
+            SceneManager.LoadScene("ResultPage");
         }
     }
 
