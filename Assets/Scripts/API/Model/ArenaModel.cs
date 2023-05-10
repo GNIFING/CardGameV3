@@ -28,4 +28,6 @@ public class Arena
 {
     public int id;
     public int?[] arenaArray;
+    public bool buffOneActive;
+    public bool buffTwoActive;
 }

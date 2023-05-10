@@ -226,7 +226,35 @@ public class MultiPlayerController : ApiController
 
         request.Dispose();
     }
-    
+
+    public IEnumerator UpdateBuff(int arenaId, bool buffOneActive, bool buffTwoActive, Action<UpdateBuffResponse> callback)
+    {
+        string path = "/buff/update";
+
+        var request = Api.CreateRequest(controller + path, "POST", new UpdateBuffRequest()
+        {
+            arenaId = arenaId,
+            buffOneActive = buffOneActive,
+            buffTwoActive = buffTwoActive,
+        });
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
+        {
+            var json = request.downloadHandler.text;
+            UpdateBuffResponse response = JsonConvert.DeserializeObject<UpdateBuffResponse>(json);
+
+            callback(response);
+        }
+        else
+        {
+            CheckRequestStatus(request);
+        }
+
+        request.Dispose();
+    }
+
     public IEnumerator MoveCard(int arenaId, int beforeIndex, int afterIndex, Action<Arena> callback)
     {
         string path = "/move";

@@ -79,6 +79,19 @@ public class AttackTowerResponse
     public int hp;
 }
 
+public class UpdateBuffRequest
+{
+    public int arenaId;
+    public bool buffOneActive;
+    public bool buffTwoActive;
+}
+
+public class UpdateBuffResponse
+{
+    public bool buffOneActive;
+    public bool buffTwoActive;
+}
+
 public class MoveCardRequest
 {
     public int arenaId;
