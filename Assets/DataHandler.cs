@@ -117,7 +117,7 @@ public class DataHandler : MonoBehaviour
         //Debug.Log("Update Player Hand Passed");
         UpdateArenaCardsPosition();
         //Debug.Log("Update Arena Card Passed");
-        CheckWinCondition();
+        StartCoroutine(CheckWinCondition());
         //Debug.Log("Update Player Stat Passed");
     }
 
