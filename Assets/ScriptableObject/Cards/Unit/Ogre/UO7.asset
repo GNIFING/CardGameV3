@@ -16,8 +16,7 @@ MonoBehaviour:
   cardIndex: UO7
   cardName: Pud the ripper
   cardImage: {fileID: 21300000, guid: ce2e9c8f8cb520340b98716fec42f2f5, type: 3}
-  cardDescription: Hook the closet enemy in lane in front of him, deal 1 damage to
-    it
+  cardDescription: Hook the closet enemy in lane in front of him
   currentCardClass: 1
   currentMoveType: 0
   currentAttackType: 0

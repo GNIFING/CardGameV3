@@ -9,12 +9,14 @@ public class SpawnCard : MonoBehaviour
 {
     public int playerNo;
     [SerializeField] List<GameObject> unitCardPrefabs;
-    public DeckController deckController;
     public bool isLoading = false;
 
     private List<GameObject> cardTiles = new List<GameObject>();
     private List<Card> cards = new();
     private List<int> cardIds = new();
+
+    public GameController gameController;
+    public MultiPlayerController multiPlayerController;
 
     private void Start()
     {
@@ -48,26 +50,29 @@ public class SpawnCard : MonoBehaviour
 
     public void SpawnUnit()
     {
-        foreach (GameObject tile in cardTiles)
-        {
-            bool isFoundUnit = false;
-            foreach(Transform tr in tile.transform)
-            {
-                if (tr.CompareTag("Unit"))
-                {
-                    isFoundUnit = true;
-                }
-            }
-            if (!isFoundUnit)
-            {
-                int index = Random.Range(0, unitCardPrefabs.Count);
-                GameObject unitCard = Instantiate(unitCardPrefabs[index], tile.transform.position, Quaternion.identity);
-                unitCard.transform.parent = tile.transform;
-                unitCard.GetComponent<UnitCard>().SetPlayerNo(playerNo);
-                unitCard.GetComponent<UnitCard>().RefreshCredit();
-                return;
-            }
-        }
+        //foreach (GameObject tile in cardTiles)
+        //{
+        //    bool isFoundUnit = false;
+        //    foreach(Transform tr in tile.transform)
+        //    {
+        //        if (tr.CompareTag("Unit"))
+        //        {
+        //            isFoundUnit = true;
+        //        }
+        //    }
+        //    if (!isFoundUnit)
+        //    {
+        //        int index = Random.Range(0, unitCardPrefabs.Count);
+        //        GameObject unitCard = Instantiate(unitCardPrefabs[index], tile.transform.position, Quaternion.identity);
+        //        unitCard.transform.parent = tile.transform;
+        //        unitCard.GetComponent<UnitCard>().SetPlayerNo(playerNo);
+        //        unitCard.GetComponent<UnitCard>().RefreshCredit();
+        //        return;
+        //    }
+        //}
+        int arenaId = PlayerPrefs.GetInt("ArenaId");
+        int playerId = gameController.GetPlayerId();
+        StartCoroutine(multiPlayerController.DrawCard(arenaId, playerId, (response) => { }));
     }
 
     public void InitialSpawn(bool isShowCard)
