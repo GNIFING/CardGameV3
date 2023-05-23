@@ -16,12 +16,15 @@ public class UH4 : UnitCard
 
     public override void UnitSkill()
     {
+        Debug.Log("Player NO = " + playerNo);
         if(playerNo == 1)
         {
             spawnP1Card.SpawnUnit();
+            Debug.Log("SpawnUnit1");
         }else if(playerNo == 2)
         {
             spawnP2Card.SpawnUnit();
+            Debug.Log("SpawnUnit2");
         }
         isSkillDone = true;
     }

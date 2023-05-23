@@ -71,7 +71,7 @@ public class SpawnCard : MonoBehaviour
         //    }
         //}
         int arenaId = PlayerPrefs.GetInt("ArenaId");
-        int playerId = gameController.GetPlayerId();
+        int playerId = gameController.playerId;
         StartCoroutine(multiPlayerController.DrawCard(arenaId, playerId, (response) => { }));
     }
 

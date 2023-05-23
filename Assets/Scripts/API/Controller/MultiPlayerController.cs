@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Assets.Scripts.API.Controller;
 using Newtonsoft.Json;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class MultiPlayerController : ApiController
@@ -10,6 +11,9 @@ public class MultiPlayerController : ApiController
     
     public IEnumerator DrawCard(int arenaId, int playerId, Action<DrawCardResponse> callback)
     {
+        Debug.Log("Arena ID = " + arenaId);
+        Debug.Log("Player Id = " + playerId);
+
         string path = "/drawCard";
 
         var request = Api.CreateRequest(controller + path, "POST", new ArenaPlayerRequest()
