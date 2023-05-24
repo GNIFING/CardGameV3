@@ -52,17 +52,7 @@ public class UO7 : UnitCard
                 if (selectedUnit.GetPlayerNo() != playerNo)
                 {
                     Debug.Log("Hooked");
-
-                    StartCoroutine(WaitTime(0.5f));
                     hookedTile.MoveUnitToThisTile(selectedUnit.gameObject);
-                    StartCoroutine(WaitTime(1f));
-
-                    int arenaId = gameController.arenaId;
-                    multiPlayerController = FindObjectOfType<MultiPlayerController>();
-                    Tile tileOnThisUnit = GetComponentInParent<Tile>();
-                    int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
-
-                    StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, 0, (response) => { Debug.Log("Update Card Done"); }));
                     //selectedUnit.TakeDamage(this, 1);
                     break;
                 }
@@ -70,11 +60,6 @@ public class UO7 : UnitCard
         }
         Debug.Log("Ogre 7 Skill !");
         isSkillDone = true;
-    }
-
-    public IEnumerator WaitTime(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
     }
     public override void UnitHighlight()
     {

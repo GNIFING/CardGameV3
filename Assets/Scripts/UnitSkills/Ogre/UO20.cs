@@ -13,9 +13,9 @@ public class UO20 : UnitCard
     public override void UnitSkill()
     {
         GameObject unitInSelectTile = skillTargetUnit;
-        //Quaternion rotation = CalculateRotation(unitInSelectTile);
-        //GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
-        //bullet.GetComponent<BulletScript>().SetTarget(unitInSelectTile.transform.parent.gameObject);
+        Quaternion rotation = CalculateRotation(unitInSelectTile);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+        bullet.GetComponent<BulletScript>().SetTarget(unitInSelectTile.transform.parent.gameObject);
         UnitCard selectedUnit = unitInSelectTile.GetComponent<UnitCard>();
         selectedUnit.TakeDamage(this, 4);
         if(selectedUnit.GetHealth() <= 4)
