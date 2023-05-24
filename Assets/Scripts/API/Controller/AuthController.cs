@@ -36,6 +36,8 @@ public class AuthController : MonoBehaviour
             AuthResponse data = JsonUtility.FromJson<AuthResponse>(request.downloadHandler.text);
 
             Api.accessToken = data.accessToken;
+            PlayerPrefs.SetString("AccessToken", data.accessToken.ToString());
+            PlayerPrefs.Save();
 
             SceneManager.LoadScene("LobbyPage");
         }

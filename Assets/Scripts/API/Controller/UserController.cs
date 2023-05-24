@@ -57,6 +57,9 @@ public class UserController : ApiController
     public void Logout()
     {
         Api.accessToken = null;
+        
+        // Clear all PlayerPrefs values
+        PlayerPrefs.DeleteAll();
 
         SceneManager.LoadScene("LoginPage");
     }
