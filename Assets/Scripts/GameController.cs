@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour
         tileManager.CancelUnitMoveHighlight();
 
 
-        UseUnitsEndturnSkill(playerId);
+        UseUnitsEndturnSkill(GetPlayerId());
 
         //----------- SEND API -----------//
 

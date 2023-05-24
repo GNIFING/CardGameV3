@@ -25,9 +25,10 @@ public class UH17 : UnitCard
     public override void TakeDamage(UnitCard attackUnitCard, int damage)
     {
         health -= damage;
+        DecreaseHealth(damage);
         if(damage != 0)
         {
-            attack += 2;
+            IncreaseAttackDamage(2);
         }
         UpdateCardUI();
         if (health <= 0) Destroy(this.gameObject, 0.5f);
