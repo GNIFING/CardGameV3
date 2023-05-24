@@ -343,13 +343,24 @@ public class DataHandler : MonoBehaviour
             if(arena.arenaArray[arenaIndex] == null)
             {
                 // If there is no unit in this tile, remove any existing unit.
-                if (tiles[arenaIndex].GetUnitInTile() != null)
-                {
-                    Destroy(tiles[arenaIndex].GetUnitInTile(), 0.5f);
-                    Debug.Log("case 1");
-                    Debug.Log("case 1 = " + arenaIndex);
 
+                for (int i = 0; i < tiles[arenaIndex].transform.childCount; i++)
+                {
+                    if (tiles[arenaIndex].GetUnitInTile() != null)
+                    {
+                        Destroy(tiles[arenaIndex].GetUnitInTile(), 0.5f);
+                        Debug.Log("case 1");
+                        Debug.Log("case 1 = " + arenaIndex);
+                    }
                 }
+                foreach (Transform child in tiles[arenaIndex].transform)
+                {
+                    if (child.CompareTag("Unit"))
+                    {
+                        Destroy(child.gameObject);
+                    }
+                }
+
                 // If there is no unit and no card, do nothing.
                 Debug.Log("case 2");
             }
