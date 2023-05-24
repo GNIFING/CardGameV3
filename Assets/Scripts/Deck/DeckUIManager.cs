@@ -75,6 +75,7 @@ public class DeckUIManager : MonoBehaviour
 
         deckUI.Name.text = deck.name;
         deckUI.Id.text = deck.id.ToString();
+        deckUI.ClassName.text = deck.className.ToString();
         deckUI.Label.text = $"Deck {deck.id}: ({deck.userCards.Count()} cards)";
 
         newDeckBody.transform.SetParent(deckPanel.transform, false);

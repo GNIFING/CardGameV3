@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class DeckUI : MonoBehaviour
 {
     public TextMeshProUGUI Name;
+    public TextMeshProUGUI ClassName;
     public TextMeshProUGUI Id;
     public TextMeshProUGUI Label;
 
