@@ -456,8 +456,10 @@ public class Tile : MonoBehaviour
         //int cardId = selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
         arenaId = gameController.arenaId;
         int tileIndex = ConvertTilePosToIndex(xPos, yPos);
-        StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) => { }));
-
+        StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
+        {
+            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { }));
+        }));
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;
