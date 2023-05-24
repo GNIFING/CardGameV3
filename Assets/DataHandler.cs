@@ -347,6 +347,8 @@ public class DataHandler : MonoBehaviour
                 {
                     Destroy(tiles[arenaIndex].GetUnitInTile(), 0.5f);
                     Debug.Log("case 1");
+                    Debug.Log("case 1 = " + arenaIndex);
+
                 }
                 // If there is no unit and no card, do nothing.
                 Debug.Log("case 2");

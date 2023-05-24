@@ -27,7 +27,8 @@ public class UH11 : UnitCard
         Tile unitTile = GetComponentInParent<Tile>();
         if (unitTile.tileType != Tile.TileType.Player1Tower && unitTile.tileType != Tile.TileType.Player2Tower)
         {
-            attack += 1;
+            //attack += 1;
+            IncreaseAttackDamage(1);
             UpdateCardUI();
         }
     }

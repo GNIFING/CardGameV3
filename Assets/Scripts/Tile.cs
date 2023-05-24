@@ -459,7 +459,7 @@ public class Tile : MonoBehaviour
         int tileIndex = ConvertTilePosToIndex(xPos, yPos);
         StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
         {
-            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { }));
+            //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { }));
         }));
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
