@@ -8,9 +8,15 @@ using UnityEngine.Networking;
 public class Api : MonoBehaviour
 {
 
-    public static string accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTY4MzYzODkxMCwiZXhwIjoxNjgzNjQyNTEwfQ.jbesM9S84bZfD5M5CYWk31GV-Xgk2wyGm2hawb56sdc";
+    public static string accessToken;
     public static string apiPrefix = "http://18.140.116.224:8080/api";
     //public static string s3Prefix = "https://thanat-sun-storage.s3.ap-southeast-1.amazonaws.com/capstone/images/";
+
+    private void Start()
+    {
+        Debug.Log(PlayerPrefs.GetString("AccessToken"));
+        accessToken = PlayerPrefs.GetString("AccessToken");
+    }
 
     public static UnityWebRequest CreateAuthRequest(string path, string method, object body = null)
     {
@@ -44,7 +50,7 @@ public class Api : MonoBehaviour
 
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.SetRequestHeader("Authorization", "Bearer " + accessToken);
+        request.SetRequestHeader("Authorization", "Bearer " + PlayerPrefs.GetString("AccessToken"));
 
         request.disposeUploadHandlerOnDispose = true;
         request.disposeDownloadHandlerOnDispose = true;
