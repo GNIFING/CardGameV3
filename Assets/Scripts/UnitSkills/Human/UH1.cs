@@ -12,11 +12,22 @@ public class UH1 : UnitCard
 
     public override void UnitSkill()
     {
-        GameObject unitInSelectTile = skillTargetUnit;
-        Quaternion rotation = CalculateRotation(unitInSelectTile);
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
-        bullet.GetComponent<BulletScript>().SetTarget(unitInSelectTile.transform.parent.gameObject);
-        unitInSelectTile.GetComponent<UnitCard>().TakeDamage(this, 1);
+        //GameObject unitInSelectTile = skillTargetUnit;
+        //Quaternion rotation = CalculateRotation(unitInSelectTile);
+        //GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+        //bullet.GetComponent<BulletScript>().SetTarget(unitInSelectTile.transform.parent.gameObject);
+
+        int arenaId = gameController.arenaId;
+        Tile attackerTile = this.GetComponentInParent<Tile>();
+        int attackerIndex = attackerTile.ConvertTilePosToIndex(attackerTile.GetXPos(), attackerTile.GetYPos());
+        Tile defenderTile = skillTargetUnit.GetComponentInParent<Tile>();
+        int defenderIndex = defenderTile.ConvertTilePosToIndex(defenderTile.GetXPos(), defenderTile.GetYPos());
+        multiPlayerController = FindObjectOfType<MultiPlayerController>();
+
+        StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => { Debug.Log("Skill Card Done"); }));
+
+        StartCoroutine(multiPlayerController.UpdateCard(arenaId, defenderIndex, -1, 0, (response) => { Debug.Log("Update Card Done"); }));
+
         isSkillDone = true;
     }
 
