@@ -410,8 +410,7 @@ public class Tile : MonoBehaviour
         int afterTileIndex = ConvertTilePosToIndex(xPos, yPos);
         StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => 
         { 
-            //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, afterTileIndex, (response) => { }));
-            
+            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, afterTileIndex, (response) => { }));
             if (buff != null && buffIndex == 1)
             {
                 selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
