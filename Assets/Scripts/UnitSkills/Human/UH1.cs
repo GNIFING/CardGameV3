@@ -25,8 +25,8 @@ public class UH1 : UnitCard
         multiPlayerController = FindObjectOfType<MultiPlayerController>();
 
         StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => { Debug.Log("Skill Card Done"); }));
-
         StartCoroutine(multiPlayerController.UpdateCard(arenaId, defenderIndex, -1, 0, (response) => { Debug.Log("Update Card Done"); }));
+        StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
 
         isSkillDone = true;
     }
