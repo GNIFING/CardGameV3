@@ -51,6 +51,7 @@ public class UO7 : UnitCard
                 selectedUnit = tile.GetUnitInTile().GetComponent<UnitCard>();
                 if (selectedUnit.GetPlayerNo() != playerNo)
                 {
+                    Debug.Log("Hooked");
                     hookedTile.MoveUnitToThisTile(selectedUnit.gameObject);
                     //selectedUnit.TakeDamage(this, 1);
                     break;
