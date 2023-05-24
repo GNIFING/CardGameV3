@@ -139,7 +139,7 @@ public class DataHandler : MonoBehaviour
         //Debug.Log("Update Player Stat Passed");
         UpdatePlayerHands();
         //Debug.Log("Update Player Hand Passed");
-        UpdateArenaCardsPosition();
+        StartCoroutine(UpdateArenaCardsPosition());
         //Debug.Log("Update Arena Card Passed");
         StartCoroutine(CheckWinCondition());
         //Debug.Log("Update Player Stat Passed");
@@ -203,7 +203,7 @@ public class DataHandler : MonoBehaviour
             playerController.PlayerWin(winner);
             
             // Wait for a bit
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
 
             // Set result
             if (winner == 1 && (gameController.playerId == this.player1Id))
@@ -336,7 +336,7 @@ public class DataHandler : MonoBehaviour
         //if there is no unit check that tile should have unit or not
     }
 
-    public void UpdateArenaCardsPosition()
+    public IEnumerator UpdateArenaCardsPosition()
     {
         for (int arenaIndex = 0; arenaIndex < 42; arenaIndex++)
         {
@@ -406,6 +406,7 @@ public class DataHandler : MonoBehaviour
                     // If there is no unit in this tile, spawn a new one.
                     UserCard userCard = cardsOnBoard.Where(u => u.id == arena.arenaArray[arenaIndex]).Select(u => u).FirstOrDefault();
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
+                    yield return new WaitForSeconds(0.5f);
                     newUnitCardObj.transform.parent = tiles[arenaIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
                     newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
