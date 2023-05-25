@@ -26,7 +26,8 @@ public class UH1 : UnitCard
 
         StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => {
             StartCoroutine(multiPlayerController.UpdateCard(arenaId, defenderIndex, -1, 0, (response) => { 
-                StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { })); }));
+                //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
+                }));
         }));
         
 
