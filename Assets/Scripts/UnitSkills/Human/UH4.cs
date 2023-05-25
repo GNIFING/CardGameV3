@@ -35,9 +35,4 @@ public class UH4 : UnitCard
         tileManager.NoHighlightUnit();
         Debug.Log("Highlight from unit 4");
     }
-
-    private IEnumerator Delay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-    }
 }

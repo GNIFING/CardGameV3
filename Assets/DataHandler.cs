@@ -403,7 +403,7 @@ public class DataHandler : MonoBehaviour
                     }
                     else if(unitCard.GetUserCardId() == userCard.id) ///////////////////////////////////////////////////////
                     {
-                        Debug.Log("case 4: Instantiate correct existed index " + arenaIndex);
+                        Debug.Log("case 4: Update correct existed index " + arenaIndex);
                         // Update the existing unit's attack and health.
                         if (unitCard.GetAttackDamage() != userCard.atk)
                         {
