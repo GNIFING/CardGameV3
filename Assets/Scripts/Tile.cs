@@ -317,7 +317,7 @@ public class Tile : MonoBehaviour
                 selectUnitCard.ReduceCardCredit();
                 tileManager.isInSkillProcess = true;
                 //unit use skill
-                AsyncUnitHighlight(2f, selectUnitCard);
+                StartCoroutine(AsyncUnitHighlight(2f, selectUnitCard));
 
                 //selectUnitCard.UnitHighlight();
                 
@@ -536,14 +536,15 @@ public class Tile : MonoBehaviour
         return xPos * 6 + yPos;
     }
 
-    public IEnumerable AsyncUnitHighlight(float delay, UnitCard delayCard)
+    public IEnumerator AsyncUnitHighlight(float delay, UnitCard delayCard)
     {
         yield return new WaitForSeconds(delay);
+        Debug.Log("WaitFinished");
         delayCard.UnitHighlight();
 
     }
 
-    public IEnumerable Delay(float delay)
+    public IEnumerator Delay(float delay)
     {
         yield return new WaitForSeconds(delay);
     }
