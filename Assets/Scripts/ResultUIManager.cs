@@ -15,6 +15,6 @@ public class ResultUIManager : MonoBehaviour
         resultText.text = result;
 
         // Set point due to result
-        pointText.text = $"{(result == "Victory" ? "+ 1" : "- 1")} Point";
+        pointText.text = $"{(result == "Victory" ? "+ 1" : "- 1")} Score";
     }
 }
