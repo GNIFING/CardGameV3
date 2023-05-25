@@ -68,12 +68,17 @@ public class Tile : MonoBehaviour
     }
     void OnMouseExit()
     {
-        if(descriptionBox != null)
+        if(descriptionBox != null && tileType == TileType.Player2Tile)
         {
             descriptionBox.position += new Vector3(4.3f, 0, 0);
             descriptionBox.gameObject.SetActive(false);
             isCheckPosition = false;
         }
+        else if (descriptionBox != null)
+        {
+            descriptionBox.gameObject.SetActive(false);
+        }
+
         hoverHighlight.SetActive(false);
         hoverTime = 0f;
     }
