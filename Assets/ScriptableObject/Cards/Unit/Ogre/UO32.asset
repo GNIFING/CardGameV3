@@ -16,7 +16,7 @@ MonoBehaviour:
   cardIndex: UO32
   cardName: Corrupted King
   cardImage: {fileID: 21300000, guid: 8ab7eaeeb0dcf2941bc21f8eccd8f772, type: 3}
-  cardDescription: Every time when he attack, deal 4 damage to own tower
+  cardDescription: 
   currentCardClass: 1
   currentMoveType: 6
   currentAttackType: 0

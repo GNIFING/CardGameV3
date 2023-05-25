@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbf884f8bb7ab147bbba9815451ac69, type: 3}
   m_Name: UO19
   m_EditorClassIdentifier: 
-  id: 88
-  cardIndex: UO18
-  cardName: Kinetic Slime
-  cardImage: {fileID: 21300000, guid: 3b4e1bbcd9461c143bf6b265a9c67cad, type: 3}
-  cardDescription: When this unit take damages, increase attack damage equal to damage
-    it take
+  id: 89
+  cardIndex: UO19
+  cardName: Giant Beast
+  cardImage: {fileID: 21300000, guid: 5aae24f5155d6714aad40fa14e9f0674, type: 3}
+  cardDescription: 
   currentCardClass: 1
-  currentMoveType: 4
+  currentMoveType: 0
   currentAttackType: 0
   specialSkill: []
-  defaultManaCost: 4
-  defaultAttackDamage: 1
-  defaultHp: 8
+  defaultManaCost: 5
+  defaultAttackDamage: 2
+  defaultHp: 13

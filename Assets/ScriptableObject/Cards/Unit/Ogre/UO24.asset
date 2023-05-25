@@ -16,12 +16,11 @@ MonoBehaviour:
   cardIndex: UO24
   cardName: Soul Eater
   cardImage: {fileID: 21300000, guid: 43e48bbde55bba24b8da633cf334d9e9, type: 3}
-  cardDescription: Choose enemy unit, at the start of next turn. If enemy's health
-    is not decrease, destroy it
+  cardDescription: Deal 5 damage to enemy unit
   currentCardClass: 1
   currentMoveType: 0
   currentAttackType: 0
   specialSkill: []
-  defaultManaCost: 4
+  defaultManaCost: 6
   defaultAttackDamage: 4
   defaultHp: 5
