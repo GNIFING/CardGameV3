@@ -419,19 +419,23 @@ public class Tile : MonoBehaviour
             //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, afterTileIndex, (response) => { Debug.Log("Api: Mark Use Card Index " + afterTileIndex); }));
             if (buff != null && buffIndex == 1)
             {
-                selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-                selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+                StartCoroutine(AsyncUpdateBuff(1.5f, selectUnit ,arenaId));
 
-                StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
-                Destroy(buff, 0.3f);
+                //selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+                //selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+
+                //StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
+                //Destroy(buff, 0.3f);
             }
             if (buff != null && buffIndex == 2)
             {
-                selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-                selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+                StartCoroutine(AsyncUpdateBuff(1.5f, selectUnit, arenaId));
 
-                StartCoroutine(multiPlayerController.UpdateBuff(arenaId, dataHandler.arena.buffOneActive, false, (response) => { Debug.Log("Api: UpdateBuff"); }));
-                Destroy(buff, 0.3f);
+                //selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+                //selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+
+                //StartCoroutine(multiPlayerController.UpdateBuff(arenaId, dataHandler.arena.buffOneActive, false, (response) => { Debug.Log("Api: UpdateBuff"); }));
+                //Destroy(buff, 0.3f);
             }
 
         }));
@@ -541,6 +545,19 @@ public class Tile : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Debug.Log("WaitFinished");
         delayCard.UnitHighlight();
+
+    }
+
+    public IEnumerator AsyncUpdateBuff(float delay, GameObject delayCard, int arenaId)
+    {
+        yield return new WaitForSeconds(delay);
+        Debug.Log("WaitFinished");
+
+        delayCard.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+        delayCard.GetComponent<UnitCard>().IncreaseHealth(1);
+
+        StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
+        Destroy(buff, 0.3f);
 
     }
 
