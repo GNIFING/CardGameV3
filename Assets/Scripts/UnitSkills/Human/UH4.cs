@@ -17,7 +17,8 @@ public class UH4 : UnitCard
     public override void UnitSkill()
     {
         Debug.Log("Player NO = " + playerNo);
-        if(playerNo == 1)
+
+        if (playerNo == 1)
         {
             spawnP1Card.SpawnUnit();
             Debug.Log("SpawnUnit1");
@@ -33,5 +34,10 @@ public class UH4 : UnitCard
         UnitSkill();
         tileManager.NoHighlightUnit();
         Debug.Log("Highlight from unit 4");
+    }
+
+    private IEnumerator Delay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
     }
 }

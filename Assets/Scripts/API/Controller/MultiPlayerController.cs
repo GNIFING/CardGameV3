@@ -11,9 +11,6 @@ public class MultiPlayerController : ApiController
     
     public IEnumerator DrawCard(int arenaId, int playerId, Action<DrawCardResponse> callback)
     {
-        Debug.Log("Arena ID = " + arenaId);
-        Debug.Log("Player Id = " + playerId);
-
         string path = "/drawCard";
 
         var request = Api.CreateRequest(controller + path, "POST", new ArenaPlayerRequest()

@@ -89,7 +89,7 @@ public class GameController : MonoBehaviour
 
         //----------- SEND API -----------//
 
-        StartCoroutine(multiPlayerController.EndTurn(arenaId, playerId, (response) => { }));
+        StartCoroutine(multiPlayerController.EndTurn(arenaId, playerId, (response) => { Debug.Log("Api: End Turn Player " + playerId); }));
 
 
         //----------- SEND API -----------//
