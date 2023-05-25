@@ -70,7 +70,9 @@ public class Tile : MonoBehaviour
     {
         if(descriptionBox != null)
         {
+            descriptionBox.position += new Vector3(4.3f, 0, 0);
             descriptionBox.gameObject.SetActive(false);
+            isCheckPosition = false;
         }
         hoverHighlight.SetActive(false);
         hoverTime = 0f;
