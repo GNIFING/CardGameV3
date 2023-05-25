@@ -21,7 +21,7 @@ public class UO20 : UnitCard
         if(selectedUnit.GetHealth() <= 4)
         {
             Tile tileFromSelectUnit = unitInSelectTile.GetComponentInParent<Tile>();
-            tileFromSelectUnit.MoveUnitToThisTile(this.gameObject);
+            StartCoroutine(DelayMove(tileFromSelectUnit));
         }
         isSkillDone = true;
     }
@@ -30,5 +30,12 @@ public class UO20 : UnitCard
     {
         tileManager.HighlightEnemyUnitTiles(playerNo);
         //isSkillDone = true;
+    }
+
+    public IEnumerator DelayMove(Tile tileFromSelectUnit)
+    {
+        yield return new WaitForSeconds(2f);
+        tileFromSelectUnit.MoveUnitToThisTile(this.gameObject);
+
     }
 }
