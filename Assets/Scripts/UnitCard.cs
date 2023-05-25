@@ -206,7 +206,7 @@ public class UnitCard : MonoBehaviour
     {
         DecreaseHealth(damage);
         UpdateCardUI();
-        if (health <= 0) Destroy(this.gameObject, 0.5f);
+        //if (health <= 0) Destroy(this.gameObject, 0.5f);
     }
 
     public void IncreaseHealth(int plusHealth, bool callApi = true)
@@ -306,7 +306,12 @@ public class UnitCard : MonoBehaviour
         Tile tileOnThisUnit = GetComponentInParent<Tile>();
         int tileIndex = tileOnThisUnit.ConvertTilePosToIndex(tileOnThisUnit.GetXPos(), tileOnThisUnit.GetYPos());
         Debug.Log("decrease attack");
-        if (callApi == true)
+        if(minusAttack - attack >= 0 && callApi == true)
+        {
+            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, -attack, (response) => { }));
+        }
+
+        else if (callApi == true)
         {
             StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, -minusAttack, (response) => { }));
         }
