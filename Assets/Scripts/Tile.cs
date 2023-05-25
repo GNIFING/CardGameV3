@@ -321,10 +321,11 @@ public class Tile : MonoBehaviour
                 selectUnitCard.ReduceCardCredit();
                 tileManager.isInSkillProcess = true;
                 //unit use skill
-                StartCoroutine(AsyncUnitHighlight(2f, selectUnitCard));
+                //StartCoroutine(AsyncUnitHighlight(2f, selectUnitCard));
+                selectUnitCard.UnitHighlight();
 
                 //selectUnitCard.UnitHighlight();
-                
+
             }
         }
 
@@ -418,12 +419,15 @@ public class Tile : MonoBehaviour
         { 
             Debug.Log("Api: Move Card From " + beforeTileIndex + " To " + afterTileIndex);
 
-            Delay(0.5f);
-
             //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, afterTileIndex, (response) => { Debug.Log("Api: Mark Use Card Index " + afterTileIndex); }));
             if (buff != null && buffIndex == 1)
             {
-                StartCoroutine(AsyncUpdateBuff(1.5f, selectUnit ,arenaId));
+                //StartCoroutine(AsyncUpdateBuff(1.5f, selectUnit ,arenaId));
+                selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+                selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+
+                StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
+                Destroy(buff, 0.3f);
 
                 //selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
                 //selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
@@ -433,7 +437,12 @@ public class Tile : MonoBehaviour
             }
             if (buff != null && buffIndex == 2)
             {
-                StartCoroutine(AsyncUpdateBuff(1.5f, selectUnit, arenaId));
+                //StartCoroutine(AsyncUpdateBuff(1.5f, selectUnit, arenaId));
+                selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+                selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+
+                StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
+                Destroy(buff, 0.3f);
 
                 //selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
                 //selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
@@ -557,11 +566,11 @@ public class Tile : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Debug.Log("WaitFinished");
 
-        delayCard.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-        delayCard.GetComponent<UnitCard>().IncreaseHealth(1);
+        //delayCard.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+        //delayCard.GetComponent<UnitCard>().IncreaseHealth(1);
 
-        StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
-        Destroy(buff, 0.3f);
+        //StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
+        //Destroy(buff, 0.3f);
 
     }
 

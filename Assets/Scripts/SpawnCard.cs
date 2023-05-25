@@ -73,7 +73,7 @@ public class SpawnCard : MonoBehaviour
         int arenaId = PlayerPrefs.GetInt("ArenaId");
         int playerId = gameController.playerId;
 
-        StartCoroutine(DrawCardWithDelay(2f, arenaId, playerId));
+        StartCoroutine(DrawCardWithDelay(1f, arenaId, playerId));
     }
 
     public void InitialSpawn(bool isShowCard)

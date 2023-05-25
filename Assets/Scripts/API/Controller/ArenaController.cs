@@ -71,7 +71,7 @@ public class ArenaController : ApiController
         {
             GameData gameData = response.GetValue<GameData>();
             outputArea.text = $"Player 1 : {gameData.playerOne.id}, Player 2 : {gameData.playerTwo.id}, Arena id : {gameData.arena.id}";
-            dataHandler.UpdateData(gameData);
+            dataHandler.dataQueue.Enqueue(gameData);
             //outputArea.text = $"Me: {arenaData.Me.Cards}";
         }
         catch (Exception e)

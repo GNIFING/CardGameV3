@@ -68,6 +68,10 @@ public class DataHandler : MonoBehaviour
     public TextMeshProUGUI player1CardNo;
     public TextMeshProUGUI player2CardNo;
 
+    public Queue<GameData> dataQueue = new();
+
+    public bool isUpdating;
+
     public void Start()
     {
         foreach (Transform child in tileManager.transform)
@@ -87,8 +91,22 @@ public class DataHandler : MonoBehaviour
         //Draw 3 initial card here
     }
 
+    private void Update()
+    {
+        Debug.Log(isUpdating);
+
+        if (dataQueue.Count > 0 && !isUpdating)
+        {
+            Debug.Log("Remaining Queue: " + dataQueue.Count);
+            GameData data = dataQueue.Dequeue();
+            UpdateData(data);
+        }
+    }
+
     public void UpdateData(GameData gameData)
     {
+        this.isUpdating = true;
+
         player1Id = gameData.playerOne.id;
         player1CardLeft = gameData.playerOne.cardLeft;
         player1DeckId = gameData.playerOne.deckId;
@@ -338,20 +356,6 @@ public class DataHandler : MonoBehaviour
 
     public IEnumerator UpdateArenaCardsPosition()
     {
-        // Clear out all the in arena
-        //for (int arenaIndex = 0; arenaIndex < 42; arenaIndex++)
-        //{
-        //    if (tiles[arenaIndex].GetUnitInTile() != null)
-        //    {
-        //        Destroy(tiles[arenaIndex].GetUnitInTile(), 0.5f);
-        //    }
-        //}
-
-        //for (int arenaIndex = 0; arenaIndex < 42; arenaIndex++)
-        //{
-
-        //}
-        Debug.Log("Update Arena");
         for (int arenaIndex = 0; arenaIndex < 42; arenaIndex++)
         {
             if(arena.arenaArray[arenaIndex] == null)
@@ -359,7 +363,7 @@ public class DataHandler : MonoBehaviour
                 // If there is no unit in this tile, remove any existing unit.
                 if (tiles[arenaIndex].GetUnitInTile() != null)
                 {
-                    Destroy(tiles[arenaIndex].GetUnitInTile(), 0.5f);
+                    Destroy(tiles[arenaIndex].GetUnitInTile(), 0.3f);
                     //Debug.Log("case 1");
                     Debug.Log("case 1: Destroy index " + arenaIndex);
                 }
@@ -378,7 +382,7 @@ public class DataHandler : MonoBehaviour
                     {
                         Debug.Log("case 3: Instantiate wrong existed index " + arenaIndex);
                         // Destroy the existing unit and spawn a new one.
-                        Destroy(unitCard.gameObject, 0.5f);
+                        Destroy(unitCard.gameObject, 0.3f);
 
                         GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
                         yield return new WaitForSeconds(0.5f);
@@ -389,7 +393,7 @@ public class DataHandler : MonoBehaviour
                         newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                         newUnitCard.SetPlayerNo(userCard.player);
                         newUnitCard.SetBackCard(false);
-                        
+
                         if (newUnitCard.GetAttackDamage() != userCard.atk)
                         {
                             newUnitCard.SetAttackDamage(userCard.atk, false);
@@ -401,7 +405,7 @@ public class DataHandler : MonoBehaviour
                         // Set the new unit's credit based on whether it's ready or not.
                         newUnitCard.SetCardCredit(userCard.isReady ? 1 : 0);
                     }
-                    else if(unitCard.GetUserCardId() == userCard.id) ///////////////////////////////////////////////////////
+                    else if (unitCard.GetUserCardId() == userCard.id) ///////////////////////////////////////////////////////
                     {
                         Debug.Log("case 4: Update correct existed index " + arenaIndex);
                         // Update the existing unit's attack and health.
@@ -419,15 +423,15 @@ public class DataHandler : MonoBehaviour
                 {
                     Debug.Log("case 10: Instantiate new index " + arenaIndex);
                     // If there is no unit in this tile, spawn a new one.
-                    UserCard userCard = cardsOnBoard.Where(u => u.id == arena.arenaArray[arenaIndex]).Select(u => u).FirstOrDefault();
+                    UserCard userCard = cardsOnBoard.SingleOrDefault(x => x.id == arena.arenaArray[arenaIndex]);
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.3f);
                     newUnitCardObj.transform.parent = tiles[arenaIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
                     newUnitCard.SetUserCardId((int)arena.arenaArray[arenaIndex]);
                     newUnitCard.SetPlayerNo(userCard.player);
                     newUnitCard.SetBackCard(false);
-                    
+
                     if (newUnitCard.GetAttackDamage() != userCard.atk)
                     {
                         newUnitCard.SetAttackDamage(userCard.atk, false);
@@ -440,7 +444,11 @@ public class DataHandler : MonoBehaviour
                     newUnitCard.SetCardCredit(userCard.isReady ? 1 : 0);
                 }
             }
+
         }
+        
+        this.isUpdating = false;
+            
     }
     //Move All unit here
     //Change All unit Stat here
