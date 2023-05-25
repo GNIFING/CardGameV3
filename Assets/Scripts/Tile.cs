@@ -88,15 +88,18 @@ public class Tile : MonoBehaviour
             if(unit != null)
             {
                 //if(unit.GetComponent<UnitCard>().isPlayCard == true || unit.GetComponent<UnitCard>().GetPlayerNo() == GameController.CurrentTurn)
-                int player = 1;
-                
+                int player = gameController.GetPlayerId();
                 bool isEnemyHandTile = false;
                 if(player == 1)
                 {
                     isEnemyHandTile = tileType == TileType.Player2Tile ? true : false;
                 }
+                if (player == 2)
+                {
+                    isEnemyHandTile = tileType == TileType.Player1Tile ? true : false;
+                }
 
-                if(!isEnemyHandTile)
+                if (!isEnemyHandTile)
                 {
                     Transform canvas = unit.transform.Find("Canvas");
                     descriptionBox = canvas.Find("DescriptionBox");

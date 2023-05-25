@@ -58,6 +58,10 @@ public class GameController : MonoBehaviour
             playerController.RefreshPlayerMana(1);
             alreadyLoad = true;
         }
+
+        player1Arrow.SetActive(playerturn == 1);
+        player2Arrow.SetActive(playerturn == 2);
+
     }
 
     public void UseUnitsEndturnSkill(int playerNo)
@@ -96,9 +100,6 @@ public class GameController : MonoBehaviour
 
         UpdateIsPlay();
         playerturn = playerturn == 1 ? 2 : 1;
-
-        player1Arrow.SetActive(playerturn == 1);
-        player2Arrow.SetActive(playerturn == 2);
 
         if (playerturn == 1)
         {
