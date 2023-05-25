@@ -12,11 +12,19 @@ public class UO1 : UnitCard
 
     public override void UnitSkill()
     {
-        GameObject unitInSelectTile = skillTargetUnit;
-        Quaternion rotation = CalculateRotation(unitInSelectTile);
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
-        bullet.GetComponent<BulletScript>().SetTarget(unitInSelectTile.transform.parent.gameObject);
-        unitInSelectTile.GetComponent<UnitCard>().TakeDamage(this, 3);
+        int arenaId = gameController.arenaId;
+        Tile attackerTile = this.GetComponentInParent<Tile>();
+        int attackerIndex = attackerTile.ConvertTilePosToIndex(attackerTile.GetXPos(), attackerTile.GetYPos());
+        Tile defenderTile = skillTargetUnit.GetComponentInParent<Tile>();
+        int defenderIndex = defenderTile.ConvertTilePosToIndex(defenderTile.GetXPos(), defenderTile.GetYPos());
+        multiPlayerController = FindObjectOfType<MultiPlayerController>();
+
+        StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => {
+            StartCoroutine(multiPlayerController.UpdateCard(arenaId, defenderIndex, -3, 0, (response) => {
+                //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
+            }));
+        }));
+
         isSkillDone = true;
     }
 

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class UO24 : UnitCard
 {
-    int currentSelectedUnitHP;
-    bool skillDone;
     void Start()
     {
         InitializeCardStats();
@@ -14,25 +12,26 @@ public class UO24 : UnitCard
 
     public override void UnitSkill()
     {
-        GameObject unitInSelectTile = skillTargetUnit;
-        currentSelectedUnitHP = unitInSelectTile.GetComponent<UnitCard>().GetHealth(); 
-        Debug.Log("Ogre Skill !");
+        int arenaId = gameController.arenaId;
+        Tile attackerTile = this.GetComponentInParent<Tile>();
+        int attackerIndex = attackerTile.ConvertTilePosToIndex(attackerTile.GetXPos(), attackerTile.GetYPos());
+        Tile defenderTile = skillTargetUnit.GetComponentInParent<Tile>();
+        int defenderIndex = defenderTile.ConvertTilePosToIndex(defenderTile.GetXPos(), defenderTile.GetYPos());
+        multiPlayerController = FindObjectOfType<MultiPlayerController>();
+
+        StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => {
+            StartCoroutine(multiPlayerController.UpdateCard(arenaId, defenderIndex, -5, 0, (response) => {
+                //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
+            }));
+        }));
+
         isSkillDone = true;
     }
     public override void UnitHighlight()
     {
         tileManager.HighlightEnemyUnitTiles(playerNo);
-        Debug.Log("Highlight from unit 11");
+        //isSkillDone = true;
     }
 
-    public override void StartTurnSkill()
-    {
-        GameObject unitInSelectTile = skillTargetUnit;
-        if (unitInSelectTile.GetComponent<UnitCard>().GetHealth() >= currentSelectedUnitHP && !skillDone)
-        {
-            Destroy(skillTargetUnit, 0.5f);
-            skillDone = true;
-        }
-        
-    }
+
 }

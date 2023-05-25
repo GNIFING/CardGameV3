@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UO32 : UnitCard
 {
-    private PlayerController playerController;
     void Start()
     {
         InitializeCardStats();
@@ -20,18 +19,5 @@ public class UO32 : UnitCard
         isSkillDone = true;
         tileManager.NoHighlightUnit();
         Debug.Log("Highlight from Ogre 32");
-    }
-
-    public override IEnumerator MeleeAttack(UnitCard unitAttacked)
-    {
-        TakeDamage(unitAttacked, unitAttacked.GetAttackDamage());
-        yield return new WaitForSeconds(0.5f);
-
-        unitAttacked.TakeDamage(this, attack);
-        MeleeAttackAnimation(unitAttacked);
-        
-        playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        int playerHp = playerController.GetPlayerHP(playerNo);
-        playerController.SetPlayerHP(playerNo, playerHp - 4);
     }
 }

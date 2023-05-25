@@ -26,9 +26,6 @@ public class UO18 : UnitCard
         DecreaseHealth(damage);
         IncreaseAttackDamage(damage);
 
-        if (attackUnitCard.GetHealth() <= 0) Destroy(attackUnitCard.gameObject, 0.5f);
-        if (health <= 0) Destroy(this.gameObject, 0.5f);
-
         UpdateCardUI();
         attackUnitCard.UpdateCardUI();
     }
