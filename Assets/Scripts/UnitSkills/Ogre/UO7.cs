@@ -17,8 +17,8 @@ public class UO7 : UnitCard
         int yPos = unitTile.GetYPos();
         int offset = playerNo == 1 ? 1 : -1;
         int offset2 = playerNo == 1 ? 0 : 6 - 2 * xPos;
-        Tile hookedTile = new Tile();
-        UnitCard selectedUnit = new UnitCard();
+        Tile hookedTile = new();
+        UnitCard selectedUnit = new();
 
 
         for (int i = 1; i < 6 - xPos - offset2; i++) //0 1 2 3 4
