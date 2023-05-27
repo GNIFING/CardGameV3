@@ -17,6 +17,17 @@ public class UE27 : UnitCard
     {
         List<UnitCard> unitCards = tileManager.SelectFriendlyUnits(playerNo);
         int drawNumber = unitCards.Count - 1;
+        DataHandler dataHandler = FindObjectOfType<DataHandler>();
+        
+        if(gameController.GetPlayerId() == 1 && dataHandler.player1CardLeft <= drawNumber)
+        {
+            drawNumber = dataHandler.player1CardLeft;
+        }
+        else if (gameController.GetPlayerId() == 2 && dataHandler.player2CardLeft <= drawNumber)
+        {
+            drawNumber = dataHandler.player2CardLeft;
+        }
+
         for (int i = 0; i < drawNumber; i++)
         {
             if (playerNo == 1)

@@ -116,37 +116,11 @@ public class SpawnCard : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
         // Drawcard api
-        if(gameController.GetPlayerId() == 1)
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
         {
-            if(dataHandler.player1CardLeft > 0)
-            {
-                gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
-                {
-                    path = "/drawCard",
-                    arenaId = arenaId,
-                    playerId = playerId
-                });
-            }
-            else
-            {
-                Debug.Log("player 1 card empty");
-            }
-        }
-        else if (gameController.GetPlayerId() == 2)
-        {
-            if (dataHandler.player2CardLeft > 0)
-            {
-                gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
-                {
-                    path = "/drawCard",
-                    arenaId = arenaId,
-                    playerId = playerId
-                });
-            }
-            else
-            {
-                Debug.Log("player 2 card empty");
-            }
-        }
+            path = "/drawCard",
+            arenaId = arenaId,
+            playerId = playerId
+        });
     }
 }

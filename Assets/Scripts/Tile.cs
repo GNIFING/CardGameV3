@@ -467,8 +467,9 @@ public class Tile : MonoBehaviour
         if(selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1)
         {
             Tile selectUnitTile = selectUnit.GetComponentInParent<Tile>();
+
+            Debug.Log("Convert = " + ConvertTilePosToIndex(selectUnitTile.GetXPos(), selectUnitTile.GetYPos()));
             cardId = dataHandler.player1HandCards[ConvertTilePosToIndex(selectUnitTile.GetXPos(), selectUnitTile.GetYPos())].id;
-            Debug.Log("cardId = " + cardId);
         }
         else
         {

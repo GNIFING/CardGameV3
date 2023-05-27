@@ -31,7 +31,7 @@ public class UE2 : UnitCard
         int player1Id = dataHandler.player1Id;
         int player2Id = dataHandler.player2Id;
 
-        int defenderId = gameController.GetPlayerId() == 1 ? player1Id : player2Id;
+        int defenderId = gameController.GetPlayerId() == 1 ? player2Id : player1Id;
 
         // attack tower api
         gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
