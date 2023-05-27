@@ -276,7 +276,7 @@ public class DataHandler : MonoBehaviour
                     if(unitCard.GetUserCardId() != player1HandCards[handIndex].card.UserCardId)
                     {
                         //Debug.Log("case 1: Destroy wrong card");
-                        Destroy(unitCard.gameObject, 0.5f);
+                        Destroy(unitCard.gameObject);
                     }
                 }
                 else if(player1Tile[handIndex].GetUnitInTile() == null)
@@ -312,7 +312,7 @@ public class DataHandler : MonoBehaviour
                 if (player2Tile[handIndex].GetUnitInTile() != null)
                 {
                     GameObject unitCard = player2Tile[handIndex].GetUnitInTile();
-                    Destroy(unitCard, 0.5f);
+                    Destroy(unitCard);
                     //Debug.Log("Destroy case -1");
 
                 }
@@ -324,7 +324,7 @@ public class DataHandler : MonoBehaviour
                     UnitCard unitCard = player2Tile[handIndex].GetUnitInTile().GetComponent<UnitCard>();
                     if (unitCard.GetUserCardId() != player2HandCards[handIndex].card.UserCardId)
                     {
-                        Destroy(unitCard.gameObject, 0.5f);
+                        Destroy(unitCard.gameObject);
                         //Debug.Log("Destroy case 0");
 
                     }
