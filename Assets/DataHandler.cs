@@ -257,14 +257,13 @@ public class DataHandler : MonoBehaviour
     public void UpdatePlayerHands()
     {
         //player1
-        Debug.Log("player 1 count " + player1Tile.Where(w => w.GetUnitInTile() != null).Count());
         for (int handIndex = 0; handIndex < 12; handIndex++)
         {
             if (player1HandCards[handIndex] == null)
             {
                 if (player1Tile[handIndex].GetUnitInTile() != null)
                 {
-                    Debug.Log("case 0: Destroy socket null game not null");
+                    //Debug.Log("case 0: Destroy socket null game not null");
                     GameObject unitCard = player1Tile[handIndex].GetUnitInTile();
                     Destroy(unitCard);
                 }
@@ -276,13 +275,13 @@ public class DataHandler : MonoBehaviour
                     UnitCard unitCard = player1Tile[handIndex].GetUnitInTile().GetComponent<UnitCard>();
                     if(unitCard.GetUserCardId() != player1HandCards[handIndex].card.UserCardId)
                     {
-                        Debug.Log("case 1: Destroy wrong card");
+                        //Debug.Log("case 1: Destroy wrong card");
                         Destroy(unitCard.gameObject, 0.5f);
                     }
                 }
                 else if(player1Tile[handIndex].GetUnitInTile() == null)
                 {
-                    Debug.Log("case 2: instantiate card");
+                    //Debug.Log("case 2: instantiate card");
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[player1HandCards[handIndex].card.id], player1Tile[handIndex].transform.position, Quaternion.identity);
                     newUnitCardObj.transform.parent = player1Tile[handIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
@@ -314,7 +313,7 @@ public class DataHandler : MonoBehaviour
                 {
                     GameObject unitCard = player2Tile[handIndex].GetUnitInTile();
                     Destroy(unitCard, 0.5f);
-                    Debug.Log("Destroy case -1");
+                    //Debug.Log("Destroy case -1");
 
                 }
             }
@@ -326,7 +325,7 @@ public class DataHandler : MonoBehaviour
                     if (unitCard.GetUserCardId() != player2HandCards[handIndex].card.UserCardId)
                     {
                         Destroy(unitCard.gameObject, 0.5f);
-                        Debug.Log("Destroy case 0");
+                        //Debug.Log("Destroy case 0");
 
                     }
                 }
@@ -368,7 +367,7 @@ public class DataHandler : MonoBehaviour
                 {
                     Destroy(tiles[arenaIndex].GetUnitInTile(), 0.3f);
                     //Debug.Log("case 1");
-                    Debug.Log("case 1: Destroy index " + arenaIndex);
+                    //Debug.Log("case 1: Destroy index " + arenaIndex);
                 }
                 // If there is no unit and no card, do nothing.
                 //Debug.Log("case 2");
@@ -383,7 +382,7 @@ public class DataHandler : MonoBehaviour
 
                     if (unitCard.GetUserCardId() != userCard.id)
                     {
-                        Debug.Log("case 3: Instantiate wrong existed index " + arenaIndex);
+                        //Debug.Log("case 3: Instantiate wrong existed index " + arenaIndex);
                         // Destroy the existing unit and spawn a new one.
                         Destroy(unitCard.gameObject, 0.3f);
 
@@ -410,7 +409,7 @@ public class DataHandler : MonoBehaviour
                     }
                     else if (unitCard.GetUserCardId() == userCard.id) ///////////////////////////////////////////////////////
                     {
-                        Debug.Log("case 4: Update correct existed index " + arenaIndex);
+                        //Debug.Log("case 4: Update correct existed index " + arenaIndex);
                         // Update the existing unit's attack and health.
                         if (unitCard.GetAttackDamage() != userCard.atk)
                         {
@@ -424,7 +423,7 @@ public class DataHandler : MonoBehaviour
                 }
                 else if (tiles[arenaIndex].GetUnitInTile() == null)
                 {
-                    Debug.Log("case 10: Instantiate new index " + arenaIndex);
+                    //Debug.Log("case 10: Instantiate new index " + arenaIndex);
                     // If there is no unit in this tile, spawn a new one.
                     UserCard userCard = cardsOnBoard.SingleOrDefault(x => x.id == arena.arenaArray[arenaIndex]);
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[userCard.card.id], tiles[arenaIndex].transform.position, Quaternion.identity);

@@ -24,12 +24,13 @@ public class UH17 : UnitCard
     }
     public override void TakeDamage(UnitCard attackUnitCard, int damage)
     {
-        health -= damage;
+        Debug.Log("UH17 plus atk 2");
+
         if(damage != 0)
         {
-            attack += 2;
+            IncreaseAttackDamage(2);
         }
         UpdateCardUI();
-        if (health <= 0) Destroy(this.gameObject, 0.5f);
+        //if (health <= 0) Destroy(this.gameObject, 0.5f);
     }
 }

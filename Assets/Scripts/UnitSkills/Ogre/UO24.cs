@@ -32,7 +32,7 @@ public class UO24 : UnitCard
         {
             path = "/update/card",
             arenaId = arenaId,
-            defenderIndex = defenderIndex,
+            cardIndex = defenderIndex,
             hp = -5,
             atk = 0,
         });

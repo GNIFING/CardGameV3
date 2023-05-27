@@ -259,7 +259,6 @@ public class TileManager : MonoBehaviour
 
     public void HighlightUnitMoveFromP1Hand()
     {
-        Debug.Log("p1");
         for (int yPos = 0; yPos < 6; yPos++)
         {
             GenerateHighlightMove(1, yPos);

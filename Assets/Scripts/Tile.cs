@@ -445,11 +445,11 @@ public class Tile : MonoBehaviour
 
         if (buff != null && buffIndex == 1)
         {
-            StartCoroutine(AsyncUpdateBuffOne(1.5f, selectUnit ,arenaId));
+            StartCoroutine(AsyncUpdateBuffOne(0.5f, selectUnit ,arenaId));
         }
         if (buff != null && buffIndex == 2)
         {
-            StartCoroutine(AsyncUpdateBuffTwo(1.5f, selectUnit, arenaId));
+            StartCoroutine(AsyncUpdateBuffTwo(0.5f, selectUnit, arenaId));
         }
         
         //------------------------------------------//
