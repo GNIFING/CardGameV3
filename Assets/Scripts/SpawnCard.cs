@@ -112,7 +112,7 @@ public class SpawnCard : MonoBehaviour
 
     private IEnumerator AsyncDrawCard(int arenaId, int playerId)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
         // Drawcard api
         gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
         {

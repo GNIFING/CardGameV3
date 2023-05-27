@@ -80,6 +80,7 @@ public class GameController : MonoBehaviour
         unitCards = tileManager.SelectFriendlyUnits(playerNo);
         foreach (UnitCard unitCard in unitCards)
         {
+            Debug.Log("end skill of " + unitCard.name);
             unitCard.EndTurnSkill();
         }
     }
@@ -100,7 +101,7 @@ public class GameController : MonoBehaviour
         tileManager.CancelUnitMoveHighlight();
 
 
-        UseUnitsEndturnSkill(playerId);
+        UseUnitsEndturnSkill(GetPlayerId());
 
         //----------- SEND API -----------//
 
