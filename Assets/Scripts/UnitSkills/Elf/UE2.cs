@@ -22,6 +22,25 @@ public class UE2 : UnitCard
         //------------------------//
         //Deal 1 damage to tower
         //------------------------//
+
+        int arenaId = PlayerPrefs.GetInt("ArenaId");
+        arenaId = gameController.arenaId;
+        int attackerIndex = GetComponentInParent<Tile>().ConvertTilePosToIndex(GetComponentInParent<Tile>().GetXPos(), GetComponentInParent<Tile>().GetYPos());
+
+        DataHandler dataHandler = FindObjectOfType<DataHandler>();
+        int player1Id = dataHandler.player1Id;
+        int player2Id = dataHandler.player2Id;
+
+        int defenderId = gameController.GetPlayerId() == 1 ? player1Id : player2Id;
+
+        // attack tower api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/attack/tower",
+            arenaId = arenaId,
+            defenderId = defenderId,
+            attackerIndex = attackerIndex,
+        });
     }
     public override void UnitHighlight()
     {

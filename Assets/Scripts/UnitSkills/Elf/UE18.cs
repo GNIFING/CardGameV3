@@ -28,7 +28,7 @@ public class UE18 : UnitCard
 
         if (unitAttacked.GetAttackDamage() < 3)
         {
-            Destroy(unitAttacked.gameObject, 0.5f);
+            unitAttacked.TakeDamage(this, unitAttacked.GetHealth());
         }
         unitAttacked.TakeDamage(this, attack);
 

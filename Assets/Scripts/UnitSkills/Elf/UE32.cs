@@ -20,7 +20,8 @@ public class UE32 : UnitCard
             {
                 GameObject unitCard = tile.GetUnitInTile();
                 //---------destroy card---------//
-                Destroy(unitCard);
+                //Destroy(unitCard);
+                unitCard.GetComponent<UnitCard>().TakeDamage(this, unitCard.GetComponent<UnitCard>().GetHealth());
             }
         }
         Debug.Log("Unit 28 Skill !");

@@ -3057,6 +3057,7 @@ MonoBehaviour:
   isLoading: 0
   gameController: {fileID: 1789605238}
   multiPlayerController: {fileID: 719817399}
+  dataHandler: {fileID: 1843965771}
 --- !u!4 &143956406
 Transform:
   m_ObjectHideFlags: 0
@@ -10055,6 +10056,7 @@ MonoBehaviour:
   isLoading: 0
   gameController: {fileID: 1789605238}
   multiPlayerController: {fileID: 719817399}
+  dataHandler: {fileID: 1843965771}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -31957,6 +31959,7 @@ MonoBehaviour:
   gameOver: 0
   gameController: {fileID: 1789605238}
   playerController: {fileID: 778456478}
+  multiPlayerController: {fileID: 0}
   tileManager: {fileID: 636937102}
   tiles: []
   player1Spawn: {fileID: 513062228}
@@ -32072,6 +32075,7 @@ MonoBehaviour:
   - {fileID: 0}
   player1CardNo: {fileID: 1908505390}
   player2CardNo: {fileID: 1348980269}
+  isSocketUpdating: 0
 --- !u!1001 &1847528928
 PrefabInstance:
   m_ObjectHideFlags: 0
