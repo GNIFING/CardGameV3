@@ -226,10 +226,19 @@ public class Tile : MonoBehaviour
                 arenaId = gameController.arenaId;
                 int attackerIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
                 int defenderId = dataHandler.player1Id;
-                StartCoroutine(multiPlayerController.AttackTower(arenaId, defenderId, attackerIndex, (response) =>
+
+                // attack tower api
+                gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
                 {
-                    StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
-                }));
+                    path = "/attack/tower",
+                    arenaId = arenaId,
+                    defenderId = defenderId,
+                    attackerIndex = attackerIndex,
+                });
+                //StartCoroutine(multiPlayerController.AttackTower(arenaId, defenderId, attackerIndex, (response) =>
+                //{
+                //    StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
+                //}));
 
 
                 //----------------- Attack Animation -------------------//
@@ -268,10 +277,19 @@ public class Tile : MonoBehaviour
                 arenaId = gameController.arenaId;
                 int attackerIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
                 int defenderId = dataHandler.player2Id;
-                StartCoroutine(multiPlayerController.AttackTower(arenaId, defenderId, attackerIndex, (response) =>
+
+                // attack tower api
+                gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
                 {
-                    StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
-                }));
+                    path = "/attack/tower",
+                    arenaId = arenaId,
+                    defenderId = defenderId,
+                    attackerIndex = attackerIndex,
+                });
+                //StartCoroutine(multiPlayerController.AttackTower(arenaId, defenderId, attackerIndex, (response) =>
+                //{
+                //    StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
+                //}));
 
                 //----------------- Attack Animation -------------------//
                 if (selectUnitCard.GetUnitAttackType() == UnitCardStat.AttackType.Melee)
@@ -415,43 +433,25 @@ public class Tile : MonoBehaviour
         arenaId = gameController.arenaId;
         int beforeTileIndex = ConvertTilePosToIndex(selectUnit.GetComponentInParent<Tile>().GetXPos(), selectUnit.GetComponentInParent<Tile>().GetYPos());
         int afterTileIndex = ConvertTilePosToIndex(xPos, yPos);
-        StartCoroutine(multiPlayerController.MoveCard(arenaId, beforeTileIndex, afterTileIndex, (response) => 
-        { 
-            Debug.Log("Api: Move Card From " + beforeTileIndex + " To " + afterTileIndex);
 
-            //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, afterTileIndex, (response) => { Debug.Log("Api: Mark Use Card Index " + afterTileIndex); }));
-            if (buff != null && buffIndex == 1)
-            {
-                //StartCoroutine(AsyncUpdateBuff(1.5f, selectUnit ,arenaId));
-                selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-                selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
+        // update card api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/move",
+            arenaId = arenaId,
+            beforeIndex = beforeTileIndex,
+            afterIndex = afterTileIndex,
+        });
 
-                StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
-                Destroy(buff, 0.3f);
-
-                //selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-                //selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
-
-                //StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
-                //Destroy(buff, 0.3f);
-            }
-            if (buff != null && buffIndex == 2)
-            {
-                //StartCoroutine(AsyncUpdateBuff(1.5f, selectUnit, arenaId));
-                selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-                selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
-
-                StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
-                Destroy(buff, 0.3f);
-
-                //selectUnit.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-                //selectUnit.GetComponent<UnitCard>().IncreaseHealth(1);
-
-                //StartCoroutine(multiPlayerController.UpdateBuff(arenaId, dataHandler.arena.buffOneActive, false, (response) => { Debug.Log("Api: UpdateBuff"); }));
-                //Destroy(buff, 0.3f);
-            }
-
-        }));
+        if (buff != null && buffIndex == 1)
+        {
+            StartCoroutine(AsyncUpdateBuffOne(1.5f, selectUnit ,arenaId));
+        }
+        if (buff != null && buffIndex == 2)
+        {
+            StartCoroutine(AsyncUpdateBuffTwo(1.5f, selectUnit, arenaId));
+        }
+        
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
         selectUnit.transform.position = transform.position;
@@ -479,7 +479,17 @@ public class Tile : MonoBehaviour
         //int cardId = selectUnit.GetComponent<UnitCard>().GetPlayerNo() == 1 ? dataHandler.player1HandCards[yPos].id : dataHandler.player2HandCards[yPos].id;
         arenaId = gameController.arenaId;
         int tileIndex = ConvertTilePosToIndex(xPos, yPos);
-        StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) => { Debug.Log("Api: Laydown from hand to tile " + tileIndex); }));
+
+        // laydown card api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/laydown",
+            arenaId = arenaId,
+            cardId = cardId,
+            index = tileIndex,
+        });
+
+        //StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) => { Debug.Log("Api: Laydown from hand to tile " + tileIndex); }));
 
         //------------------------------------------//
         selectUnit.transform.SetParent(transform);
@@ -513,13 +523,22 @@ public class Tile : MonoBehaviour
         int cardId = playerNo == 1? dataHandler.player1HandCards[handTileIndex].id : dataHandler.player2HandCards[handTileIndex].id;
         arenaId = gameController.arenaId;
         int tileIndex = ConvertTilePosToIndex(towerTile.GetComponent<Tile>().GetXPos(), towerTile.GetComponent<Tile>().GetYPos());
-        StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
-        {
-            Debug.Log("Api: Laydown From " + tileIndex + " To Tower");
-            Delay(0.5f);
 
-            StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { Debug.Log("Api: Mark Use Card Index " + tileIndex); }));
-        }));
+        // laydown card api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/laydown",
+            arenaId = arenaId,
+            cardId = cardId,
+            index = tileIndex,
+        });
+        //StartCoroutine(multiPlayerController.LaydownCard(arenaId, cardId, tileIndex, (response) =>
+        //{
+        //    Debug.Log("Api: Laydown From " + tileIndex + " To Tower");
+        //    Delay(0.5f);
+
+        //    //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, tileIndex, (response) => { Debug.Log("Api: Mark Use Card Index " + tileIndex); }));
+        //}));
         //------------------------------------------//
 
         unit.transform.SetParent(towerTile.transform);
@@ -561,17 +580,37 @@ public class Tile : MonoBehaviour
 
     }
 
-    public IEnumerator AsyncUpdateBuff(float delay, GameObject delayCard, int arenaId)
+    public IEnumerator AsyncUpdateBuffOne(float delay, GameObject delayCard, int arenaId)
     {
         yield return new WaitForSeconds(delay);
-        Debug.Log("WaitFinished");
+        delayCard.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+        delayCard.GetComponent<UnitCard>().IncreaseHealth(1);
 
-        //delayCard.GetComponent<UnitCard>().IncreaseAttackDamage(1);
-        //delayCard.GetComponent<UnitCard>().IncreaseHealth(1);
+        // update buff api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/buff/update",
+            arenaId = arenaId,
+            buffOneActive = false,
+            buffTwoActive = dataHandler.arena.buffTwoActive,
+        });
+        Destroy(buff, 0.3f);
+    }
+    public IEnumerator AsyncUpdateBuffTwo(float delay, GameObject delayCard, int arenaId)
+    {
+        yield return new WaitForSeconds(delay);
+        delayCard.GetComponent<UnitCard>().IncreaseAttackDamage(1);
+        delayCard.GetComponent<UnitCard>().IncreaseHealth(1);
 
-        //StartCoroutine(multiPlayerController.UpdateBuff(arenaId, false, dataHandler.arena.buffTwoActive, (response) => { Debug.Log("Api: UpdateBuff"); }));
-        //Destroy(buff, 0.3f);
-
+        // update buff api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/buff/update",
+            arenaId = arenaId,
+            buffOneActive = dataHandler.arena.buffOneActive,
+            buffTwoActive = false,
+        });
+        Destroy(buff, 0.3f);
     }
 
     public IEnumerator Delay(float delay)

@@ -22,5 +22,5 @@ MonoBehaviour:
   currentAttackType: 0
   specialSkill: []
   defaultManaCost: 3
-  defaultAttackDamage: 1
+  defaultAttackDamage: 2
   defaultHp: 5

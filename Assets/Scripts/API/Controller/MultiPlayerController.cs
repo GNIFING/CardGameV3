@@ -143,7 +143,6 @@ public class MultiPlayerController : ApiController
         request.Dispose();
     }
 
-    // Unused
     public IEnumerator UpdateCard(int arenaId, int cardIndex, int hp, int atk, Action<UserCard> callback)
     {
         string path = "/update/card";

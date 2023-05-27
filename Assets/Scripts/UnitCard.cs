@@ -196,6 +196,11 @@ public class UnitCard : MonoBehaviour
         return id;
     }
 
+    public void SetId(int newId)
+    {
+        id = newId;
+    }
+
     public string GetCardIndex()
     {
         return cardIndex;
@@ -221,7 +226,16 @@ public class UnitCard : MonoBehaviour
         Debug.Log("increase health");
         if (callApi == true)
         {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, plusHealth, 0, (response) => { }));
+            // attack tower api
+            gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+            {
+                path = "/update/card",
+                arenaId = arenaId,
+                cardIndex = tileIndex,
+                hp = plusHealth,
+                atk = 0
+            });
+            //StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, plusHealth, 0, (response) => { }));
         }
         //----------- SEND API ------------//
         health += plusHealth;
@@ -241,12 +255,21 @@ public class UnitCard : MonoBehaviour
 
         if (callApi == true)
         {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, -minusHealth, 0, (response) => { Debug.Log("Update Card Done"); }));
+            // attack tower api
+            gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+            {
+                path = "/update/card",
+                arenaId = arenaId,
+                cardIndex = tileIndex,
+                hp = -minusHealth,
+                atk = 0
+            });
+            //StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, -minusHealth, 0, (response) => { Debug.Log("Update Card Done"); }));
         }
         Debug.Log("decrease health - " + minusHealth + "Passed");
         //----------- SEND API ------------//
         
-        if (health <= 0) Destroy(this.gameObject, 0.5f);
+        //if (health <= 0) Destroy(this.gameObject, 0.5f);
 
     }
 
@@ -262,12 +285,21 @@ public class UnitCard : MonoBehaviour
         Debug.Log("set health");
         if (callApi == true)
         {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, newHealth - health, 0, (response) => { }));
+            // attack tower api
+            gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+            {
+                path = "/update/card",
+                arenaId = arenaId,
+                cardIndex = tileIndex,
+                hp = newHealth - health,
+                atk = 0
+            });
+            //StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, newHealth - health, 0, (response) => { }));
         }
         //----------- SEND API ------------//
         health = newHealth;
         UpdateCardUI();
-        if (health <= 0) Destroy(this.gameObject, 0.5f);
+        //if (health <= 0) Destroy(this.gameObject, 0.5f);
     }
     public void IncreaseAttackDamage(int plusAttack, bool callApi = true)
     {
@@ -283,7 +315,16 @@ public class UnitCard : MonoBehaviour
         Debug.Log("increase attack");
         if (callApi == true)
         {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, plusAttack, (response) => { Debug.Log(response.atk); }));
+            // attack tower api
+            gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+            {
+                path = "/update/card",
+                arenaId = arenaId,
+                cardIndex = tileIndex,
+                hp = 0,
+                atk = plusAttack
+            });
+            //StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, plusAttack, (response) => { Debug.Log(response.atk); }));
         }
         //----------- SEND API ------------//
         attack += plusAttack;
@@ -308,12 +349,30 @@ public class UnitCard : MonoBehaviour
         Debug.Log("decrease attack");
         if(minusAttack - attack >= 0 && callApi == true)
         {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, -attack, (response) => { }));
+            // attack tower api
+            gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+            {
+                path = "/update/card",
+                arenaId = arenaId,
+                cardIndex = tileIndex,
+                hp = 0,
+                atk = -attack
+            });
+            //StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, -attack, (response) => { }));
         }
 
         else if (callApi == true)
         {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, -minusAttack, (response) => { }));
+            // attack tower api
+            gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+            {
+                path = "/update/card",
+                arenaId = arenaId,
+                cardIndex = tileIndex,
+                hp = 0,
+                atk = -minusAttack
+            });
+            //StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, -minusAttack, (response) => { }));
         }
         //----------- SEND API ------------//
         attack -= minusAttack;
@@ -333,7 +392,16 @@ public class UnitCard : MonoBehaviour
         Debug.Log("set attack");
         if (callApi == true)
         {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, newAttackDamage - attack, (response) => { }));
+            // attack tower api
+            gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+            {
+                path = "/update/card",
+                arenaId = arenaId,
+                cardIndex = tileIndex,
+                hp = 0,
+                atk = newAttackDamage - attack
+            });
+            //StartCoroutine(multiPlayerController.UpdateCard(arenaId, tileIndex, 0, newAttackDamage - attack, (response) => { }));
         }
         //----------- SEND API ------------//
         attack = newAttackDamage;
@@ -370,7 +438,16 @@ public class UnitCard : MonoBehaviour
         Tile defenderTile = unitAttacked.GetComponentInParent<Tile>();
         int defenderIndex = defenderTile.ConvertTilePosToIndex(defenderTile.GetXPos(), defenderTile.GetYPos());
         multiPlayerController = FindObjectOfType<MultiPlayerController>();
-        StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => { Debug.Log("Attack Card Done"); }));
+
+        // attack card api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/attack/card",
+            arenaId = arenaId,
+            attackerIndex = attackerIndex,
+            defenderIndex = defenderIndex,
+        });
+        //StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => { Debug.Log("Attack Card Done"); }));
         //----------- SEND API ------------//
         if (unitCardStat.CurrentAttackType == UnitCardStat.AttackType.Melee)
         {

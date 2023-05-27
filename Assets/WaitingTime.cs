@@ -49,7 +49,7 @@ public class WaitingTime : MonoBehaviour
         Debug.Log(this.roomId);
 
         // If not match other play, create a cycle for checking room status
-        yield return StartCoroutine(GetRoom(this.roomId, 5));
+        yield return StartCoroutine(GetRoom(this.roomId, 2));
     }
 
     // Update is called once per frame

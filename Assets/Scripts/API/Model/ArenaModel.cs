@@ -32,3 +32,22 @@ public class Arena
     public bool buffOneActive;
     public bool buffTwoActive;
 }
+
+public class ArenaApiQueue
+{
+    public int? afterIndex;
+    public int? arenaId;
+    public int? atk;
+    public int? attackerIndex;
+    public int? beforeIndex;
+    public bool? buffOneActive;
+    public bool? buffTwoActive;
+    public int? cardId;
+    public int? cardIndex;
+    public int? defenderIndex;
+    public int? defenderId;
+    public int? hp;
+    public int? index;
+    public string path;
+    public int? playerId;
+}

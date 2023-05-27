@@ -24,11 +24,28 @@ public class UH1 : UnitCard
         int defenderIndex = defenderTile.ConvertTilePosToIndex(defenderTile.GetXPos(), defenderTile.GetYPos());
         multiPlayerController = FindObjectOfType<MultiPlayerController>();
 
-        StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => {
-            StartCoroutine(multiPlayerController.UpdateCard(arenaId, defenderIndex, -1, 0, (response) => { 
-                //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
-                }));
-        }));
+        // attack card api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/attack/card",
+            arenaId = arenaId,
+            attackerIndex = attackerIndex,
+            defenderIndex = defenderIndex,
+        });
+        // update card api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/update/card",
+            arenaId = arenaId,
+            cardIndex = defenderIndex,
+            hp = -1,
+            atk = 0,
+        });
+        //StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => {
+        //    StartCoroutine(multiPlayerController.UpdateCard(arenaId, defenderIndex, -1, 0, (response) => { 
+        //        //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
+        //        }));
+        //}));
         
 
         isSkillDone = true;

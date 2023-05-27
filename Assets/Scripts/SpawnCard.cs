@@ -73,7 +73,8 @@ public class SpawnCard : MonoBehaviour
         int arenaId = PlayerPrefs.GetInt("ArenaId");
         int playerId = gameController.playerId;
 
-        StartCoroutine(DrawCardWithDelay(1f, arenaId, playerId));
+        StartCoroutine(AsyncDrawCard(arenaId, playerId));
+
     }
 
     public void InitialSpawn(bool isShowCard)
@@ -109,13 +110,15 @@ public class SpawnCard : MonoBehaviour
         }
     }
 
-    private IEnumerator DrawCardWithDelay(float delay, int arenaId, int playerId)
+    private IEnumerator AsyncDrawCard(int arenaId, int playerId)
     {
-        yield return new WaitForSeconds(delay);
-        StartCoroutine(
-                multiPlayerController.DrawCard(arenaId, playerId, (response) => {
-                    Debug.Log("Api: Draw Card Player " + playerId);
-                })
-        );
+        yield return new WaitForSeconds(1f);
+        // Drawcard api
+        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/drawCard",
+            arenaId = arenaId,
+            playerId = playerId
+        });
     }
 }

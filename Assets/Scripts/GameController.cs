@@ -28,6 +28,9 @@ public class GameController : MonoBehaviour
     public GameObject endTurnButton;
     public static int CurrentTurn => playerturn;
 
+    public Queue<ArenaApiQueue> arenaApiQueue = new();
+    public bool isArenaApiUpdating;
+
     private void Start()
     {
         playerId = PlayerPrefs.GetInt("PlayerId");
@@ -39,6 +42,14 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        // Check api queue
+        if (arenaApiQueue.Count > 0 && !isArenaApiUpdating)
+        {
+            ArenaApiQueue apiData = arenaApiQueue.Dequeue();
+            Debug.Log("Pop api queue " + apiData.path);
+            StartCoroutine(CallArenaApi(apiData));
+        }
+
         time += Time.deltaTime;
         if(time >= timeout)
         {
@@ -93,7 +104,14 @@ public class GameController : MonoBehaviour
 
         //----------- SEND API -----------//
 
-        StartCoroutine(multiPlayerController.EndTurn(arenaId, playerId, (response) => { Debug.Log("Api: End Turn Player " + playerId); }));
+        // end turn api
+        arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/turn",
+            arenaId = arenaId,
+            playerId = playerId,
+        });
+        //StartCoroutine(multiPlayerController.EndTurn(arenaId, playerId, (response) => { Debug.Log("Api: End Turn Player " + playerId); }));
 
 
         //----------- SEND API -----------//
@@ -151,8 +169,107 @@ public class GameController : MonoBehaviour
     public void Surrender()
     {
         Debug.Log("Surrender");
-        StartCoroutine(multiPlayerController.Surrender(arenaId, playerId, (response) => { }));
+        // surrender api
+        arenaApiQueue.Enqueue(new ArenaApiQueue
+        {
+            path = "/surrender",
+            arenaId = arenaId,
+            playerId = playerId,
+        });
+        //StartCoroutine(multiPlayerController.Surrender(arenaId, playerId, (response) => { }));
 
 
+    }
+
+    public IEnumerator CallArenaApi(ArenaApiQueue apiData)
+    {
+        isArenaApiUpdating = true;
+
+        int afterIndex = apiData.afterIndex ?? -1;
+        int arenaId = apiData.arenaId ?? -1;
+        int atk = apiData.atk ?? -1;
+        int attackerIndex = apiData.attackerIndex ?? -1;
+        int beforeIndex = apiData.beforeIndex ?? -1;
+        bool buffOneActive = apiData.buffOneActive ?? false;
+        bool buffTwoActive = apiData.buffTwoActive ?? false;
+        int cardId = apiData.cardId ?? -1;
+        int cardIndex = apiData.cardIndex ?? -1;
+        int defenderIndex = apiData.defenderIndex ?? -1;
+        int defenderId = apiData.defenderId ?? -1;
+        int hp = apiData.hp ?? -1;
+        int index = apiData.index ?? -1;
+        int playerId = apiData.playerId ?? -1;
+
+        yield return new WaitForSeconds(0f);
+
+        switch (apiData.path)
+        {
+            case "/drawCard":
+                StartCoroutine(
+                    multiPlayerController.DrawCard(arenaId, playerId, (response) => {
+                        Debug.Log("Api: Draw Card Player " + playerId);
+                        isArenaApiUpdating = false;
+                    })
+                );
+                break;
+            case "/laydown":
+                StartCoroutine(
+                    multiPlayerController.LaydownCard(arenaId, cardId, index, (response) => {
+                        Debug.Log("Api: Laydown from hand to tile " + index);
+                        isArenaApiUpdating = false;
+                    }));
+                break;
+            case "/surrender":
+                StartCoroutine(
+                    multiPlayerController.Surrender(arenaId, playerId, (response) => {
+                        Debug.Log("Api: Surrender by player " + playerId);
+                        isArenaApiUpdating = false;
+                    }));
+                break;
+            case "/attack/card":
+                StartCoroutine(
+                    multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => {
+                        Debug.Log("Api: Attack from index " + attackerIndex + " to " + defenderIndex);
+                        isArenaApiUpdating = false;
+                    }));
+                break;
+            case "/update/card":
+                StartCoroutine(
+                    multiPlayerController.UpdateCard(arenaId, cardIndex, hp, atk, (response) => {
+                        Debug.Log("Api: Update from index " + cardIndex);
+                        isArenaApiUpdating = false;
+                    }));
+                break;
+            case "/attack/tower":
+                StartCoroutine(
+                    multiPlayerController.AttackTower(arenaId, defenderId, attackerIndex, (response) => {
+                        Debug.Log("Api: Attack tower from index " + attackerIndex);
+                        isArenaApiUpdating = false;
+                    }));
+                break;
+            case "/buff/update":
+                StartCoroutine(
+                    multiPlayerController.UpdateBuff(arenaId, buffOneActive, buffTwoActive, (response) => {
+                        Debug.Log("Api: Active buff 1 " + buffOneActive + " buff 2 " + buffTwoActive);
+                        isArenaApiUpdating = false;
+                    }));
+                break;
+            case "/move":
+                StartCoroutine(
+                    multiPlayerController.MoveCard(arenaId, beforeIndex, afterIndex, (response) => {
+                        Debug.Log("Api: Move Card From " + beforeIndex + " To " + afterIndex);
+                        isArenaApiUpdating = false;
+                    }));
+                break;
+            case "/turn":
+                StartCoroutine(
+                    multiPlayerController.EndTurn(arenaId, playerId, (response) => {
+                        Debug.Log("Api: End Turn Player " + playerId);
+                        isArenaApiUpdating = false;
+                    }));
+                break;
+            default:
+                break;
+        }
     }
 }
