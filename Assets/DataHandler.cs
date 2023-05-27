@@ -266,7 +266,7 @@ public class DataHandler : MonoBehaviour
                 {
                     Debug.Log("case 0: Destroy socket null game not null");
                     GameObject unitCard = player1Tile[handIndex].GetUnitInTile();
-                    Destroy(unitCard, 0.5f);
+                    Destroy(unitCard);
                 }
             }
             else if (player1HandCards[handIndex] != null)

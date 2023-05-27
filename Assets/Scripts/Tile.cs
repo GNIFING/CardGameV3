@@ -134,6 +134,14 @@ public class Tile : MonoBehaviour
 
         if (selectUnit != null) selectUnitCard = selectUnit.GetComponent<UnitCard>();
 
+        //-------------- Click on a tile that has the nextMoveHighlight --------------//
+
+        if (nextMoveHighlight.activeInHierarchy)
+        {
+            HandleFoundNextMoveHighlight(unitCard, selectUnit);
+            return;
+        }
+
         //-------------- Click on a tile that has the unitHighlight --------------//
 
         if (unitHighlight.activeInHierarchy)
@@ -144,14 +152,6 @@ public class Tile : MonoBehaviour
 
         if (tileManager.isInSkillProcess)
         {
-            return;
-        }
-
-        //-------------- Click on a tile that has the nextMoveHighlight --------------//
-
-        if (nextMoveHighlight.activeInHierarchy)
-        {
-            HandleFoundNextMoveHighlight(unitCard, selectUnit);
             return;
         }
 
