@@ -18,6 +18,8 @@ public class SpawnCard : MonoBehaviour
     public GameController gameController;
     public MultiPlayerController multiPlayerController;
 
+    public DataHandler dataHandler;
+
     private void Start()
     {
         string saveFile = Application.persistentDataPath + "/deckId.json";
@@ -114,11 +116,37 @@ public class SpawnCard : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
         // Drawcard api
-        gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+        if(gameController.GetPlayerId() == 1)
         {
-            path = "/drawCard",
-            arenaId = arenaId,
-            playerId = playerId
-        });
+            if(dataHandler.player1CardLeft > 0)
+            {
+                gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+                {
+                    path = "/drawCard",
+                    arenaId = arenaId,
+                    playerId = playerId
+                });
+            }
+            else
+            {
+                Debug.Log("player 1 card empty");
+            }
+        }
+        else if (gameController.GetPlayerId() == 2)
+        {
+            if (dataHandler.player2CardLeft > 0)
+            {
+                gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
+                {
+                    path = "/drawCard",
+                    arenaId = arenaId,
+                    playerId = playerId
+                });
+            }
+            else
+            {
+                Debug.Log("player 2 card empty");
+            }
+        }
     }
 }

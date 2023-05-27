@@ -27,7 +27,7 @@ public class UE4 : UnitCard
         //If Enemy dies, it dies
         if (unitAttacked.GetHealth() <= attack)
         {
-            Destroy(this.gameObject, 1f);
+            this.TakeDamage(this, health);
         }
         //------------------------//
         unitAttacked.TakeDamage(this, attack);

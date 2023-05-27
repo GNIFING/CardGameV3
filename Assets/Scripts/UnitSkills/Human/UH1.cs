@@ -35,21 +35,7 @@ public class UH1 : UnitCard
         // update card api
 
         skillTargetUnit.GetComponent<UnitCard>().TakeDamage(this, 1);
-        //gameController.arenaApiQueue.Enqueue(new ArenaApiQueue
-        //{
-        //    path = "/update/card",
-        //    arenaId = arenaId,
-        //    cardIndex = defenderIndex,
-        //    hp = -1,
-        //    atk = 0,
-        //});
-        //StartCoroutine(multiPlayerController.AttackCard(arenaId, attackerIndex, defenderIndex, (response) => {
-        //    StartCoroutine(multiPlayerController.UpdateCard(arenaId, defenderIndex, -1, 0, (response) => { 
-        //        //StartCoroutine(multiPlayerController.MarkUseCard(arenaId, attackerIndex, (response) => { }));
-        //        }));
-        //}));
         
-
         isSkillDone = true;
     }
 
