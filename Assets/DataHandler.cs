@@ -52,6 +52,7 @@ public class DataHandler : MonoBehaviour
 
     public GameController gameController;
     public PlayerController playerController;
+    public MultiPlayerController multiPlayerController;
     public TileManager tileManager;
     public List<Tile> tiles;
 
@@ -70,7 +71,7 @@ public class DataHandler : MonoBehaviour
 
     public Queue<GameData> dataQueue = new();
 
-    public bool isUpdating;
+    public bool isSocketUpdating;
 
     public void Start()
     {
@@ -93,11 +94,9 @@ public class DataHandler : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(isUpdating);
-
-        if (dataQueue.Count > 0 && !isUpdating)
+        // Check socket data queue
+        if (dataQueue.Count > 0 && !isSocketUpdating)
         {
-            Debug.Log("Remaining Queue: " + dataQueue.Count);
             GameData data = dataQueue.Dequeue();
             UpdateData(data);
         }
@@ -105,7 +104,7 @@ public class DataHandler : MonoBehaviour
 
     public void UpdateData(GameData gameData)
     {
-        this.isUpdating = true;
+        this.isSocketUpdating = true;
 
         player1Id = gameData.playerOne.id;
         player1CardLeft = gameData.playerOne.cardLeft;
@@ -258,12 +257,14 @@ public class DataHandler : MonoBehaviour
     public void UpdatePlayerHands()
     {
         //player1
+        Debug.Log("player 1 count " + player1Tile.Where(w => w.GetUnitInTile() != null).Count());
         for (int handIndex = 0; handIndex < 12; handIndex++)
         {
             if (player1HandCards[handIndex] == null)
             {
                 if (player1Tile[handIndex].GetUnitInTile() != null)
                 {
+                    Debug.Log("case 0: Destroy socket null game not null");
                     GameObject unitCard = player1Tile[handIndex].GetUnitInTile();
                     Destroy(unitCard, 0.5f);
                 }
@@ -273,17 +274,19 @@ public class DataHandler : MonoBehaviour
                 if (player1Tile[handIndex].GetUnitInTile() != null)
                 {
                     UnitCard unitCard = player1Tile[handIndex].GetUnitInTile().GetComponent<UnitCard>();
-                    if(unitCard.GetUserCardId() != player1HandCards[handIndex].id)
+                    if(unitCard.GetUserCardId() != player1HandCards[handIndex].card.UserCardId)
                     {
+                        Debug.Log("case 1: Destroy wrong card");
                         Destroy(unitCard.gameObject, 0.5f);
                     }
                 }
                 else if(player1Tile[handIndex].GetUnitInTile() == null)
                 {
+                    Debug.Log("case 2: instantiate card");
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[player1HandCards[handIndex].card.id], player1Tile[handIndex].transform.position, Quaternion.identity);
                     newUnitCardObj.transform.parent = player1Tile[handIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
-                    newUnitCard.SetUserCardId(player1HandCards[handIndex].id);
+                    newUnitCard.SetUserCardId(player1HandCards[handIndex].card.UserCardId);
                     newUnitCard.SetPlayerNo(1);
                     newUnitCard.RefreshCredit();
                     newUnitCard.SetBackCard(gameController.GetPlayerId() == 2);
@@ -320,7 +323,7 @@ public class DataHandler : MonoBehaviour
                 if (player2Tile[handIndex].GetUnitInTile() != null)
                 {
                     UnitCard unitCard = player2Tile[handIndex].GetUnitInTile().GetComponent<UnitCard>();
-                    if (unitCard.GetUserCardId() != player2HandCards[handIndex].id)
+                    if (unitCard.GetUserCardId() != player2HandCards[handIndex].card.UserCardId)
                     {
                         Destroy(unitCard.gameObject, 0.5f);
                         Debug.Log("Destroy case 0");
@@ -332,7 +335,7 @@ public class DataHandler : MonoBehaviour
                     GameObject newUnitCardObj = Instantiate(cardPrefabs[player2HandCards[handIndex].card.id], player2Tile[handIndex].transform.position, Quaternion.identity);
                     newUnitCardObj.transform.parent = player2Tile[handIndex].transform;
                     UnitCard newUnitCard = newUnitCardObj.GetComponent<UnitCard>();
-                    newUnitCard.SetUserCardId(player2HandCards[handIndex].id);
+                    newUnitCard.SetUserCardId(player2HandCards[handIndex].card.UserCardId);
                     newUnitCard.SetPlayerNo(2);
                     newUnitCard.RefreshCredit();
                     newUnitCard.SetBackCard(gameController.GetPlayerId() == 1);
@@ -447,9 +450,11 @@ public class DataHandler : MonoBehaviour
 
         }
         
-        this.isUpdating = false;
+        this.isSocketUpdating = false;
             
     }
+
+    
     //Move All unit here
     //Change All unit Stat here
     //Destroy every object here
