@@ -26,7 +26,9 @@ public class UH17 : UnitCard
     {
         Debug.Log("UH17 plus atk 2");
 
-        if(damage != 0)
+        DecreaseHealth(damage);
+
+        if (damage != 0)
         {
             IncreaseAttackDamage(2);
         }

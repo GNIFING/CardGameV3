@@ -209,6 +209,7 @@ public class UnitCard : MonoBehaviour
     //-------------------- Increase-Decrease Stat --------------------//
     public virtual void TakeDamage(UnitCard attackUnitCard, int damage)
     {
+        Debug.Log("Take damage");
         DecreaseHealth(damage);
         UpdateCardUI();
         //if (health <= 0) Destroy(this.gameObject, 0.5f);
