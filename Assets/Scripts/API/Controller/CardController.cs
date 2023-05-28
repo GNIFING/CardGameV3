@@ -55,6 +55,28 @@ public class CardController : ApiController
         request.Dispose();
     }
 
+    public IEnumerator GetReward(Action<UserCard> callback)
+    {
+        string path = "/card/reward";
+
+        var request = Api.CreateRequest(path, "POST");
+
+        yield return request.SendWebRequest();
+        if (request.result != UnityWebRequest.Result.ConnectionError && request.result != UnityWebRequest.Result.ProtocolError)
+        {
+            var json = request.downloadHandler.text;
+            UserCard userCard = JsonConvert.DeserializeObject<UserCard>(json);
+
+            callback(userCard);
+        }
+        else
+        {
+            CheckRequestStatus(request);
+        }
+
+        request.Dispose();
+    }
+
     public IEnumerator AddCard(int deckId, int cardId, Action<string> callback)
     {
         string path = "deck/add/cardId/";
