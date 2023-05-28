@@ -97,6 +97,7 @@ public class DataHandler : MonoBehaviour
         // Check socket data queue
         if (dataQueue.Count > 0 && !isSocketUpdating)
         {
+            this.isSocketUpdating = true;
             GameData data = dataQueue.Dequeue();
             UpdateData(data);
         }
@@ -104,8 +105,6 @@ public class DataHandler : MonoBehaviour
 
     public void UpdateData(GameData gameData)
     {
-        this.isSocketUpdating = true;
-
         player1Id = gameData.playerOne.id;
         player1CardLeft = gameData.playerOne.cardLeft;
         player1DeckId = gameData.playerOne.deckId;
